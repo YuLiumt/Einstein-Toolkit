@@ -63,13 +63,11 @@
     <a class="current" href=".">Home</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#welcome-to-mkdocs">Welcome to MkDocs</a></li>
+    <li class="toctree-l2"><a href="#einstein-toolkit">Einstein Toolkit</a></li>
     
         <ul>
         
-            <li><a class="toctree-l3" href="#commands">Commands</a></li>
-        
-            <li><a class="toctree-l3" href="#project-layout">Project layout</a></li>
+            <li><a class="toctree-l3" href="#installation">Installation</a></li>
         
         </ul>
     
@@ -109,21 +107,38 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+                <h1 id="einstein-toolkit">Einstein Toolkit</h1>
+<p>The <a href="https://www.einsteintoolkit.org/index.html">Einstein Toolkit</a> is a community-driven software platform of core computational tools to advance and support research in relativistic astrophysics and gravitational physics.</p>
+<h2 id="installation">Installation</h2>
+<p>Required Software</p>
+<pre><code># On Debian/Ubuntu use this command:
+sudo apt-get install -y subversion gcc git numactl libgsl-dev libpapi-dev python libhwloc-dev make libopenmpi-dev libhdf5-openmpi-dev libfftw3-dev libssl-dev liblapack-dev g++ curl gfortran patch pkg-config libhdf5-dev libjpeg-turbo?-dev
+# On Fedora use this command:
+sudo dnf install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel python hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran findutils hdf5-devel fftw-devel patch gsl-devel pkgconfig
+module load mpi/openmpi-x86_64
+# On Centos use this command:
+sudo yum install -y epel-release
+sudo yum install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran hdf5-devel fftw-devel patch gsl-devel
 </code></pre>
+
+<p>Download</p>
+<p>A script called GetComponents is used to fetch the components of the Einstein Toolkit.</p>
+<pre><code>cd ~/
+curl -kLO https://raw.githubusercontent.com/gridaphobe/CRL/ET_2018_09/GetComponents
+chmod a+x GetComponents
+./GetComponents --parallel https://bitbucket.org/einsteintoolkit/manifest/raw/ET_2018_09/einsteintoolkit.th
+cd ~/Cactus
+</code></pre>
+
+<p>Configuring SimFactory for your machine</p>
+<pre><code>./simfactory/bin/sim setup-silent
+</code></pre>
+
+<p>Building the Einstein Toolkit</p>
+<pre><code>./simfactory/bin/sim build --mdbkey make 'make -j2' --thornlist ../einsteintoolkit.th | cat
+</code></pre>
+
+<p><a href="https://github.com/nds-org/jupyter-et/blob/master/CactusTutorial.ipynb">A step by step guide to downloading, configuring, and running the Einstein Toolkit.</a></p>
               
             </div>
           </div>
@@ -163,5 +178,5 @@ docs/
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2019-02-23 07:04:44
+Build Date UTC : 2019-02-23 07:32:54
 -->
