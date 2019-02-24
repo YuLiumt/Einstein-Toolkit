@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Linearized Waves - Einstein Toolkit</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Linearized Waves";
+    var mkdocs_page_input_path = "GW/Linearized Waves.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/GW/Linearized Waves/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Einstein Toolkit</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../ET/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Cactus/">Cactus</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../GR/">General Relativity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Introduction/">Introduction</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Linearized Waves</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#perturbation-theory">Perturbation Theory</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../NR/">Numerical Relativity</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Einstein Toolkit</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Gravitational Wave &raquo;</li>
+        
+      
+    
+    <li>Linearized Waves</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/GW/Linearized Waves.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><mark>In the near-field region about sources, the gravitational fields consist of a combination of longitudinal and transverse components that cannot be disentangled unambigiously.</mark> As the transverse fields propagate away from their sources, however, they will reach an asymptotic region in which they can be modeled as a linear perturbation of a nearly Minkowski spacetime. <strong>These linearized gravitational waves carry information about the nature of the nonlinear sources that generated them. It is these linearized waves that are measured by gravitational wave detectors.</strong></p>
+<h2 id="perturbation-theory">Perturbation Theory</h2>
+<p>Consider a small perturbation <span><span class="MathJax_Preview">h _ { a b }</span><script type="math/tex">h _ { a b }</script></span> of a known “background” solution to Einstein’s equations. In principle the background could be any solution, but here we are interested in waves propagating in a nearly Minkowski spacetime, for which the metric becomes</p>
+<div>
+<div class="MathJax_Preview">
+g _ { a b } = \eta _ { a b } + h _ { a b } , \quad \left| h _ { a b } \right| \ll 1
+</div>
+<script type="math/tex; mode=display">
+g _ { a b } = \eta _ { a b } + h _ { a b } , \quad \left| h _ { a b } \right| \ll 1
+</script>
+</div>
+<p>It is convenient to introduce the “trace-reversed” perturbation</p>
+<div>
+<div class="MathJax_Preview">
+\bar { h } _ { a b } \equiv h _ { a b } - \frac { 1 } { 2 } \eta _ { a b } h _ { c } ^ { c }
+</div>
+<script type="math/tex; mode=display">
+\bar { h } _ { a b } \equiv h _ { a b } - \frac { 1 } { 2 } \eta _ { a b } h _ { c } ^ { c }
+</script>
+</div>
+<p>We can now exploit our coordinate-freedom to impose the “Lorentz gauge” condition,</p>
+<div>
+<div class="MathJax_Preview">
+\nabla _ { a } \bar { h } ^ { a b } = 0
+</div>
+<script type="math/tex; mode=display">
+\nabla _ { a } \bar { h } ^ { a b } = 0
+</script>
+</div>
+<p><strong>Vacuum Solutions</strong></p>
+<hr />
+<p>Einstein’s equations in vacuum reduce to the wave equation</p>
+<div>
+<div class="MathJax_Preview">
+\square \bar { h } _ { a b } = \nabla ^ { c } \nabla _ { c } \bar { h } _ { a b } = 0
+</div>
+<script type="math/tex; mode=display">
+\square \bar { h } _ { a b } = \nabla ^ { c } \nabla _ { c } \bar { h } _ { a b } = 0
+</script>
+</div>
+<p>the Lorentz-gauge condition does not determine <span><span class="MathJax_Preview">\bar { h } _ { a b }</span><script type="math/tex">\bar { h } _ { a b }</script></span> uniquely, since we can introduce further infinitesimal gauge transformations that leave this condition unchanged.</p>
+<p>Particularly useful is the transverse-traceless or “TT” gauge, in which</p>
+<div>
+<div class="MathJax_Preview">
+\bar { h } _ { a 0 } ^ { T T } = 0 , \quad \bar { h } ^ { T T a } _ { a } = 0
+</div>
+<script type="math/tex; mode=display">
+\bar { h } _ { a 0 } ^ { T T } = 0 , \quad \bar { h } ^ { T T a } _ { a } = 0
+</script>
+</div>
+<p>The first condition implies that the only nonzero components of <span><span class="MathJax_Preview">\bar { h } _ { a b } ^ { T T }</span><script type="math/tex">\bar { h } _ { a b } ^ { T T }</script></span> are purely spatial. The second condition implies that <span><span class="MathJax_Preview">h _ { c } ^ { c } = 0</span><script type="math/tex">h _ { c } ^ { c } = 0</script></span>, so that, the trace-reversed metric perturbations <span><span class="MathJax_Preview">\bar { h } _ { a b }</span><script type="math/tex">\bar { h } _ { a b }</script></span> are identical to the original perturbations <span><span class="MathJax_Preview">h _ { a b }</span><script type="math/tex">h _ { a b }</script></span>, and we are entitled to drop the bars whenever we write down results in the TT gauge.</p>
+<p>Together, the “Lorentz gauge” condition and “TT” gauge provide eight constraints on the originally ten independent components of <span><span class="MathJax_Preview">h _ { a b }</span><script type="math/tex">h _ { a b }</script></span>. <strong>The remaining two degrees of freedom correspond to the two possible polarization states of gravitational radiation.</strong></p>
+<p><img alt="-w1180" src="../media/15509911327771.jpg" /></p>
+<p>A general gravitational wave is then specified by two dimensionless amplitudes <span><span class="MathJax_Preview">h _ { + }</span><script type="math/tex">h _ { + }</script></span> and <span><span class="MathJax_Preview">h _ { \times }</span><script type="math/tex">h _ { \times }</script></span> as</p>
+<div>
+<div class="MathJax_Preview">
+h _ { j k } ^ { T T } = h _ { + } e _ { i j } ^ { + } + h _ { \times } e _ { i j } ^ { \times }
+</div>
+<script type="math/tex; mode=display">
+h _ { j k } ^ { T T } = h _ { + } e _ { i j } ^ { + } + h _ { \times } e _ { i j } ^ { \times }
+</script>
+</div>
+<div class="admonition example">
+<p class="admonition-title">a linear plane wave</p>
+<p>For a linear plane wave propagating in vacuum in the z-direction, we have <span><span class="MathJax_Preview">e _ { x x } ^ { + } = - e _ { y y } ^ { + } = 1 , e _ { x y } ^ { \times } = e _ { y x } ^ { \times } = 1</span><script type="math/tex">e _ { x x } ^ { + } = - e _ { y y } ^ { + } = 1 , e _ { x y } ^ { \times } = e _ { y x } ^ { \times } = 1</script></span>, all other components zero. </p>
+</div>
+<p>Just as in electrodynamics, this type of equation admits simple plane wave solutions of the form</p>
+<div>
+<div class="MathJax_Preview">
+\bar { h } _ { a b } = \Re \left( A _ { a b } e ^ { i k _ { c } x ^ { c } } \right)
+</div>
+<script type="math/tex; mode=display">
+\bar { h } _ { a b } = \Re \left( A _ { a b } e ^ { i k _ { c } x ^ { c } } \right)
+</script>
+</div>
+<p>Einstein’s equations then demand that <span><span class="MathJax_Preview">k ^ { a }</span><script type="math/tex">k ^ { a }</script></span> be a null vector,</p>
+<div>
+<div class="MathJax_Preview">
+k _ { a } k ^ { a } = 0
+</div>
+<script type="math/tex; mode=display">
+k _ { a } k ^ { a } = 0
+</script>
+</div>
+<p>The Lorentz condition requires</p>
+<div>
+<div class="MathJax_Preview">
+k ^ { a } A _ { a b } = 0
+</div>
+<script type="math/tex; mode=display">
+k ^ { a } A _ { a b } = 0
+</script>
+</div>
+<p>implying that gravitational waves are transverse.</p>
+<p>From a numerical point of view the plane wave solutions found above are not the most useful. Most numerical simulations treat spacetimes with finite, bounded sources, for which the waves propagate radially outward at large distance. Moreover such spacetimes approach asymptotic flatness at least as fast as <span><span class="MathJax_Preview">r ^ { - 1 }</span><script type="math/tex">r ^ { - 1 }</script></span>. Clearly spacetimes containing with plane waves do not share these properties. More useful for simulation purposes are in terms of tensor spherical harmonics.</p>
+<p><strong>Gravitational radiation carries energy, momentum, and angular momentum.</strong></p>
+<p>We can express the radiated energy in terms of the wave amplitudes <span><span class="MathJax_Preview">h _ { + }</span><script type="math/tex">h _ { + }</script></span> and <span><span class="MathJax_Preview">h _ { \times }</span><script type="math/tex">h _ { \times }</script></span></p>
+<div>
+<div class="MathJax_Preview">
+L _ { \mathrm { GW } } = - \frac { d E } { d t } = \lim _ { r \rightarrow \infty } \frac { r ^ { 2 } } { 16 \pi } \int \left\langle \dot { h } _ { + } ^ { 2 } + \dot { h } _ { \times } ^ { 2 } \right\rangle d \Omega
+</div>
+<script type="math/tex; mode=display">
+L _ { \mathrm { GW } } = - \frac { d E } { d t } = \lim _ { r \rightarrow \infty } \frac { r ^ { 2 } } { 16 \pi } \int \left\langle \dot { h } _ { + } ^ { 2 } + \dot { h } _ { \times } ^ { 2 } \right\rangle d \Omega
+</script>
+</div>
+<p>Similarly, we can find the loss of angular momentum due to radiation,</p>
+<div>
+<div class="MathJax_Preview">
+\frac { d J _ { z } } { d t } = \lim _ { r \rightarrow \infty } \frac { r ^ { 2 } } { 16 \pi } \int \left\langle \partial _ { t } h _ { + } \partial _ { \phi } h _ { + } + \partial _ { t } h _ { \times } \partial _ { \phi } h _ { \times } \right\rangle d \Omega
+</div>
+<script type="math/tex; mode=display">
+\frac { d J _ { z } } { d t } = \lim _ { r \rightarrow \infty } \frac { r ^ { 2 } } { 16 \pi } \int \left\langle \partial _ { t } h _ { + } \partial _ { \phi } h _ { + } + \partial _ { t } h _ { \times } \partial _ { \phi } h _ { \times } \right\rangle d \Omega
+</script>
+</div>
+<p>Finally, the loss of linear momentum due to radiation is</p>
+<div>
+<div class="MathJax_Preview">
+\frac { d P ^ { i } } { d t } = \lim _ { r \rightarrow \infty } - \frac { r ^ { 2 } } { 16 \pi } \int \frac { x ^ { i } } { r } \left\langle \dot { h } _ { + } ^ { 2 } + \dot { h } _ { \times } ^ { 2 } \right\rangle d \Omega
+</div>
+<script type="math/tex; mode=display">
+\frac { d P ^ { i } } { d t } = \lim _ { r \rightarrow \infty } - \frac { r ^ { 2 } } { 16 \pi } \int \frac { x ^ { i } } { r } \left\langle \dot { h } _ { + } ^ { 2 } + \dot { h } _ { \times } ^ { 2 } \right\rangle d \Omega
+</script>
+</div>
+<p>In all the above expressions the quantities E, J and <span><span class="MathJax_Preview">P^i</span><script type="math/tex">P^i</script></span> refer to the source, and their changes are equal and opposite to the corresponding quantities carried off by the waves.</p>
+<p><strong>Sources</strong></p>
+<hr />
+<p>Consider now the generation of gravitational radiation from a weak-field, slow-velocity source. For such a source, Einstein’s equations reduce to</p>
+<div>
+<div class="MathJax_Preview">
+\square \bar { h } _ { a b } = \nabla ^ { c } \nabla _ { c } \bar { h } _ { a b } = - 16 \pi T _ { a b }
+</div>
+<script type="math/tex; mode=display">
+\square \bar { h } _ { a b } = \nabla ^ { c } \nabla _ { c } \bar { h } _ { a b } = - 16 \pi T _ { a b }
+</script>
+</div>
+<p>Imposing an outgoing-wave boundary condition, we can solve equation with the help of a Green’s function to obtain the integral equation,</p>
+<div>
+<div class="MathJax_Preview">
+\bar { h } _ { a b } \left( t , x ^ { i } \right) = 4 \int d ^ { 3 } x ^ { \prime } \frac { T _ { a b } \left( t - \left| x ^ { i } - x ^ { i } \right| , x ^ { i } \right) } { \left| x ^ { i } - x ^ { \prime } \right| }
+</div>
+<script type="math/tex; mode=display">
+\bar { h } _ { a b } \left( t , x ^ { i } \right) = 4 \int d ^ { 3 } x ^ { \prime } \frac { T _ { a b } \left( t - \left| x ^ { i } - x ^ { i } \right| , x ^ { i } \right) } { \left| x ^ { i } - x ^ { \prime } \right| }
+</script>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../NR/" class="btn btn-neutral float-right" title="Numerical Relativity">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Introduction/" class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../NR/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
