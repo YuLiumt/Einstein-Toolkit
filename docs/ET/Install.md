@@ -1,0 +1,38 @@
+Required Software
+
+``` bash
+# On Debian/Ubuntu use this command:
+sudo apt-get install -y subversion gcc git numactl libgsl-dev libpapi-dev python libhwloc-dev make libopenmpi-dev libhdf5-openmpi-dev libfftw3-dev libssl-dev liblapack-dev g++ curl gfortran patch pkg-config libhdf5-dev libjpeg-turbo?-dev
+# On Fedora use this command:
+sudo dnf install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel python hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran findutils hdf5-devel fftw-devel patch gsl-devel pkgconfig
+module load mpi/openmpi-x86_64
+# On Centos use this command:
+sudo yum install -y epel-release
+sudo yum install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran hdf5-devel fftw-devel patch gsl-devel
+```
+
+Download
+
+A script called GetComponents is used to fetch the components of the Einstein Toolkit.
+    
+``` bash
+cd ~/
+curl -kLO https://raw.githubusercontent.com/gridaphobe/CRL/ET_2018_09/GetComponents
+chmod a+x GetComponents
+./GetComponents --parallel https://bitbucket.org/einsteintoolkit/manifest/raw/ET_2018_09/einsteintoolkit.th
+cd ~/Cactus
+```
+
+Configuring SimFactory for your machine
+
+``` bash
+./simfactory/bin/sim setup-silent
+```
+
+Building the Einstein Toolkit
+
+``` bash
+./simfactory/bin/sim build --mdbkey make 'make -j2' --thornlist ../einsteintoolkit.th | cat
+```
+
+[A step by step guide to downloading, configuring, and running the Einstein Toolkit.](https://github.com/nds-org/jupyter-et/blob/master/CactusTutorial.ipynb)

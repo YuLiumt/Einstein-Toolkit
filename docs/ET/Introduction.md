@@ -1,0 +1,1 @@
+The [Einstein Toolkit](https://www.einsteintoolkit.org/index.html) is a community-driven software platform of core computational tools to advance and support research in relativistic astrophysics and gravitational physics.

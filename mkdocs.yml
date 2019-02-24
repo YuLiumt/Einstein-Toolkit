@@ -2,10 +2,45 @@ site_name: Einstein Toolkit
 
 site_author: Yu Liu
 
-google_analytics: ['UA-36723568-3', 'mkdocs.org']
-
 theme:
   name: 'readthedocs'
 
 nav:
-    - Home: index.md
+- Home: 'index.md'
+- Einstein Toolkit: 
+    - Introduction: 'ET/Introduction.md'
+    - Install: 'ET/Install.md'
+    - Cactus: 'ET/Cactus.md'
+- General Relativity: 'GR.md'
+- Gravitational Wave:
+    - Introduction: 'GW/Introduction.md'
+    - Linearized Waves: 'GW/Linearized Waves.md'
+- Numerical Relativity: 'NR.md'
+
+repo_url: https://github.com/YuLiumt/Einstein-Toolkit
+site_url: https://YuLiumt.github.io/Einstein-Toolkit
+
+google_analytics: ['UA-36723568-3', 'https://yuliumt.github.io']
+
+markdown_extensions:
+  - codehilite:
+      linenums: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - admonition
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
