@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Numerical Methods - Einstein Toolkit</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Numerical Methods";
+    var mkdocs_page_input_path = "NR/Numerical Methods.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/NR/Numerical Methods/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Einstein Toolkit</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../ET/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Cactus/">Cactus</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../GR/">General Relativity</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GW/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Linearized Waves/">Linearized Waves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Extracting Gravitational Waveforms/">Extracting Gravitational Waveforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Numerical Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../3+1 Decomposition/">3+1 Decomposition</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Numerical Methods</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#finite-difference-methods">Finite Difference Methods</a></li>
+    
+
+    <li class="toctree-l3"><a href="#hyperbolic-equations">Hyperbolic Equations</a></li>
+    
+
+    <li class="toctree-l3"><a href="#question">Question</a></li>
+    
+
+    <li class="toctree-l3"><a href="#courant-friedrichs-lewy-condition">Courant-Friedrichs-Lewy condition</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Einstein Toolkit</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Numerical Relativity &raquo;</li>
+        
+      
+    
+    <li>Numerical Methods</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/NR/Numerical Methods.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="finite-difference-methods">Finite Difference Methods</h2>
+<p><strong>In a finite difference approximation a function <span><span class="MathJax_Preview">f(t,x)</span><script type="math/tex">f(t,x)</script></span> is represented by values at a discrete set of points.</strong> At the core of finite difference approximation is therefore a discretization of the spacetime, or a numerical grid. Instead of evaluating f at all values of x, for example, we only consider discrete values <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>. The distance between the gridpoints <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is called the gridspacing <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span>. For uniform grids, for which <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span> is constant, we have</p>
+<div>
+<div class="MathJax_Preview">
+x _ { i } = x _ { 0 } + i \Delta x
+</div>
+<script type="math/tex; mode=display">
+x _ { i } = x _ { 0 } + i \Delta x
+</script>
+</div>
+<p>If the solution depends on time we also discretize the time coordinate, for example as</p>
+<div>
+<div class="MathJax_Preview">
+t ^ { n } = t ^ { 0 } + n \Delta t
+</div>
+<script type="math/tex; mode=display">
+t ^ { n } = t ^ { 0 } + n \Delta t
+</script>
+</div>
+<p>The finite difference representation of the function <span><span class="MathJax_Preview">f(t,x)</span><script type="math/tex">f(t,x)</script></span>, for example, is</p>
+<div>
+<div class="MathJax_Preview">
+f _ { i } ^ { n } = f \left( t ^ { n } , x _ { i } \right) + \text { truncation error. }
+</div>
+<script type="math/tex; mode=display">
+f _ { i } ^ { n } = f \left( t ^ { n } , x _ { i } \right) + \text { truncation error. }
+</script>
+</div>
+<p>Differential equations involve derivatives, so we must next discuss how to represent derivatives in a finite difference representation.</p>
+<p>Assuming that <span><span class="MathJax_Preview">f(x)</span><script type="math/tex">f(x)</script></span> can be differentiated to sufficiently high order and that it can be represented as a Taylor series, we have</p>
+<div>
+<div class="MathJax_Preview">
+f _ { i + 1 } = f \left( x _ { i } + \Delta x \right) = f \left( x _ { i } \right) + \Delta x \left( \partial _ { x } f \right) _ { x _ { i } } + \frac { ( \Delta x ) ^ { 2 } } { 2 } \left( \partial _ { x } ^ { 2 } f \right) _ { x _ { i } } + \mathcal { O } \left( \Delta x ^ { 3 } \right)
+</div>
+<script type="math/tex; mode=display">
+f _ { i + 1 } = f \left( x _ { i } + \Delta x \right) = f \left( x _ { i } \right) + \Delta x \left( \partial _ { x } f \right) _ { x _ { i } } + \frac { ( \Delta x ) ^ { 2 } } { 2 } \left( \partial _ { x } ^ { 2 } f \right) _ { x _ { i } } + \mathcal { O } \left( \Delta x ^ { 3 } \right)
+</script>
+</div>
+<p>Solving for <span><span class="MathJax_Preview">\left( \partial _ { x } f \right) _ { x _ { i } } = \left( \partial _ { x } f \right) _ { i }</span><script type="math/tex">\left( \partial _ { x } f \right) _ { x _ { i } } = \left( \partial _ { x } f \right) _ { i }</script></span> we find</p>
+<div>
+<div class="MathJax_Preview">
+\left( \partial _ { x } f \right) _ { i } = \frac { f _ { i + 1 } - f _ { i } } { \Delta x } + \mathcal { O } ( \Delta x )
+</div>
+<script type="math/tex; mode=display">
+\left( \partial _ { x } f \right) _ { i } = \frac { f _ { i + 1 } - f _ { i } } { \Delta x } + \mathcal { O } ( \Delta x )
+</script>
+</div>
+<p>The truncation error of this expression is linear in <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span>, and it turns out that we can do better. We call equation a <strong>one-sided derivative</strong>, since it uses only neighbors on one side of <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>.</p>
+<p>Consider the Taylor expansion to the point <span><span class="MathJax_Preview">x_{ i − 1 }</span><script type="math/tex">x_{ i − 1 }</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+f _ { i - 1 } = f \left( x _ { i } - \Delta x \right) = f \left( x _ { i } \right) - \Delta x \left( \partial _ { x } f \right) _ { x _ { i } } + \frac { ( \Delta x ) ^ { 2 } } { 2 } \left( \partial _ { x } ^ { 2 } f \right) _ { x _ { i } } + \mathcal { O } \left( \Delta x ^ { 3 } \right)
+</div>
+<script type="math/tex; mode=display">
+f _ { i - 1 } = f \left( x _ { i } - \Delta x \right) = f \left( x _ { i } \right) - \Delta x \left( \partial _ { x } f \right) _ { x _ { i } } + \frac { ( \Delta x ) ^ { 2 } } { 2 } \left( \partial _ { x } ^ { 2 } f \right) _ { x _ { i } } + \mathcal { O } \left( \Delta x ^ { 3 } \right)
+</script>
+</div>
+<p>we now find</p>
+<div>
+<div class="MathJax_Preview">
+\left( \partial _ { x } f \right) _ { i } = \frac { f _ { i + 1 } - f _ { i - 1 } } { 2 \Delta x } + \mathcal { O } \left( \Delta x ^ { 2 } \right)
+</div>
+<script type="math/tex; mode=display">
+\left( \partial _ { x } f \right) _ { i } = \frac { f _ { i + 1 } - f _ { i - 1 } } { 2 \Delta x } + \mathcal { O } \left( \Delta x ^ { 2 } \right)
+</script>
+</div>
+<p>which is second order in <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span>. In general, <strong>centered derivatives</strong> lead to higher order schemes than one-sided derivatives for the same number of gridpoints.</p>
+<p>The key point is that we are able to combine the two Taylor expansions in such a way that the leading order error term cancels out, leaving us <strong>with a higher order representation of the derivative</strong>. This cancellation <strong>only works out for uniform grids</strong>, when <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span> is independent of x. This is one of the reasons why many current numerical relativity applications of finite difference schemes work with uniform grids.</p>
+<p>Higher order derivatives can be constructed in a similar fashion. Adding the two Taylor expansions all terms odd in <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span> drop out and we find for the second derivative</p>
+<div>
+<div class="MathJax_Preview">
+\left( \partial _ { x } ^ { 2 } f \right) _ { i } = \frac { f _ { i + 1 } - 2 f _ { i } + f _ { i - 1 } } { ( \Delta x ) ^ { 2 } } + \mathcal { O } \left( \Delta x ^ { 2 } \right)
+</div>
+<script type="math/tex; mode=display">
+\left( \partial _ { x } ^ { 2 } f \right) _ { i } = \frac { f _ { i + 1 } - 2 f _ { i } + f _ { i - 1 } } { ( \Delta x ) ^ { 2 } } + \mathcal { O } \left( \Delta x ^ { 2 } \right)
+</script>
+</div>
+<blockquote>
+<div>
+<div class="MathJax_Preview">
+\left( \partial _ { x } f \right) _ { i } = \frac { 1 } { 12 \Delta x } \left( f _ { i - 2 } - 8 f _ { i - 1 } + 8 f _ { i + 1 } - f _ { i + 2 } \right) \\
+\left( \partial _ { x } ^ { 2 } f \right) _ { i } = \frac { 1 } { 12 ( \Delta x ) ^ { 2 } } \left( - f _ { i - 2 } + 16 f _ { i - 1 } - 30 f _ { i } + 16 f _ { i + 1 } - f _ { i + 2 } \right)
+</div>
+<script type="math/tex; mode=display">
+\left( \partial _ { x } f \right) _ { i } = \frac { 1 } { 12 \Delta x } \left( f _ { i - 2 } - 8 f _ { i - 1 } + 8 f _ { i + 1 } - f _ { i + 2 } \right) \\
+\left( \partial _ { x } ^ { 2 } f \right) _ { i } = \frac { 1 } { 12 ( \Delta x ) ^ { 2 } } \left( - f _ { i - 2 } + 16 f _ { i - 1 } - 30 f _ { i } + 16 f _ { i + 1 } - f _ { i + 2 } \right)
+</script>
+</div>
+<p>where we have omitted the truncation error, <span><span class="MathJax_Preview">\mathcal { O } \left( \Delta x ^ { 4 } \right)</span><script type="math/tex">\mathcal { O } \left( \Delta x ^ { 4 } \right)</script></span></p>
+</blockquote>
+<h2 id="hyperbolic-equations">Hyperbolic Equations</h2>
+<p>For simplicity it does not contain any source terms, and the the wave speed v is constant.</p>
+<div>
+<div class="MathJax_Preview">
+\partial _ { t } u + v \partial _ { x } u = 0
+</div>
+<script type="math/tex; mode=display">
+\partial _ { t } u + v \partial _ { x } u = 0
+</script>
+</div>
+<p>The equation is satisfied exactly by any function of the form <span><span class="MathJax_Preview">u ( t , x ) = u ( x - v t )</span><script type="math/tex">u ( t , x ) = u ( x - v t )</script></span>. <strong>The equation has a time derivative in addition to the space derivative, and thus requires initial data</strong>.</p>
+<p>Inserting both finite-difference representations</p>
+<div>
+<div class="MathJax_Preview">
+\left( \partial _ { x } u \right) _ { j } ^ { n } = \frac { u _ { j + 1 } ^ { n } - u _ { j - 1 } ^ { n } } { 2 \Delta x } + \mathcal { O } \left( \Delta x ^ { 2 } \right) \\
+\left( \partial _ { t } u \right) _ { j } ^ { n } = \frac { u _ { j } ^ { n + 1 } - u _ { j } ^ { n } } { \Delta t } + \mathcal { O } ( \Delta t )
+</div>
+<script type="math/tex; mode=display">
+\left( \partial _ { x } u \right) _ { j } ^ { n } = \frac { u _ { j + 1 } ^ { n } - u _ { j - 1 } ^ { n } } { 2 \Delta x } + \mathcal { O } \left( \Delta x ^ { 2 } \right) \\
+\left( \partial _ { t } u \right) _ { j } ^ { n } = \frac { u _ { j } ^ { n + 1 } - u _ { j } ^ { n } } { \Delta t } + \mathcal { O } ( \Delta t )
+</script>
+</div>
+<p>we can solve for <span><span class="MathJax_Preview">u^{n+1}_j</span><script type="math/tex">u^{n+1}_j</script></span> and find</p>
+<div>
+<div class="MathJax_Preview">
+u _ { j } ^ { n + 1 } = u _ { j } ^ { n } - \frac { v } { 2 } \frac { \Delta t } { \Delta x } \left( u _ { j + 1 } ^ { n } - u _ { j - 1 } ^ { n } \right)
+</div>
+<script type="math/tex; mode=display">
+u _ { j } ^ { n + 1 } = u _ { j } ^ { n } - \frac { v } { 2 } \frac { \Delta t } { \Delta x } \left( u _ { j + 1 } ^ { n } - u _ { j - 1 } ^ { n } \right)
+</script>
+</div>
+<p>or reasons that are quite obivous this differencing scheme is called forward-time centered-space, or FTCS.</p>
+<p><img alt="" src="../media/15512306516707.jpg" /></p>
+<p>It is an example of an explicit scheme, meaning that we can solve for the grid function <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n + 1 directly in terms of function values on the old time level n.</p>
+<h2 id="question">Question</h2>
+<p>The Courant-Friedrichs-Lewy condition</p>
+<div>
+<div class="MathJax_Preview">
+\frac { | v | \Delta t } { \Delta x } \leq 1
+</div>
+<script type="math/tex; mode=display">
+\frac { | v | \Delta t } { \Delta x } \leq 1
+</script>
+</div>
+<p>The Courant condition states that the the grid point <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n+1 has to reside inside the domain of determinacy of the interval spanned by the finite difference stencil at the time level n. This makes intuitive sense: if <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> were outside this domain, its physical specification would require more information about the past than we are providing numerically, which may trigger an instability.</p>
+<p><img alt="" src="../media/15512306641761.jpg" /></p>
+<p>Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.</p>
+<h2 id="courant-friedrichs-lewy-condition">Courant-Friedrichs-Lewy condition</h2>
+<p>Unfortunately, however, FTCS is fairly useless. The equation is satisfied exactly by any function of the form <span><span class="MathJax_Preview">u ( t , x ) = u ( x - v t )</span><script type="math/tex">u ( t , x ) = u ( x - v t )</script></span>. we can write the solution <span><span class="MathJax_Preview">u ( t , x )</span><script type="math/tex">u ( t , x )</script></span> to our continuum hyperbolic differential equation as a superposition of eigenmodes <span><span class="MathJax_Preview">e^{i(\omega t+k x)}</span><script type="math/tex">e^{i(\omega t+k x)}</script></span>. Here k is a spatial wave number.</p>
+<p>A real <span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span>, for which <span><span class="MathJax_Preview">e^{i \omega t}</span><script type="math/tex">e^{i \omega t}</script></span> has a magnitude of unity, yields sinusoidally oscillating modes, while the existence of a complex piece in <span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span> leads to exponentially growing or damping modes. In the case of exponential growth, the magnitude of <span><span class="MathJax_Preview">e^{i \omega t}</span><script type="math/tex">e^{i \omega t}</script></span> will exceed unity.</p>
+<p>We can perform a similar spectral analysis of the finite difference equation. Write the eigenmode for <span><span class="MathJax_Preview">u_{j}^{n}</span><script type="math/tex">u_{j}^{n}</script></span> as</p>
+<div>
+<div class="MathJax_Preview">
+u_{j}^{n}=\xi^{n} e^{i k(j \Delta x)}
+</div>
+<script type="math/tex; mode=display">
+u_{j}^{n}=\xi^{n} e^{i k(j \Delta x)}
+</script>
+</div>
+<p>Here the quantity <span><span class="MathJax_Preview">\xi</span><script type="math/tex">\xi</script></span> plays the role of <span><span class="MathJax_Preview">e^{i \omega \Delta t}</span><script type="math/tex">e^{i \omega \Delta t}</script></span> and is called the amplification factor:</p>
+<div>
+<div class="MathJax_Preview">
+u_{j}^{n}=\xi u_{j}^{n-1} = \xi^{2} u_{j}^{n-2} \ldots=\xi^{n} u_{j}^{0}
+</div>
+<script type="math/tex; mode=display">
+u_{j}^{n}=\xi u_{j}^{n-1} = \xi^{2} u_{j}^{n-2} \ldots=\xi^{n} u_{j}^{0}
+</script>
+</div>
+<p>For the scheme to be stable, the magnitude <span><span class="MathJax_Preview">\xi</span><script type="math/tex">\xi</script></span> must be smaller or equal to unity for all k,</p>
+<div>
+<div class="MathJax_Preview">
+|\xi(k)| \leq 1
+</div>
+<script type="math/tex; mode=display">
+|\xi(k)| \leq 1
+</script>
+</div>
+<p>To perform a von Neumann stability anaylsis of the FTCS scheme</p>
+<div>
+<div class="MathJax_Preview">
+\xi(k)=1-i \frac{v \Delta t}{\Delta x} \sin k \Delta x
+</div>
+<script type="math/tex; mode=display">
+\xi(k)=1-i \frac{v \Delta t}{\Delta x} \sin k \Delta x
+</script>
+</div>
+<p><strong>the magnitude of <span><span class="MathJax_Preview">\xi</span><script type="math/tex">\xi</script></span> is greater than unity for all k, indicating that this scheme is unstable.</strong> In fact, we have <span><span class="MathJax_Preview">|\xi|&gt;1</span><script type="math/tex">|\xi|>1</script></span> independently of our choice for <span><span class="MathJax_Preview">\Delta x</span><script type="math/tex">\Delta x</script></span> and <span><span class="MathJax_Preview">\Delta t</span><script type="math/tex">\Delta t</script></span>, which makes this scheme unconditionally unstable. That is bad.</p>
+<p>The good news is that there are several ways of fixing this problem.</p>
+<p>For example</p>
+<p>We could replace the term <span><span class="MathJax_Preview">u_{j}^{n}</span><script type="math/tex">u_{j}^{n}</script></span> by the spatial average <span><span class="MathJax_Preview">\left(u_{j+1}^{n}+u_{j-1}^{n}\right) / 2</span><script type="math/tex">\left(u_{j+1}^{n}+u_{j-1}^{n}\right) / 2</script></span>.</p>
+<div>
+<div class="MathJax_Preview">
+u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</div>
+<script type="math/tex; mode=display">
+u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</script>
+</div>
+<p>a von Neumann analysis results in the amplification factor</p>
+<div>
+<div class="MathJax_Preview">
+\xi=\cos k \Delta x-i \frac{v \Delta t}{\Delta x} \sin k \Delta x
+</div>
+<script type="math/tex; mode=display">
+\xi=\cos k \Delta x-i \frac{v \Delta t}{\Delta x} \sin k \Delta x
+</script>
+</div>
+<p>The von Neumann stability criterion then implies that we must have</p>
+<div>
+<div class="MathJax_Preview">
+\frac { | v | \Delta t } { \Delta x } \leq 1
+</div>
+<script type="math/tex; mode=display">
+\frac { | v | \Delta t } { \Delta x } \leq 1
+</script>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../3+1 Decomposition/" class="btn btn-neutral" title="3+1 Decomposition"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../3+1 Decomposition/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

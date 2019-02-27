@@ -2,42 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://YuLiumt.github.io/Einstein-Toolkit/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://YuLiumt.github.io/Einstein-Toolkit/ET/Introduction/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://YuLiumt.github.io/Einstein-Toolkit/ET/Install/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://YuLiumt.github.io/Einstein-Toolkit/ET/Cactus/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://YuLiumt.github.io/Einstein-Toolkit/GR/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://YuLiumt.github.io/Einstein-Toolkit/GW/Introduction/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://YuLiumt.github.io/Einstein-Toolkit/GW/Linearized Waves/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://YuLiumt.github.io/Einstein-Toolkit/NR/</loc>
-     <lastmod>2019-02-24</lastmod>
+     <loc>https://YuLiumt.github.io/Einstein-Toolkit/GW/Extracting Gravitational Waveforms/</loc>
+     <lastmod>2019-02-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://YuLiumt.github.io/Einstein-Toolkit/NR/Introduction/</loc>
+     <lastmod>2019-02-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://YuLiumt.github.io/Einstein-Toolkit/NR/3+1 Decomposition/</loc>
+     <lastmod>2019-02-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://YuLiumt.github.io/Einstein-Toolkit/NR/Numerical Methods/</loc>
+     <lastmod>2019-02-27</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
