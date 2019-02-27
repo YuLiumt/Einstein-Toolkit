@@ -1,0 +1,2 @@
+The 3+1 equations are entirely equivalent to the usual ﬁeld equations but they focus on the evolution of 12 purely spatial quantities closely related to $g_{ij}$ and $\partial_t g_{ij}$ and the constraints that they must satisfy on spatial hypersurfaces. Once these spatial ﬁeld quantities are specified on some initial “time slice” (i.e. spatial hypersurface) consistent with the 3 + 1 constraint equations, the 3 + 1 evolution equations can then be integrated, together with evolution equations for the matter sources, to determine these ﬁeld quantities at all later times.
+

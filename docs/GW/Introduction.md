@@ -9,6 +9,8 @@ Gravitational wave detectors measure gravitational amplitudes directly, as a fun
 **Ground-based gravitational wave interferometers**
 ___
 
+The high frequency band includes frequencies in the approximate range $1 \mathrm { Hz } \lesssim f \lesssim 10 ^ { 4 } \mathrm { Hz }$. This frequency band is observable with the new generation of ground-based gravitational wave interferometers.
+
 ![-w1221](media/15509881364976.jpg)
 
 A passing gravitational wave will distort the relative length of the two arms, and will therefore modify the interference pattern of the two returning light beams.
@@ -24,6 +26,8 @@ A passing gravitational wave will distort the relative length of the two arms, a
 
 **Space-based detectors**
 ___
+
+The low frequency band between $10 ^ { - 5 } \mathrm { Hz } \lesssim f \lesssim 1 \mathrm { Hz }$ cannot be observed with ground-based detectors. This leaves space-based observatories as the best means of detecting such radiation.
 
 ![-w946](media/15509897316513.jpg)
 

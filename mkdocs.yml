@@ -15,7 +15,11 @@ nav:
 - Gravitational Wave:
     - Introduction: 'GW/Introduction.md'
     - Linearized Waves: 'GW/Linearized Waves.md'
-- Numerical Relativity: 'NR.md'
+    - Extracting Gravitational Waveforms: 'GW/Extracting Gravitational Waveforms.md'
+- Numerical Relativity:
+    - Introduction: 'NR/Introduction.md'
+    - 3+1 Decomposition: 'NR/3+1 Decomposition.md'
+    - Numerical Methods: 'NR/Numerical Methods.md'
 
 repo_url: https://github.com/YuLiumt/Einstein-Toolkit
 site_url: https://YuLiumt.github.io/Einstein-Toolkit

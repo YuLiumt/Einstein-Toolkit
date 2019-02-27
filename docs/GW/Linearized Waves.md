@@ -111,3 +111,16 @@ $$
 \bar { h } _ { a b } \left( t , x ^ { i } \right) = 4 \int d ^ { 3 } x ^ { \prime } \frac { T _ { a b } \left( t - \left| x ^ { i } - x ^ { i } \right| , x ^ { i } \right) } { \left| x ^ { i } - x ^ { \prime } \right| }
 $$
 
+For a binary, we can estimate the typical gravitational wave strain h. For equal-mass binaries we have $\mu = M / 4$, so
+
+$$
+h \simeq \frac { 4 } { r } \frac { \mu M } { R } \simeq 5 \times 10 ^ { - 20 } \left( \frac { 1 \mathrm { Mpc } } { r } \right) \left( \frac { M } { M _ { \odot } } \right) \left( \frac { M } { R } \right)
+$$
+
+The characteristic gravitational wave frequency from a stellar object of mass M, radius R and compaction $M/R$ by
+
+$$
+f \simeq \frac { 1 } { M } \left( \frac { M } { R } \right) ^ { 3 / 2 } \simeq 2 \times 10 ^ { 5 } \mathrm { Hz } \left( \frac { M _ { \odot } } { M } \right) \left( \frac { M } { R } \right) ^ { 3 / 2 }
+$$
+
+The highest frequency sources are compact objects with large compactions (black holes or neutron stars) and small masses; stellar-mass compact objects fall into this category. These sources fall into the high frequency band.
