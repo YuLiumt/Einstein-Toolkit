@@ -1,4 +1,4 @@
-site_name: Einstein Toolkit
+site_name: Yu Liu's Notebook 
 
 site_author: Yu Liu
 
@@ -11,7 +11,9 @@ nav:
     - Introduction: 'ET/Introduction.md'
     - Install: 'ET/Install.md'
     - Cactus: 'ET/Cactus.md'
-- General Relativity: 'GR.md'
+    - Thorn: 'ET/Thorn.md'
+- General Relativity:
+    - Solutions: 'GR/Solutions'
 - Gravitational Wave:
     - Introduction: 'GW/Introduction.md'
     - Linearized Waves: 'GW/Linearized Waves.md'
@@ -20,6 +22,10 @@ nav:
     - Introduction: 'NR/Introduction.md'
     - 3+1 Decomposition: 'NR/3+1 Decomposition.md'
     - Numerical Methods: 'NR/Numerical Methods.md'
+- Search Pipeline:
+    - Introduction: 'SP/Introduction.md'
+    - Matched Filtering: 'SP/matched filter.md'
+
 
 repo_url: https://github.com/YuLiumt/Einstein-Toolkit
 site_url: https://YuLiumt.github.io/Einstein-Toolkit
@@ -27,6 +33,7 @@ site_url: https://YuLiumt.github.io/Einstein-Toolkit
 google_analytics: ['UA-36723568-3', 'https://yuliumt.github.io']
 
 markdown_extensions:
+  - footnotes
   - codehilite:
       linenums: true
   - pymdownx.arithmatex

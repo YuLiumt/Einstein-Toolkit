@@ -63,7 +63,7 @@ $$
 > 
 > where we have omitted the truncation error, $\mathcal { O } \left( \Delta x ^ { 4 } \right)$
 
-## Hyperbolic Equations
+### Hyperbolic Equations
 
 For simplicity it does not contain any source terms, and the the wave speed v is constant.
 
@@ -92,21 +92,7 @@ or reasons that are quite obivous this differencing scheme is called forward-tim
 
 It is an example of an explicit scheme, meaning that we can solve for the grid function $u _ { j } ^ { n + 1 }$ at the new time level n + 1 directly in terms of function values on the old time level n.
 
-## Question
-
-The Courant-Friedrichs-Lewy condition
-
-$$
-\frac { | v | \Delta t } { \Delta x } \leq 1
-$$
-
-The Courant condition states that the the grid point $u _ { j } ^ { n + 1 }$ at the new time level n+1 has to reside inside the domain of determinacy of the interval spanned by the finite difference stencil at the time level n. This makes intuitive sense: if $u _ { j } ^ { n + 1 }$ were outside this domain, its physical specification would require more information about the past than we are providing numerically, which may trigger an instability.
-
-![](media/15512306641761.jpg)
-
-Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.
-
-## Courant-Friedrichs-Lewy condition
+#### Courant-Friedrichs-Lewy condition
 
 Unfortunately, however, FTCS is fairly useless. The equation is satisfied exactly by any function of the form $u ( t , x ) = u ( x - v t )$. we can write the solution $u ( t , x )$ to our continuum hyperbolic differential equation as a superposition of eigenmodes $e^{i(\omega t+k x)}$. Here k is a spatial wave number.
 
@@ -159,3 +145,9 @@ The von Neumann stability criterion then implies that we must have
 $$
 \frac { | v | \Delta t } { \Delta x } \leq 1
 $$
+
+The Courant condition states that the the grid point $u _ { j } ^ { n + 1 }$ at the new time level n+1 has to reside inside the domain of determinacy of the interval spanned by the finite difference stencil at the time level n. This makes intuitive sense: if $u _ { j } ^ { n + 1 }$ were outside this domain, its physical specification would require more information about the past than we are providing numerically, which may trigger an instability.
+
+![](media/15512306641761.jpg)
+
+Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.

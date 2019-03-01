@@ -1,0 +1,1 @@
+These detections required technically sophisticated analysis pipelines to reduce the strain data. This is because typical events are buried under the detector noise, and cannot be simply “seen” in raw data at current sensitivities. Hence, any search for signals in the data needs to properly and precisely model the detector noise.
