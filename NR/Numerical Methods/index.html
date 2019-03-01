@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Numerical Methods - Einstein Toolkit</title>
+  <title>Numerical Methods - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -46,7 +46,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> Einstein Toolkit</a>
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -79,12 +79,22 @@
                     
     <a class="" href="../../ET/Cactus/">Cactus</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Thorn/">Thorn</a>
+                </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../GR/">General Relativity</a>
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Solutions">Solutions</a>
+                </li>
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -125,17 +135,29 @@
             
     <li class="toctree-l3"><a href="#finite-difference-methods">Finite Difference Methods</a></li>
     
-
-    <li class="toctree-l3"><a href="#hyperbolic-equations">Hyperbolic Equations</a></li>
-    
-
-    <li class="toctree-l3"><a href="#question">Question</a></li>
-    
-
-    <li class="toctree-l3"><a href="#courant-friedrichs-lewy-condition">Courant-Friedrichs-Lewy condition</a></li>
+        <ul>
+        
+            <li><a class="toctree-l4" href="#hyperbolic-equations">Hyperbolic Equations</a></li>
+        
+        </ul>
     
 
     </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
                 </li>
     </ul>
 	    </li>
@@ -150,7 +172,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">Einstein Toolkit</a>
+        <a href="../..">Yu Liu's Notebook</a>
       </nav>
 
       
@@ -269,7 +291,7 @@ f _ { i - 1 } = f \left( x _ { i } - \Delta x \right) = f \left( x _ { i } \righ
 </div>
 <p>where we have omitted the truncation error, <span><span class="MathJax_Preview">\mathcal { O } \left( \Delta x ^ { 4 } \right)</span><script type="math/tex">\mathcal { O } \left( \Delta x ^ { 4 } \right)</script></span></p>
 </blockquote>
-<h2 id="hyperbolic-equations">Hyperbolic Equations</h2>
+<h3 id="hyperbolic-equations">Hyperbolic Equations</h3>
 <p>For simplicity it does not contain any source terms, and the the wave speed v is constant.</p>
 <div>
 <div class="MathJax_Preview">
@@ -303,20 +325,7 @@ u _ { j } ^ { n + 1 } = u _ { j } ^ { n } - \frac { v } { 2 } \frac { \Delta t }
 <p>or reasons that are quite obivous this differencing scheme is called forward-time centered-space, or FTCS.</p>
 <p><img alt="" src="../media/15512306516707.jpg" /></p>
 <p>It is an example of an explicit scheme, meaning that we can solve for the grid function <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n + 1 directly in terms of function values on the old time level n.</p>
-<h2 id="question">Question</h2>
-<p>The Courant-Friedrichs-Lewy condition</p>
-<div>
-<div class="MathJax_Preview">
-\frac { | v | \Delta t } { \Delta x } \leq 1
-</div>
-<script type="math/tex; mode=display">
-\frac { | v | \Delta t } { \Delta x } \leq 1
-</script>
-</div>
-<p>The Courant condition states that the the grid point <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n+1 has to reside inside the domain of determinacy of the interval spanned by the finite difference stencil at the time level n. This makes intuitive sense: if <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> were outside this domain, its physical specification would require more information about the past than we are providing numerically, which may trigger an instability.</p>
-<p><img alt="" src="../media/15512306641761.jpg" /></p>
-<p>Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.</p>
-<h2 id="courant-friedrichs-lewy-condition">Courant-Friedrichs-Lewy condition</h2>
+<h4 id="courant-friedrichs-lewy-condition">Courant-Friedrichs-Lewy condition</h4>
 <p>Unfortunately, however, FTCS is fairly useless. The equation is satisfied exactly by any function of the form <span><span class="MathJax_Preview">u ( t , x ) = u ( x - v t )</span><script type="math/tex">u ( t , x ) = u ( x - v t )</script></span>. we can write the solution <span><span class="MathJax_Preview">u ( t , x )</span><script type="math/tex">u ( t , x )</script></span> to our continuum hyperbolic differential equation as a superposition of eigenmodes <span><span class="MathJax_Preview">e^{i(\omega t+k x)}</span><script type="math/tex">e^{i(\omega t+k x)}</script></span>. Here k is a spatial wave number.</p>
 <p>A real <span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span>, for which <span><span class="MathJax_Preview">e^{i \omega t}</span><script type="math/tex">e^{i \omega t}</script></span> has a magnitude of unity, yields sinusoidally oscillating modes, while the existence of a complex piece in <span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span> leads to exponentially growing or damping modes. In the case of exponential growth, the magnitude of <span><span class="MathJax_Preview">e^{i \omega t}</span><script type="math/tex">e^{i \omega t}</script></span> will exceed unity.</p>
 <p>We can perform a similar spectral analysis of the finite difference equation. Write the eigenmode for <span><span class="MathJax_Preview">u_{j}^{n}</span><script type="math/tex">u_{j}^{n}</script></span> as</p>
@@ -385,12 +394,17 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
 \frac { | v | \Delta t } { \Delta x } \leq 1
 </script>
 </div>
+<p>The Courant condition states that the the grid point <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n+1 has to reside inside the domain of determinacy of the interval spanned by the finite difference stencil at the time level n. This makes intuitive sense: if <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> were outside this domain, its physical specification would require more information about the past than we are providing numerically, which may trigger an instability.</p>
+<p><img alt="" src="../media/15512306641761.jpg" /></p>
+<p>Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.</p>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../SP/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../3+1 Decomposition/" class="btn btn-neutral" title="3+1 Decomposition"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -423,6 +437,8 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
       
         <span><a href="../3+1 Decomposition/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../../SP/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

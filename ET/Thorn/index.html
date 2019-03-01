@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Thorn - Yu Liu's Notebook</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Thorn";
+    var mkdocs_page_input_path = "ET/Thorn.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/ET/Thorn/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Cactus/">Cactus</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Thorn</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#general-syntax-of-ccl-files">General Syntax of CCL Files</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#the-interfaceccl-file">The interface.ccl File</a></li>
+        
+            <li><a class="toctree-l4" href="#the-paramccl-file">The param.ccl File</a></li>
+        
+            <li><a class="toctree-l4" href="#the-scheduleccl-file">The schedule.ccl File</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#initial-data">Initial data</a></li>
+    
+
+    <li class="toctree-l3"><a href="#diagnostics">Diagnostics</a></li>
+    
+
+    <li class="toctree-l3"><a href="#extract-gravitational-wave">Extract Gravitational Wave</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Solutions">Solutions</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GW/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Linearized Waves/">Linearized Waves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Extracting Gravitational Waveforms/">Extracting Gravitational Waveforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Numerical Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../NR/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Yu Liu's Notebook</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Einstein Toolkit &raquo;</li>
+        
+      
+    
+    <li>Thorn</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/Thorn.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><strong>A thorn is the basic working module within Cactus.</strong> All user supplied code goes into thorns, which are, by and large, independent of each other. Relationships among thorns are all based upon relationships among the implementations they provide.</p>
+<p>Thorns are grouped into arrangements. This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the <code class="codehilite">arrangements</code> directory of the main Cactus directory.</p>
+<p>A thorn consists of a subdirectory of an arrangement containing four administrative files:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>interface.ccl</td>
+<td>This defines the implementation the thorn provides, and the variables the thorn needs, along with their visibility to other implementations.</td>
+</tr>
+<tr>
+<td>param.ccl</td>
+<td>This defines the parameters that are used to control the thorn, along with their visibility to other implementations.</td>
+</tr>
+<tr>
+<td>schedule.ccl</td>
+<td>This defines which functions are called from the thorn and when they are called. It also handles memory and communication assignment for grid variables.</td>
+</tr>
+<tr>
+<td>configuration.ccl</td>
+<td>This file is optional for a thorn. If it exists, it contains extra configuration options of this thorn.</td>
+</tr>
+</tbody>
+</table>
+<p>Thorns can also contain</p>
+<ul>
+<li>a subdirectory called src, which should hold source files and compilation instructions for the thorn </li>
+<li>a subdirectory src/include for include files</li>
+<li>a README containing a brief description of the thorn</li>
+<li>a doc directory for documentation</li>
+<li>a par directory for example parameter files</li>
+<li>a test subdirectory may also be added, to hold the thorn’s test suite.</li>
+</ul>
+<h2 id="general-syntax-of-ccl-files">General Syntax of CCL Files</h2>
+<p><strong>Cactus Configuration Language (CCL) files are text files used to define configuration information for a thorn.</strong></p>
+<p>A Grammar File for each type of CCL file is provided in the <code class="codehilite">src/piraha/pegs</code> directory of the Cactus source tree.</p>
+<p>CCL files are (mostly) case independent, and may contain comments introduced by the hash ‘#’ character, which indicates that the rest of the line is a comment. If the last non-blank character of a line in a CCL file is a backslash ‘\’, the following line is treated as a continuation of the current line.</p>
+<p>see <a href="https://github.com/stevenrbrandt/piraha-peg">https://github.com/stevenrbrandt/piraha-peg</a> for a description of formal syntax.</p>
+<h3 id="the-interfaceccl-file">The interface.ccl File</h3>
+<p>The <code class="codehilite">interface.ccl</code> file is used to declare</p>
+<ul>
+<li>the implementation provided by the thorn</li>
+<li>the variables provided by the thorn</li>
+<li>the include files provided by the thorn</li>
+<li>the functions provided by the thorn</li>
+</ul>
+<h4 id="header-block">Header Block</h4>
+<p>The implementation is declared by a single line at the top of the file</p>
+<p><code class="codehilite">implements: &lt;name&gt;</code></p>
+<p>There are three different access levels available for variables</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public</td>
+<td>Can be ‘inherited’ by other implementations.</td>
+</tr>
+<tr>
+<td>Protected</td>
+<td>Can be shared with other implementations which declare themselves to be friends of this one.</td>
+</tr>
+<tr>
+<td>Private</td>
+<td>Can only be seen by this thorn.</td>
+</tr>
+</tbody>
+</table>
+<p>For example</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># This gets all Public variables from implementation &lt;name&gt;, and all variables that &lt;name&gt; has in turn inherited.
+Inherits: &lt;name&gt;
+# This gets all Protected variables from implementation &lt;name&gt;.
+Friend: &lt;name&gt;
+</pre></div>
+</td></tr></table>
+
+<h4 id="include-files">Include Files</h4>
+<p>The include file section has the form:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>USES INCLUDE [SOURCE|HEADER]: &lt;file_name&gt;
+INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
+</pre></div>
+</td></tr></table>
+
+<p>The former is used when a thorn wishes to use an include file from another thorn. The latter indicates that this thorn adds the code in <file to include> to the include file <file name>. If the include file is described as SOURCE, the included code is only executed if the providing thorn is active. Both default to HEADER.</p>
+<h4 id="function-aliasing">Function Aliasing</h4>
+<p>If any aliased function is to be used or provided by the thorn, then the prototype must be declared with the form:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>&lt;return_type&gt; FUNCTION &lt;alias&gt;(&lt;arg1_type&gt; &lt;intent1&gt; [ARRAY] &lt;arg1&gt;, ...)
+</pre></div>
+</td></tr></table>
+
+<p>The <return_type> must be either void, CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, or CCTK_POINTER_TO_CONST. The keyword SUBROUTINE is equivalent to void FUNCTION. The name of the aliased function <alias> must contain at least one uppercase and one lowercase letter and follow the C standard for function names. The type of each argument, <arg* type>, must be either CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, CCTK_POINTER_TO_CONST, or STRING. All string arguments must be the last arguments in the list. The intent of each argument, <intent*>, must be either IN, OUT, or INOUT. An argument may only be modified if it is declared to have intent OUT or INOUT. If the argument is an array then the prefix ARRAY must also be given.</p>
+<p>If an aliased function is to be required, then the block is required.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>REQUIRES FUNCTION &lt;alias&gt;
+</pre></div>
+</td></tr></table>
+
+<p>If an aliased function is to be (optionally) used, then the block is required.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>USES FUNCTION &lt;alias&gt;
+</pre></div>
+</td></tr></table>
+
+<h4 id="variable-blocks">Variable Blocks</h4>
+<p>The thorn’s variables are collected into groups.</p>
+<p>The thorn’s variables are defined by:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">[&lt;access&gt;:]</span>
+
+<span class="na">&lt;data_type&gt; &lt;group_name&gt; [&lt;number&gt;] [TYPE</span><span class="o">=</span><span class="s">&lt;group_type&gt;] [DIM=&lt;dim&gt;] [TIMELEVELS=&lt;num&gt;] [SIZE=&lt;size in each direction&gt;] [DISTRIB=&lt;distribution_type&gt;] [GHOSTSIZE=&lt;ghostsize&gt;] [TAGS=&lt;string&gt;] [&quot;&lt;group_description&gt;&quot;]</span>
+<span class="na">{</span>
+<span class="na">&lt;variable_name&gt;</span>
+<span class="na">&lt;variable_name&gt;</span>
+<span class="na">} [&quot;&lt;group_description&gt;&quot;]</span>
+</pre></div>
+</td></tr></table>
+
+<p>The options TYPE, DIM, etc., following <group name> must all appear on one line.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access</td>
+<td>defines which thorns can use the following groups of variables. access can be either public, protected or private.</td>
+</tr>
+<tr>
+<td>data_type</td>
+<td>defines the data type of the variables in the group. Supported data types are CHAR, BYTE, INT, REAL, and COMPLEX.</td>
+</tr>
+<tr>
+<td>group_name</td>
+<td>must be an alphanumeric name (which may also contain underscores) which is unique across group and variable names within the scope of the thorn. A group name is compulsory.</td>
+</tr>
+<tr>
+<td>[number]</td>
+<td>if present, indicates that this is a vector group.</td>
+</tr>
+<tr>
+<td>TYPE</td>
+<td>designates the kind of variables held by the group. The choices are GF, ARRAY or SCALAR. This field is optional, with the default variable type being SCALAR.</td>
+</tr>
+<tr>
+<td>DIM</td>
+<td>defines the spatial dimension of the ARRAY or GF. The default value is DIM=3.</td>
+</tr>
+<tr>
+<td>TIMELEVELS</td>
+<td>defines the number of timelevels a group has if the group is of type ARRAY or GF, and can take any positive value. The default is one timelevel.</td>
+</tr>
+<tr>
+<td>SIZE</td>
+<td>defines the number grid-points an ARRAY has in each direction. This should be a comma- separated list of valid arithmetical expressions consisting of integers or integer-valued parameters.</td>
+</tr>
+<tr>
+<td>DISTRIB</td>
+<td>defines the processor decomposition of an ARRAY. DISTRIB=DEFAULT distributes SIZE grid- points across all processors. DISTRIB=CONSTANT implies that SIZE grid-points should be allocated on each processor. The default value is DISTRIB=DEFAULT.</td>
+</tr>
+<tr>
+<td>GHOSTSIZE</td>
+<td>defines number of ghost zones in each dimension of an ARRAY. It defaults to zero.</td>
+</tr>
+<tr>
+<td>TAGS</td>
+<td>defines an optional string which is used to create a set of key-value pairs associated with the group.</td>
+</tr>
+</tbody>
+</table>
+<p>An optional description of the group can be given on the last line. If the variable block is omitted, this description can be given at the end of the declaration line.</p>
+<h3 id="the-paramccl-file">The param.ccl File</h3>
+<p>The param.ccl file is used to specify the parameters used to control an individual thorn, and to specify the values these parameters are allowed to take. If a parameter is not assigned in a parameter file, it is given its default value.</p>
+<h4 id="parameter-data-scoping-items">Parameter Data Scoping Items</h4>
+<p><access>:</p>
+<p>The keyword <code class="codehilite">access</code> designates that all parameter object specification items, up to the next parameter data scoping item, are in the same protection or scoping class. access can take the values:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global</td>
+<td>These parameters are seen by all thorns.</td>
+</tr>
+<tr>
+<td>Restricted</td>
+<td>These parameters may be used by other implementations if they so desire.</td>
+</tr>
+<tr>
+<td>Private</td>
+<td>These are only seen by this thorn.</td>
+</tr>
+<tr>
+<td>shares</td>
+<td>in this case, an implementation name must follow the colon. It declares that all the parameters in the following scoping block are restricted variables from the specified implementation.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="parameter-object-specification-items">Parameter Object Specification Items</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">[EXTENDS|USES] &lt;parameter type&gt; &lt;parameter name&gt; [&lt;len&gt;] &quot;&lt;parameter description&gt;&quot; [AS &lt;alias&gt;] [STEERABLE=&lt;NEVER|ALWAYS|RECOVER&gt;]</span>
+<span class="k">[ACCUMULATOR=&lt;expression&gt;] [ACCUMULATOR-BASE=&lt;parameter name&gt;]</span>
+<span class="na">{</span>
+<span class="na">&lt;parameter values&gt; </span>
+<span class="na">} &lt;default value&gt;</span>
+</pre></div>
+</td></tr></table>
+
+<p>where the options AS, STEERABLE, etc., following <parameter description>, must all appear in one line. Note that the beginning brace ({) must sit on a line by itself; the ending brace (}) must be at the beginning of a line followed by <default value> on that same line.</p>
+<ul>
+<li>A thorn can declare that it <code class="codehilite">EXTENDS</code> a parameter of another thorn. This allows it to declare additional acceptable values. By default, it is acceptable for two thorns to declare the same value as acceptable.</li>
+<li>If the thorn wants to simply use a parameter from another thorn, without declaring additional values, use <code class="codehilite">USES</code> instead.</li>
+<li>The <code class="codehilite">parameter name</code> must be unique within the scope of the thorn.</li>
+<li>The <code class="codehilite">default value</code> must match one of the ranges given in the <code class="codehilite">parameter type</code></li>
+<li><code class="codehilite">[len]</code> is an integer, if present, indicates that this is an array parameter of len values of the specified type.</li>
+<li><code class="codehilite">alias</code> allows a parameter to appear under a different name in this thorn, other than its original name in another thorn. The name, as seen in the parameter file, is unchanged.</li>
+<li><code class="codehilite">STEERABLE</code> specifies when a parameter value may be changed. By default, parameters may not be changed after the parameter file has been read, or on restarting from checkpoint. This option relaxes this restriction, specifying that the parameter may be changed at recovery time from a parameter file or at any time using the flesh routine <code class="codehilite">CCTK_ParameterSet</code>. The value <code class="codehilite">RECOVERY</code> is used in <code class="codehilite">checkpoint/recovery</code> situations, and indicates that the parameter may be altered until the value is read in from a recovery par file, but not after.</li>
+<li><code class="codehilite">ACCUMULATOR</code> specifies that this is an accumulator parameter. Such parameters cannot be set directly, but are set by other parameters who specify this one as an <code class="codehilite">ACCUMULATOR-BASE</code>. The expression is a two-parameter arithmetical expression of x and y. Setting the parameter consists of evaluating this expression successively, with x being the current value of the parameter (at the first iteration this is the default value), and y the value of the setting parameter. This procedure is repeated, starting from the default value of the parameter, each time one of the setting parameters changes.</li>
+<li><code class="codehilite">ACCUMULATOR-BASE</code> specifies the name of an <code class="codehilite">ACCUMULATOR</code> parameter which this parameter sets.</li>
+</ul>
+<p>The <parameter values> depend on the <parameter type>, which may be one of the following:</p>
+<p><strong>INT</strong></p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>&lt;range description&gt; [::&quot;&lt;comment describing this range&gt;&quot;]
+</pre></div>
+</td></tr></table>
+
+<p>Here, a <code class="codehilite">&lt;range description&gt;</code> specifies a set of integers, and has one of the following forms:</p>
+<ul>
+<li><code class="codehilite">*</code>: means any integer</li>
+<li><code class="codehilite">&lt;integer&gt;</code>: means only <code class="codehilite">&lt;integer&gt;</code></li>
+<li><code class="codehilite">&lt;lower bound&gt;:&lt;upper bound&gt;</code>: means all integers in the range from <lower bound> to <upper bound> </li>
+<li><code class="codehilite">&lt;lower bound&gt;:&lt;upper bound&gt;:&lt;positive step&gt;</code>: means all integers in the range from <lower bound> to <upper bound> in steps of <positive step></li>
+</ul>
+<p>where <lower bound> has one of the forms</p>
+<ul>
+<li><code class="codehilite">&lt;empty field&gt;</code>: means no lower limit</li>
+<li><code class="codehilite">*</code>: means no lower limit</li>
+<li><code class="codehilite">&lt;integer&gt;</code>: means a closed interval starting at <integer></li>
+<li><code class="codehilite">[&lt;integer&gt;</code>: also means a closed interval starting at <integer></li>
+<li><code class="codehilite">(&lt;integer&gt;</code>: means an open interval starting at <integer></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REAL</td>
+<td>The range specification is the same as with integers, except that here, no <code class="codehilite">step</code> implies a continuum of values. Note that numeric constants should be expressed as in C (e.g. 1e-10). Note also that one cannot use the Cactus types such as <code class="codehilite">CCTK_REAL4</code> to specify the precision of the parameter; parameters always have the default precision.</td>
+</tr>
+<tr>
+<td>KEYWORD</td>
+<td>Each entry in the list of acceptable values for a keyword has the form <code class="codehilite">&lt;keyword value&gt; :: &quot;&lt;description&gt;&quot;</code> Keyword values should be enclosed in double quotes. The double quotes are mandatory if the keyword contains spaces.</td>
+</tr>
+<tr>
+<td>STRING</td>
+<td>Allowed values for strings should be specified using regular expressions. To allow any string, the regular expression "" should be used. (An empty regular expression matches anything.) Regular expressions and string values should be enclosed in double quotes. The double quotes are mandatory if the regular expression or the string value is empty or contains spaces.</td>
+</tr>
+<tr>
+<td>BOOLEAN</td>
+<td>No <parameter values> should be specified for a boolean parameter.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-scheduleccl-file">The schedule.ccl File</h3>
+<p>Cactus contains a rule-based scheduling system, which determines which routines, from which thorns are run in which order.</p>
+<p>A usual simple specification for a schedule declaration is</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>schedule &lt;function name&gt; AT &lt;schedule bin&gt; 
+{
+LANG: &lt;language&gt;
+[STORAGE: &lt;group&gt;[timelevels]
+} &quot;Description of function&quot;
+</pre></div>
+</td></tr></table>
+
+<p>Each schedule item is scheduled either AT a particular scheduling bin, or IN a schedule group.</p>
+<h4 id="assignment-statements">Assignment Statements</h4>
+<p>These lines have the form:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>STORAGE: &lt;group&gt;[timelevels]
+</pre></div>
+</td></tr></table>
+
+<p>The storage line includes the number of timelevels to activate storage for, this number can be from 1 up to the maximum number or timelevels for the group, as specified in the defining <code class="codehilite">interface.ccl</code> file. If the maximum number of timelevels is 1 (the default), this number may be omitted. Alternatively timelevels can be the name of a parameter accessible to the thorn. The parameter name is the same as used in C routines of the thorn, fully qualified parameter names of the form thorn::parameter are not allowed. In this case 0 (zero) timelevels can be requested, which is equivalent to the STORAGE statement being absent.</p>
+<h4 id="schedule-blocks">Schedule Blocks</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>schedule [GROUP] &lt;function name|group name&gt; AT|IN &lt;time&gt; [AS &lt;alias&gt;] [WHILE &lt;variable&gt;] [IF &lt;variable&gt;] [BEFORE|AFTER &lt;function name&gt;|(&lt;function name&gt;)] 
+{
+[LANG: &lt;language&gt;]
+[OPTIONS: &lt;option&gt;,&lt;option &gt;...]
+[TAGS: &lt;keyword=value&gt;,&lt;keyword=value &gt;...]
+[STORAGE: &lt;group&gt;[timelevels],&lt;group&gt;[timelevels]...]
+[READS: &lt;group&gt;,&lt;group&gt;...]
+[WRITES: &lt;group&gt;,&lt;group&gt;...]
+[TRIGGER: &lt;group&gt;,&lt;group&gt;...]
+[SYNCHRONISE: &lt;group&gt;,&lt;group&gt;...]
+[OPTIONS: &lt;option&gt;,&lt;option&gt;...]
+} &quot;Description of function&quot;
+</pre></div>
+</td></tr></table>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GROUP</td>
+<td>Schedule a schedule group with the same options as a schedule function. The schedule group will be created if it doesn’t exist.</td>
+</tr>
+<tr>
+<td>&lt;function name</td>
+<td>group name&gt;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="initial-data">Initial data</h2>
+<p>The initial data are computed using the Compact Object CALculator (COCAL) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></p>
+<p><img alt="-w534" src="../media/15512756872829.jpg" /></p>
+<h2 id="diagnostics">Diagnostics</h2>
+<p>The BH apparent horizon is located and monitored through the AHFinderDirect thorn. We estimate the BH mass <span><span class="MathJax_Preview">M_{\mathrm{BH}}</span><script type="math/tex">M_{\mathrm{BH}}</script></span> and the BH dimensionless spin parameter <span><span class="MathJax_Preview">a / M_{\mathrm{BH}}</span><script type="math/tex">a / M_{\mathrm{BH}}</script></span> using the isolated horizon formalism.</p>
+<h2 id="extract-gravitational-wave">Extract Gravitational Wave</h2>
+<p>To measure the flux of energy and angular momentum carried away by GWs, we use a modiﬁed version of the Psikadelia thorn.</p>
+<p><a href="https://arxiv.org/pdf/1502.05674.pdf">https://arxiv.org/pdf/1502.05674.pdf</a>
+<a href="https://arxiv.org/pdf/1809.08237.pdf">https://arxiv.org/pdf/1809.08237.pdf</a>
+<a href="https://arxiv.org/pdf/gr-qc/0306056.pdf">https://arxiv.org/pdf/gr-qc/0306056.pdf</a>
+<a href="https://arxiv.org/pdf/gr-qc/0206008.pdf">https://arxiv.org/pdf/gr-qc/0206008.pdf</a></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../GW/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Cactus/" class="btn btn-neutral" title="Cactus"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Cactus/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../GW/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

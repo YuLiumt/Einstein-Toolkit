@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Solutions - Yu Liu's Notebook</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Solutions";
+    var mkdocs_page_input_path = "GR/Solutions.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/GR/Solutions/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../ET/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Cactus/">Cactus</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Thorn/">Thorn</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href=".">Solutions</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GW/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Linearized Waves/">Linearized Waves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Extracting Gravitational Waveforms/">Extracting Gravitational Waveforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Numerical Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../NR/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Yu Liu's Notebook</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Solutions</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/GR/Solutions.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="the-gravitational-equilibrium-of-masses-of-neutrons1">The gravitational equilibrium of masses of neutrons<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></h2>
+<p>We study the gravitational equilibrium of masses of neutrons, <strong>using the equation of state for a cold Fermi gas, and general relativity</strong>. </p>
+<details class="note"><summary>Whether there is an upper limit to the possible size of such a neutron core?</summary><p>Landau showed that for a model consisting of a cold degenerate Fermi gas there exist no stable equilibrium configurations for masses greater than a certain critical mass, all larger masses tending to collapse.</p>
+</details>
+<h3 id="relativistic-treatment-of-equilibrium">Relativistic Treatment Of Equilibrium</h3>
+<p>The most general static line element exhibiting spherical symmetry may be expressed in the form</p>
+<div>
+<div class="MathJax_Preview">
+ds^2 = - e^{\lambda} dr^2 - r^2 d \theta^2 - r^2 sin^2 \theta d \phi^2 + e^{\nu} dt^2 \\
+\lambda = \lambda (r), \nu = \nu (r).
+</div>
+<script type="math/tex; mode=display">
+ds^2 = - e^{\lambda} dr^2 - r^2 d \theta^2 - r^2 sin^2 \theta d \phi^2 + e^{\nu} dt^2 \\
+\lambda = \lambda (r), \nu = \nu (r).
+</script>
+</div>
+<p>If the matter supports no transverse stresses and has no mass motion, then its energy momentum tensor is given by</p>
+<div>
+<div class="MathJax_Preview">
+T^{\space 1}_{1} = T^{\space 2}_{2} = T^{\space 3}_{3} = - P, \space T^{\space 4}_{4} = \rho
+</div>
+<script type="math/tex; mode=display">
+T^{\space 1}_{1} = T^{\space 2}_{2} = T^{\space 3}_{3} = - P, \space T^{\space 4}_{4} = \rho
+</script>
+</div>
+<p>where p and <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span> are respectively the pressure and the macroscopic energy density measured in proper coordinates. </p>
+<p>The cosmological constant <span><span class="MathJax_Preview">\Lambda</span><script type="math/tex">\Lambda</script></span> taken equal to zero, Einstein's field equations reduce to:</p>
+<div>
+<div class="MathJax_Preview">
+8 \pi P = e^{-\lambda} (\frac{\nu'}{r} + \frac{1}{r^2}) - \frac{1}{r^2} \\
+8 \pi \rho = e^{-\lambda} (\frac{\lambda'}{r} - \frac{1}{r^2}) + \frac{1}{r^2} \\
+\frac{dP}{dr} = - \frac{(P + \rho)}{2} \nu'
+</div>
+<script type="math/tex; mode=display">
+8 \pi P = e^{-\lambda} (\frac{\nu'}{r} + \frac{1}{r^2}) - \frac{1}{r^2} \\
+8 \pi \rho = e^{-\lambda} (\frac{\lambda'}{r} - \frac{1}{r^2}) + \frac{1}{r^2} \\
+\frac{dP}{dr} = - \frac{(P + \rho)}{2} \nu'
+</script>
+</div>
+<p>where primes denote differentiation with respect to r.</p>
+<p>These three equations together with the equation of state of the material <span><span class="MathJax_Preview">\rho = \rho (P)</span><script type="math/tex">\rho = \rho (P)</script></span> determine the mechanical equilibrium of the matter distribution.</p>
+<p>The boundary of the matter distribution is the value of <span><span class="MathJax_Preview">r = r_b</span><script type="math/tex">r = r_b</script></span> for which <span><span class="MathJax_Preview">P = 0</span><script type="math/tex">P = 0</script></span>, and such that for value <span><span class="MathJax_Preview">r &lt; r_b</span><script type="math/tex">r < r_b</script></span> where <span><span class="MathJax_Preview">P &gt; O</span><script type="math/tex">P > O</script></span>.</p>
+<p>In empty space surrounding the spherically symmetric distribution of matter <span><span class="MathJax_Preview">P = \rho = 0</span><script type="math/tex">P = \rho = 0</script></span>, and Schwarzschild's exterior solution is obtained:</p>
+<div>
+<div class="MathJax_Preview">
+e^{-\lambda} = 1 + \frac{A}{r} \\
+e^{\nu} = B (1 + \frac{A}{r})
+</div>
+<script type="math/tex; mode=display">
+e^{-\lambda} = 1 + \frac{A}{r} \\
+e^{\nu} = B (1 + \frac{A}{r})
+</script>
+</div>
+<p>The constants A and 8 are fixed by the requirement that at great distances away from the matter distribution the <span><span class="MathJax_Preview">g_{\mu \nu}</span><script type="math/tex">g_{\mu \nu}</script></span> must go over into their weak-field form, i.e., <span><span class="MathJax_Preview">B = 1</span><script type="math/tex">B = 1</script></span>, <span><span class="MathJax_Preview">A = - 2m</span><script type="math/tex">A = - 2m</script></span> where
+m is the total Newtonian mass of the matter as calculated by a distant observer. </p>
+<p>Further introduce a new variable</p>
+<div>
+<div class="MathJax_Preview">
+u(r) = \frac{1}{2} r (1 - e^{-\lambda})
+</div>
+<script type="math/tex; mode=display">
+u(r) = \frac{1}{2} r (1 - e^{-\lambda})
+</script>
+</div>
+<p>Then above equations becomes:</p>
+<div>
+<div class="MathJax_Preview">
+e^{\nu(r)} = (1 - \frac{2m}{r_b}) e^{- \int_0^{P(r)} \frac{2dP}{P + \rho(P)}} \\
+\frac{du}{dr} = 4 \pi \rho(P) r^2 \\   
+\frac{dP}{dr} = - \frac{P + \rho(P)}{r(r - 2 u)}(4 \pi P r^3 + u)
+</div>
+<script type="math/tex; mode=display">
+e^{\nu(r)} = (1 - \frac{2m}{r_b}) e^{- \int_0^{P(r)} \frac{2dP}{P + \rho(P)}} \\
+\frac{du}{dr} = 4 \pi \rho(P) r^2 \\   
+\frac{dP}{dr} = - \frac{P + \rho(P)}{r(r - 2 u)}(4 \pi P r^3 + u)
+</script>
+</div>
+<p>From this equation we can see that u is very similar to m.</p>
+<p>Starting with some initial values <span><span class="MathJax_Preview">u = u_0</span><script type="math/tex">u = u_0</script></span>, <span><span class="MathJax_Preview">P = P_0</span><script type="math/tex">P = P_0</script></span> at <span><span class="MathJax_Preview">r = 0</span><script type="math/tex">r = 0</script></span>, the two equations are integrated simultaneously to the value <span><span class="MathJax_Preview">r = r_b</span><script type="math/tex">r = r_b</script></span> where <span><span class="MathJax_Preview">P = O</span><script type="math/tex">P = O</script></span>, until the boundary of the matter distribution is reached. The value of <span><span class="MathJax_Preview">u = u_b</span><script type="math/tex">u = u_b</script></span> at <span><span class="MathJax_Preview">r = r_b</span><script type="math/tex">r = r_b</script></span> determines the value of <span><span class="MathJax_Preview">e^{\lambda(r_b)}</span><script type="math/tex">e^{\lambda(r_b)}</script></span> at the boundary, and this is joined continuously across the boundary to the exterior solution, making</p>
+<div>
+<div class="MathJax_Preview">
+u_b = m
+</div>
+<script type="math/tex; mode=display">
+u_b = m
+</script>
+</div>
+<p>Thus the mass of this spherical distribution of matter as measured by a distant observer is given by the value <span><span class="MathJax_Preview">u_b</span><script type="math/tex">u_b</script></span> of u at <span><span class="MathJax_Preview">r = r_b</span><script type="math/tex">r = r_b</script></span>.</p>
+<p>The following restrictions must be made on the choice of <span><span class="MathJax_Preview">P_0</span><script type="math/tex">P_0</script></span> and <span><span class="MathJax_Preview">u_0</span><script type="math/tex">u_0</script></span>, the initial values of P and u at <span><span class="MathJax_Preview">r = 0</span><script type="math/tex">r = 0</script></span>.</p>
+<h3 id="particular-equations-of-state">Particular Equations Of State</h3>
+<p>The above arguments show that <span><span class="MathJax_Preview">\frac{du}{dr}</span><script type="math/tex">\frac{du}{dr}</script></span> and <span><span class="MathJax_Preview">\frac{dP}{dr}</span><script type="math/tex">\frac{dP}{dr}</script></span> together with a given equation of state completely determine the distribution of matter.</p>
+<p>If the matter is taken to consist of particles of rest mass <span><span class="MathJax_Preview">\mu_0</span><script type="math/tex">\mu_0</script></span> obeying Fermi statistics, and their thermal energy and all forces between them are neglected, then it may be shown that a parametric form for the equation of state is:</p>
+<div>
+<div class="MathJax_Preview">
+\rho = K (sinht - t) \\
+P = \frac{1}{3} K (sinht - 8 sinh(\frac{1}{2}t) + 3 t)
+</div>
+<script type="math/tex; mode=display">
+\rho = K (sinht - t) \\
+P = \frac{1}{3} K (sinht - 8 sinh(\frac{1}{2}t) + 3 t)
+</script>
+</div>
+<p>where </p>
+<div>
+<div class="MathJax_Preview">
+K = \frac{\pi \mu_0^4 c^5}{4 h^3} \\
+t = 4 log(\frac{\widehat{P}}{\mu_0 c} + [1 + (\frac{\widehat{P}}{\mu_0 c})^2]^{\frac{1}{2}})
+</div>
+<script type="math/tex; mode=display">
+K = \frac{\pi \mu_0^4 c^5}{4 h^3} \\
+t = 4 log(\frac{\widehat{P}}{\mu_0 c} + [1 + (\frac{\widehat{P}}{\mu_0 c})^2]^{\frac{1}{2}})
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\widehat{P}</span><script type="math/tex">\widehat{P}</script></span> is the maximum momentum in the Fermi distribution and is related to the proper particle density <span><span class="MathJax_Preview">\frac{N}{V}</span><script type="math/tex">\frac{N}{V}</script></span> by</p>
+<div>
+<div class="MathJax_Preview">
+\frac{N}{V} = \frac{8 \pi}{3 h^3} \widehat{P}^3
+</div>
+<script type="math/tex; mode=display">
+\frac{N}{V} = \frac{8 \pi}{3 h^3} \widehat{P}^3
+</script>
+</div>
+<p>the uncertainty of a particle in space is <span><span class="MathJax_Preview">\frac{V}{N}</span><script type="math/tex">\frac{V}{N}</script></span>, and the uncertainty in momentum space is <span><span class="MathJax_Preview">2\frac{4 \pi}{3} \widehat{P}^3</span><script type="math/tex">2\frac{4 \pi}{3} \widehat{P}^3</script></span>. so <span><span class="MathJax_Preview">\frac{V}{N} \times 2\frac{4 \pi}{3} \widehat{P}^3 = h^3</span><script type="math/tex">\frac{V}{N} \times 2\frac{4 \pi}{3} \widehat{P}^3 = h^3</script></span>.</p>
+<p>The above equations become:</p>
+<div>
+<div class="MathJax_Preview">
+\frac{du}{dr} = 4 \pi r^2 K (sinht - t) \\
+\frac{dt}{dr} = - \frac{4}{r(r - 2u)} \frac{sinht - 2 sinh(\frac{1}{2}t)}{cosht - 4 cosh(\frac{1}{2}t) + 3}[\frac{4}{3} \pi K r^3 (sinht - 8 sinh(\frac{1}{2}t) + 3t) + u]
+</div>
+<script type="math/tex; mode=display">
+\frac{du}{dr} = 4 \pi r^2 K (sinht - t) \\
+\frac{dt}{dr} = - \frac{4}{r(r - 2u)} \frac{sinht - 2 sinh(\frac{1}{2}t)}{cosht - 4 cosh(\frac{1}{2}t) + 3}[\frac{4}{3} \pi K r^3 (sinht - 8 sinh(\frac{1}{2}t) + 3t) + u]
+</script>
+</div>
+<p>These equations are to be integrated from the values <span><span class="MathJax_Preview">u = 0</span><script type="math/tex">u = 0</script></span>, <span><span class="MathJax_Preview">t = t_0</span><script type="math/tex">t = t_0</script></span> at <span><span class="MathJax_Preview">r = 0</span><script type="math/tex">r = 0</script></span> to <span><span class="MathJax_Preview">r = r_b</span><script type="math/tex">r = r_b</script></span> where <span><span class="MathJax_Preview">t_b = 0</span><script type="math/tex">t_b = 0</script></span> (which makes <span><span class="MathJax_Preview">P = 0</span><script type="math/tex">P = 0</script></span>), and <span><span class="MathJax_Preview">u = u_0</span><script type="math/tex">u = u_0</script></span>.</p>
+<p>No way was found to carry out the integration analytically, so equations were integrated numerically for several finite values of <span><span class="MathJax_Preview">t_0</span><script type="math/tex">t_0</script></span>. For all these cases <span><span class="MathJax_Preview">u_0</span><script type="math/tex">u_0</script></span> was taken to be equal to zero, since the equation of state near the origin for finite <span><span class="MathJax_Preview">t_0</span><script type="math/tex">t_0</script></span> behaves like <span><span class="MathJax_Preview">\rho(P) = K P^s</span><script type="math/tex">\rho(P) = K P^s</script></span>, <span><span class="MathJax_Preview">s &lt; 1</span><script type="math/tex">s < 1</script></span>.</p>
+<p><img alt="" src="../media/15514141323755.jpg" /></p>
+<p><img alt="" src="../media/15514141448329.jpg" /></p>
+<ul>
+<li>For very small values of t the equation of state reduces to <span><span class="MathJax_Preview">P = K \rho^{\frac{5}{3}}</span><script type="math/tex">P = K \rho^{\frac{5}{3}}</script></span> and <span><span class="MathJax_Preview">\widehat{P} \propto t</span><script type="math/tex">\widehat{P} \propto t</script></span>. Using this equation of state and Newtonian gravitational theory (which is expected to give a good result for small masses and densities), one finds that <span><span class="MathJax_Preview">m \propto t^{\frac{3}{2}}</span><script type="math/tex">m \propto t^{\frac{3}{2}}</script></span>.</li>
+<li>
+<p>Foe <span><span class="MathJax_Preview">t_0 \to \infty</span><script type="math/tex">t_0 \to \infty</script></span>, Equation may be replaced by their expressions:</p>
+<div>
+<div class="MathJax_Preview">
+\frac{du}{dr} = \frac{1}{2} r^2 e^t \\
+\frac{dt}{dr} = - \frac{4}{r(r - 2u)} (\frac{r^3}{6}e^t + u)
+</div>
+<script type="math/tex; mode=display">
+\frac{du}{dr} = \frac{1}{2} r^2 e^t \\
+\frac{dt}{dr} = - \frac{4}{r(r - 2u)} (\frac{r^3}{6}e^t + u)
+</script>
+</div>
+<p>An exact solution of these equations is:</p>
+<div>
+<div class="MathJax_Preview">
+e^t = \frac{3}{7r^2} \\
+u = \frac{3r}{14}
+</div>
+<script type="math/tex; mode=display">
+e^t = \frac{3}{7r^2} \\
+u = \frac{3r}{14}
+</script>
+</div>
+<p>Then the mass carried out to <span><span class="MathJax_Preview">r = r_b</span><script type="math/tex">r = r_b</script></span> where <span><span class="MathJax_Preview">t = 0</span><script type="math/tex">t = 0</script></span>.</p>
+</li>
+</ul>
+<p><strong>The striking feature of the curve is that the mass increases with increasing <span><span class="MathJax_Preview">t_0</span><script type="math/tex">t_0</script></span> until a maximum is reached at about <span><span class="MathJax_Preview">t_0 =3</span><script type="math/tex">t_0 =3</script></span>, after which the curve drops until a value roughly <span><span class="MathJax_Preview">\frac{1}{3} \odot</span><script type="math/tex">\frac{1}{3} \odot</script></span> is reached for <span><span class="MathJax_Preview">t_0 = \infty</span><script type="math/tex">t_0 = \infty</script></span>. In other words no static solutions at all exist for <span><span class="MathJax_Preview">m &gt; \frac{3}{4} \odot</span><script type="math/tex">m > \frac{3}{4} \odot</script></span>, two solutions exist for all m in <span><span class="MathJax_Preview">\frac{3}{4} \odot &gt; m &gt; \frac{1}{3} \odot</span><script type="math/tex">\frac{3}{4} \odot > m > \frac{1}{3} \odot</script></span>, and one solution exists for all <span><span class="MathJax_Preview">m &lt; \frac{1}{3} \odot</span><script type="math/tex">m < \frac{1}{3} \odot</script></span>.</strong></p>
+<h2 id="free-energy">Free Energy</h2>
+<p>In the non-relativistic polytrope solutions of Emden the equation of state was assumed to be <span><span class="MathJax_Preview">P = K \rho^{\gamma}</span><script type="math/tex">P = K \rho^{\gamma}</script></span>. But Landau pointed out that although these solutions in <span><span class="MathJax_Preview">\gamma &gt; \frac{6}{5}</span><script type="math/tex">\gamma > \frac{6}{5}</script></span> give an equilibrium configuration, they do not in every case give stable equilibrium. Thus, unless <span><span class="MathJax_Preview">\gamma &gt;frac{4}{3}</span><script type="math/tex">\gamma >frac{4}{3}</script></span> the equilibrium configuration is unstable.</p>
+<p>The part of the free energy caused by compression is </p>
+<div>
+<div class="MathJax_Preview">
+F = - a \rho^{\frac{1}{3}} + b \rho^{\gamma - 1}
+</div>
+<script type="math/tex; mode=display">
+F = - a \rho^{\frac{1}{3}} + b \rho^{\gamma - 1}
+</script>
+</div>
+<p><img alt="" src="../media/15514142344354.jpg" /></p>
+<p>Polytrope solutions exist for <span><span class="MathJax_Preview">\gamma = \frac{5}{3} (&gt; \frac{4}{3})</span><script type="math/tex">\gamma = \frac{5}{3} (> \frac{4}{3})</script></span> corresponds to stable equilibrium, for <span><span class="MathJax_Preview">\gamma = \frac{5}{4} (&lt; \frac{4}{3})</span><script type="math/tex">\gamma = \frac{5}{4} (< \frac{4}{3})</script></span> to unstable equilibrium.</p>
+<p>Since the free energy must be a continuous function of <span><span class="MathJax_Preview">t_0</span><script type="math/tex">t_0</script></span>, and since we know from non-relativistic calculations that for small masses (and low densities) we have a position of stable equilibrium (a minimum in the free energy curve) we can conclude that the second equilibrium position corresponds either to a maximum or to an inflection point in the free energy curve (and certainly not to a minimum). </p>
+<p><img alt="" src="../media/15514142464260.jpg" /></p>
+<p>Fig. 3 gives a schematic plot of free energy against <span><span class="MathJax_Preview">t_0</span><script type="math/tex">t_0</script></span> for different values of <span><span class="MathJax_Preview">M_0</span><script type="math/tex">M_0</script></span> which would explain the existence of one equilibrium position for small masses, two for intermediate masses, and none for large masses. The masses marked on the curves are the actual gravitational masses corresponding to the equilibrium points of the critical free energy curves.</p>
+<h2 id="application-to-stellar-matter">Application To Stellar Matter</h2>
+<p>Since neutron cores can <strong>hardly be stable (with respect to formation of electrons and nuclei) for masses less than <span><span class="MathJax_Preview">\sim 0.1 M_{\odot}</span><script type="math/tex">\sim 0.1 M_{\odot}</script></span></strong>. Since, even after thermonuclear sources of energy are exhausted, they will** not tend to form by collapse of ordinary matter for masses under <span><span class="MathJax_Preview">1.5 M_{\odot}</span><script type="math/tex">1.5 M_{\odot}</script></span> (Landau's limit)<strong>. It seems **unlikely that static neutron cores can play any great part in stellar evolution</strong>, and the question of what happens, after energy sources are exhausted, to <strong>stars of mass greater than <span><span class="MathJax_Preview">1.5 M_{\odot}</span><script type="math/tex">1.5 M_{\odot}</script></span> still remains unanswered</strong>. </p>
+<p>There would then seem to be only two answers possible to the question of the "final" behavior of very massive stars: </p>
+<ul>
+<li>The equation of state we have used so far fails to describe the behavior of highly condensed matter that the conclusions reached above are qualitatively misleading</li>
+<li>The star will continue to contract indefinitely, never reaching equilibrium. </li>
+</ul>
+<h2 id="non-static-solutions">Non-static Solutions</h2>
+<p>From this discussion it appears probable that for an understanding of the long time behavior of actual heavy stars a consideration of non-static solutions must be essential. Among all (spherical) non-static solutions one would hope to find some for which the rate of contraction, and in general the time variation, become slower and slower, so that these solutions might be regarded, not as equilibrium solutions, but as quasi-static. Some reason for this we may see in the following argument: for large enough mass the core will collapse; near the center the density and pressure will grow, and <span><span class="MathJax_Preview">g_{tt} = e^{\nu}</span><script type="math/tex">g_{tt} = e^{\nu}</script></span> will be small; and as <span><span class="MathJax_Preview">e^{\nu}</span><script type="math/tex">e^{\nu}</script></span> grows smaller, all processes will, as seen by an outside observer, slow down in the central region.</p>
+<p>For masses under <span><span class="MathJax_Preview">\frac{1}{3} M_{\odot}</span><script type="math/tex">\frac{1}{3} M_{\odot}</script></span> only one equilibrium solution exists, which is approximately described by the non-relativistic Fermi equation of state and Newtonian gravitational theory. For masses <span><span class="MathJax_Preview">\frac{1}{3} M_{\odot} &lt; m &lt; \frac{3}{4} M_{\odot}</span><script type="math/tex">\frac{1}{3} M_{\odot} < m < \frac{3}{4} M_{\odot}</script></span> two solutions exist, one stable and quasi-Newtonian, one more condensed, and unstable. For masses greater than <span><span class="MathJax_Preview">\frac{3}{4} M_{\odot}</span><script type="math/tex">\frac{3}{4} M_{\odot}</script></span> there are no static equilibrium solutions.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://doi.org/10.1103/PhysRev.55.374">Oppenheimer(1939) On Massive Neutron Cores</a>&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

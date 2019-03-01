@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Cactus - Einstein Toolkit</title>
+  <title>Cactus - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -46,7 +46,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> Einstein Toolkit</a>
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -80,14 +80,27 @@
     <a class="current" href="./">Cactus</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#parameter-file-syntax">Parameter File Syntax</a></li>
+    
+
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Thorn/">Thorn</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="../../GR/">General Relativity</a>
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Solutions">Solutions</a>
+                </li>
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -128,6 +141,21 @@
     </ul>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -138,7 +166,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">Einstein Toolkit</a>
+        <a href="../..">Yu Liu's Notebook</a>
       </nav>
 
       
@@ -181,17 +209,53 @@
 </pre></div>
 </td></tr></table>
 
-<p>If any of the parameters in the parameter file does not belong to any of the active thorns, or if the parameter value is not in the allowed range, an error is registered.</p>
+<p>Screen output</p>
+<hr />
+<p>As your Cactus executable runs, standard output and standard error are usually written to the screen. Standard output provides you with information about the run, and standard error reports warnings and errors from the flesh and thorns.</p>
+<p>As the program runs, the normal output provides the following information:</p>
+<ul>
+<li>Active thorns: This report shows whether the thorn activation was successful, and if successful gives the thorn’s implementation.</li>
+<li>Failed parameters: If any of the parameters in the parameter file does not belong to any of the active thorns, or if the parameter value is not in the allowed range, an error is registered.</li>
+</ul>
 <p>For example, </p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># if the parameter is not recognised
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Activating thorn idscalarwave...Success -&gt; active implementation idscalarwave
+# if the parameter is not recognised
 Unknown parameter time::ddtfac
 # if the parameter value is not in the allowed range
 Unable to set keyword CartGrid3D::type - ByMouth not in any active range
 </pre></div>
 </td></tr></table>
+
+<p>Checkpointing</p>
+<hr />
+<p>Checkpointing is defined as saving the current state of a run to a file. At a later time, this run can then be restarted from that state by recovering all the data from the checkpoint file.</p>
+<p>Cactus checkpointing and recovery methods are provided by thorns. In general, these thorns decide how often to generate a checkpoint.</p>
+<h2 id="parameter-file-syntax">Parameter File Syntax</h2>
+<p>A parameter file (or par file) is used to control the behaviour of a Cactus executable. </p>
+<p>A parameter statement is an expression of the form <code class="codehilite">Left-Hand-Side = Right-Hand-Side</code>. The <code class="codehilite">Left-Hand-Side</code> may be a fully qualified parameter name. The <code class="codehilite">Right-Hand-Side</code> is a value.</p>
+<p>Values can be any of the following</p>
+<ul>
+<li><strong>Booleans</strong>: Booleans are either true (i.e. 1, true, on, "true", or "on") or false (i.e. 0, false, off, "false", or "off").</li>
+<li><strong>Integers</strong>: Integers can be positive or negative.</li>
+<li><strong>Real numbers</strong>: Real numbers can be positive or negative and may be written with exponents (e.g. 1.0e-3, or -2.94d+10).</li>
+<li><strong>Strings</strong>: Sequences of characters delimited by quotes.</li>
+<li><strong>Variables</strong>: Parameter values can also contain variables of the form <code class="codehilite"><span class="cp">${</span><span class="n">VARIABLE</span><span class="cp">}</span></code> or <code class="codehilite">$ENV{VARIABLE}</code>.</li>
+<li><strong>Expressions</strong>: Parameters statements of numeric or boolean type can use arithmetic expressions in place of explicit values.</li>
+<li><strong>Array assignments</strong>: Arrays of parameters can be set by including an integer expression inside the square brackets following the name, e.g. <code class="codehilite">thorn::parameters[0]</code>. Optionally, an array of parameters may be set by means of a comma delimited list of values inside square brackets, e.g. <code class="codehilite">thorn::parameters = [4.8, 3.2]</code>.</li>
+</ul>
+<p><img alt="-w913" src="../media/15513391903942.jpg" /></p>
+<p>Please see the file <code class="codehilite">par.peg</code> in the directory <code class="codehilite">Cactus/src/piraha/pegs</code> for the full grammar describing the par file.</p>
+<p>The parameter file is read sequentially from top to bottom, this means that if you set the value of a parameter twice in the parameter file, the second value will be used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can obtain lists of the parameters associated with each thorn using the command-line options.</p>
+<p><code class="codehilite">-O</code>: Prints a full list of all parameters from all thorns which were compiled, along with descriptions and allowed values.</p>
+<p><code class="codehilite">-o</code>: Prints the description and allowed values for a given parameter—takes one argument.</p>
+</div>
               
             </div>
           </div>
@@ -199,7 +263,7 @@ Unable to set keyword CartGrid3D::type - ByMouth not in any active range
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../GR/" class="btn btn-neutral float-right" title="General Relativity">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Thorn/" class="btn btn-neutral float-right" title="Thorn">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Install/" class="btn btn-neutral" title="Install"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -233,7 +297,7 @@ Unable to set keyword CartGrid3D::type - ByMouth not in any active range
         <span><a href="../Install/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../GR/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Thorn/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
