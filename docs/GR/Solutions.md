@@ -166,7 +166,4 @@ There would then seem to be only two answers possible to the question of the "fi
 
 From this discussion it appears probable that for an understanding of the long time behavior of actual heavy stars a consideration of non-static solutions must be essential. Among all (spherical) non-static solutions one would hope to find some for which the rate of contraction, and in general the time variation, become slower and slower, so that these solutions might be regarded, not as equilibrium solutions, but as quasi-static. Some reason for this we may see in the following argument: for large enough mass the core will collapse; near the center the density and pressure will grow, and $g_{tt} = e^{\nu}$ will be small; and as $e^{\nu}$ grows smaller, all processes will, as seen by an outside observer, slow down in the central region.
 
-
-For masses under $\frac{1}{3} M_{\odot}$ only one equilibrium solution exists, which is approximately described by the non-relativistic Fermi equation of state and Newtonian gravitational theory. For masses $\frac{1}{3} M_{\odot} < m < \frac{3}{4} M_{\odot}$ two solutions exist, one stable and quasi-Newtonian, one more condensed, and unstable. For masses greater than $\frac{3}{4} M_{\odot}$ there are no static equilibrium solutions.
-
 [^1]: [Oppenheimer(1939) On Massive Neutron Cores](https://doi.org/10.1103/PhysRev.55.374)

@@ -12,6 +12,7 @@ nav:
     - Install: 'ET/Install.md'
     - Cactus: 'ET/Cactus.md'
     - Thorn: 'ET/Thorn.md'
+    - parameter file: 'ET/parameter file.md'
 - General Relativity:
     - Solutions: 'GR/Solutions'
 - Gravitational Wave:

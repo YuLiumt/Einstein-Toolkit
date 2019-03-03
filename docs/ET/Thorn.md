@@ -244,27 +244,49 @@ schedule [GROUP] <function name|group name> AT|IN <time> [AS <alias>] [WHILE <va
 | Name | Describe |
 | ------------ | ------------- |
 | GROUP | Schedule a schedule group with the same options as a schedule function. The schedule group will be created if it doesn’t exist. |
-| <function name|group name> |
+| <function name|group name> | The name of a function or a schedule group to be scheduled. Function and schedule group names are case sensitive. |
+| AT | Functions can be scheduled to run at the Cactus schedule bins, for example, CCTK_EVOL, and CCTK_STARTUP. The initial letters CCTK_ are optional. Grid variables cannot be used in the CCTK_STARTUP and CCTK_SHUTDOWN timebins. |
+| IN | Schedules a function or schedule group to run in a schedule group, rather than in a Cactus timebin. |
+| AS | Provides an alias for a function or schedule group which should be used for scheduling before, after or in. This can be used to provide thorn independence for other thorns scheduling functions, or schedule groups relative to this one. |
+| WHILE | Executes a function or schedule group until the given variable (which must be a fully qualified integer grid scalar) has the value zero. |
+| IF | Executes a function or schedule group only if the given variable (which must be a fully qualified integer grid scalar) has a non-zero value. |
+| BEFORE/AFTER | Takes a function name, a function alias, a schedule group name, or a parenthesesenclosed whitespace-separated list of these. (Any names that are not provided by an active thorn are ignored.) Note that a single schedule block may have multiple BEFORE/AFTER clauses. |
+| LANG | The code language for the function (either C or FORTRAN). No language should be specified for a schedule group. |
+| OPTIONS | Schedule options are used for mesh refinement and multi-block simulations, and they determine “where” a routine executes. Possible options are: meta, meta_early, meta_late, global, global_early, global_late, level, singlemap, local, loop_meta, loop_global, loop_level, loop_singlemap, loop_local. |
+| TAGS | Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by Util_TableCreateFromString. |
+| STORAGE | List of variable groups which should have storage switched on for the duration of the function or schedule group. Each group must specify how many timelevels to activate storage for, from 1 up to the maximum number for the group as specified in the defining interface.ccl file. If the maximum is 1 (the default) this number may be omitted. Alternatively timelevels can be the name of a parameter accessible to the thorn. The parameter name is the same as used in C routines of the thorn, fully qualified parameter names of the form thorn ::parameter are not allowed. In this case 0 (zero) timelevels can be requested, which is equivalent to the STORAGE statement being absent. |
+| READS | READS is used to declare which grid variables are read by the routine. This information is used e.g. to determine which variables need to be copied between host and device for OpenCL or CUDA kernel. This information can also be used to ensure that all variables that are read have previously been written by another routine. |
+| WRITES | WRITES is used to declare which grid variables are written by the routine. This information is used e.g. to determine which variables need to be copied between host and device for OpenCL or CUDA kernel. This information can also be used to ensure that all variables that are read have previously been written by another routine. |
+| TRIGGER | List of grid variables or groups to be used as triggers for causing an ANALYSIS function or group to be executed. Any schedule block for an analysis function or analysis group may contain a TRIGGER line. |
+| SYNCHRONISE | List of groups to be synchronised, as soon as the function or schedule group is exited. |
+| OPTIONS | List of additional options (see below) for the scheduled function or group of functions. |
 
-## Initial data
+#### Conditional Statements
 
-The initial data are computed using the Compact Object CALculator (COCAL) [^1]
+Any schedule block or assignment statements can be optionally surrounded by conditional if-elseif-else constructs using the parameter data base. These can be nested, and have the general form:
 
-![-w534](media/15512756872829.jpg)
+```
 
+if (<conditional-expression>) 
+{
+[<assignments >]
+[<schedule blocks>] 
+}
+```
 
-[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+conditional-expression can be any valid C construct evaluating to a truth value. Such conditionals are evaluated only at program startup, and are used to pick between different static schedule options. For dynamic scheduling, the SCHEDULE WHILE construction should be used.
 
-## Diagnostics
+### The configuration.ccl File
 
-The BH apparent horizon is located and monitored through the AHFinderDirect thorn. We estimate the BH mass $M_{\mathrm{BH}}$ and the BH dimensionless spin parameter $a / M_{\mathrm{BH}}$ using the isolated horizon formalism.
+A configuration.ccl file defines capabilities which a thorn either provides or requires, or may use if available. Unlike implementations, only one thorn providing a particular capability may be compiled into a configuration at one time. Thus, this mechanism may be used to, for example: provide access to external libraries; provide access to functions which other thorns must call, but are too complex for function aliasing; or to split a thorn into several thorns, all of which require some common (not aliased) functions.
 
-## Extract Gravitational Wave
+A configuration options file can contain any number of the following sections:
 
-To measure the flux of energy and angular momentum carried away by GWs, we use a modiﬁed version of the Psikadelia thorn.
-
-
-https://arxiv.org/pdf/1502.05674.pdf
-https://arxiv.org/pdf/1809.08237.pdf
-https://arxiv.org/pdf/gr-qc/0306056.pdf
-https://arxiv.org/pdf/gr-qc/0206008.pdf
+```
+PROVIDES <Capability> 
+{
+SCRIPT <Configuration script> [VERSION <Version String>]
+LANG <Language>
+[OPTIONS [<option>[,<option>]...]]
+}
+```
