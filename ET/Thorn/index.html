@@ -94,19 +94,16 @@
         
             <li><a class="toctree-l4" href="#the-scheduleccl-file">The schedule.ccl File</a></li>
         
+            <li><a class="toctree-l4" href="#the-configurationccl-file">The configuration.ccl File</a></li>
+        
         </ul>
     
 
-    <li class="toctree-l3"><a href="#initial-data">Initial data</a></li>
-    
-
-    <li class="toctree-l3"><a href="#diagnostics">Diagnostics</a></li>
-    
-
-    <li class="toctree-l3"><a href="#extract-gravitational-wave">Extract Gravitational Wave</a></li>
-    
-
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../parameter file/">parameter file</a>
                 </li>
     </ul>
 	    </li>
@@ -572,27 +569,99 @@ LANG: &lt;language&gt;
 <td>&lt;function name</td>
 <td>group name&gt;</td>
 </tr>
+<tr>
+<td>AT</td>
+<td>Functions can be scheduled to run at the Cactus schedule bins, for example, CCTK_EVOL, and CCTK_STARTUP. The initial letters CCTK_ are optional. Grid variables cannot be used in the CCTK_STARTUP and CCTK_SHUTDOWN timebins.</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>Schedules a function or schedule group to run in a schedule group, rather than in a Cactus timebin.</td>
+</tr>
+<tr>
+<td>AS</td>
+<td>Provides an alias for a function or schedule group which should be used for scheduling before, after or in. This can be used to provide thorn independence for other thorns scheduling functions, or schedule groups relative to this one.</td>
+</tr>
+<tr>
+<td>WHILE</td>
+<td>Executes a function or schedule group until the given variable (which must be a fully qualified integer grid scalar) has the value zero.</td>
+</tr>
+<tr>
+<td>IF</td>
+<td>Executes a function or schedule group only if the given variable (which must be a fully qualified integer grid scalar) has a non-zero value.</td>
+</tr>
+<tr>
+<td>BEFORE/AFTER</td>
+<td>Takes a function name, a function alias, a schedule group name, or a parenthesesenclosed whitespace-separated list of these. (Any names that are not provided by an active thorn are ignored.) Note that a single schedule block may have multiple BEFORE/AFTER clauses.</td>
+</tr>
+<tr>
+<td>LANG</td>
+<td>The code language for the function (either C or FORTRAN). No language should be specified for a schedule group.</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>Schedule options are used for mesh refinement and multi-block simulations, and they determine “where” a routine executes. Possible options are: meta, meta_early, meta_late, global, global_early, global_late, level, singlemap, local, loop_meta, loop_global, loop_level, loop_singlemap, loop_local.</td>
+</tr>
+<tr>
+<td>TAGS</td>
+<td>Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by Util_TableCreateFromString.</td>
+</tr>
+<tr>
+<td>STORAGE</td>
+<td>List of variable groups which should have storage switched on for the duration of the function or schedule group. Each group must specify how many timelevels to activate storage for, from 1 up to the maximum number for the group as specified in the defining interface.ccl file. If the maximum is 1 (the default) this number may be omitted. Alternatively timelevels can be the name of a parameter accessible to the thorn. The parameter name is the same as used in C routines of the thorn, fully qualified parameter names of the form thorn ::parameter are not allowed. In this case 0 (zero) timelevels can be requested, which is equivalent to the STORAGE statement being absent.</td>
+</tr>
+<tr>
+<td>READS</td>
+<td>READS is used to declare which grid variables are read by the routine. This information is used e.g. to determine which variables need to be copied between host and device for OpenCL or CUDA kernel. This information can also be used to ensure that all variables that are read have previously been written by another routine.</td>
+</tr>
+<tr>
+<td>WRITES</td>
+<td>WRITES is used to declare which grid variables are written by the routine. This information is used e.g. to determine which variables need to be copied between host and device for OpenCL or CUDA kernel. This information can also be used to ensure that all variables that are read have previously been written by another routine.</td>
+</tr>
+<tr>
+<td>TRIGGER</td>
+<td>List of grid variables or groups to be used as triggers for causing an ANALYSIS function or group to be executed. Any schedule block for an analysis function or analysis group may contain a TRIGGER line.</td>
+</tr>
+<tr>
+<td>SYNCHRONISE</td>
+<td>List of groups to be synchronised, as soon as the function or schedule group is exited.</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>List of additional options (see below) for the scheduled function or group of functions.</td>
+</tr>
 </tbody>
 </table>
-<h2 id="initial-data">Initial data</h2>
-<p>The initial data are computed using the Compact Object CALculator (COCAL) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></p>
-<p><img alt="-w534" src="../media/15512756872829.jpg" /></p>
-<h2 id="diagnostics">Diagnostics</h2>
-<p>The BH apparent horizon is located and monitored through the AHFinderDirect thorn. We estimate the BH mass <span><span class="MathJax_Preview">M_{\mathrm{BH}}</span><script type="math/tex">M_{\mathrm{BH}}</script></span> and the BH dimensionless spin parameter <span><span class="MathJax_Preview">a / M_{\mathrm{BH}}</span><script type="math/tex">a / M_{\mathrm{BH}}</script></span> using the isolated horizon formalism.</p>
-<h2 id="extract-gravitational-wave">Extract Gravitational Wave</h2>
-<p>To measure the flux of energy and angular momentum carried away by GWs, we use a modiﬁed version of the Psikadelia thorn.</p>
-<p><a href="https://arxiv.org/pdf/1502.05674.pdf">https://arxiv.org/pdf/1502.05674.pdf</a>
-<a href="https://arxiv.org/pdf/1809.08237.pdf">https://arxiv.org/pdf/1809.08237.pdf</a>
-<a href="https://arxiv.org/pdf/gr-qc/0306056.pdf">https://arxiv.org/pdf/gr-qc/0306056.pdf</a>
-<a href="https://arxiv.org/pdf/gr-qc/0206008.pdf">https://arxiv.org/pdf/gr-qc/0206008.pdf</a></p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
+<h4 id="conditional-statements">Conditional Statements</h4>
+<p>Any schedule block or assignment statements can be optionally surrounded by conditional if-elseif-else constructs using the parameter data base. These can be nested, and have the general form:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>if (&lt;conditional-expression&gt;) 
+{
+[&lt;assignments &gt;]
+[&lt;schedule blocks&gt;] 
+}
+</pre></div>
+</td></tr></table>
+
+<p>conditional-expression can be any valid C construct evaluating to a truth value. Such conditionals are evaluated only at program startup, and are used to pick between different static schedule options. For dynamic scheduling, the SCHEDULE WHILE construction should be used.</p>
+<h3 id="the-configurationccl-file">The configuration.ccl File</h3>
+<p>A configuration.ccl file defines capabilities which a thorn either provides or requires, or may use if available. Unlike implementations, only one thorn providing a particular capability may be compiled into a configuration at one time. Thus, this mechanism may be used to, for example: provide access to external libraries; provide access to functions which other thorns must call, but are too complex for function aliasing; or to split a thorn into several thorns, all of which require some common (not aliased) functions.</p>
+<p>A configuration options file can contain any number of the following sections:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>PROVIDES &lt;Capability&gt; 
+{
+SCRIPT &lt;Configuration script&gt; [VERSION &lt;Version String&gt;]
+LANG &lt;Language&gt;
+[OPTIONS [&lt;option&gt;[,&lt;option&gt;]...]]
+}
+</pre></div>
+</td></tr></table>
               
             </div>
           </div>
@@ -600,7 +669,7 @@ LANG: &lt;language&gt;
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../GW/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../parameter file/" class="btn btn-neutral float-right" title="parameter file">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Cactus/" class="btn btn-neutral" title="Cactus"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -634,7 +703,7 @@ LANG: &lt;language&gt;
         <span><a href="../Cactus/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../GW/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../parameter file/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

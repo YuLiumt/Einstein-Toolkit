@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>ADM - Yu Liu's Notebook</title>
+  <title>Visualization - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ADM";
-    var mkdocs_page_input_path = "NR/ADM.md";
-    var mkdocs_page_url = "/Einstein-Toolkit/NR/ADM/";
+    var mkdocs_page_name = "Visualization";
+    var mkdocs_page_input_path = "ET/Visualization.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/ET/Visualization/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
@@ -69,23 +69,23 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../ET/Introduction/">Introduction</a>
+    <a class="" href="../Introduction/">Introduction</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../ET/Install/">Install</a>
+    <a class="" href="../Install/">Install</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../ET/Cactus/">Cactus</a>
+    <a class="" href="../Cactus/">Cactus</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../ET/Thorn/">Thorn</a>
+    <a class="" href="../Thorn/">Thorn</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../ET/parameter file/">parameter file</a>
+    <a class="" href="../parameter file/">parameter file</a>
                 </li>
     </ul>
 	    </li>
@@ -126,15 +126,15 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../Introduction/">Introduction</a>
+    <a class="" href="../../NR/Introduction/">Introduction</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../3+1 Decomposition/">3+1 Decomposition</a>
+    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -176,10 +176,10 @@
     
       
     
-    <li>ADM</li>
+    <li>Visualization</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/NR/ADM.md"
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/Visualization.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -189,7 +189,15 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1"></h1>
+                <h2 id="visit">VisIt</h2>
+<h2 id="opening-the-databases">Opening the databases</h2>
+<p>Once the software is running, the button Open can be used to open files from the simulation. Make sure to select Open file as type: CarpetHDF5, otherwise VisIt may try to load the data using another format.</p>
+<p><img alt="vt-1" src="../media/vt-1.png" /></p>
+<p>If you are using the Simulation Factory to launch and manage the run, the data will be output under the directory <code class="codehilite">&lt;basedir&gt;/&lt;simulation name&gt;/output-&lt;nnnn&gt;/&lt;parfile name&gt;</code>, where <code class="codehilite">&lt;nnnn&gt;</code> is the number of the restart. There are essentially two types of files that can be visualised with VisIt:</p>
+<ul>
+<li>Files from the thorn <code class="codehilite">CarpetIOHDF5</code>, with <code class="codehilite"><span class="na">.h5</span></code> extension, which will be read by the <code class="codehilite">CarpetHDF5</code> plugin in VisIt and represent the 1D, 2D, or 3D configuration of a specific field, on a number of constant-time spaces.</li>
+<li>Files from the thorn <code class="codehilite">QuasiLocalMeasures</code>, with <code class="codehilite"><span class="na">.vtk</span></code> extension, which are read natively by VisIt and represent the shape and properties of relevant 2D topological spheres, such as the apparent horizons, also at different times.</li>
+</ul>
               
             </div>
           </div>

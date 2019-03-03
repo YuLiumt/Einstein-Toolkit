@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>parameter file - Yu Liu's Notebook</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "parameter file";
+    var mkdocs_page_input_path = "ET/parameter file.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/ET/parameter file/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Cactus/">Cactus</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Thorn/">Thorn</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">parameter file</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#flesh-parameters">Flesh parameters</a></li>
+    
+
+    <li class="toctree-l3"><a href="#grid-structure">Grid structure</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#coordbase">CoordBase</a></li>
+        
+            <li><a class="toctree-l4" href="#cartgrid3d">CartGrid3D</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#mesh-refinement">Mesh refinement</a></li>
+    
+
+    <li class="toctree-l3"><a href="#initial-data">Initial data</a></li>
+    
+
+    <li class="toctree-l3"><a href="#evolution-and-boundary">Evolution and boundary</a></li>
+    
+
+    <li class="toctree-l3"><a href="#bh-tracking">BH tracking</a></li>
+    
+
+    <li class="toctree-l3"><a href="#spatial-finite-differencing">Spatial finite differencing</a></li>
+    
+
+    <li class="toctree-l3"><a href="#time-integration">Time integration</a></li>
+    
+
+    <li class="toctree-l3"><a href="#interpolation">Interpolation</a></li>
+    
+
+    <li class="toctree-l3"><a href="#psi4-computation">Psi4 computation</a></li>
+    
+
+    <li class="toctree-l3"><a href="#apparent-horizons">Apparent Horizons</a></li>
+    
+
+    <li class="toctree-l3"><a href="#spherical-surfaces">Spherical surfaces</a></li>
+    
+
+    <li class="toctree-l3"><a href="#isolated-horizons">Isolated Horizons</a></li>
+    
+
+    <li class="toctree-l3"><a href="#output">Output</a></li>
+    
+
+    <li class="toctree-l3"><a href="#initial-data_1">Initial data</a></li>
+    
+
+    <li class="toctree-l3"><a href="#diagnostics">Diagnostics</a></li>
+    
+
+    <li class="toctree-l3"><a href="#extract-gravitational-wave">Extract Gravitational Wave</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Solutions">Solutions</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GW/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Linearized Waves/">Linearized Waves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Extracting Gravitational Waveforms/">Extracting Gravitational Waveforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Numerical Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../NR/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Yu Liu's Notebook</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Einstein Toolkit &raquo;</li>
+        
+      
+    
+    <li>parameter file</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/parameter file.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="flesh-parameters">Flesh parameters</h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># Flesh parameters
+Cactus::&lt;Flesh parameters&gt; = &lt;Value&gt;
+</pre></div>
+</td></tr></table>
+
+<p>The default value is shown in square brackets, while curly braces show allowed parameter values.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cctk_run_title</td>
+<td>Description of this simulation [""]</td>
+</tr>
+<tr>
+<td>cctk_full_warnings</td>
+<td>Give detailed information for each warning statement [yes]</td>
+</tr>
+<tr>
+<td>highlight_warning_messages</td>
+<td>Highlight CCTK warning messages [yes]</td>
+</tr>
+<tr>
+<td>cctk_timer_output</td>
+<td>Give timing information [off] {off, full}</td>
+</tr>
+<tr>
+<td>allow_mixeddim_gfs</td>
+<td>Allow use of GFs from different dimensions [no]</td>
+</tr>
+<tr>
+<td>cctk_brief_output</td>
+<td>Give only brief output [no]</td>
+</tr>
+<tr>
+<td>cctk_show_banners</td>
+<td>Show any registered banners for the different thorns [yes]</td>
+</tr>
+<tr>
+<td>cctk_show_schedule</td>
+<td>Print the scheduling tree to standard output [yes]</td>
+</tr>
+<tr>
+<td>cctk_strong_param_check</td>
+<td>Die on parameter errors in CCTK_PARAMCHECK [yes]</td>
+</tr>
+<tr>
+<td>recovery_mode</td>
+<td>How to behave when recovering from a checkpoint [strict] {strict, relaxed}</td>
+</tr>
+<tr>
+<td>info_format</td>
+<td>Specifies the content and format of CCTK_INFO()/CCTK_VINFO messages. [basic] {"basic", "numeric time stamp", "human-readable time stamp", "full time stamp"}</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>terminate</td>
+<td>Condition on which to terminate evolution loop [iteration] {never, iteration, time, runtime, any, all}</td>
+</tr>
+<tr>
+<td>cctk_final_time</td>
+<td>Final time for evolution, overridden by cctk_itlast unless it is positive [-1.0]</td>
+</tr>
+<tr>
+<td>cctk_initial_time</td>
+<td>Initial time for evolution [0.0]</td>
+</tr>
+<tr>
+<td>cctk_itlast</td>
+<td>Final iteration number [10]</td>
+</tr>
+<tr>
+<td>max_runtime</td>
+<td>Terminate evolution loop after a certain elapsed runtime (in minutes); set to zero to disable this termination condition [0]</td>
+</tr>
+<tr>
+<td>terminate_next</td>
+<td>Terminate on next iteration ? [no]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="grid-structure">Grid structure</h2>
+<h3 id="coordbase">CoordBase</h3>
+<p>The <code class="codehilite">CoordBase</code> thorn provides a method of registering coordinate systems and their properties.</p>
+<h4 id="specifying-coordinate-systems-in-the-interfaceccl">Specifying coordinate systems in the interface.ccl</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CCTK_REAL SphericalVectorField TYPE=ARRAY DIM=2 TAGS=’COORDSYSTEM=&quot;sphere2d&quot; TENSORTYPE=&quot;vector&quot;’  
+{  
+  field_theta, field_phi  
+}
+</pre></div>
+</td></tr></table>
+
+<h4 id="specifying-the-extent-of-the-physical-domain">Specifying the extent of the physical domain</h4>
+<p>CoordBase provides a way for specifying the extent of the simulation domain that is independent of the actual coordinate and symmetry thorns. This is necessary because the size of the physical domain is not necessarily the same as the size of the computational grid, which is usually enlarged by symmetry zones and/or boundary zones. The physical domain is characterised by the location of its lower and upper boundary and by its grid spacing. </p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CoordBase::domainsize = &lt;Value&gt;
+</pre></div>
+</td></tr></table>
+
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minmax</td>
+<td>by the location of its lower and upper boundary.</td>
+</tr>
+<tr>
+<td>extent</td>
+<td>by its extent, i.e. its width.</td>
+</tr>
+<tr>
+<td>spacing</td>
+<td>by grid spacing and the number of grid cells.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>The domain specification uses the number of grid cells instead of the number of grid points because the latter can easily lead to one-off errors.</p>
+<p>The domain size in each dimension is specificied in equivalent ways. For example, the x-dimension is specified by a set of some of the following parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zero_origin_x</td>
+<td>When the domain size is specified by extent or by spacing, then the origin (lower boundary) can either be located at <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>, which leads to the domain <span><span class="MathJax_Preview">x \in[0, L]</span><script type="math/tex">x \in[0, L]</script></span> with the extent L, or the domain can be symmetric with respect to <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>, which leads to <span><span class="MathJax_Preview">x \in[-L / 2, L / 2]</span><script type="math/tex">x \in[-L / 2, L / 2]</script></span>.</td>
+</tr>
+<tr>
+<td>xmin and xmax</td>
+<td>When the domain is specified by the location of its lower and upper boundary, then these specify the locations.</td>
+</tr>
+<tr>
+<td>xextent</td>
+<td>When the domain is specified by its extent, then this specifies the extent.</td>
+</tr>
+<tr>
+<td>dx (real) and ncells_x (int)</td>
+<td>When the domain is specified by grid spacing and the number of grid cells, then these specify the grid spacing and the number of grid cells.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="specifying-the-location-of-the-boundary-points">Specifying the location of the boundary points</h4>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boundary_size_x_lower</td>
+<td></td>
+</tr>
+<tr>
+<td>boundary_internal_x_lower</td>
+<td></td>
+</tr>
+<tr>
+<td>boundary_staggered_x_lower</td>
+<td></td>
+</tr>
+<tr>
+<td>boundary_shiftout_x_lower</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cartgrid3d">CartGrid3D</h3>
+<p><code class="codehilite">CartGrid3D</code> allows you to set up coordinates on a 3D Cartesian grid in a flexible manner.</p>
+<h4 id="specifying-the-grid-size-range-and-spacing">Specifying the Grid Size, Range, and Spacing</h4>
+<p><code class="codehilite">CartGrid3D</code> provides several different methods for setting up the integer grid size, floating-point grid spacing, and floating-point grid range. You specify which method to use, with the <code class="codehilite">grid::type</code> parameter.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byrange</td>
+<td>You specify the x, y, and z grid ranges, either with separate <code class="codehilite">grid::xmin</code>, <code class="codehilite">grid::xmax</code>, <code class="codehilite">grid::ymin</code>, <code class="codehilite">grid::ymax</code>, <code class="codehilite">grid::zmin</code>, and <code class="codehilite">grid::zmax</code> parameters, or with the <code class="codehilite">grid::xyzmin</code> and <code class="codehilite">grid::xyzmax</code> parameters.</td>
+</tr>
+<tr>
+<td>box</td>
+<td>This is a special case of <code class="codehilite">grid::type = &quot;byrange&quot;</code> with the grid ranges hard-wired to <code class="codehilite">grid::xyzmin = -0.5</code> and <code class="codehilite">grid::xyzmax = +0.5</code>.</td>
+</tr>
+<tr>
+<td>byspacing</td>
+<td>You specify the x, y, and z grid spacings, either with separate <code class="codehilite">grid::dx</code>, <code class="codehilite">grid::dy</code>, and <code class="codehilite">grid::dz</code> parameters, or with the <code class="codehilite">grid::dxyz</code> parameter.</td>
+</tr>
+</tbody>
+</table>
+<p><code class="codehilite">grid::avoid_originx</code> This is a Boolean parameter; if set to true then the grid will be “half-centered” across <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>, ie there will be grid points at <span><span class="MathJax_Preview">\ldots, x=-\frac{3}{2} \Delta x, x=-\frac{1}{2} \Delta x, x=+\frac{1}{2} \Delta x, x=+\frac{3}{2} \Delta x, \ldots</span><script type="math/tex">\ldots, x=-\frac{3}{2} \Delta x, x=-\frac{1}{2} \Delta x, x=+\frac{1}{2} \Delta x, x=+\frac{3}{2} \Delta x, \ldots</script></span>, but not at <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>.</p>
+<h4 id="specifying-the-grid-symmetry">Specifying the Grid Symmetry</h4>
+<p><code class="codehilite">CartGrid3D</code> allows you to specify the grid symmetry with the <code class="codehilite">grid::domain</code> parameter.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>full</td>
+<td>There are no symmetries.</td>
+</tr>
+<tr>
+<td>bitant</td>
+<td>The grid includes only the <span><span class="MathJax_Preview">z \geq 0</span><script type="math/tex">z \geq 0</script></span> half-space; there is a reflection symmetry across the $z = 0 $plane.</td>
+</tr>
+<tr>
+<td>quadrant</td>
+<td>The grid includes only the <span><span class="MathJax_Preview">\{x \geq 0, y \geq 0\}</span><script type="math/tex">\{x \geq 0, y \geq 0\}</script></span> quadrant. ; there is a reflection symmetry across both the <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span> plane and the <span><span class="MathJax_Preview">y = 0</span><script type="math/tex">y = 0</script></span> plane.</td>
+</tr>
+<tr>
+<td>octant</td>
+<td>The grid includes only the <span><span class="MathJax_Preview">\{x \geq 0, y \geq 0, z \geq 0\}</span><script type="math/tex">\{x \geq 0, y \geq 0, z \geq 0\}</script></span> octant; there is a reflection symmetry across each of the <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span> plane, the <span><span class="MathJax_Preview">y = 0</span><script type="math/tex">y = 0</script></span> plane and the <span><span class="MathJax_Preview">z = 0</span><script type="math/tex">z = 0</script></span> plane.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mesh-refinement">Mesh refinement</h2>
+<h2 id="initial-data">Initial data</h2>
+<h2 id="evolution-and-boundary">Evolution and boundary</h2>
+<h2 id="bh-tracking">BH tracking</h2>
+<h2 id="spatial-finite-differencing">Spatial finite differencing</h2>
+<h2 id="time-integration">Time integration</h2>
+<h2 id="interpolation">Interpolation</h2>
+<h2 id="psi4-computation">Psi4 computation</h2>
+<h2 id="apparent-horizons">Apparent Horizons</h2>
+<h2 id="spherical-surfaces">Spherical surfaces</h2>
+<h2 id="isolated-horizons">Isolated Horizons</h2>
+<h2 id="output">Output</h2>
+<h2 id="initial-data_1">Initial data</h2>
+<p>The initial data are computed using the Compact Object CALculator (COCAL) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></p>
+<p><img alt="-w534" src="../media/15512756872829.jpg" /></p>
+<h2 id="diagnostics">Diagnostics</h2>
+<p>The BH apparent horizon is located and monitored through the AHFinderDirect thorn. We estimate the BH mass <span><span class="MathJax_Preview">M_{\mathrm{BH}}</span><script type="math/tex">M_{\mathrm{BH}}</script></span> and the BH dimensionless spin parameter <span><span class="MathJax_Preview">a / M_{\mathrm{BH}}</span><script type="math/tex">a / M_{\mathrm{BH}}</script></span> using the isolated horizon formalism.</p>
+<h2 id="extract-gravitational-wave">Extract Gravitational Wave</h2>
+<p>To measure the flux of energy and angular momentum carried away by GWs, we use a modiﬁed version of the Psikadelia thorn.</p>
+<p><a href="https://arxiv.org/pdf/1502.05674.pdf">https://arxiv.org/pdf/1502.05674.pdf</a>
+<a href="https://arxiv.org/pdf/1809.08237.pdf">https://arxiv.org/pdf/1809.08237.pdf</a>
+<a href="https://arxiv.org/pdf/gr-qc/0306056.pdf">https://arxiv.org/pdf/gr-qc/0306056.pdf</a>
+<a href="https://arxiv.org/pdf/gr-qc/0206008.pdf">https://arxiv.org/pdf/gr-qc/0206008.pdf</a></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../GW/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Thorn/" class="btn btn-neutral" title="Thorn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Thorn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../GW/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

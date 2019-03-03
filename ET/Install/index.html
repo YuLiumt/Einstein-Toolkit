@@ -76,6 +76,18 @@
     <a class="current" href="./">Install</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#prepare-tools">Prepare Tools</a></li>
+    
+
+    <li class="toctree-l3"><a href="#configuring-simfactory-for-your-machine">Configuring SimFactory for your machine</a></li>
+    
+
+    <li class="toctree-l3"><a href="#building-the-einstein-toolkit">Building the Einstein Toolkit</a></li>
+    
+
+    <li class="toctree-l3"><a href="#running">Running</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -85,6 +97,10 @@
                 <li class="">
                     
     <a class="" href="../Thorn/">Thorn</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../parameter file/">parameter file</a>
                 </li>
     </ul>
 	    </li>
@@ -211,31 +227,69 @@ sudo yum install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc
 </pre></div>
 </td></tr></table>
 
-<p>Download</p>
-<p>A script called GetComponents is used to fetch the components of the Einstein Toolkit.</p>
+<h2 id="prepare-tools">Prepare Tools</h2>
+<p>A script called GetComponents is used to fetch the components of the Einstein Toolkit. You may download and make it executable it as follows:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
-3
-4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/
-curl -kLO https://raw.githubusercontent.com/gridaphobe/CRL/ET_2018_09/GetComponents
-chmod a+x GetComponents
-./GetComponents --parallel https://bitbucket.org/einsteintoolkit/manifest/raw/ET_2018_09/einsteintoolkit.th
-<span class="nb">cd</span> ~/Cactus
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>cd ~/
+curl -O -L https://raw.githubusercontent.com/gridaphobe/CRL/ET_2018_09/GetComponents
+chmod u+x GetComponents
 </pre></div>
 </td></tr></table>
 
-<p>Configuring SimFactory for your machine</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim setup-silent
+<p>Below checks out Cactus, the Einstein Toolkit thorns, the Simulation Factory and example parameter files into a directory named Cactus.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./GetComponents --parallel https://bitbucket.org/einsteintoolkit/manifest/raw/ET_2018_09/einsteintoolkit.th
 </pre></div>
 </td></tr></table>
 
-<p>Building the Einstein Toolkit</p>
+<details class="warning classes"><summary>Warning</summary><p>Some versions of svn might show problems with the parallel checkout. If you see errors like (svn: E155037: Previous operation has not finished), try without the --parallel option.</p>
+</details>
+<h2 id="configuring-simfactory-for-your-machine">Configuring SimFactory for your machine</h2>
+<p>Edit <code class="codehilite">simfactory/etc/defs.local.ini</code>.</p>
+<p>SimFactory also contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in <code class="codehilite">simfactory/mdb/optionlists</code> and <code class="codehilite">simfactory/mdb/runscripts</code> and specify their names on the sim setup command line.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># for Debian
+./simfactory/bin/sim setup-silent --optionlist=debian.cfg --runscript debian.sh
+# for Ubuntu, Mint
+./simfactory/bin/sim setup-silent --optionlist=ubuntu.cfg --runscript debian.sh
+# for Fedora (you may have to log out and back in if you have just intalled mpich to make the module command work)
+module load mpi
+./simfactory/bin/sim setup-silent --optionlist=fedora.cfg --runscript debian.sh
+# OSX+MacPorts
+./simfactory/bin/sim setup-silent --optionlist=osx-macports.cfg --runscript osx-macports.run
+# OSX+Homebrew
+./simfactory/bin/sim setup-silent --optionlist=osx-homebrew.cfg --runscript generic-mpi.run
+</pre></div>
+</td></tr></table>
+
+<p>After this step is complete you will find your machine's default setup under <code class="codehilite">./repos/simfactory2/mdb/machines/&lt;hostname&gt;.ini</code></p>
+<details class="note"><summary>Note</summary><p>The main SimFactory binary is called “sim” and is located in <code class="codehilite">simfactory/bin</code>. You can execute SimFactory explicitly as <code class="codehilite">./simfactory/bin/sim</code>, but we recommend that you set up a shell alias in your shell startup file so that you can just use the command “sim”. For bash users this file is <code class="codehilite"><span class="na">.bashrc</span></code> on Linux. Add the following to the shell startup file:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>alias sim=./simfactory/bin/sim
+</pre></div>
+</td></tr></table>
+
+</details>
+<h2 id="building-the-einstein-toolkit">Building the Einstein Toolkit</h2>
+<p>Assuming that SimFactory has been successfully set up on your machine, you should be able to build the Einstein Toolkit with</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim build --mdbkey make <span class="s1">&#39;make -j2&#39;</span> --thornlist ../einsteintoolkit.th <span class="p">|</span> cat
 </pre></div>
 </td></tr></table>
 
-<p><a href="https://github.com/nds-org/jupyter-et/blob/master/CactusTutorial.ipynb">A step by step guide to downloading, configuring, and running the Einstein Toolkit.</a></p>
+<h2 id="running">Running</h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim command [ options ]
+</pre></div>
+</td></tr></table>
+
+<p>SimFactory needs to know a name for the simulation as well as what parameter file to use. You can either specify the name on the command line and give the parameter file with the <code class="codehilite">--parfile</code> option.</p>
               
             </div>
           </div>
