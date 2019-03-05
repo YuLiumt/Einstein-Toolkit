@@ -13,8 +13,9 @@ nav:
     - Cactus: 'ET/Cactus.md'
     - Thorn: 'ET/Thorn.md'
     - parameter file: 'ET/parameter file.md'
+    - Visualization: 'ET/Visualization.md'
 - General Relativity:
-    - Solutions: 'GR/Solutions'
+    - Solutions: 'GR/Solutions.md'
 - Gravitational Wave:
     - Introduction: 'GW/Introduction.md'
     - Linearized Waves: 'GW/Linearized Waves.md'
@@ -23,9 +24,12 @@ nav:
     - Introduction: 'NR/Introduction.md'
     - 3+1 Decomposition: 'NR/3+1 Decomposition.md'
     - Numerical Methods: 'NR/Numerical Methods.md'
+    - ADM: 'NR/ADM.md'
 - Search Pipeline:
     - Introduction: 'SP/Introduction.md'
     - Matched Filtering: 'SP/matched filter.md'
+- Example:
+    - Poisson: 'Example/Poisson.md'
 
 
 repo_url: https://github.com/YuLiumt/Einstein-Toolkit

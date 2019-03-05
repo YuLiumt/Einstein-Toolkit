@@ -75,4 +75,10 @@ Assuming that SimFactory has been successfully set up on your machine, you shoul
 
 SimFactory needs to know a name for the simulation as well as what parameter file to use. You can either specify the name on the command line and give the parameter file with the `--parfile` option.
 
+For example
+
+```
+./simfactory/bin/sim create-run <Simulation name> --parfile /Users/yuliu/Desktop/work/yuliu/CactusPar/<name.par> --procs=2 --num-threads=1 --ppn-used=2 --walltime=8:0:0
+```
+
 

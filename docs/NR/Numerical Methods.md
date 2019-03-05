@@ -63,6 +63,100 @@ $$
 > 
 > where we have omitted the truncation error, $\mathcal { O } \left( \Delta x ^ { 4 } \right)$
 
+### Elliptic Equations
+
+As an example of a simple, one-dimensional elliptic equation consider
+
+$$
+\partial_{x}^{2} f=s
+$$
+
+We first have to construct a numerical grid that covers an interval between $x_{min}$ and $x_{max}$. We then divide the interval $\left[x_{\min }, x_{\max }\right]$ into N gridcells, leading to a gridspacing of
+
+$$
+\Delta x=\frac{x_{\max }-x_{\min }}{N}
+$$
+
+We can choose our grid points to be located either at the center of these cells, which would be referred to as a cell-centered grid, or on the vertices, which would be referred to as a vertex-centered grid. For a cell-centered grid we have N grid points located at
+
+$$
+x_{i}=x_{\min }+(i-1 / 2) \Delta x, \quad i=1, \ldots, N
+$$
+
+![](media/15516083713832.jpg)
+
+whereas for a vertex centered grid we have N + 1 gridpoints located a
+
+$$
+x_{i}=x_{\min }+(i-1) \Delta x, \quad i=1, \ldots, N+1
+$$
+
+**The difference between cell-centered and vertex-centered grids only affects the implementation of boundary conditions, but not the finite difference representation of the differential equation itself.**
+
+We are now ready to finite difference the differential equation. We define two arrays, $f_i$ and $s_i$, which represent the functions f and s at the gridpoints $x_i$ for $i = 1, . . . , N$. In the interior of our domain we can represent the differential equation as
+
+$$
+f_{i+1}-2 f_{i}+f_{i-1}=(\Delta x)^{2} s_{i} \quad i=2, \ldots, N-1
+$$
+
+At the lower boundary point $i = 1$ the neighbor $i − 1$ does not exist in our domain, and, similarly, at the upper boundary point $i = N$ the point $i + 1$ does not exist. At these points we have to implement the boundary conditions, which can be done in many different ways.
+
+Let us assume that the solution f is a symmetric function about $x = 0$, in which case we can restrict the analysis to positive x and impose a Neuman condition at the origin,
+    
+$$
+\partial_{x} f=0 \quad \text { at } x=0
+$$
+ 
+The two grid points $x_0$ and $x_1$ then bracket the boundary point $x_{min} = 0$ symmetrically. We can then write the boundary condition as
+    
+$$
+f_{1}=f_{0}
+$$
+    
+For i = 1 we yields
+
+$$
+f_{i+1}-f_{i}=(\Delta x)^{2} s_{i} \quad i=1
+$$
+
+We can use a similar strategy at the upper boundary. Let us also assume that f falls off with $1/x$ for large x, which results in the Robin boundary condition
+
+$$
+\partial_{x}(x f)=0 \quad \text { as } x \rightarrow \infty
+$$
+
+With the help of a virtual grid point $x_{N + 1}$ we can write the boundary condition in $\Delta x$ as
+
+$$
+f_{N+1}=\frac{x_{N}}{x_{N+1}} f_{N}=\frac{x_{N}}{x_{N}+\Delta x} f_{N}
+$$
+
+We can again insert this into for i = N and find
+
+$$
+\left(\frac{x_{i}}{x_{i}+\Delta x}-2\right) f_{i}+f_{i-1}=(\Delta x)^{2} s_{i} \quad i=N
+$$
+
+Elliptic Equations now form a coupled set of N linear equations for the N elements $f_i$ that we can write as
+
+$$
+\left( \begin{array}{ccccccc}{-1} & {1} & {0} & {0} & {0} & {0} & {0} \\ {1} & {-2} & {1} & {0} & {0} & {0} & {0} \\ {0} & {\ddots} & {\ddots} & {\ddots} & {0} & {0} & {0} \\ {0} & {0} & {1} & {-2} & {1} & {0} & {0} \\ {0} & {0} & {0} & {\ddots} & {\ddots} & {\ddots} & {0} \\ {0} & {0} & {0} & {0} & {1} & {-2} & {1} \\ {0} & {0} & {0} & {0} & {0} & {1} & {x_{N} /\left(x_{N}+\Delta x\right)-2}\end{array}\right) \cdot \left( \begin{array}{c}{f_{1}} \\ {f_{2}} \\ {\vdots} \\ {f_{i}} \\ {\vdots} \\ {f_{N-1}} \\ {f_{N}}\end{array}\right)=(\Delta x)^{2} \left( \begin{array}{c}{s_{1}} \\ {s_{2}} \\ {\vdots} \\ {s_{i}} \\ {\vdots} \\ {s_{N-1}} \\ {s_{N}}\end{array}\right)
+$$
+
+or, in a more compact form,
+
+$$
+\mathbf{A} \cdot \mathbf{f}=(\Delta x)^{2} \mathbf{S}
+$$
+
+The solution is given by
+
+$$
+\mathbf{f}=(\Delta x)^{2} \mathbf{A}^{-1} \cdot \mathbf{S}
+$$
+
+so that we have reduced the problem to inverting an N × N matrix.
+
 ### Hyperbolic Equations
 
 For simplicity it does not contain any source terms, and the the wave speed v is constant.
