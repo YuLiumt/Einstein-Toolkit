@@ -87,6 +87,10 @@
                     
     <a class="" href="../../ET/parameter file/">parameter file</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Visualization/">Visualization</a>
+                </li>
     </ul>
 	    </li>
           
@@ -96,7 +100,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../GR/Solutions">Solutions</a>
+    <a class="" href="../../GR/Solutions/">Solutions</a>
                 </li>
     </ul>
 	    </li>
@@ -141,12 +145,18 @@
     
         <ul>
         
+            <li><a class="toctree-l4" href="#elliptic-equations">Elliptic Equations</a></li>
+        
             <li><a class="toctree-l4" href="#hyperbolic-equations">Hyperbolic Equations</a></li>
         
         </ul>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../ADM/">ADM</a>
                 </li>
     </ul>
 	    </li>
@@ -162,6 +172,17 @@
                 <li class="">
                     
     <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Example</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Example/Poisson/">Poisson</a>
                 </li>
     </ul>
 	    </li>
@@ -295,6 +316,137 @@ f _ { i - 1 } = f \left( x _ { i } - \Delta x \right) = f \left( x _ { i } \righ
 </div>
 <p>where we have omitted the truncation error, <span><span class="MathJax_Preview">\mathcal { O } \left( \Delta x ^ { 4 } \right)</span><script type="math/tex">\mathcal { O } \left( \Delta x ^ { 4 } \right)</script></span></p>
 </blockquote>
+<h3 id="elliptic-equations">Elliptic Equations</h3>
+<p>As an example of a simple, one-dimensional elliptic equation consider</p>
+<div>
+<div class="MathJax_Preview">
+\partial_{x}^{2} f=s
+</div>
+<script type="math/tex; mode=display">
+\partial_{x}^{2} f=s
+</script>
+</div>
+<p>We first have to construct a numerical grid that covers an interval between <span><span class="MathJax_Preview">x_{min}</span><script type="math/tex">x_{min}</script></span> and <span><span class="MathJax_Preview">x_{max}</span><script type="math/tex">x_{max}</script></span>. We then divide the interval <span><span class="MathJax_Preview">\left[x_{\min }, x_{\max }\right]</span><script type="math/tex">\left[x_{\min }, x_{\max }\right]</script></span> into N gridcells, leading to a gridspacing of</p>
+<div>
+<div class="MathJax_Preview">
+\Delta x=\frac{x_{\max }-x_{\min }}{N}
+</div>
+<script type="math/tex; mode=display">
+\Delta x=\frac{x_{\max }-x_{\min }}{N}
+</script>
+</div>
+<p>We can choose our grid points to be located either at the center of these cells, which would be referred to as a cell-centered grid, or on the vertices, which would be referred to as a vertex-centered grid. For a cell-centered grid we have N grid points located at</p>
+<div>
+<div class="MathJax_Preview">
+x_{i}=x_{\min }+(i-1 / 2) \Delta x, \quad i=1, \ldots, N
+</div>
+<script type="math/tex; mode=display">
+x_{i}=x_{\min }+(i-1 / 2) \Delta x, \quad i=1, \ldots, N
+</script>
+</div>
+<p><img alt="" src="../media/15516083713832.jpg" /></p>
+<p>whereas for a vertex centered grid we have N + 1 gridpoints located a</p>
+<div>
+<div class="MathJax_Preview">
+x_{i}=x_{\min }+(i-1) \Delta x, \quad i=1, \ldots, N+1
+</div>
+<script type="math/tex; mode=display">
+x_{i}=x_{\min }+(i-1) \Delta x, \quad i=1, \ldots, N+1
+</script>
+</div>
+<p><strong>The difference between cell-centered and vertex-centered grids only affects the implementation of boundary conditions, but not the finite difference representation of the differential equation itself.</strong></p>
+<p>We are now ready to finite difference the differential equation. We define two arrays, <span><span class="MathJax_Preview">f_i</span><script type="math/tex">f_i</script></span> and <span><span class="MathJax_Preview">s_i</span><script type="math/tex">s_i</script></span>, which represent the functions f and s at the gridpoints <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> for <span><span class="MathJax_Preview">i = 1, . . . , N</span><script type="math/tex">i = 1, . . . , N</script></span>. In the interior of our domain we can represent the differential equation as</p>
+<div>
+<div class="MathJax_Preview">
+f_{i+1}-2 f_{i}+f_{i-1}=(\Delta x)^{2} s_{i} \quad i=2, \ldots, N-1
+</div>
+<script type="math/tex; mode=display">
+f_{i+1}-2 f_{i}+f_{i-1}=(\Delta x)^{2} s_{i} \quad i=2, \ldots, N-1
+</script>
+</div>
+<p>At the lower boundary point <span><span class="MathJax_Preview">i = 1</span><script type="math/tex">i = 1</script></span> the neighbor <span><span class="MathJax_Preview">i − 1</span><script type="math/tex">i − 1</script></span> does not exist in our domain, and, similarly, at the upper boundary point <span><span class="MathJax_Preview">i = N</span><script type="math/tex">i = N</script></span> the point <span><span class="MathJax_Preview">i + 1</span><script type="math/tex">i + 1</script></span> does not exist. At these points we have to implement the boundary conditions, which can be done in many different ways.</p>
+<p>Let us assume that the solution f is a symmetric function about <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>, in which case we can restrict the analysis to positive x and impose a Neuman condition at the origin,</p>
+<div>
+<div class="MathJax_Preview">
+\partial_{x} f=0 \quad \text { at } x=0
+</div>
+<script type="math/tex; mode=display">
+\partial_{x} f=0 \quad \text { at } x=0
+</script>
+</div>
+<p>The two grid points <span><span class="MathJax_Preview">x_0</span><script type="math/tex">x_0</script></span> and <span><span class="MathJax_Preview">x_1</span><script type="math/tex">x_1</script></span> then bracket the boundary point <span><span class="MathJax_Preview">x_{min} = 0</span><script type="math/tex">x_{min} = 0</script></span> symmetrically. We can then write the boundary condition as</p>
+<div>
+<div class="MathJax_Preview">
+f_{1}=f_{0}
+</div>
+<script type="math/tex; mode=display">
+f_{1}=f_{0}
+</script>
+</div>
+<p>For i = 1 we yields</p>
+<div>
+<div class="MathJax_Preview">
+f_{i+1}-f_{i}=(\Delta x)^{2} s_{i} \quad i=1
+</div>
+<script type="math/tex; mode=display">
+f_{i+1}-f_{i}=(\Delta x)^{2} s_{i} \quad i=1
+</script>
+</div>
+<p>We can use a similar strategy at the upper boundary. Let us also assume that f falls off with <span><span class="MathJax_Preview">1/x</span><script type="math/tex">1/x</script></span> for large x, which results in the Robin boundary condition</p>
+<div>
+<div class="MathJax_Preview">
+\partial_{x}(x f)=0 \quad \text { as } x \rightarrow \infty
+</div>
+<script type="math/tex; mode=display">
+\partial_{x}(x f)=0 \quad \text { as } x \rightarrow \infty
+</script>
+</div>
+<p>With the help of a virtual grid point <span><span class="MathJax_Preview">x_{N + 1}</span><script type="math/tex">x_{N + 1}</script></span> we can write the boundary condition in <span><span class="MathJax_Preview">\Delta x</span><script type="math/tex">\Delta x</script></span> as</p>
+<div>
+<div class="MathJax_Preview">
+f_{N+1}=\frac{x_{N}}{x_{N+1}} f_{N}=\frac{x_{N}}{x_{N}+\Delta x} f_{N}
+</div>
+<script type="math/tex; mode=display">
+f_{N+1}=\frac{x_{N}}{x_{N+1}} f_{N}=\frac{x_{N}}{x_{N}+\Delta x} f_{N}
+</script>
+</div>
+<p>We can again insert this into for i = N and find</p>
+<div>
+<div class="MathJax_Preview">
+\left(\frac{x_{i}}{x_{i}+\Delta x}-2\right) f_{i}+f_{i-1}=(\Delta x)^{2} s_{i} \quad i=N
+</div>
+<script type="math/tex; mode=display">
+\left(\frac{x_{i}}{x_{i}+\Delta x}-2\right) f_{i}+f_{i-1}=(\Delta x)^{2} s_{i} \quad i=N
+</script>
+</div>
+<p>Elliptic Equations now form a coupled set of N linear equations for the N elements <span><span class="MathJax_Preview">f_i</span><script type="math/tex">f_i</script></span> that we can write as</p>
+<div>
+<div class="MathJax_Preview">
+\left( \begin{array}{ccccccc}{-1} &amp; {1} &amp; {0} &amp; {0} &amp; {0} &amp; {0} &amp; {0} \\ {1} &amp; {-2} &amp; {1} &amp; {0} &amp; {0} &amp; {0} &amp; {0} \\ {0} &amp; {\ddots} &amp; {\ddots} &amp; {\ddots} &amp; {0} &amp; {0} &amp; {0} \\ {0} &amp; {0} &amp; {1} &amp; {-2} &amp; {1} &amp; {0} &amp; {0} \\ {0} &amp; {0} &amp; {0} &amp; {\ddots} &amp; {\ddots} &amp; {\ddots} &amp; {0} \\ {0} &amp; {0} &amp; {0} &amp; {0} &amp; {1} &amp; {-2} &amp; {1} \\ {0} &amp; {0} &amp; {0} &amp; {0} &amp; {0} &amp; {1} &amp; {x_{N} /\left(x_{N}+\Delta x\right)-2}\end{array}\right) \cdot \left( \begin{array}{c}{f_{1}} \\ {f_{2}} \\ {\vdots} \\ {f_{i}} \\ {\vdots} \\ {f_{N-1}} \\ {f_{N}}\end{array}\right)=(\Delta x)^{2} \left( \begin{array}{c}{s_{1}} \\ {s_{2}} \\ {\vdots} \\ {s_{i}} \\ {\vdots} \\ {s_{N-1}} \\ {s_{N}}\end{array}\right)
+</div>
+<script type="math/tex; mode=display">
+\left( \begin{array}{ccccccc}{-1} & {1} & {0} & {0} & {0} & {0} & {0} \\ {1} & {-2} & {1} & {0} & {0} & {0} & {0} \\ {0} & {\ddots} & {\ddots} & {\ddots} & {0} & {0} & {0} \\ {0} & {0} & {1} & {-2} & {1} & {0} & {0} \\ {0} & {0} & {0} & {\ddots} & {\ddots} & {\ddots} & {0} \\ {0} & {0} & {0} & {0} & {1} & {-2} & {1} \\ {0} & {0} & {0} & {0} & {0} & {1} & {x_{N} /\left(x_{N}+\Delta x\right)-2}\end{array}\right) \cdot \left( \begin{array}{c}{f_{1}} \\ {f_{2}} \\ {\vdots} \\ {f_{i}} \\ {\vdots} \\ {f_{N-1}} \\ {f_{N}}\end{array}\right)=(\Delta x)^{2} \left( \begin{array}{c}{s_{1}} \\ {s_{2}} \\ {\vdots} \\ {s_{i}} \\ {\vdots} \\ {s_{N-1}} \\ {s_{N}}\end{array}\right)
+</script>
+</div>
+<p>or, in a more compact form,</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{A} \cdot \mathbf{f}=(\Delta x)^{2} \mathbf{S}
+</div>
+<script type="math/tex; mode=display">
+\mathbf{A} \cdot \mathbf{f}=(\Delta x)^{2} \mathbf{S}
+</script>
+</div>
+<p>The solution is given by</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{f}=(\Delta x)^{2} \mathbf{A}^{-1} \cdot \mathbf{S}
+</div>
+<script type="math/tex; mode=display">
+\mathbf{f}=(\Delta x)^{2} \mathbf{A}^{-1} \cdot \mathbf{S}
+</script>
+</div>
+<p>so that we have reduced the problem to inverting an N × N matrix.</p>
 <h3 id="hyperbolic-equations">Hyperbolic Equations</h3>
 <p>For simplicity it does not contain any source terms, and the the wave speed v is constant.</p>
 <div>
@@ -408,7 +560,7 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../SP/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ADM/" class="btn btn-neutral float-right" title="ADM">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../3+1 Decomposition/" class="btn btn-neutral" title="3+1 Decomposition"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -442,7 +594,7 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
         <span><a href="../3+1 Decomposition/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../SP/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../ADM/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

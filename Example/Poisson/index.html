@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Introduction - Yu Liu's Notebook</title>
+  <title>Poisson - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Introduction";
-    var mkdocs_page_input_path = "ET/Introduction.md";
-    var mkdocs_page_url = "/Einstein-Toolkit/ET/Introduction/";
+    var mkdocs_page_name = "Poisson";
+    var mkdocs_page_input_path = "Example/Poisson.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/Example/Poisson/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
@@ -67,32 +67,29 @@
 		
     <span class="caption-text">Einstein Toolkit</span>
     <ul class="subnav">
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Introduction</a>
-    <ul class="subnav">
-            
-    </ul>
+    <a class="" href="../../ET/Introduction/">Introduction</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../Install/">Install</a>
+    <a class="" href="../../ET/Install/">Install</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../Cactus/">Cactus</a>
+    <a class="" href="../../ET/Cactus/">Cactus</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../Thorn/">Thorn</a>
+    <a class="" href="../../ET/Thorn/">Thorn</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../parameter file/">parameter file</a>
+    <a class="" href="../../ET/parameter file/">parameter file</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../Visualization/">Visualization</a>
+    <a class="" href="../../ET/Visualization/">Visualization</a>
                 </li>
     </ul>
 	    </li>
@@ -169,9 +166,15 @@
 		
     <span class="caption-text">Example</span>
     <ul class="subnav">
-                <li class="">
+                <li class=" current">
                     
-    <a class="" href="../../Example/Poisson/">Poisson</a>
+    <a class="current" href="./">Poisson</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#grid-structure">Grid Structure</a></li>
+    
+
+    </ul>
                 </li>
     </ul>
 	    </li>
@@ -198,14 +201,14 @@
     
       
         
-          <li>Einstein Toolkit &raquo;</li>
+          <li>Example &raquo;</li>
         
       
     
-    <li>Introduction</li>
+    <li>Poisson</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/Introduction.md"
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/Example/Poisson.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -215,7 +218,81 @@
           <div role="main">
             <div class="section">
               
-                <p>The <a href="https://www.einsteintoolkit.org/index.html">Einstein Toolkit</a> is a community-driven software platform of core computational tools to advance and support research in relativistic astrophysics and gravitational physics.</p>
+                <p>Here we solve the Poisson equation</p>
+<div>
+<div class="MathJax_Preview">
+\Delta \Phi(x)=\rho(x)
+</div>
+<script type="math/tex; mode=display">
+\Delta \Phi(x)=\rho(x)
+</script>
+</div>
+<p>where the right hand side <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span> is given by</p>
+<div>
+<div class="MathJax_Preview">
+\rho(r)=\left\{\begin{array}{ll}{Q / V } &amp; {r \leq R} \\ {0} &amp; {r&gt;R}\end{array}\right.
+</div>
+<script type="math/tex; mode=display">
+\rho(r)=\left\{\begin{array}{ll}{Q / V } & {r \leq R} \\ {0} & {r>R}\end{array}\right.
+</script>
+</div>
+<h2 id="grid-structure">Grid Structure</h2>
+<p>To do so, we first have to construct a numerical grid that covers an interval between <span><span class="MathJax_Preview">x_{min}</span><script type="math/tex">x_{min}</script></span> and <span><span class="MathJax_Preview">x_{max}</span><script type="math/tex">x_{max}</script></span>. We then divide the interval <span><span class="MathJax_Preview">\left[x_{\min }, x_{\max }\right]</span><script type="math/tex">\left[x_{\min }, x_{\max }\right]</script></span> into N gridcells, leading to a gridspacing of</p>
+<div>
+<div class="MathJax_Preview">
+\Delta x=\frac{x_{\max }-x_{\min }}{N}
+</div>
+<script type="math/tex; mode=display">
+\Delta x=\frac{x_{\max }-x_{\min }}{N}
+</script>
+</div>
+<p>We can choose our grid points to be located either at the center of these cells, which would be referred to as a cell-centered grid, or on the vertices, which would be referred to as a vertex-centered grid. For a cell-centered grid we have N grid points located at</p>
+<div>
+<div class="MathJax_Preview">
+x_{i}=x_{\min }+(i-1 / 2) \Delta x, \quad i=1, \ldots, N
+</div>
+<script type="math/tex; mode=display">
+x_{i}=x_{\min }+(i-1 / 2) \Delta x, \quad i=1, \ldots, N
+</script>
+</div>
+<p><img alt="-w1252" src="../media/15516017095776.jpg" /></p>
+<p>whereas for a vertex centered grid we have N + 1 gridpoints located a</p>
+<div>
+<div class="MathJax_Preview">
+x_{i}=x_{\min }+(i-1) \Delta x, \quad i=1, \ldots, N+1
+</div>
+<script type="math/tex; mode=display">
+x_{i}=x_{\min }+(i-1) \Delta x, \quad i=1, \ldots, N+1
+</script>
+</div>
+<p>For now, the difference between cell-centered and vertex-centered grids only affects the implementation of boundary conditions, but not the finite difference representation of the differential equation itself.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;CoordBase&quot;
+
+CoordBase::domainsize = &quot;minmax&quot;
+
+CoordBase::xmin =  -1.00
+CoordBase::ymin =  -1.00
+CoordBase::zmin =  -1.00
+CoordBase::xmax =  +1.00
+CoordBase::ymax =  +1.00
+CoordBase::zmax =  +1.00
+CoordBase::dx   =  0.25
+CoordBase::dy   =  0.25
+CoordBase::dz   =  0.25
+</pre></div>
+</td></tr></table>
               
             </div>
           </div>
@@ -223,10 +300,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Install/" class="btn btn-neutral float-right" title="Install">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../.." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../SP/matched filter/" class="btn btn-neutral" title="Matched Filtering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -254,10 +329,8 @@
           <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../SP/matched filter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../Install/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
