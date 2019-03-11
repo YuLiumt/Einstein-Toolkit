@@ -1,14 +1,16 @@
 Required Software
 
 ``` bash
-# On Debian/Ubuntu use this command:
-sudo apt-get install -y subversion gcc git numactl libgsl-dev libpapi-dev python libhwloc-dev make libopenmpi-dev libhdf5-openmpi-dev libfftw3-dev libssl-dev liblapack-dev g++ curl gfortran patch pkg-config libhdf5-dev libjpeg-turbo?-dev
-# On Fedora use this command:
-sudo dnf install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel python hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran findutils hdf5-devel fftw-devel patch gsl-devel pkgconfig
-module load mpi/openmpi-x86_64
-# On Centos use this command:
-sudo yum install -y epel-release
-sudo yum install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran hdf5-devel fftw-devel patch gsl-devel
+# Debian (stretch, buster)
+su -c 'apt-get install build-essential pkg-config libopenmpi-dev openmpi-bin gfortran git subversion curl gnuplot gnuplot-x11'
+# Ubuntu (16.04.2, 17.04, 17.10)
+sudo apt-get install build-essential pkg-config mpich2? python libmpich2?-dev gfortran git subversion curl gnuplot gnuplot-x11
+# Fedora (FC 25, 27)
+su -c ' yum -y install mpich2 python pkg-config mpich2-devel gsl gsl-devel libjpeg-devel hdf5 hdf5-mpich-devel gcc gcc-c++ gcc-gfortran patch numactl-devel numactl hwloc subversion git openssl-devel lapack-static gnuplot'
+# Mac OS (High Sierra), MacPorts
+sudo port -N install pkgconfig gcc8 openmpi fftw-3 gsl jpeg zlib hdf5 +fortran +gfortran openssl
+# Mac OS (High Sierra), Homebrew
+brew install gnuplot pkg-config gcc fftw gsl hdf5 --with-fortran hwloc jpeg openssl pkg-config szip open-mpi
 ```
 
 ## Prepare Tools
@@ -29,6 +31,20 @@ Below checks out Cactus, the Einstein Toolkit thorns, the Simulation Factory and
 
 ??? warning classes
      Some versions of svn might show problems with the parallel checkout. If you see errors like (svn: E155037: Previous operation has not finished), try without the --parallel option.
+
+```
+./GetComponents [options] [URL]
+```
+
+| Option | Discribe |
+| ------------ | ------------- |
+| −−help | brief help message |
+| −−man | full documentation |
+| −−verbose | print all system commands as they are executed |
+| −−debug | print all commands to be executed and exit |
+| −−anonymous | use anonymous checkout for all components |
+| −−update | process all updates |
+| −−root | override root directory |
 
 ## Configuring SimFactory for your machine
 
@@ -78,7 +94,9 @@ SimFactory needs to know a name for the simulation as well as what parameter fil
 For example
 
 ```
-./simfactory/bin/sim create-run <Simulation name> --parfile /Users/yuliu/Desktop/work/yuliu/CactusPar/<name.par> --procs=2 --num-threads=1 --ppn-used=2 --walltime=8:0:0
+./simfactory/bin/sim create-run <Simulation name> --parfile /Users/yuliu/Desktop/work/yuliu/CactusPar/<name.par> --procs=120 --walltime=8:0:0
 ```
 
-
+```
+./simfactory/bin/sim create-run static_tov --parfile=par/static_tov_small_short.par --procs=2 --num-threads=1 --ppn-used=2  --walltime=8:0:0 | cat
+```

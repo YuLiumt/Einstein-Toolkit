@@ -30,146 +30,14 @@ The default value is shown in square brackets, while curly braces show allowed p
 | Cactus::max_runtime | Terminate evolution loop after a certain elapsed runtime (in minutes); set to zero to disable this termination condition [0] |
 | Cactus::terminate_next | Terminate on next iteration ? [no] |
 
-## Grid structure
-
-### CoordBase
-
-The `CoordBase` thorn provides a method of registering coordinate systems and their properties.
-
-#### Specifying coordinate systems in the interface.ccl
-
-```
-CCTK_REAL SphericalVectorField TYPE=ARRAY DIM=2 TAGS=’COORDSYSTEM="sphere2d" TENSORTYPE="vector"’  
-{  
-  field_theta, field_phi  
-}
-```
-
-#### Specifying the extent of the physical domain
-
-CoordBase provides a way for specifying the extent of the simulation domain that is independent of the actual coordinate and symmetry thorns. This is necessary because the size of the physical domain is not necessarily the same as the size of the computational grid, which is usually enlarged by symmetry zones and/or boundary zones. The physical domain is characterised by the location of its lower and upper boundary and by its grid spacing. 
-
-```
-CoordBase::domainsize = <Value>
-```
-
-| Value | Describe |
-| ------------ | ------------- |
-| minmax | by the location of its lower and upper boundary. |
-| extent | by its extent, i.e. its width. |
-| spacing | by grid spacing and the number of grid cells. |
-
-___
-
-The domain specification uses the number of grid cells instead of the number of grid points because the latter can easily lead to one-off errors.
-
-The domain size in each dimension is specificied in equivalent ways. For example, the x-dimension is specified by a set of some of the following parameters:
-
-| Value | Describe |
-| ------------ | ------------- |
-| zero_origin_x | When the domain size is specified by extent or by spacing, then the origin (lower boundary) can either be located at $x = 0$, which leads to the domain $x \in[0, L]$ with the extent L, or the domain can be symmetric with respect to $x = 0$, which leads to $x \in[-L / 2, L / 2]$. |
-| xmin and xmax | When the domain is specified by the location of its lower and upper boundary, then these specify the locations. |
-| xextent | When the domain is specified by its extent, then this specifies the extent. |
-| dx (real) and ncells_x (int) | When the domain is specified by grid spacing and the number of grid cells, then these specify the grid spacing and the number of grid cells. |
-
-#### Specifying the location of the boundary points
-
-`CoordBase` also provides a way for specifying the discretisation of the boundary. The specification does not depend on the resolution, so that it need not be adapted when the resolution is changed.
-
-| Value | Describe |
-| ------------ | ------------- |
-| boundary_size_x_lower| the computational grid can have more than one boundary points. |
-| boundary_internal_x_lower | speciﬁes whether the boundary points extend inwards at the lower x face. |
-| boundary_staggered_x_lower | the boundary points should either be staggered about the physical boundary, or the last boundary point should be located exactly on the physical boundary. |
-| boundary_shiftout_x_lower | shift the boundary points outwards (or inwards with negative values) by multiples of the grid spacing. | 
-
-### [CartGrid3D](http://cactuscode.org/documentation/thorns/CactusBase-CartGrid3D.pdf)
-
-`CartGrid3D` allows you to set up coordinates on a 3D Cartesian grid in a flexible manner.
-
-#### Specifying the Grid Size, Range, and Spacing
-
-`CartGrid3D` provides several different methods for setting up the integer grid size, floating-point grid spacing, and floating-point grid range. You specify which method to use, with the `grid::type` parameter.
-
-| Value | Describe |
-| ------------ | ------------- |
-| byrange | You specify the x, y, and z grid ranges, either with separate `grid::xmin`, `grid::xmax`, `grid::ymin`, `grid::ymax`, `grid::zmin`, and `grid::zmax` parameters, or with the `grid::xyzmin` and `grid::xyzmax` parameters. |
-| box | This is a special case of `grid::type = "byrange"` with the grid ranges hard-wired to `grid::xyzmin = -0.5` and `grid::xyzmax = +0.5`. |
-| byspacing | You specify the x, y, and z grid spacings, either with separate `grid::dx`, `grid::dy`, and `grid::dz` parameters, or with the `grid::dxyz` parameter. |
-
-`grid::avoid_originx` This is a Boolean parameter; if set to true then the grid will be “half-centered” across $x = 0$, ie there will be grid points at $\ldots, x=-\frac{3}{2} \Delta x, x=-\frac{1}{2} \Delta x, x=+\frac{1}{2} \Delta x, x=+\frac{3}{2} \Delta x, \ldots$, but not at $x = 0$.
-
-#### Specifying the Grid Symmetry
-
-`CartGrid3D` allows you to specify the grid symmetry with the `grid::domain` parameter.
-
-| Value | Describe |
-| ------------ | ------------- |
-| full | There are no symmetries. |
-| bitant | The grid includes only the $z \geq 0$ half-space; there is a reflection symmetry across the $z = 0 $plane. |
-| quadrant | The grid includes only the $\{x \geq 0, y \geq 0\}$ quadrant. ; there is a reflection symmetry across both the $x = 0$ plane and the $y = 0$ plane. |
-| octant | The grid includes only the $\{x \geq 0, y \geq 0, z \geq 0\}$ octant; there is a reflection symmetry across each of the $x = 0$ plane, the $y = 0$ plane and the $z = 0$ plane. |
-
-### CT_MultiLevel
-
-`CT_MultiLevel` is a Cactus thorn that implements a multigrid solver for elliptic partial differential equations (PDEs).
-
-$$
-\begin{aligned} c_{x x} \partial_{x x} \psi+c_{x y} \partial_{x y} \psi+c_{x z} \partial_{x z} \psi+c_{y y} \partial_{y y} \psi+c_{y z} \partial_{y z} \psi+c_{z z} \partial_{z z} \psi &+\\ c_{x} \partial_{x} \psi+c_{y} \partial_{y} \psi+c_{z} \partial_{z} \psi+c_{0} \psi^{n_{0}}+c_{1} \psi^{n_{1}}+c_{2} \psi^{n_{2}}+c_{3} \psi^{n_{3}}+c_{4} \psi^{n_{4}} &=0 \end{aligned}
-$$
-
-### [IOASCII](http://cactuscode.org/documentation/thorns/CactusBase-IOASCII.pdf)
-
-Thorn `IOASCII` provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.
-
-
-## Boundary Conditions
-
-### [Boundary](http://cactuscode.org/documentation/thorns/CactusBase-Boundary.pdf)
-
-This thorn also provides some standard outer boundary conditions.
-
-| Value | defaults | Describe |
-| ------------ | ------------- | ------------- |
-| register_scalar | yes | the value of the given field at the boundary is set to a given scalar value. |
-| register_flat | yes | the value of the given field at the boundary is copied from the value one grid point in, in any direction. |
-| register_radiation | yes | Grid functions are given for the current time level as well as grid functions from a past timelevel which are needed for constructing the boundary condition. |
-| register_copy | yes | Copy the boundary values from a different grid function, for example the previous timelevel. |
-| register_robin | yes |  |
-| register_static | yes | the boundary values do not evolve in time, by copying their values from previous timelevels. |
-| register_none | yes |  |
-
-## Initial data
-
-The initial data are computed using the Compact Object CALculator (COCAL) [^1]
-
-![-w534](media/15512756872829.jpg)
-
-
-[^1]: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-## Diagnostics
-
-The BH apparent horizon is located and monitored through the AHFinderDirect thorn. We estimate the BH mass $M_{\mathrm{BH}}$ and the BH dimensionless spin parameter $a / M_{\mathrm{BH}}$ using the isolated horizon formalism.
-
-## Extract Gravitational Wave
-
-To measure the flux of energy and angular momentum carried away by GWs, we use a modiﬁed version of the Psikadelia thorn.
-
-
-https://arxiv.org/pdf/1502.05674.pdf
-https://arxiv.org/pdf/1809.08237.pdf
-https://arxiv.org/pdf/gr-qc/0306056.pdf
-https://arxiv.org/pdf/gr-qc/0206008.pdf
-
 ## KrancNumericalTools
 
 ### GenericFD
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
-| assume_stress_energy_state | -1 | Assume stress_energy_state has a particular value |   -1  :: "do not assume anything"*OR*  0:1 :: "assume off or on"*OR* |
-| assume_use_jacobian | -1 | Assume use_jacobian has a particular value |   -1  :: "do not assume anything"*OR*  0:1 :: "assume off or on"*OR* |
+| assume_stress_energy_state | -1 | Assume stress_energy_state has a particular value |   -1  :: "do not assume anything"*OR*  0:1 :: "assume off or on" |
+| assume_use_jacobian | -1 | Assume use_jacobian has a particular value |   -1  :: "do not assume anything"*OR*  0:1 :: "assume off or on" |
 | jacobian_group | "" | Name of group containing Jacobian |   "" :: "String of the form <implementation>::<groupname>"*OR* |
 | jacobian_determinant_group | "" | Name of group containing Jacobian determinant |   "" :: "String of the form <implementation>::<groupname>"*OR* |
 | jacobian_inverse_group | "" | Name of group containing Jacobian inverse |   "" :: "String of the form <implementation>::<groupname>"*OR* |
@@ -180,18 +48,6 @@ https://arxiv.org/pdf/gr-qc/0206008.pdf
 ## CactusIO
 
 ### IOJpeg
-
-Cactus Code Thorn IOJpeg
-Author(s)    : John Shalf
-               Gabrielle Allen
-               Tom Goodale
-               Gerd Lanfermann
-               Thomas Radke
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 This thorn does output of 2D slices from Cactus grid functions and arrays
 in jpeg image format.
@@ -240,14 +96,6 @@ It registers the I/O method "IOJpeg" with the flesh.
 
 ### hwloc
 
-Cactus Code Thorn hwloc
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : New BSD Licence
---------------------------------------------------------------------------
-
-1. Purpose
-
 Distribute the hwloc library; see
 <http://www.open-mpi.org/projects/hwloc/>.
 
@@ -265,20 +113,8 @@ information about modern computing hardware so as to exploit it
 accordingly and efficiently.
 
 
-| Key | Defaults | Describe | Option |
-| ------------ | ------------- | ------------- | ------------- |
-
 
 ### LORENE2
-
-Cactus Code Thorn LORENE
-Author(s)    : Cactus interface: Erik Schnetter, Roberto De Pietri, Frank Löffler
-               Lorene: see Lorene library
-Maintainer(s): Cactus team
-Licence      : GPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the LORENE library; see <http://www.lorene.obspm.fr/>.
 
@@ -294,19 +130,8 @@ astrophysics.  It provides tools to solve partial differential
 equations by means of multi-domain spectral methods.
 
 
-| Key | Defaults | Describe | Option |
-| ------------ | ------------- | ------------- | ------------- |
-
 
 ### BLAS
-
-Cactus Code Thorn BLAS
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the Basic Linear Algebra Subroutines (BLAS); see
 <http://netlib.org/blas/>.
@@ -325,20 +150,8 @@ the development of high quality linear algebra software, LAPACK for
 example.
 
 
-| Key | Defaults | Describe | Option |
-| ------------ | ------------- | ------------- | ------------- |
-
-
 ### libjpeg
 
-Cactus Code Thorn libjpeg
-Author(s)    : Frank Löffler
-               Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the libjpeg library; see <http://www.ijg.org/>
 
@@ -354,19 +167,8 @@ The current version is release 8b of 16-May-2010. This is a stable and
 solid foundation for many application's JPEG support.
 
 
-| Key | Defaults | Describe | Option |
-| ------------ | ------------- | ------------- | ------------- |
-
 
 ### MPI
-
-Cactus Code Thorn MPI
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : New BSD license
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the OpenMPI library; see <http://www.open-mpi.org/>.
 
@@ -387,19 +189,9 @@ available. Open MPI offers advantages for system and software vendors,
 application developers and computer science researchers.
 
 
-| Key | Defaults | Describe | Option |
-| ------------ | ------------- | ------------- | ------------- |
-
 
 ### PAPI
 
-Cactus Code Thorn PAPI
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : BSD
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the Performance Application Programming Interface; see
 <http://icl.cs.utk.edu/papi/index.html>.
@@ -436,14 +228,6 @@ hardware and software stack.
 
 ### HDF5
 
-Cactus Code Thorn HDF5
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?
---------------------------------------------------------------------------
-
-1. Purpose
-
 Distribute the HDF5 library; see <http://www.hdfgroup.org/HDF5/>.
 
 Provide some generic utility programs to manipulate HDF5 files. These
@@ -468,13 +252,7 @@ and analyzing data in the HDF5 format.
 
 ### LAPACK
 
-Cactus Code Thorn LAPACK
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?
---------------------------------------------------------------------------
 
-1. Purpose
 
 Distribute the Linear Algebra Package (LAPACK); see
 <http://netlib.org/lapack/>.
@@ -501,13 +279,6 @@ precision.
 
 ### FFTW3
 
-Cactus Code Thorn FFTW3
-Author(s)    : Yosef Zlochower <yosef@astro.rit.edu>
-Maintainer(s): 
-Licence      : GPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the FFTW Library; see <http://www.fftw.org/>.
 
@@ -538,13 +309,7 @@ Johnson
 
 ### LORENE
 
-Cactus Code Thorn LORENE
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL
---------------------------------------------------------------------------
 
-1. Purpose
 
 Distribute the LORENE library; see <http://www.lorene.obspm.fr/>.
 
@@ -566,13 +331,7 @@ equations by means of multi-domain spectral methods.
 
 ### zlib
 
-Cactus Code Thorn zlib
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?
---------------------------------------------------------------------------
 
-1. Purpose
 
 Distribute the zlib library; see <http://www.zlib.net/>
 
@@ -602,13 +361,6 @@ available on another page.
 
 ### OpenCL
 
-Cactus Code Thorn OpenCL
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL, public domain
---------------------------------------------------------------------------
-
-1. Purpose
 
 Configure with OpenCL; see <http://www.khronos.org/opencl/>.
 
@@ -679,13 +431,6 @@ env PATH=$PATH:/usr/local/intel_ocl_sdk_1.5_x64/usr/lib64/OpenCL/vendors/intel C
 
 ### OpenBLAS
 
-Cactus Code Thorn OpenBLAS
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute OpenBLAS; see <https://github.com/xianyi/OpenBLAS/wiki>.
 
@@ -703,13 +448,6 @@ version.
 
 ### pciutils
 
-Cactus Code Thorn pciutils
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the PCI Utilities; see <http://mj.ucw.cz/sw/pciutils/>.
 
@@ -729,13 +467,6 @@ space on a variety of operating systems.
 
 ### GSL
 
-Cactus Code Thorn GSL
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the GNU Scientific Library; see
 <http://www.gnu.org/software/gsl/>.
@@ -759,13 +490,6 @@ There are over 1000 functions in total with an extensive test suite.
 
 ### pthreads
 
-Cactus Code Thorn PTHREADS
-Author(s)    : Roland Haas
-Maintainer(s): Cactus team
-Licence      : MIT
---------------------------------------------------------------------------
-
-1. Purpose
 
 Provide access to the POSIX threads libraries.
 
@@ -779,13 +503,6 @@ way to include it in a Cactus configuration.
 
 ### PETSc
 
-Cactus Code Thorn PETSc
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the PETSc library; see <http://www.mcs.anl.gov/petsc>.
 
@@ -802,55 +519,9 @@ employs the MPI standard for parallelism.
 
 
 
-When referencing PETSc in a publication, please cite the following:
-
-@Misc{petsc-web-page,
-  Author =       "Satish Balay and Kris Buschelman and William D.
-                  Gropp and Dinesh Kaushik and Matthew G. Knepley and
-                  Lois Curfman McInnes and Barry F. Smith and Hong
-                  Zhang",
-  Title =        "{PETSc} {W}eb page",
-  Note =         "http://www.mcs.anl.gov/petsc",
-  Year =         2009
-}
-
-@TechReport{petsc-user-ref,
-  Author =       "Satish Balay and Kris Buschelman and Victor Eijkhout
-                  and William D. Gropp and Dinesh Kaushik and Matthew
-                  G. Knepley and Lois Curfman McInnes and Barry F.
-                  Smith and Hong Zhang",
-  Title =        "{PETS}c Users Manual",
-  Number =       "ANL-95/11 - Revision 3.0.0",
-  Institution =  "Argonne National Laboratory",
-  Year =         2008
-}
-
-@InProceedings{petsc-efficient,
-  Author =       "Satish Balay and William D. Gropp and Lois Curfman
-                  McInnes and Barry F. Smith",
-  Title =        "Efficient Management of Parallelism in Object
-                  Oriented Numerical Software Libraries",
-  Booktitle =    "Modern Software Tools in Scientific Computing",
-  Editor =       "E. Arge and A. M. Bruaset and H. P. Langtangen",
-  Pages =        "163--202",
-  Publisher =    "Birkh{\"{a}}user Press",
-  Year =         1997
-}
-
-
-| Key | Defaults | Describe | Option |
-| ------------ | ------------- | ------------- | ------------- |
-
 
 ### OpenSSL
 
-Cactus Code Thorn OpenSSL
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : Apache-style
---------------------------------------------------------------------------
-
-1. Purpose
 
 Distribute the OpenSSL library; see <http://www.openssl.org/>.
 
@@ -881,12 +552,6 @@ simple license conditions.
 
 ### Periodic
 
-CVS info   : $Header$
-
-Cactus Code Thorn Periodic
-Thorn Author(s)     : Erik Schnetter <schnetter@uni-tuebingen.de>
-Thorn Maintainer(s) : Erik Schnetter <schnetter@uni-tuebingen.de>
---------------------------------------------------------------------------
 
 Purpose of the thorn:
 
@@ -907,10 +572,7 @@ Periodic boundary conditions that do not depend on PUGH.
 
 ### Slab
 
-Cactus Code Thorn Slab
-Thorn Author(s)     : Erik Schnetter <schnetter@cct.lsu.edu>
-Thorn Maintainer(s) : Erik Schnetter <schnetter@cct.lsu.edu>
---------------------------------------------------------------------------
+
 
 Purpose of the thorn:
 
@@ -929,13 +591,7 @@ testing this thorn.
 
 ### RotatingSymmetry180
 
-Cactus Code Thorn RotatingSymmetry180
-Author(s)    : Erik Schnetter <schnetter@cct.lsu.edu>
-Maintainer(s): Erik Schnetter <schnetter@cct.lsu.edu>
-Licence      : GPL
---------------------------------------------------------------------------
 
-1. Purpose
 
 Provide a 180 degree rotational symmetry boundary condition.  This is
 the kind of symmetry that exists e.g. in a binary black hole evolution
@@ -967,13 +623,7 @@ conditions in the z direction, e.g. bitant or periodicity.
 
 ### RotatingSymmetry90
 
-Cactus Code Thorn RotatingSymmetry90
-Author(s)    : Erik Schnetter <schnetter@cct.lsu.edu>
-Maintainer(s): Erik Schnetter <schnetter@cct.lsu.edu>
-Licence      : GPL
---------------------------------------------------------------------------
 
-1. Purpose
 
 Provide a 90 degree rotational symmetry boundary condition.  This is
 the kind of symmetry that exists e.g. in a single black hole evolution
@@ -1001,10 +651,7 @@ conditions in the z direction, e.g. bitant or periodicity.
 
 ### InterpToArray
 
-Cactus Code Thorn InterpToArray
-Thorn Author(s)     : Erik Schnetter <schnetter@cct.lsu.edu>
-Thorn Maintainer(s) : Erik Schnetter <schnetter@cct.lsu.edu>
---------------------------------------------------------------------------
+
 
 Purpose of the thorn:
 
@@ -1100,13 +747,6 @@ locations, so that these can e.g. be output more easily.
 
 ### TestLocalReduce
 
-Cactus Code Thorn TestLocalReduce
-Author(s)    : unknown
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 not documented
 
@@ -1120,13 +760,7 @@ not documented
 
 ### TestLocalInterp2
 
-Cactus Code Thorn LocalInterpTest
-Author(s)    : David radice <dradice@caltech.edu>
-Maintainer(s): David radice <dradice@caltech.edu>
-Licence      : GPLv3
---------------------------------------------------------------------------
 
-1. Purpose
 
 not documented
 
@@ -1140,10 +774,6 @@ not documented
 
 ### Noise
 
-Cactus Code Thorn Noise
-Authors: Denis Pollney <pollney@aei.mpg.de>
-CVS info: $Header$
---------------------------------------------------------------------------
 
 Purpose of the thorn:
 
@@ -1163,13 +793,7 @@ Jeff Winicour.
 
 ### LocalInterp
 
-Cactus Code Thorn LocalInterp
-Author(s)    : Thomas Radke
-               Jonathan Thornburg
-               Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
+
 
 1. Purpose
 
@@ -1180,7 +804,7 @@ of interpolation points.
 
 
 History
-=======
+
 
 This interpolator was written by Thomas Radke in early 2001 (drawing
 on older code by Paul Walker), and supports the interpolation operator
@@ -1210,11 +834,6 @@ Jonathan Thornburg's interpolator.  You can/should ignore these.
 
 ### TensorTypes
 
-Cactus Code Thorn TensorTypes
-Thorn Author(s)     : Erik Schnetter <schnetter@aei.mpg.de>
-Thorn Maintainer(s) : Erik Schnetter <schnetter@aei.mpg.de>
-License             : LGPLv2.1 or later
---------------------------------------------------------------------------
 
 Purpose of the thorn:
 
@@ -1227,12 +846,6 @@ Provide information about various types of tensors.
 
 ### Dissipation
 
-CVS info   : $Header$
-
-Cactus Code Thorn Dissipation
-Thorn Author(s)     : Erik Schnetter <schnetter@aei.mpg.de>
-Thorn Maintainer(s) : Erik Schnetter <schnetter@aei.mpg.de>
---------------------------------------------------------------------------
 
 Purpose of the thorn:
 
@@ -1269,15 +882,7 @@ GARP Publication Series (GARP Publication, 1973).
 
 ### LocalReduce
 
-Cactus Code Thorn LocalReduce
-Author(s)    : Ravi Paruchuri
-               Tom Goodale
-               Yaakoub El Khamra
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
 
-1. Purpose
 
 Local array reduction implementation, using the new local reduction API. New features added, please refer to the thorn documentation for details and to the TestLocalReduce thorn for examples of usage. 
 
@@ -1288,11 +893,7 @@ Local array reduction implementation, using the new local reduction API. New fea
 
 ### SummationByParts
 
-Cactus Code Thorn SummationByParts
-Author(s)     : Peter Diener <diener@cct.lsu.edu>
-Maintainer(s) : Peter Diener <diener@cct.lsu.edu>
-License       : LGPLv2.1 or later
---------------------------------------------------------------------------
+
 
 Purpose of the thorn:
 
@@ -1328,10 +929,7 @@ that satisfy summation by parts.
 
 ### SphericalSurface
 
-Cactus Code Thorn SphericalSurface
-Thorn Author(s)     : Erik Schnetter <schnetter@cct.lsu.edu>
-Thorn Maintainer(s) : Erik Schnetter <schnetter@cct.lsu.edu>
---------------------------------------------------------------------------
+
 
 Purpose of the thorn:
 
@@ -1348,14 +946,7 @@ Store spherical surfaces.
 
 ### LocalInterp2
 
-Cactus Code Thorn LocalInterp
-Author(s)    : David Radice
-               Thomas Radke
-               Jonathan Thornburg
-               Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
+
 
 1. Purpose
 
@@ -1366,7 +957,7 @@ of interpolation points.
 
 
 History
-=======
+
 
 This interpolator was written by Thomas Radke in early 2001 (drawing
 on older code by Paul Walker), and supports the interpolation operator
@@ -1395,14 +986,7 @@ thorn were rewritten in C++ by David Radice.
 
 ### Cartoon2D
 
-Cactus Code Thorn Cartoon2D
-Author(s)    : Sai Iyer
-               Denis Pollney
-               Thomas Radke
-               David Rideout
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
+
 
 1. Purpose
 
@@ -1433,12 +1017,6 @@ See the test/ directory for sample parameter files.
 
 ### SlabTest
 
-CVS info   : $Header$
-
-Cactus Code Thorn SlabTest
-Thorn Author(s)     : Erik Schnetter <schnetter@uni-tuebingen.de>
-Thorn Maintainer(s) : Erik Schnetter <schnetter@uni-tuebingen.de>
---------------------------------------------------------------------------
 
 Purpose of the thorn:
 
@@ -1449,36 +1027,24 @@ This thorn tests the slab transfer routines of the thorn Slab.
 | ------------ | ------------- | ------------- | ------------- |
 
 
-### MoL
+### [MoL](http://cactuscode.org/documentation/thorns/CactusBase-MoL.pdf)
 
-Cactus Code Thorn MoL
-Author(s)    : Ian Hawke
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
+The Method of Lines (MoL) converts a partial differential equation(s) into an ordinary differential equation containing some spatial differential operator.
 
-1. Purpose
-
-This thorn provides generic time integrators.
-This allows clean coupling when multiple thorns wish to integrate at the
-same time.
-It also means a physics thorn doesn't have to rewrite its own time
-integrator.
-This version is designed to work with Mesh Refinement codes as well as
-unigrid.
-
+If you already have a thorn that uses the method of lines, then there are four main parameters that are relevant to change the integration method. The keyword `MoL_ODE_Method` chooses between the different methods. The parameter `MoL_Intermediate_Steps` controls the number of intermediate steps for the ODE solver. The parameter `MoL_Num_Scratch_Levels` controls the amount of scratch space used. 
+Another parameter is `MoL_Memory_Always_On` which switches on memory for the scratch space always if true and only during evolution if false.
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
-| MoL_Num_Evolved_Vars | 0 | The maximum number of variables to be evolved by MoL (DPRECATED) |   0:*		:: "Anything non negative. Added to by other thorns."*OR* |
-| MoL_Num_Evolved_Vars_Slow | 0 | The maximum number of 'slow' variables to be evolved by MoL (DPRECATED) |   0:*		:: "Anything non negative. Added to by other thorns."*OR* |
-| MoL_Num_Constrained_Vars | 0 | The maximum number of constrained variables with timelevels that MoL needs to know about (DPRECATED) |   0:*		:: "Anything non negative. Added to by other thorns."*OR* |
-| MoL_Num_SaveAndRestore_Vars | 0 | The maximum number of variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) |   0:*		:: "Anything non negative. Added to by other thorns."*OR* |
-| MoL_Max_Evolved_Array_Size | 0 | The maximum total size of any grid arrays to be evolved |   0:*          :: "Anything non negative. Accumulated by other thorns"*OR* |
-| MoL_Num_ArrayEvolved_Vars | 0 | The maximum number of array variables to be evolved by MoL (DPRECATED) |   0:*		:: "Anything non negative. Added to by other thorns."*OR* |
-| MoL_Num_ArrayConstrained_Vars | 0 | The maximum number of array constrained variables with timelevels that MoL needs to know about (DPRECATED) |   0:*		:: "Anything non negative. Added to by other thorns."*OR* |
-| MoL_Num_ArraySaveAndRestore_Vars | 0 | The maximum number of array variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) |   0:*		:: "Anything non negative. Added to by other thorns."*OR* |
-| MoL_Num_Scratch_Levels | 0 | Number of scratch levels required by the ODE method |   0:*		:: "Anything non negative"*OR* |
+| MoL_Num_Evolved_Vars | 0 | The maximum number of variables to be evolved by MoL (DPRECATED) | 0:* :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_Evolved_Vars_Slow | 0 | The maximum number of 'slow' variables to be evolved by MoL (DPRECATED) | 0:* :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_Constrained_Vars | 0 | The maximum number of constrained variables with timelevels that MoL needs to know about (DPRECATED) |   0:* :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_SaveAndRestore_Vars | 0 | The maximum number of variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) | 0:*	 :: "Anything non negative. Added to by other thorns." |
+| MoL_Max_Evolved_Array_Size | 0 | The maximum total size of any grid arrays to be evolved | 0:* :: "Anything non negative. Accumulated by other thorns" |
+| MoL_Num_ArrayEvolved_Vars | 0 | The maximum number of array variables to be evolved by MoL (DPRECATED) | 0:* :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_ArrayConstrained_Vars | 0 | The maximum number of array constrained variables with timelevels that MoL needs to know about (DPRECATED) | 0:*	 :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_ArraySaveAndRestore_Vars | 0 | The maximum number of array variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) | 0:*	 :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_Scratch_Levels | 0 | Number of scratch levels required by the ODE method | 0:* :: "Anything non negative" |
 | ODE_Method | "ICN" | The ODE method use by MoL to do time integration |   "Generic"	:: "Generic Shu-Osher Runge-Kutta type"*OR*  "ICN"		:: "Iterative Crank Nicholson"*OR*  "ICN-avg"	:: "Iterative Crank Nicholson with averaging"*OR*  "Euler"	:: "Euler"*OR*  "RK2"		:: "Efficient RK2"*OR*  "RK2-central"	:: "Central RK2"*OR*  "RK3"		:: "Efficient RK3"*OR*  "RK4"		:: "Efficient RK4"*OR*  "RK45"        :: "RK45 (Fehlberg) with error estimation"*OR*  "RK45CK"      :: "RK45CK (Cash-Karp) with error estimation"*OR*  "RK65"        :: "RK65 with error estimation"*OR*  "RK87"        :: "RK87 with error estimation"*OR*  "AB"          :: "Adams-Bashforth"*OR*  "RK2-MR-2:1"  :: "2nd order 2:1 multirate RK scheme based on RK2 due to Schlegel et al 2009. This requires init_RHS_zero='no'."*OR*  "RK4-MR-2:1"  :: "3rd order 2:1 multirate RK scheme based on RK43 due to Schlegel et al 2009. This requires init_RHS_zero='no'."*OR*  "RK4-RK2"     :: "RK4 as fast method and RK2 as slow method"*OR* |
 | Generic_Type | "RK" | If using the generic method, which sort |   "RK"		:: "One of the standard TVD Runge-Kutta methods"*OR*  "ICN"		:: "Iterative Crank Nicholson as a generic method"*OR*  "Table"       :: "Given from the generic method descriptor parameter"*OR*  "Classic RK3"	:: "Efficient RK3 - classical version"*OR* |
 | ICN_avg_theta | 0.5 | theta of averaged ICN method, usually 0.5 |   0:1 :: "0 <= theta <= 1"*OR* |
@@ -1508,13 +1074,6 @@ unigrid.
 
 ### SpaceMask
 
-Cactus Code Thorn SpaceMask
-Author(s)    : Denis Pollney
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Provides utilities for assigning states to individual grid points
 using a mask grid function.
@@ -1527,14 +1086,6 @@ using a mask grid function.
 
 ### Norms
 
-CVS info   : $Header$
-
-Cactus Code Thorn Norms
-Thorn Author(s)     : Frank Herrmann <herrmann@aei.mpg.de>
-                    : Erik Schnetter <schnetter@aei.mpg.de>
-Thorn Maintainer(s) : Frank Herrmann <herrmann@aei.mpg.de>
-                    : Erik Schnetter <schnetter@aei.mpg.de>
---------------------------------------------------------------------------
 
 Purpose of the thorn:
 
@@ -1565,13 +1116,6 @@ gr-qc/0503056 (2005)
 
 ### ReflectionSymmetry
 
-Cactus Code Thorn ReflectionSymmetry
-Author(s)    : Erik Schnetter <schnetter@cct.lsu.edu>
-Maintainer(s): Erik Schnetter <schnetter@cct.lsu.edu>
-Licence      : GPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Provide reflection symmetries, i.e., bitant, quadrant, and octant mode.
 
@@ -1597,13 +1141,6 @@ Provide reflection symmetries, i.e., bitant, quadrant, and octant mode.
 
 ### NewRad
 
-Cactus Code Thorn NewRad
-Author(s)    : Erik Schnetter <schnetter@cct.lsu.edu>
-Maintainer(s): Erik Schnetter <schnetter@cct.lsu.edu>
-Licence      : GPL
---------------------------------------------------------------------------
-
-1. Purpose
 
 Implement the "NewRad" radiative boundary conditions known from
 BSSN_MoL.
@@ -1615,18 +1152,6 @@ BSSN_MoL.
 
 
 ### GRHydro_InitData
-
-Cactus Code Thorn GRHydro_Init_Data  
-Author(s)    : Luca Baiotti
-               Ian Hawke
-               Scott Hawley
-               Frank Löffler
-               Christian David Ott
-Maintainer(s): CIGR developers team
-Licence      : GPLv2+
---------------------------------------------------------------------------
-
-1. Purpose
 
 Provides simple initial data (shock tubes, ...) for the GRHydro code.
 
@@ -1705,27 +1230,9 @@ Provides simple initial data (shock tubes, ...) for the GRHydro code.
 
 ### GRHydro
 
-Cactus Code Thorn GRHydro
-Author(s)    : Luca Baiotti
-               Ian Hawke
-               Pedro Montero
-               Sebastiano Bernuzzi
-               Giovanni Corvino
-               Toni Font
-               Joachim Frieben
-               Roberto De Pietri
-               Thorsten Kellermann
-               Frank Löffler
-               Christian D. Ott
-               Luciano Rezzolla
-               Nikolaos Stergioulas
-               Aaryn Tonita
-               many others
-Maintainer(s): CIGR developers team
-Licence      : GPLv2+
---------------------------------------------------------------------------
 
-1. Purpose
+
+
 
 GRHydro is the evolution code for a general-purpose 3D relativistic
 hydrodynamics code. To work it requires Einstein, MoL (the method of
@@ -1792,15 +1299,6 @@ For more information see the documentation in the ThornGuide.
 
 ### PUGH
 
-Cactus Code Thorn PUGH
-Author(s)    : Gabrielle Allen
-               Tom Goodale
-               Thomas Radke
-               Matei Ripeanu
-               Paul Walker
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
 
 1. Purpose
 
@@ -1868,12 +1366,6 @@ This thorn provides a unigrid parallel driver with MPI.
 
 ### PUGHInterp
 
-Cactus Code Thorn PUGHInterp
-Author(s)    : Paul Walker
-               Thomas Radke
-Maintainer(s): Cactus team
-Licence      : LGPL
---------------------------------------------------------------------------
 
 1. Purpose
 
@@ -3079,17 +2571,8 @@ Purpose of the thorn:
 
 ### Carpet
 
-Cactus Code Thorn Carpet
-Author(s)    : Erik Schnetter <schnetter@cct.lsu.edu>
-Maintainer(s): Erik Schnetter <schnetter@cct.lsu.edu>
-Licence      : GPLv2+
---------------------------------------------------------------------------
-
-1. Purpose
-
 This thorn provides a parallel AMR (adaptive mesh refinement) driver
 with MPI.
-
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
@@ -3545,17 +3028,8 @@ Periodic boundary conditions using Carpet's communication routines.
 
 ### CarpetRegrid2
 
-Cactus Code Thorn CarpetRegrid2
-Author(s)    : Erik Schnetter <schnetter@cct.lsu.edu>
-Maintainer(s): Erik Schnetter <schnetter@cct.lsu.edu>
-Licence      : GPLv2+
---------------------------------------------------------------------------
-
-1. Purpose
-
 Set up refined regions by specifying a set of centres and radii about
 them.  The refined regions are then the conjunction of these regions.
-
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
