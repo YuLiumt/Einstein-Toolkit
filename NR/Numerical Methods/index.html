@@ -85,7 +85,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../ET/parameter file/">parameter file</a>
+    <a class="" href="../../ET/parameter/">Parameter</a>
                 </li>
                 <li class="">
                     
@@ -148,6 +148,15 @@
             <li><a class="toctree-l4" href="#elliptic-equations">Elliptic Equations</a></li>
         
             <li><a class="toctree-l4" href="#hyperbolic-equations">Hyperbolic Equations</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#mesh-refinement">Mesh Refinement</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#fixed-mesh-refinement">Fixed Mesh Refinement</a></li>
         
         </ul>
     
@@ -553,6 +562,11 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
 <p>The Courant condition states that the the grid point <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n+1 has to reside inside the domain of determinacy of the interval spanned by the finite difference stencil at the time level n. This makes intuitive sense: if <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> were outside this domain, its physical specification would require more information about the past than we are providing numerically, which may trigger an instability.</p>
 <p><img alt="" src="../media/15512306641761.jpg" /></p>
 <p>Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.</p>
+<h2 id="mesh-refinement">Mesh Refinement</h2>
+<h3 id="fixed-mesh-refinement">Fixed Mesh Refinement</h3>
+<p>A standard way of solving partial differential equations are finite differences on a regular grid. This is also called unigrid. Such an application discretises its problem space onto a single, rectangular grid which has everywhere the same grid spacing. Increasing the resolution in a unigrid application is somewhat expensive. For example, increasing the resolution by a factor of two requires a factor of eight more storage in three dimensions. Most applications need the high resolution only in a part of the simulation domain.</p>
+<p>Instead of only one grid, there are several grids or grid patches with different resolutions. The coarsest grid usually encloses the whole simulation domain. Successively finer grids overlay the coarse grid at those locations where a higher resolutions is needed. The coarser grids provide boundary conditions to the finer grid through interpolation.</p>
+<p>Instead of updating only one grid, the application has to update all grids. The usual approach is to first take a step on the coarsest grid, and then recursively take several smaller steps on the finer grids. The Courant criterion requires that the step sizes on the finer grids be smaller than on the coarse grid. The boundary values for the finer grids are found through interpolation in space and time from the coarser grid. In the end, the information on the finer grids is injected into the coarse grids.</p>
               
             </div>
           </div>

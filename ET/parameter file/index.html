@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>parameter file - Yu Liu's Notebook</title>
+  <title>Parameter file - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "parameter file";
+    var mkdocs_page_name = "Parameter file";
     var mkdocs_page_input_path = "ET/parameter file.md";
     var mkdocs_page_url = "/Einstein-Toolkit/ET/parameter file/";
   </script>
@@ -83,368 +83,9 @@
                     
     <a class="" href="../Thorn/">Thorn</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">parameter file</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#flesh-parameters">Flesh parameters</a></li>
-    
-
-    <li class="toctree-l3"><a href="#grid-structure">Grid structure</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#coordbase">CoordBase</a></li>
-        
-            <li><a class="toctree-l4" href="#cartgrid3d">CartGrid3D</a></li>
-        
-            <li><a class="toctree-l4" href="#ct_multilevel">CT_MultiLevel</a></li>
-        
-            <li><a class="toctree-l4" href="#ioascii">IOASCII</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#boundary-conditions">Boundary Conditions</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#boundary">Boundary</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#initial-data">Initial data</a></li>
-    
-
-    <li class="toctree-l3"><a href="#diagnostics">Diagnostics</a></li>
-    
-
-    <li class="toctree-l3"><a href="#extract-gravitational-wave">Extract Gravitational Wave</a></li>
-    
-
-    <li class="toctree-l3"><a href="#krancnumericaltools">KrancNumericalTools</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#genericfd">GenericFD</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#cactusio">CactusIO</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#iojpeg">IOJpeg</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#externallibraries">ExternalLibraries</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#hwloc">hwloc</a></li>
-        
-            <li><a class="toctree-l4" href="#lorene2">LORENE2</a></li>
-        
-            <li><a class="toctree-l4" href="#blas">BLAS</a></li>
-        
-            <li><a class="toctree-l4" href="#libjpeg">libjpeg</a></li>
-        
-            <li><a class="toctree-l4" href="#mpi">MPI</a></li>
-        
-            <li><a class="toctree-l4" href="#papi">PAPI</a></li>
-        
-            <li><a class="toctree-l4" href="#hdf5">HDF5</a></li>
-        
-            <li><a class="toctree-l4" href="#lapack">LAPACK</a></li>
-        
-            <li><a class="toctree-l4" href="#fftw3">FFTW3</a></li>
-        
-            <li><a class="toctree-l4" href="#lorene">LORENE</a></li>
-        
-            <li><a class="toctree-l4" href="#zlib">zlib</a></li>
-        
-            <li><a class="toctree-l4" href="#opencl">OpenCL</a></li>
-        
-            <li><a class="toctree-l4" href="#openblas">OpenBLAS</a></li>
-        
-            <li><a class="toctree-l4" href="#pciutils">pciutils</a></li>
-        
-            <li><a class="toctree-l4" href="#gsl">GSL</a></li>
-        
-            <li><a class="toctree-l4" href="#pthreads">pthreads</a></li>
-        
-            <li><a class="toctree-l4" href="#petsc">PETSc</a></li>
-        
-            <li><a class="toctree-l4" href="#openssl">OpenSSL</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#cactusnumerical">CactusNumerical</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#periodic">Periodic</a></li>
-        
-            <li><a class="toctree-l4" href="#slab">Slab</a></li>
-        
-            <li><a class="toctree-l4" href="#rotatingsymmetry180">RotatingSymmetry180</a></li>
-        
-            <li><a class="toctree-l4" href="#rotatingsymmetry90">RotatingSymmetry90</a></li>
-        
-            <li><a class="toctree-l4" href="#interptoarray">InterpToArray</a></li>
-        
-            <li><a class="toctree-l4" href="#testlocalreduce">TestLocalReduce</a></li>
-        
-            <li><a class="toctree-l4" href="#testlocalinterp2">TestLocalInterp2</a></li>
-        
-            <li><a class="toctree-l4" href="#noise">Noise</a></li>
-        
-            <li><a class="toctree-l4" href="#localinterp">LocalInterp</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#history">History</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#tensortypes">TensorTypes</a></li>
-        
-            <li><a class="toctree-l4" href="#dissipation">Dissipation</a></li>
-        
-            <li><a class="toctree-l4" href="#localreduce">LocalReduce</a></li>
-        
-            <li><a class="toctree-l4" href="#summationbyparts">SummationByParts</a></li>
-        
-            <li><a class="toctree-l4" href="#sphericalsurface">SphericalSurface</a></li>
-        
-            <li><a class="toctree-l4" href="#localinterp2">LocalInterp2</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#history_1">History</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#cartoon2d">Cartoon2D</a></li>
-        
-            <li><a class="toctree-l4" href="#slabtest">SlabTest</a></li>
-        
-            <li><a class="toctree-l4" href="#mol">MoL</a></li>
-        
-            <li><a class="toctree-l4" href="#spacemask">SpaceMask</a></li>
-        
-            <li><a class="toctree-l4" href="#norms">Norms</a></li>
-        
-            <li><a class="toctree-l4" href="#reflectionsymmetry">ReflectionSymmetry</a></li>
-        
-            <li><a class="toctree-l4" href="#einsteinevolve">EinsteinEvolve</a></li>
-        
-            <li><a class="toctree-l4" href="#cactuspugh">CactusPUGH</a></li>
-        
-            <li><a class="toctree-l4" href="#numerical">Numerical</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#purpose-of-the-thorn">Purpose of the thorn</a></li>
-    
-
-    <li class="toctree-l3"><a href="#documentation">Documentation</a></li>
-    
-
-    <li class="toctree-l3"><a href="#history_2">History</a></li>
-    
-
-    <li class="toctree-l3"><a href="#copyright-licensing">Copyright &amp; Licensing</a></li>
-    
-
-    <li class="toctree-l3"><a href="#other-interpolation-thorns">Other Interpolation Thorns</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#cactustest">CactusTest</a></li>
-        
-            <li><a class="toctree-l4" href="#cactusdoc">CactusDoc</a></li>
-        
-            <li><a class="toctree-l4" href="#einsteineos">EinsteinEOS</a></li>
-        
-            <li><a class="toctree-l4" href="#einsteinutils">EinsteinUtils</a></li>
-        
-            <li><a class="toctree-l4" href="#cactuselliptic">CactusElliptic</a></li>
-        
-            <li><a class="toctree-l4" href="#carpet">Carpet</a></li>
-        
-            <li><a class="toctree-l4" href="#einsteininitialdata">EinsteinInitialData</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#purpose-of-the-thorn_1">Purpose of the thorn</a></li>
-    
-
-    <li class="toctree-l3"><a href="#compilation">Compilation</a></li>
-    
-
-    <li class="toctree-l3"><a href="#copyright">Copyright</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#hydro_initexcision">Hydro_InitExcision</a></li>
-        
-            <li><a class="toctree-l4" href="#meudon_bin_bh">Meudon_Bin_BH</a></li>
-        
-            <li><a class="toctree-l4" href="#idbrilldata">IDBrillData</a></li>
-        
-            <li><a class="toctree-l4" href="#ctthorns">CTThorns</a></li>
-        
-            <li><a class="toctree-l4" href="#cactusconnect">CactusConnect</a></li>
-        
-            <li><a class="toctree-l4" href="#usage">Usage:</a></li>
-        
-            <li><a class="toctree-l4" href="#interface">Interface:</a></li>
-        
-            <li><a class="toctree-l4" href="#writing-to-the-browser">Writing to the browser:</a></li>
-        
-            <li><a class="toctree-l4" href="#examples">Examples:</a></li>
-        
-            <li><a class="toctree-l4" href="#structure-of-the-thorn">Structure of the thorn:</a></li>
-        
-            <li><a class="toctree-l4" href="#web-serving">Web serving:</a></li>
-        
-            <li><a class="toctree-l4" href="#content-provision">Content Provision:</a></li>
-        
-            <li><a class="toctree-l4" href="#cactuswave">CactusWave</a></li>
-        
-            <li><a class="toctree-l4" href="#einsteinexact">EinsteinExact</a></li>
-        
-            <li><a class="toctree-l4" href="#mclachlan">McLachlan</a></li>
-        
-            <li><a class="toctree-l4" href="#pittnullcode">PITTNullCode</a></li>
-        
-            <li><a class="toctree-l4" href="#cactuspughio">CactusPUGHIO</a></li>
-        
-            <li><a class="toctree-l4" href="#cactusutils">CactusUtils</a></li>
-        
-            <li><a class="toctree-l4" href="#purpose-of-this-thorn">Purpose of this thorn</a></li>
-        
-            <li><a class="toctree-l4" href="#documentation_1">Documentation</a></li>
-        
-            <li><a class="toctree-l4" href="#copyright_1">Copyright</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#copyright_2">Copyright</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#vectors">Vectors</a></li>
-        
-            <li><a class="toctree-l4" href="#nanchecker">NaNChecker</a></li>
-        
-            <li><a class="toctree-l4" href="#watchdog">WatchDog</a></li>
-        
-            <li><a class="toctree-l4" href="#accelerator">Accelerator</a></li>
-        
-            <li><a class="toctree-l4" href="#timerreport">TimerReport</a></li>
-        
-            <li><a class="toctree-l4" href="#terminationtrigger">TerminationTrigger</a></li>
-        
-            <li><a class="toctree-l4" href="#memspeed">MemSpeed</a></li>
-        
-            <li><a class="toctree-l4" href="#einsteinanalysis">EinsteinAnalysis</a></li>
-        
-        </ul>
-    
-
-    <li class="toctree-l3"><a href="#purpose-of-this-thorn_1">Purpose of This Thorn</a></li>
-    
-
-    <li class="toctree-l3"><a href="#documentation_2">Documentation</a></li>
-    
-
-    <li class="toctree-l3"><a href="#publications">Publications</a></li>
-    
-
-    <li class="toctree-l3"><a href="#copyright_3">Copyright</a></li>
-    
-
-    <li class="toctree-l3"><a href="#other-software-used-already-contained-within-ahfinderdirect">Other Software Used (Already Contained within AHFinderDirect)</a></li>
-    
-
-    <li class="toctree-l3"><a href="#other-software-required">Other Software Required</a></li>
-    
-
-    <li class="toctree-l3"><a href="#code-notes">Code Notes</a></li>
-    
-
-    <li class="toctree-l3"><a href="#compiler-notes">Compiler Notes</a></li>
-    
-
-    <li class="toctree-l3"><a href="#x86">x86</a></li>
-    
-
-    <li class="toctree-l3"><a href="#ia64-aka-itanium">ia64, a.k.a. Itanium</a></li>
-    
-
-    <li class="toctree-l3"><a href="#alpha">Alpha</a></li>
-    
-
-    <li class="toctree-l3"><a href="#sgi">SGI</a></li>
-    
-
-    <li class="toctree-l3"><a href="#ibm-power4-aix">IBM Power4 (AIX)</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#calck">CalcK</a></li>
-        
-            <li><a class="toctree-l4" href="#puncturetracker">PunctureTracker</a></li>
-        
-            <li><a class="toctree-l4" href="#ehfinder">EHFinder</a></li>
-        
-            <li><a class="toctree-l4" href="#ahfinder">AHFinder</a></li>
-        
-            <li><a class="toctree-l4" href="#brief-description">BRIEF DESCRIPTION</a></li>
-        
-            <li><a class="toctree-l4" href="#output">OUTPUT</a></li>
-        
-            <li><a class="toctree-l4" href="#parameters">PARAMETERS</a></li>
-        
-            <li><a class="toctree-l4" href="#copyright_4">Copyright</a></li>
-        
-            <li><a class="toctree-l4" href="#purpose-of-this-thorn_2">Purpose of This Thorn</a></li>
-        
-            <li><a class="toctree-l4" href="#required-thorns">Required thorns</a></li>
-        
-            <li><a class="toctree-l4" href="#related-thorns">Related thorns</a></li>
-        
-            <li><a class="toctree-l4" href="#publications_1">Publications</a></li>
-        
-            <li><a class="toctree-l4" href="#copyright_5">Copyright</a></li>
-        
-            <li><a class="toctree-l4" href="#cactusexamples">CactusExamples</a></li>
-        
-            <li><a class="toctree-l4" href="#einsteinbase">EinsteinBase</a></li>
-        
-            <li><a class="toctree-l4" href="#wvuthorns">WVUThorns</a></li>
-        
-            <li><a class="toctree-l4" href="#llama">Llama</a></li>
-        
-            <li><a class="toctree-l4" href="#cactusbase">CactusBase</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../parameter/">Parameter</a>
                 </li>
                 <li class="">
                     
@@ -553,12 +194,8 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>Einstein Toolkit &raquo;</li>
-        
-      
     
-    <li>parameter file</li>
+    <li>Parameter file</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/parameter file.md"
@@ -667,232 +304,6 @@ Cactus::&lt;Flesh parameters&gt; = &lt;Value&gt;
 </tr>
 </tbody>
 </table>
-<h2 id="grid-structure">Grid structure</h2>
-<h3 id="coordbase">CoordBase</h3>
-<p>The <code class="codehilite">CoordBase</code> thorn provides a method of registering coordinate systems and their properties.</p>
-<h4 id="specifying-coordinate-systems-in-the-interfaceccl">Specifying coordinate systems in the interface.ccl</h4>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CCTK_REAL SphericalVectorField TYPE=ARRAY DIM=2 TAGS=’COORDSYSTEM=&quot;sphere2d&quot; TENSORTYPE=&quot;vector&quot;’  
-{  
-  field_theta, field_phi  
-}
-</pre></div>
-</td></tr></table>
-
-<h4 id="specifying-the-extent-of-the-physical-domain">Specifying the extent of the physical domain</h4>
-<p>CoordBase provides a way for specifying the extent of the simulation domain that is independent of the actual coordinate and symmetry thorns. This is necessary because the size of the physical domain is not necessarily the same as the size of the computational grid, which is usually enlarged by symmetry zones and/or boundary zones. The physical domain is characterised by the location of its lower and upper boundary and by its grid spacing. </p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CoordBase::domainsize = &lt;Value&gt;
-</pre></div>
-</td></tr></table>
-
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Describe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>minmax</td>
-<td>by the location of its lower and upper boundary.</td>
-</tr>
-<tr>
-<td>extent</td>
-<td>by its extent, i.e. its width.</td>
-</tr>
-<tr>
-<td>spacing</td>
-<td>by grid spacing and the number of grid cells.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<p>The domain specification uses the number of grid cells instead of the number of grid points because the latter can easily lead to one-off errors.</p>
-<p>The domain size in each dimension is specificied in equivalent ways. For example, the x-dimension is specified by a set of some of the following parameters:</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Describe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>zero_origin_x</td>
-<td>When the domain size is specified by extent or by spacing, then the origin (lower boundary) can either be located at <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>, which leads to the domain <span><span class="MathJax_Preview">x \in[0, L]</span><script type="math/tex">x \in[0, L]</script></span> with the extent L, or the domain can be symmetric with respect to <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>, which leads to <span><span class="MathJax_Preview">x \in[-L / 2, L / 2]</span><script type="math/tex">x \in[-L / 2, L / 2]</script></span>.</td>
-</tr>
-<tr>
-<td>xmin and xmax</td>
-<td>When the domain is specified by the location of its lower and upper boundary, then these specify the locations.</td>
-</tr>
-<tr>
-<td>xextent</td>
-<td>When the domain is specified by its extent, then this specifies the extent.</td>
-</tr>
-<tr>
-<td>dx (real) and ncells_x (int)</td>
-<td>When the domain is specified by grid spacing and the number of grid cells, then these specify the grid spacing and the number of grid cells.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="specifying-the-location-of-the-boundary-points">Specifying the location of the boundary points</h4>
-<p><code class="codehilite">CoordBase</code> also provides a way for specifying the discretisation of the boundary. The specification does not depend on the resolution, so that it need not be adapted when the resolution is changed.</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Describe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>boundary_size_x_lower</td>
-<td>the computational grid can have more than one boundary points.</td>
-</tr>
-<tr>
-<td>boundary_internal_x_lower</td>
-<td>speciﬁes whether the boundary points extend inwards at the lower x face.</td>
-</tr>
-<tr>
-<td>boundary_staggered_x_lower</td>
-<td>the boundary points should either be staggered about the physical boundary, or the last boundary point should be located exactly on the physical boundary.</td>
-</tr>
-<tr>
-<td>boundary_shiftout_x_lower</td>
-<td>shift the boundary points outwards (or inwards with negative values) by multiples of the grid spacing.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="cartgrid3d"><a href="http://cactuscode.org/documentation/thorns/CactusBase-CartGrid3D.pdf">CartGrid3D</a></h3>
-<p><code class="codehilite">CartGrid3D</code> allows you to set up coordinates on a 3D Cartesian grid in a flexible manner.</p>
-<h4 id="specifying-the-grid-size-range-and-spacing">Specifying the Grid Size, Range, and Spacing</h4>
-<p><code class="codehilite">CartGrid3D</code> provides several different methods for setting up the integer grid size, floating-point grid spacing, and floating-point grid range. You specify which method to use, with the <code class="codehilite">grid::type</code> parameter.</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Describe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>byrange</td>
-<td>You specify the x, y, and z grid ranges, either with separate <code class="codehilite">grid::xmin</code>, <code class="codehilite">grid::xmax</code>, <code class="codehilite">grid::ymin</code>, <code class="codehilite">grid::ymax</code>, <code class="codehilite">grid::zmin</code>, and <code class="codehilite">grid::zmax</code> parameters, or with the <code class="codehilite">grid::xyzmin</code> and <code class="codehilite">grid::xyzmax</code> parameters.</td>
-</tr>
-<tr>
-<td>box</td>
-<td>This is a special case of <code class="codehilite">grid::type = &quot;byrange&quot;</code> with the grid ranges hard-wired to <code class="codehilite">grid::xyzmin = -0.5</code> and <code class="codehilite">grid::xyzmax = +0.5</code>.</td>
-</tr>
-<tr>
-<td>byspacing</td>
-<td>You specify the x, y, and z grid spacings, either with separate <code class="codehilite">grid::dx</code>, <code class="codehilite">grid::dy</code>, and <code class="codehilite">grid::dz</code> parameters, or with the <code class="codehilite">grid::dxyz</code> parameter.</td>
-</tr>
-</tbody>
-</table>
-<p><code class="codehilite">grid::avoid_originx</code> This is a Boolean parameter; if set to true then the grid will be “half-centered” across <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>, ie there will be grid points at <span><span class="MathJax_Preview">\ldots, x=-\frac{3}{2} \Delta x, x=-\frac{1}{2} \Delta x, x=+\frac{1}{2} \Delta x, x=+\frac{3}{2} \Delta x, \ldots</span><script type="math/tex">\ldots, x=-\frac{3}{2} \Delta x, x=-\frac{1}{2} \Delta x, x=+\frac{1}{2} \Delta x, x=+\frac{3}{2} \Delta x, \ldots</script></span>, but not at <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span>.</p>
-<h4 id="specifying-the-grid-symmetry">Specifying the Grid Symmetry</h4>
-<p><code class="codehilite">CartGrid3D</code> allows you to specify the grid symmetry with the <code class="codehilite">grid::domain</code> parameter.</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Describe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>full</td>
-<td>There are no symmetries.</td>
-</tr>
-<tr>
-<td>bitant</td>
-<td>The grid includes only the <span><span class="MathJax_Preview">z \geq 0</span><script type="math/tex">z \geq 0</script></span> half-space; there is a reflection symmetry across the $z = 0 $plane.</td>
-</tr>
-<tr>
-<td>quadrant</td>
-<td>The grid includes only the <span><span class="MathJax_Preview">\{x \geq 0, y \geq 0\}</span><script type="math/tex">\{x \geq 0, y \geq 0\}</script></span> quadrant. ; there is a reflection symmetry across both the <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span> plane and the <span><span class="MathJax_Preview">y = 0</span><script type="math/tex">y = 0</script></span> plane.</td>
-</tr>
-<tr>
-<td>octant</td>
-<td>The grid includes only the <span><span class="MathJax_Preview">\{x \geq 0, y \geq 0, z \geq 0\}</span><script type="math/tex">\{x \geq 0, y \geq 0, z \geq 0\}</script></span> octant; there is a reflection symmetry across each of the <span><span class="MathJax_Preview">x = 0</span><script type="math/tex">x = 0</script></span> plane, the <span><span class="MathJax_Preview">y = 0</span><script type="math/tex">y = 0</script></span> plane and the <span><span class="MathJax_Preview">z = 0</span><script type="math/tex">z = 0</script></span> plane.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ct_multilevel">CT_MultiLevel</h3>
-<p><code class="codehilite">CT_MultiLevel</code> is a Cactus thorn that implements a multigrid solver for elliptic partial differential equations (PDEs).</p>
-<div>
-<div class="MathJax_Preview">
-\begin{aligned} c_{x x} \partial_{x x} \psi+c_{x y} \partial_{x y} \psi+c_{x z} \partial_{x z} \psi+c_{y y} \partial_{y y} \psi+c_{y z} \partial_{y z} \psi+c_{z z} \partial_{z z} \psi &amp;+\\ c_{x} \partial_{x} \psi+c_{y} \partial_{y} \psi+c_{z} \partial_{z} \psi+c_{0} \psi^{n_{0}}+c_{1} \psi^{n_{1}}+c_{2} \psi^{n_{2}}+c_{3} \psi^{n_{3}}+c_{4} \psi^{n_{4}} &amp;=0 \end{aligned}
-</div>
-<script type="math/tex; mode=display">
-\begin{aligned} c_{x x} \partial_{x x} \psi+c_{x y} \partial_{x y} \psi+c_{x z} \partial_{x z} \psi+c_{y y} \partial_{y y} \psi+c_{y z} \partial_{y z} \psi+c_{z z} \partial_{z z} \psi &+\\ c_{x} \partial_{x} \psi+c_{y} \partial_{y} \psi+c_{z} \partial_{z} \psi+c_{0} \psi^{n_{0}}+c_{1} \psi^{n_{1}}+c_{2} \psi^{n_{2}}+c_{3} \psi^{n_{3}}+c_{4} \psi^{n_{4}} &=0 \end{aligned}
-</script>
-</div>
-<h3 id="ioascii"><a href="http://cactuscode.org/documentation/thorns/CactusBase-IOASCII.pdf">IOASCII</a></h3>
-<p>Thorn <code class="codehilite">IOASCII</code> provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.</p>
-<h2 id="boundary-conditions">Boundary Conditions</h2>
-<h3 id="boundary"><a href="http://cactuscode.org/documentation/thorns/CactusBase-Boundary.pdf">Boundary</a></h3>
-<p>This thorn also provides some standard outer boundary conditions.</p>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>defaults</th>
-<th>Describe</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>register_scalar</td>
-<td>yes</td>
-<td>the value of the given field at the boundary is set to a given scalar value.</td>
-</tr>
-<tr>
-<td>register_flat</td>
-<td>yes</td>
-<td>the value of the given field at the boundary is copied from the value one grid point in, in any direction.</td>
-</tr>
-<tr>
-<td>register_radiation</td>
-<td>yes</td>
-<td>Grid functions are given for the current time level as well as grid functions from a past timelevel which are needed for constructing the boundary condition.</td>
-</tr>
-<tr>
-<td>register_copy</td>
-<td>yes</td>
-<td>Copy the boundary values from a different grid function, for example the previous timelevel.</td>
-</tr>
-<tr>
-<td>register_robin</td>
-<td>yes</td>
-<td></td>
-</tr>
-<tr>
-<td>register_static</td>
-<td>yes</td>
-<td>the boundary values do not evolve in time, by copying their values from previous timelevels.</td>
-</tr>
-<tr>
-<td>register_none</td>
-<td>yes</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="initial-data">Initial data</h2>
-<p>The initial data are computed using the Compact Object CALculator (COCAL) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></p>
-<p><img alt="-w534" src="../media/15512756872829.jpg" /></p>
-<h2 id="diagnostics">Diagnostics</h2>
-<p>The BH apparent horizon is located and monitored through the AHFinderDirect thorn. We estimate the BH mass <span><span class="MathJax_Preview">M_{\mathrm{BH}}</span><script type="math/tex">M_{\mathrm{BH}}</script></span> and the BH dimensionless spin parameter <span><span class="MathJax_Preview">a / M_{\mathrm{BH}}</span><script type="math/tex">a / M_{\mathrm{BH}}</script></span> using the isolated horizon formalism.</p>
-<h2 id="extract-gravitational-wave">Extract Gravitational Wave</h2>
-<p>To measure the flux of energy and angular momentum carried away by GWs, we use a modiﬁed version of the Psikadelia thorn.</p>
-<p><a href="https://arxiv.org/pdf/1502.05674.pdf">https://arxiv.org/pdf/1502.05674.pdf</a>
-<a href="https://arxiv.org/pdf/1809.08237.pdf">https://arxiv.org/pdf/1809.08237.pdf</a>
-<a href="https://arxiv.org/pdf/gr-qc/0306056.pdf">https://arxiv.org/pdf/gr-qc/0306056.pdf</a>
-<a href="https://arxiv.org/pdf/gr-qc/0206008.pdf">https://arxiv.org/pdf/gr-qc/0206008.pdf</a></p>
 <h2 id="krancnumericaltools">KrancNumericalTools</h2>
 <h3 id="genericfd">GenericFD</h3>
 <table>
@@ -909,13 +320,13 @@ Cactus::&lt;Flesh parameters&gt; = &lt;Value&gt;
 <td>assume_stress_energy_state</td>
 <td>-1</td>
 <td>Assume stress_energy_state has a particular value</td>
-<td>-1  :: "do not assume anything"<em>OR</em>  0:1 :: "assume off or on"<em>OR</em></td>
+<td>-1  :: "do not assume anything"<em>OR</em>  0:1 :: "assume off or on"</td>
 </tr>
 <tr>
 <td>assume_use_jacobian</td>
 <td>-1</td>
 <td>Assume use_jacobian has a particular value</td>
-<td>-1  :: "do not assume anything"<em>OR</em>  0:1 :: "assume off or on"<em>OR</em></td>
+<td>-1  :: "do not assume anything"<em>OR</em>  0:1 :: "assume off or on"</td>
 </tr>
 <tr>
 <td>jacobian_group</td>
@@ -951,18 +362,6 @@ Cactus::&lt;Flesh parameters&gt; = &lt;Value&gt;
 </table>
 <h2 id="cactusio">CactusIO</h2>
 <h3 id="iojpeg">IOJpeg</h3>
-<p>Cactus Code Thorn IOJpeg
-Author(s)    : John Shalf
-               Gabrielle Allen
-               Tom Goodale
-               Gerd Lanfermann
-               Thomas Radke
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>This thorn does output of 2D slices from Cactus grid functions and arrays
 in jpeg image format.</p>
 <p>It registers the I/O method "IOJpeg" with the flesh.</p>
@@ -1178,14 +577,6 @@ in jpeg image format.</p>
 </table>
 <h2 id="externallibraries">ExternalLibraries</h2>
 <h3 id="hwloc">hwloc</h3>
-<p>Cactus Code Thorn hwloc
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : New BSD Licence</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the hwloc library; see
 <a href="http://www.open-mpi.org/projects/hwloc/">http://www.open-mpi.org/projects/hwloc/</a>.</p>
 <p>From the hwloc web site:</p>
@@ -1197,34 +588,7 @@ It also gathers various system attributes such as cache and memory
 information. It primarily aims at helping applications with gathering
 information about modern computing hardware so as to exploit it
 accordingly and efficiently.</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Defaults</th>
-<th>Describe</th>
-<th>Option</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h3 id="lorene2">LORENE2</h3>
-<p>Cactus Code Thorn LORENE
-Author(s)    : Cactus interface: Erik Schnetter, Roberto De Pietri, Frank Löffler
-               Lorene: see Lorene library
-Maintainer(s): Cactus team
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the LORENE library; see <a href="http://www.lorene.obspm.fr/">http://www.lorene.obspm.fr/</a>.</p>
 <p>From the web site:</p>
 <p>LORENE: Langage Objet pour la RElativité NumériquE</p>
@@ -1232,33 +596,7 @@ Licence      : GPL</p>
 numerical relativity, and more generally in computational
 astrophysics.  It provides tools to solve partial differential
 equations by means of multi-domain spectral methods.</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Defaults</th>
-<th>Describe</th>
-<th>Option</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h3 id="blas">BLAS</h3>
-<p>Cactus Code Thorn BLAS
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the Basic Linear Algebra Subroutines (BLAS); see
 <a href="http://netlib.org/blas/">http://netlib.org/blas/</a>.</p>
 <p>From the web site:</p>
@@ -1270,34 +608,7 @@ Level 3 BLAS perform matrix-matrix operations.  Because the BLAS are
 efficient, portable, and widely available, they are commonly used in
 the development of high quality linear algebra software, LAPACK for
 example.</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Defaults</th>
-<th>Describe</th>
-<th>Option</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h3 id="libjpeg">libjpeg</h3>
-<p>Cactus Code Thorn libjpeg
-Author(s)    : Frank Löffler
-               Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the libjpeg library; see <a href="http://www.ijg.org/">http://www.ijg.org/</a></p>
 <p>From the web site:</p>
 <p>IJG is an informal group that writes and distributes a widely used
@@ -1305,33 +616,7 @@ free library for JPEG image compression. The first version was
 released on 7-Oct-1991.</p>
 <p>The current version is release 8b of 16-May-2010. This is a stable and
 solid foundation for many application's JPEG support.</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Defaults</th>
-<th>Describe</th>
-<th>Option</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h3 id="mpi">MPI</h3>
-<p>Cactus Code Thorn MPI
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : New BSD license</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the OpenMPI library; see <a href="http://www.open-mpi.org/">http://www.open-mpi.org/</a>.</p>
 <p>From the OpenMPI web site:</p>
 <p>Open MPI: Open Source High Performance Computing</p>
@@ -1343,33 +628,7 @@ expertise, technologies, and resources from all across the High
 Performance Computing community in order to build the best MPI library
 available. Open MPI offers advantages for system and software vendors,
 application developers and computer science researchers.</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Defaults</th>
-<th>Describe</th>
-<th>Option</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h3 id="papi">PAPI</h3>
-<p>Cactus Code Thorn PAPI
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : BSD</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the Performance Application Programming Interface; see
 <a href="http://icl.cs.utk.edu/papi/index.html">http://icl.cs.utk.edu/papi/index.html</a>.</p>
 <p>From the web site:</p>
@@ -1460,14 +719,6 @@ hardware and software stack.</p>
 </tbody>
 </table>
 <h3 id="hdf5">HDF5</h3>
-<p>Cactus Code Thorn HDF5
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the HDF5 library; see <a href="http://www.hdfgroup.org/HDF5/">http://www.hdfgroup.org/HDF5/</a>.</p>
 <p>Provide some generic utility programs to manipulate HDF5 files. These
 are independent of any specific Cactus file formats.</p>
@@ -1498,14 +749,6 @@ and analyzing data in the HDF5 format.</p>
 </tbody>
 </table>
 <h3 id="lapack">LAPACK</h3>
-<p>Cactus Code Thorn LAPACK
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the Linear Algebra Package (LAPACK); see
 <a href="http://netlib.org/lapack/">http://netlib.org/lapack/</a>.</p>
 <p>From the web site:</p>
@@ -1538,14 +781,6 @@ precision.</p>
 </tbody>
 </table>
 <h3 id="fftw3">FFTW3</h3>
-<p>Cactus Code Thorn FFTW3
-Author(s)    : Yosef Zlochower <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#121;&#111;&#115;&#101;&#102;&#64;&#97;&#115;&#116;&#114;&#111;&#46;&#114;&#105;&#116;&#46;&#101;&#100;&#117;">&#121;&#111;&#115;&#101;&#102;&#64;&#97;&#115;&#116;&#114;&#111;&#46;&#114;&#105;&#116;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): 
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the FFTW Library; see <a href="http://www.fftw.org/">http://www.fftw.org/</a>.</p>
 <p>From the web site: FFTW is a C subroutine library for computing the
 discrete Fourier transform (DFT) in one or more dimensions, of
@@ -1581,14 +816,6 @@ Johnson</p>
 </tbody>
 </table>
 <h3 id="lorene">LORENE</h3>
-<p>Cactus Code Thorn LORENE
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the LORENE library; see <a href="http://www.lorene.obspm.fr/">http://www.lorene.obspm.fr/</a>.</p>
 <p>From the web site:</p>
 <p>LORENE: Langage Objet pour la RElativité NumériquE</p>
@@ -1615,14 +842,6 @@ equations by means of multi-domain spectral methods.</p>
 </tbody>
 </table>
 <h3 id="zlib">zlib</h3>
-<p>Cactus Code Thorn zlib
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the zlib library; see <a href="http://www.zlib.net/">http://www.zlib.net/</a></p>
 <p>From the web site:</p>
 <p>A Massively Spiffy Yet Delicately Unobtrusive Compression Library
@@ -1657,14 +876,6 @@ available on another page.</p>
 </tbody>
 </table>
 <h3 id="opencl">OpenCL</h3>
-<p>Cactus Code Thorn OpenCL
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL, public domain</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Configure with OpenCL; see <a href="http://www.khronos.org/opencl/">http://www.khronos.org/opencl/</a>.</p>
 <p>From the web site:</p>
 <p>OpenCL - The open standard for parallel programming of heterogeneous
@@ -1742,14 +953,6 @@ AMD's implementation.</p>
 </tbody>
 </table>
 <h3 id="openblas">OpenBLAS</h3>
-<p>Cactus Code Thorn OpenBLAS
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute OpenBLAS; see <a href="https://github.com/xianyi/OpenBLAS/wiki">https://github.com/xianyi/OpenBLAS/wiki</a>.</p>
 <p>From the web site:</p>
 <p>OpenBLAS is an optimized BLAS library based on GotoBLAS2 1.13 BSD
@@ -1773,14 +976,6 @@ version.</p>
 </tbody>
 </table>
 <h3 id="pciutils">pciutils</h3>
-<p>Cactus Code Thorn pciutils
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the PCI Utilities; see <a href="http://mj.ucw.cz/sw/pciutils/">http://mj.ucw.cz/sw/pciutils/</a>.</p>
 <p>From the pciutils web site:</p>
 <p>The PCI Utilities are a collection of programs for inspecting and
@@ -1806,14 +1001,6 @@ space on a variety of operating systems.</p>
 </tbody>
 </table>
 <h3 id="gsl">GSL</h3>
-<p>Cactus Code Thorn GSL
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the GNU Scientific Library; see
 <a href="http://www.gnu.org/software/gsl/">http://www.gnu.org/software/gsl/</a>.</p>
 <p>From the web site:</p>
@@ -1842,14 +1029,6 @@ There are over 1000 functions in total with an extensive test suite.</p>
 </tbody>
 </table>
 <h3 id="pthreads">pthreads</h3>
-<p>Cactus Code Thorn PTHREADS
-Author(s)    : Roland Haas
-Maintainer(s): Cactus team
-Licence      : MIT</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Provide access to the POSIX threads libraries.</p>
 <p>This thorn does not actually provide the library it only offers a convenient
 way to include it in a Cactus configuration.</p>
@@ -1872,14 +1051,6 @@ way to include it in a Cactus configuration.</p>
 </tbody>
 </table>
 <h3 id="petsc">PETSc</h3>
-<p>Cactus Code Thorn PETSc
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : ?</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the PETSc library; see <a href="http://www.mcs.anl.gov/petsc">http://www.mcs.anl.gov/petsc</a>.</p>
 <p>From the web site:</p>
 <p>Portable, Extensible Toolkit for Scientific Computation</p>
@@ -1887,64 +1058,7 @@ Licence      : ?</p>
 structures and routines for the scalable (parallel) solution of
 scientific applications modeled by partial differential equations. It
 employs the MPI standard for parallelism.</p>
-<p>When referencing PETSc in a publication, please cite the following:</p>
-<p>@Misc{petsc-web-page,
-  Author =       "Satish Balay and Kris Buschelman and William D.
-                  Gropp and Dinesh Kaushik and Matthew G. Knepley and
-                  Lois Curfman McInnes and Barry F. Smith and Hong
-                  Zhang",
-  Title =        "{PETSc} {W}eb page",
-  Note =         "<a href="http://www.mcs.anl.gov/petsc">http://www.mcs.anl.gov/petsc</a>",
-  Year =         2009
-}</p>
-<p>@TechReport{petsc-user-ref,
-  Author =       "Satish Balay and Kris Buschelman and Victor Eijkhout
-                  and William D. Gropp and Dinesh Kaushik and Matthew
-                  G. Knepley and Lois Curfman McInnes and Barry F.
-                  Smith and Hong Zhang",
-  Title =        "{PETS}c Users Manual",
-  Number =       "ANL-95/11 - Revision 3.0.0",
-  Institution =  "Argonne National Laboratory",
-  Year =         2008
-}</p>
-<p>@InProceedings{petsc-efficient,
-  Author =       "Satish Balay and William D. Gropp and Lois Curfman
-                  McInnes and Barry F. Smith",
-  Title =        "Efficient Management of Parallelism in Object
-                  Oriented Numerical Software Libraries",
-  Booktitle =    "Modern Software Tools in Scientific Computing",
-  Editor =       "E. Arge and A. M. Bruaset and H. P. Langtangen",
-  Pages =        "163--202",
-  Publisher =    "Birkh{\"{a}}user Press",
-  Year =         1997
-}</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Defaults</th>
-<th>Describe</th>
-<th>Option</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 <h3 id="openssl">OpenSSL</h3>
-<p>Cactus Code Thorn OpenSSL
-Author(s)    : Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : Apache-style</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Distribute the OpenSSL library; see <a href="http://www.openssl.org/">http://www.openssl.org/</a>.</p>
 <p>From the web site:</p>
 <p>The OpenSSL Project is a collaborative effort to develop a robust,
@@ -1979,11 +1093,6 @@ simple license conditions.</p>
 </table>
 <h2 id="cactusnumerical">CactusNumerical</h2>
 <h3 id="periodic">Periodic</h3>
-<p>CVS info   : <span><span class="MathJax_Preview">Header</span><script type="math/tex">Header</script></span></p>
-<p>Cactus Code Thorn Periodic
-Thorn Author(s)     : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;</a>
-Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;</a></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>Periodic boundary conditions that do not depend on PUGH.</p>
 <table>
@@ -2047,10 +1156,6 @@ Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111
 </tbody>
 </table>
 <h3 id="slab">Slab</h3>
-<p>Cactus Code Thorn Slab
-Thorn Author(s)     : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>This thorn provides routines that use MPI to transfer slabs of arrays
 between processors.</p>
@@ -2081,14 +1186,6 @@ testing this thorn.</p>
 </tbody>
 </table>
 <h3 id="rotatingsymmetry180">RotatingSymmetry180</h3>
-<p>Cactus Code Thorn RotatingSymmetry180
-Author(s)    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Provide a 180 degree rotational symmetry boundary condition.  This is
 the kind of symmetry that exists e.g. in a binary black hole evolution
 when the two black holes are identical.  The same setup also admits an
@@ -2161,14 +1258,6 @@ conditions in the z direction, e.g. bitant or periodicity.</p>
 </tbody>
 </table>
 <h3 id="rotatingsymmetry90">RotatingSymmetry90</h3>
-<p>Cactus Code Thorn RotatingSymmetry90
-Author(s)    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Provide a 90 degree rotational symmetry boundary condition.  This is
 the kind of symmetry that exists e.g. in a single black hole evolution
 when the black hole has spin.  The same setup also admits an
@@ -2217,10 +1306,6 @@ conditions in the z direction, e.g. bitant or periodicity.</p>
 </tbody>
 </table>
 <h3 id="interptoarray">InterpToArray</h3>
-<p>Cactus Code Thorn InterpToArray
-Thorn Author(s)     : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>Interpolate grid functions to grid arrays on a regular grid of
 locations, so that these can e.g. be output more easily.</p>
@@ -2729,14 +1814,6 @@ locations, so that these can e.g. be output more easily.</p>
 </tbody>
 </table>
 <h3 id="testlocalreduce">TestLocalReduce</h3>
-<p>Cactus Code Thorn TestLocalReduce
-Author(s)    : unknown
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>not documented</p>
 <table>
 <thead>
@@ -2769,14 +1846,6 @@ Licence      : LGPL</p>
 </tbody>
 </table>
 <h3 id="testlocalinterp2">TestLocalInterp2</h3>
-<p>Cactus Code Thorn LocalInterpTest
-Author(s)    : David radice <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#114;&#97;&#100;&#105;&#99;&#101;&#64;&#99;&#97;&#108;&#116;&#101;&#99;&#104;&#46;&#101;&#100;&#117;">&#100;&#114;&#97;&#100;&#105;&#99;&#101;&#64;&#99;&#97;&#108;&#116;&#101;&#99;&#104;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): David radice <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#114;&#97;&#100;&#105;&#99;&#101;&#64;&#99;&#97;&#108;&#116;&#101;&#99;&#104;&#46;&#101;&#100;&#117;">&#100;&#114;&#97;&#100;&#105;&#99;&#101;&#64;&#99;&#97;&#108;&#116;&#101;&#99;&#104;&#46;&#101;&#100;&#117;</a>
-Licence      : GPLv3</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>not documented</p>
 <table>
 <thead>
@@ -2809,10 +1878,6 @@ Licence      : GPLv3</p>
 </tbody>
 </table>
 <h3 id="noise">Noise</h3>
-<p>Cactus Code Thorn Noise
-Authors: Denis Pollney <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#112;&#111;&#108;&#108;&#110;&#101;&#121;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#112;&#111;&#108;&#108;&#110;&#101;&#121;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a>
-CVS info: <span><span class="MathJax_Preview">Header</span><script type="math/tex">Header</script></span></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>This thorn adds random noise to grid variables at initial data and/or
 boundaries, for performing the "robust stability" tests proposed by
@@ -2860,13 +1925,6 @@ Jeff Winicour.</p>
 </tbody>
 </table>
 <h3 id="localinterp">LocalInterp</h3>
-<p>Cactus Code Thorn LocalInterp
-Author(s)    : Thomas Radke
-               Jonathan Thornburg
-               Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
 <ol>
 <li>Purpose</li>
 </ol>
@@ -2874,7 +1932,7 @@ Licence      : LGPL</p>
 arrays.  In general there may be many input arrays (all defined on the
 same uniform Cartesian grid) all being interpolated to the same set
 of interpolation points.</p>
-<h1 id="history">History</h1>
+<p>History</p>
 <p>This interpolator was written by Thomas Radke in early 2001 (drawing
 on older code by Paul Walker), and supports the interpolation operator
   "uniform cartesian"
@@ -2911,11 +1969,6 @@ Jonathan Thornburg's interpolator.  You can/should ignore these.</p>
 </tbody>
 </table>
 <h3 id="tensortypes">TensorTypes</h3>
-<p>Cactus Code Thorn TensorTypes
-Thorn Author(s)     : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a>
-Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a>
-License             : LGPLv2.1 or later</p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>Provide information about various types of tensors.</p>
 <table>
@@ -2937,11 +1990,6 @@ License             : LGPLv2.1 or later</p>
 </tbody>
 </table>
 <h3 id="dissipation">Dissipation</h3>
-<p>CVS info   : <span><span class="MathJax_Preview">Header</span><script type="math/tex">Header</script></span></p>
-<p>Cactus Code Thorn Dissipation
-Thorn Author(s)     : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a>
-Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>Add fourth order Kreiss-Oliger dissipation to the right hand side of
 evolution equations.  This thorn works only for time evolutions that
@@ -3055,16 +2103,6 @@ GARP Publication Series (GARP Publication, 1973).</p>
 </tbody>
 </table>
 <h3 id="localreduce">LocalReduce</h3>
-<p>Cactus Code Thorn LocalReduce
-Author(s)    : Ravi Paruchuri
-               Tom Goodale
-               Yaakoub El Khamra
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Local array reduction implementation, using the new local reduction API. New features added, please refer to the thorn documentation for details and to the TestLocalReduce thorn for examples of usage. </p>
 <table>
 <thead>
@@ -3085,11 +2123,6 @@ Licence      : LGPL</p>
 </tbody>
 </table>
 <h3 id="summationbyparts">SummationByParts</h3>
-<p>Cactus Code Thorn SummationByParts
-Author(s)     : Peter Diener <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#105;&#101;&#110;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#100;&#105;&#101;&#110;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Maintainer(s) : Peter Diener <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#100;&#105;&#101;&#110;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#100;&#105;&#101;&#110;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-License       : LGPLv2.1 or later</p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>Calculate derivates of grid functions using finite difference stencils
 that satisfy summation by parts.</p>
@@ -3232,10 +2265,6 @@ that satisfy summation by parts.</p>
 </tbody>
 </table>
 <h3 id="sphericalsurface">SphericalSurface</h3>
-<p>Cactus Code Thorn SphericalSurface
-Thorn Author(s)     : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>Store spherical surfaces.</p>
 <table>
@@ -3275,14 +2304,6 @@ Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111
 </tbody>
 </table>
 <h3 id="localinterp2">LocalInterp2</h3>
-<p>Cactus Code Thorn LocalInterp
-Author(s)    : David Radice
-               Thomas Radke
-               Jonathan Thornburg
-               Erik Schnetter
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
 <ol>
 <li>Purpose</li>
 </ol>
@@ -3290,7 +2311,7 @@ Licence      : LGPL</p>
 arrays.  In general there may be many input arrays (all defined on the
 same uniform Cartesian grid) all being interpolated to the same set
 of interpolation points.</p>
-<h1 id="history_1">History</h1>
+<p>History</p>
 <p>This interpolator was written by Thomas Radke in early 2001 (drawing
 on older code by Paul Walker), and supports the interpolation operator
   "uniform cartesian"
@@ -3326,14 +2347,6 @@ thorn were rewritten in C++ by David Radice.</p>
 </tbody>
 </table>
 <h3 id="cartoon2d">Cartoon2D</h3>
-<p>Cactus Code Thorn Cartoon2D
-Author(s)    : Sai Iyer
-               Denis Pollney
-               Thomas Radke
-               David Rideout
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
 <ol>
 <li>Purpose</li>
 </ol>
@@ -3427,11 +2440,6 @@ to Steve Brandt.</p>
 </tbody>
 </table>
 <h3 id="slabtest">SlabTest</h3>
-<p>CVS info   : <span><span class="MathJax_Preview">Header</span><script type="math/tex">Header</script></span></p>
-<p>Cactus Code Thorn SlabTest
-Thorn Author(s)     : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;</a>
-Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#117;&#110;&#105;&#45;&#116;&#117;&#101;&#98;&#105;&#110;&#103;&#101;&#110;&#46;&#100;&#101;</a></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>This thorn tests the slab transfer routines of the thorn Slab.</p>
 <table>
@@ -3452,22 +2460,10 @@ Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111
 </tr>
 </tbody>
 </table>
-<h3 id="mol">MoL</h3>
-<p>Cactus Code Thorn MoL
-Author(s)    : Ian Hawke
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
-<p>This thorn provides generic time integrators.
-This allows clean coupling when multiple thorns wish to integrate at the
-same time.
-It also means a physics thorn doesn't have to rewrite its own time
-integrator.
-This version is designed to work with Mesh Refinement codes as well as
-unigrid.</p>
+<h3 id="mol"><a href="http://cactuscode.org/documentation/thorns/CactusBase-MoL.pdf">MoL</a></h3>
+<p>The Method of Lines (MoL) converts a partial differential equation(s) into an ordinary differential equation containing some spatial differential operator.</p>
+<p>If you already have a thorn that uses the method of lines, then there are four main parameters that are relevant to change the integration method. The keyword <code class="codehilite">MoL_ODE_Method</code> chooses between the different methods. The parameter <code class="codehilite">MoL_Intermediate_Steps</code> controls the number of intermediate steps for the ODE solver. The parameter <code class="codehilite">MoL_Num_Scratch_Levels</code> controls the amount of scratch space used. 
+Another parameter is <code class="codehilite">MoL_Memory_Always_On</code> which switches on memory for the scratch space always if true and only during evolution if false.</p>
 <table>
 <thead>
 <tr>
@@ -3482,55 +2478,55 @@ unigrid.</p>
 <td>MoL_Num_Evolved_Vars</td>
 <td>0</td>
 <td>The maximum number of variables to be evolved by MoL (DPRECATED)</td>
-<td>0:*       :: "Anything non negative. Added to by other thorns."<em>OR</em></td>
+<td>0:* :: "Anything non negative. Added to by other thorns."</td>
 </tr>
 <tr>
 <td>MoL_Num_Evolved_Vars_Slow</td>
 <td>0</td>
 <td>The maximum number of 'slow' variables to be evolved by MoL (DPRECATED)</td>
-<td>0:*       :: "Anything non negative. Added to by other thorns."<em>OR</em></td>
+<td>0:* :: "Anything non negative. Added to by other thorns."</td>
 </tr>
 <tr>
 <td>MoL_Num_Constrained_Vars</td>
 <td>0</td>
 <td>The maximum number of constrained variables with timelevels that MoL needs to know about (DPRECATED)</td>
-<td>0:*       :: "Anything non negative. Added to by other thorns."<em>OR</em></td>
+<td>0:* :: "Anything non negative. Added to by other thorns."</td>
 </tr>
 <tr>
 <td>MoL_Num_SaveAndRestore_Vars</td>
 <td>0</td>
 <td>The maximum number of variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED)</td>
-<td>0:*       :: "Anything non negative. Added to by other thorns."<em>OR</em></td>
+<td>0:*  :: "Anything non negative. Added to by other thorns."</td>
 </tr>
 <tr>
 <td>MoL_Max_Evolved_Array_Size</td>
 <td>0</td>
 <td>The maximum total size of any grid arrays to be evolved</td>
-<td>0:*          :: "Anything non negative. Accumulated by other thorns"<em>OR</em></td>
+<td>0:* :: "Anything non negative. Accumulated by other thorns"</td>
 </tr>
 <tr>
 <td>MoL_Num_ArrayEvolved_Vars</td>
 <td>0</td>
 <td>The maximum number of array variables to be evolved by MoL (DPRECATED)</td>
-<td>0:*        :: "Anything non negative. Added to by other thorns."<em>OR</em></td>
+<td>0:* :: "Anything non negative. Added to by other thorns."</td>
 </tr>
 <tr>
 <td>MoL_Num_ArrayConstrained_Vars</td>
 <td>0</td>
 <td>The maximum number of array constrained variables with timelevels that MoL needs to know about (DPRECATED)</td>
-<td>0:*        :: "Anything non negative. Added to by other thorns."<em>OR</em></td>
+<td>0:*   :: "Anything non negative. Added to by other thorns."</td>
 </tr>
 <tr>
 <td>MoL_Num_ArraySaveAndRestore_Vars</td>
 <td>0</td>
 <td>The maximum number of array variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED)</td>
-<td>0:*        :: "Anything non negative. Added to by other thorns."<em>OR</em></td>
+<td>0:*   :: "Anything non negative. Added to by other thorns."</td>
 </tr>
 <tr>
 <td>MoL_Num_Scratch_Levels</td>
 <td>0</td>
 <td>Number of scratch levels required by the ODE method</td>
-<td>0:*      :: "Anything non negative"<em>OR</em></td>
+<td>0:* :: "Anything non negative"</td>
 </tr>
 <tr>
 <td>ODE_Method</td>
@@ -3685,14 +2681,6 @@ unigrid.</p>
 </tbody>
 </table>
 <h3 id="spacemask">SpaceMask</h3>
-<p>Cactus Code Thorn SpaceMask
-Author(s)    : Denis Pollney
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Provides utilities for assigning states to individual grid points
 using a mask grid function.</p>
 <table>
@@ -3714,13 +2702,6 @@ using a mask grid function.</p>
 </tbody>
 </table>
 <h3 id="norms">Norms</h3>
-<p>CVS info   : <span><span class="MathJax_Preview">Header</span><script type="math/tex">Header</script></span></p>
-<p>Cactus Code Thorn Norms
-Thorn Author(s)     : Frank Herrmann <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#114;&#114;&#109;&#97;&#110;&#110;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#104;&#101;&#114;&#114;&#109;&#97;&#110;&#110;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a>
-                    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a>
-Thorn Maintainer(s) : Frank Herrmann <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#104;&#101;&#114;&#114;&#109;&#97;&#110;&#110;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#104;&#101;&#114;&#114;&#109;&#97;&#110;&#110;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a>
-                    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#97;&#101;&#105;&#46;&#109;&#112;&#103;&#46;&#100;&#101;</a></p>
-<hr />
 <p>Purpose of the thorn:</p>
 <p>Compute norms of the state vector, e.g. for Mexico tests.  These are
 special norms that make a difference between variables which have a
@@ -3770,14 +2751,6 @@ gr-qc/0503056 (2005)</p>
 </tbody>
 </table>
 <h3 id="reflectionsymmetry">ReflectionSymmetry</h3>
-<p>Cactus Code Thorn ReflectionSymmetry
-Author(s)    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Provide reflection symmetries, i.e., bitant, quadrant, and octant mode.</p>
 <table>
 <thead>
@@ -3871,14 +2844,6 @@ Licence      : GPL</p>
 </table>
 <h2 id="einsteinevolve">EinsteinEvolve</h2>
 <h3 id="newrad">NewRad</h3>
-<p>Cactus Code Thorn NewRad
-Author(s)    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Licence      : GPL</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Implement the "NewRad" radiative boundary conditions known from
 BSSN_MoL.</p>
 <table>
@@ -3900,18 +2865,6 @@ BSSN_MoL.</p>
 </tbody>
 </table>
 <h3 id="grhydro_initdata">GRHydro_InitData</h3>
-<p>Cactus Code Thorn GRHydro_Init_Data<br />
-Author(s)    : Luca Baiotti
-               Ian Hawke
-               Scott Hawley
-               Frank Löffler
-               Christian David Ott
-Maintainer(s): CIGR developers team
-Licence      : GPLv2+</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Provides simple initial data (shock tubes, ...) for the GRHydro code.</p>
 <table>
 <thead>
@@ -4328,28 +3281,6 @@ Licence      : GPLv2+</p>
 </tbody>
 </table>
 <h3 id="grhydro">GRHydro</h3>
-<p>Cactus Code Thorn GRHydro
-Author(s)    : Luca Baiotti
-               Ian Hawke
-               Pedro Montero
-               Sebastiano Bernuzzi
-               Giovanni Corvino
-               Toni Font
-               Joachim Frieben
-               Roberto De Pietri
-               Thorsten Kellermann
-               Frank Löffler
-               Christian D. Ott
-               Luciano Rezzolla
-               Nikolaos Stergioulas
-               Aaryn Tonita
-               many others
-Maintainer(s): CIGR developers team
-Licence      : GPLv2+</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>GRHydro is the evolution code for a general-purpose 3D relativistic
 hydrodynamics code. To work it requires Einstein, MoL (the method of
 lines thorn), CactusEOS (the general equation of state interface).
@@ -4658,15 +3589,6 @@ but for the moment the MoL version of BSSN will be the tested version.</p>
 </table>
 <h2 id="cactuspugh">CactusPUGH</h2>
 <h3 id="pugh">PUGH</h3>
-<p>Cactus Code Thorn PUGH
-Author(s)    : Gabrielle Allen
-               Tom Goodale
-               Thomas Radke
-               Matei Ripeanu
-               Paul Walker
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
 <ol>
 <li>Purpose</li>
 </ol>
@@ -5008,12 +3930,6 @@ Licence      : LGPL</p>
 </tbody>
 </table>
 <h3 id="pughinterp">PUGHInterp</h3>
-<p>Cactus Code Thorn PUGHInterp
-Author(s)    : Paul Walker
-               Thomas Radke
-Maintainer(s): Cactus team
-Licence      : LGPL</p>
-<hr />
 <ol>
 <li>Purpose</li>
 </ol>
@@ -5155,7 +4071,7 @@ and will probably be removed at some point.)</p>
   interpolation operators this thorn supports, and their mandatory
   and optional parameter-table entries.  The Thorn Guide also
   includes both simple and more complicated examples.</p>
-<h1 id="history_2">History</h1>
+<h1 id="history">History</h1>
 <p>This interpolator was written by Jonathan Thornburg in winter 2001-2002.
 Between then and July 2003 it lived in CactusBase/LocalInterp (in the
  src/GeneralizedPolynomial-Uniform/  subdirectory), but in July 2003 it
@@ -7619,14 +6535,6 @@ Thorn Maintainer(s) : Christian D. Ott <a href="&#109;&#97;&#105;&#108;&#116;&#1
 </tbody>
 </table>
 <h3 id="carpet_1">Carpet</h3>
-<p>Cactus Code Thorn Carpet
-Author(s)    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Licence      : GPLv2+</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>This thorn provides a parallel AMR (adaptive mesh refinement) driver
 with MPI.</p>
 <table>
@@ -9334,14 +8242,6 @@ Licence      : GPL</p>
 </tbody>
 </table>
 <h3 id="carpetregrid2">CarpetRegrid2</h3>
-<p>Cactus Code Thorn CarpetRegrid2
-Author(s)    : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Maintainer(s): Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;">&#115;&#99;&#104;&#110;&#101;&#116;&#116;&#101;&#114;&#64;&#99;&#99;&#116;&#46;&#108;&#115;&#117;&#46;&#101;&#100;&#117;</a>
-Licence      : GPLv2+</p>
-<hr />
-<ol>
-<li>Purpose</li>
-</ol>
 <p>Set up refined regions by specifying a set of centres and radii about
 them.  The refined regions are then the conjunction of these regions.</p>
 <table>
@@ -13320,7 +12220,7 @@ Licence      : LGPL</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ct_multilevel_1">CT_MultiLevel</h3>
+<h3 id="ct_multilevel">CT_MultiLevel</h3>
 <p>Cactus Code Thorn CT_MultiLevel
 Author(s)    : Eloisa Bentivegna <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#101;&#108;&#111;&#105;&#115;&#97;&#46;&#98;&#101;&#110;&#116;&#105;&#118;&#101;&#103;&#110;&#97;&#64;&#117;&#110;&#105;&#99;&#116;&#46;&#105;&#116;">&#101;&#108;&#111;&#105;&#115;&#97;&#46;&#98;&#101;&#110;&#116;&#105;&#118;&#101;&#103;&#110;&#97;&#64;&#117;&#110;&#105;&#99;&#116;&#46;&#105;&#116;</a>
 Maintainer(s): Eloisa Bentivegna <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#101;&#108;&#111;&#105;&#115;&#97;&#46;&#98;&#101;&#110;&#116;&#105;&#118;&#101;&#103;&#110;&#97;&#64;&#117;&#110;&#105;&#99;&#116;&#46;&#105;&#116;">&#101;&#108;&#111;&#105;&#115;&#97;&#46;&#98;&#101;&#110;&#116;&#105;&#118;&#101;&#103;&#110;&#97;&#64;&#117;&#110;&#105;&#99;&#116;&#46;&#105;&#116;</a>
@@ -27155,7 +26055,7 @@ doc/documentation.tex file which is included in the Cactus Thorn Guide.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="ioascii_1">IOASCII</h3>
+<h3 id="ioascii">IOASCII</h3>
 <p>Cactus Code Thorn IOASCII
 Author(s)    : Gabrielle Allen
                Tom Goodale
@@ -27403,7 +26303,7 @@ to output a variable without specifying it in the parameter file.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="boundary_1">Boundary</h3>
+<h3 id="boundary">Boundary</h3>
 <p>Cactus Code Thorn Boundary
 Author(s)    : Gabrielle Allen
                Gerd Lanfermann
@@ -27697,7 +26597,7 @@ Thorn Maintainer(s) : Erik Schnetter <a href="&#109;&#97;&#105;&#108;&#116;&#111
 </tr>
 </tbody>
 </table>
-<h3 id="coordbase_1">CoordBase</h3>
+<h3 id="coordbase">CoordBase</h3>
 <p>Cactus Code Thorn CoordBase
 Author(s)    : Cactus team
 Maintainer(s): Cactus team
@@ -27983,7 +26883,7 @@ Licence      : LGPL</p>
 </tr>
 </tbody>
 </table>
-<h3 id="cartgrid3d_1">CartGrid3D</h3>
+<h3 id="cartgrid3d">CartGrid3D</h3>
 <p>Cactus Code Thorn CartGrid3D
 Author(s)    : Gabrielle Allen
                Gerd Lanfermann
@@ -28216,27 +27116,10 @@ It registers Cartesian coordinate systems of 1, 2, and 3 dimensions.</p>
 </tr>
 </tbody>
 </table>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../Visualization/" class="btn btn-neutral float-right" title="Visualization">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../Thorn/" class="btn btn-neutral" title="Thorn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -28262,10 +27145,6 @@ It registers Cartesian coordinate systems of 1, 2, and 3 dimensions.</p>
           <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Thorn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../Visualization/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

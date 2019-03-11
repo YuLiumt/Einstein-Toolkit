@@ -100,7 +100,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../parameter file/">parameter file</a>
+    <a class="" href="../parameter/">Parameter</a>
                 </li>
                 <li class="">
                     
@@ -228,21 +228,25 @@
             <div class="section">
               
                 <p>Required Software</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># On Debian/Ubuntu use this command:</span>
-sudo apt-get install -y subversion gcc git numactl libgsl-dev libpapi-dev python libhwloc-dev make libopenmpi-dev libhdf5-openmpi-dev libfftw3-dev libssl-dev liblapack-dev g++ curl gfortran patch pkg-config libhdf5-dev libjpeg-turbo?-dev
-<span class="c1"># On Fedora use this command:</span>
-sudo dnf install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel python hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran findutils hdf5-devel fftw-devel patch gsl-devel pkgconfig
-module load mpi/openmpi-x86_64
-<span class="c1"># On Centos use this command:</span>
-sudo yum install -y epel-release
-sudo yum install -y libjpeg-turbo-devel gcc git lapack-devel make subversion gcc-c++ which papi-devel hwloc-devel openmpi-devel hdf5-openmpi-devel openssl-devel libtool-ltdl-devel numactl-devel gcc-gfortran hdf5-devel fftw-devel patch gsl-devel
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1"># Debian (stretch, buster)</span>
+su -c <span class="s1">&#39;apt-get install build-essential pkg-config libopenmpi-dev openmpi-bin gfortran git subversion curl gnuplot gnuplot-x11&#39;</span>
+<span class="c1"># Ubuntu (16.04.2, 17.04, 17.10)</span>
+sudo apt-get install build-essential pkg-config mpich2? python libmpich2?-dev gfortran git subversion curl gnuplot gnuplot-x11
+<span class="c1"># Fedora (FC 25, 27)</span>
+su -c <span class="s1">&#39; yum -y install mpich2 python pkg-config mpich2-devel gsl gsl-devel libjpeg-devel hdf5 hdf5-mpich-devel gcc gcc-c++ gcc-gfortran patch numactl-devel numactl hwloc subversion git openssl-devel lapack-static gnuplot&#39;</span>
+<span class="c1"># Mac OS (High Sierra), MacPorts</span>
+sudo port -N install pkgconfig gcc8 openmpi fftw-3 gsl jpeg zlib hdf5 +fortran +gfortran openssl
+<span class="c1"># Mac OS (High Sierra), Homebrew</span>
+brew install gnuplot pkg-config gcc fftw gsl hdf5 --with-fortran hwloc jpeg openssl pkg-config szip open-mpi
 </pre></div>
 </td></tr></table>
 
@@ -263,6 +267,48 @@ chmod u+x GetComponents
 
 <details class="warning classes"><summary>Warning</summary><p>Some versions of svn might show problems with the parallel checkout. If you see errors like (svn: E155037: Previous operation has not finished), try without the --parallel option.</p>
 </details>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./GetComponents [options] [URL]
+</pre></div>
+</td></tr></table>
+
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Discribe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>−−help</td>
+<td>brief help message</td>
+</tr>
+<tr>
+<td>−−man</td>
+<td>full documentation</td>
+</tr>
+<tr>
+<td>−−verbose</td>
+<td>print all system commands as they are executed</td>
+</tr>
+<tr>
+<td>−−debug</td>
+<td>print all commands to be executed and exit</td>
+</tr>
+<tr>
+<td>−−anonymous</td>
+<td>use anonymous checkout for all components</td>
+</tr>
+<tr>
+<td>−−update</td>
+<td>process all updates</td>
+</tr>
+<tr>
+<td>−−root</td>
+<td>override root directory</td>
+</tr>
+</tbody>
+</table>
 <h2 id="configuring-simfactory-for-your-machine">Configuring SimFactory for your machine</h2>
 <p>Edit <code class="codehilite">simfactory/etc/defs.local.ini</code>.</p>
 <p>SimFactory also contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in <code class="codehilite">simfactory/mdb/optionlists</code> and <code class="codehilite">simfactory/mdb/runscripts</code> and specify their names on the sim setup command line.</p>
@@ -310,7 +356,11 @@ module load mpi
 
 <p>SimFactory needs to know a name for the simulation as well as what parameter file to use. You can either specify the name on the command line and give the parameter file with the <code class="codehilite">--parfile</code> option.</p>
 <p>For example</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim create-run &lt;Simulation name&gt; --parfile /Users/yuliu/Desktop/work/yuliu/CactusPar/&lt;name.par&gt; --procs=2 --num-threads=1 --ppn-used=2 --walltime=8:0:0
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim create-run &lt;Simulation name&gt; --parfile /Users/yuliu/Desktop/work/yuliu/CactusPar/&lt;name.par&gt; --procs=120 --walltime=8:0:0
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim create-run static_tov --parfile=par/static_tov_small_short.par --procs=2 --num-threads=1 --ppn-used=2  --walltime=8:0:0 | cat
 </pre></div>
 </td></tr></table>
               

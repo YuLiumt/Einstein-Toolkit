@@ -85,17 +85,34 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../parameter file/">parameter file</a>
+    <a class="" href="../parameter/">Parameter</a>
                 </li>
                 <li class=" current">
                     
     <a class="current" href="./">Visualization</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#visit">VisIt</a></li>
+    <li class="toctree-l3"><a href="#gnuplot">gnuplot</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#plot">Plot</a></li>
+        
+        </ul>
     
 
-    <li class="toctree-l3"><a href="#opening-the-databases">Opening the databases</a></li>
+    <li class="toctree-l3"><a href="#python">Python</a></li>
+    
+
+    <li class="toctree-l3"><a href="#visit">VisIt</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#opening-the-databases">Opening the databases</a></li>
+        
+            <li><a class="toctree-l4" href="#a-visualization-example">A visualization example</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -221,8 +238,39 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="visit">VisIt</h2>
-<h2 id="opening-the-databases">Opening the databases</h2>
+                <h2 id="gnuplot">gnuplot</h2>
+<p>You should see a number of files with the extension <code class="codehilite"><span class="na">.asc</span></code>. These are 0-D (reductions of 3-D grid functions to scalar values) and 1-D ASCII output files that can be plotted with gnuplot.</p>
+<h3 id="plot">Plot</h3>
+<p>Start gnuplot with the command:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>gnuplot
+</pre></div>
+</td></tr></table>
+
+<p>and at the gnuplot prompt type:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>plot &#39;&lt;filename&gt;.asc&#39; using 2:3 with linespoints
+</pre></div>
+</td></tr></table>
+
+<h2 id="python">Python</h2>
+<p>The following commands will generate a simple line plot of the data.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;HOME&quot;</span><span class="p">]</span>
+<span class="n">lin_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">home</span><span class="o">+</span><span class="s2">&quot;/simulations/&lt;filepath&gt;.asc&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lin_data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">lin_data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="visit">VisIt</h2>
+<h3 id="opening-the-databases">Opening the databases</h3>
 <p>Once the software is running, the button Open can be used to open files from the simulation. Make sure to select Open file as type: CarpetHDF5, otherwise VisIt may try to load the data using another format.</p>
 <p><img alt="vt-1" src="../media/vt-1.png" /></p>
 <p>If you are using the Simulation Factory to launch and manage the run, the data will be output under the directory <code class="codehilite">&lt;basedir&gt;/&lt;simulation name&gt;/output-&lt;nnnn&gt;/&lt;parfile name&gt;</code>, where <code class="codehilite">&lt;nnnn&gt;</code> is the number of the restart. There are essentially two types of files that can be visualised with VisIt:</p>
@@ -230,6 +278,8 @@
 <li>Files from the thorn <code class="codehilite">CarpetIOHDF5</code>, with <code class="codehilite"><span class="na">.h5</span></code> extension, which will be read by the <code class="codehilite">CarpetHDF5</code> plugin in VisIt and represent the 1D, 2D, or 3D configuration of a specific field, on a number of constant-time spaces.</li>
 <li>Files from the thorn <code class="codehilite">QuasiLocalMeasures</code>, with <code class="codehilite"><span class="na">.vtk</span></code> extension, which are read natively by VisIt and represent the shape and properties of relevant 2D topological spheres, such as the apparent horizons, also at different times.</li>
 </ul>
+<h3 id="a-visualization-example">A visualization example</h3>
+<p>We first need to load the data, using the Open button and selecting the correct path for the database <filename.h5>. We can then generate the plot by clicking <code class="codehilite">Add &gt; Pseudocolor &gt; &lt;filename&gt;</code>. If the Auto Apply feature in VisIt is not selected, we need to click on Draw to make the plot appear.</p>
               
             </div>
           </div>
@@ -240,7 +290,7 @@
         <a href="../../GR/Solutions/" class="btn btn-neutral float-right" title="Solutions">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../parameter file/" class="btn btn-neutral" title="parameter file"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../parameter/" class="btn btn-neutral" title="Parameter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -268,7 +318,7 @@
           <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../parameter file/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../parameter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../../GR/Solutions/" style="color: #fcfcfc">Next &raquo;</a></span>
