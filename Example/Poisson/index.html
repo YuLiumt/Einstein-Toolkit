@@ -179,6 +179,12 @@
         
             <li><a class="toctree-l4" href="#grid-structure">Grid Structure</a></li>
         
+            <li><a class="toctree-l4" href="#mesh-refinement">Mesh refinement</a></li>
+        
+            <li><a class="toctree-l4" href="#ct_multilevel">CT_MultiLevel</a></li>
+        
+            <li><a class="toctree-l4" href="#io">IO</a></li>
+        
         </ul>
     
 
@@ -368,6 +374,317 @@ CoordBase::boundary_shiftout_y_upper = 1
 CoordBase::boundary_shiftout_z_upper = 1
 
 CartGrid3D::type = &quot;coordbase&quot;
+</pre></div>
+</td></tr></table>
+
+<p>The size of the computational domain is specified through the (xmin, xmax) parameters.</p>
+<p><a href="https://arxiv.org/abs/0710.4397">https://arxiv.org/abs/0710.4397</a></p>
+<p><img alt="-w415" src="../media/15522664027874.jpg" /></p>
+<p>When it is necessary to increase the number of boundary points, then <code class="codehilite">boundary_size_x_lower</code> is the only parameter that needs to be changed.</p>
+<p><img alt="" src="../media/15522671244834.jpg" /></p>
+<p>The integer parameter <code class="codehilite">boundary_shiftout_x_lower</code> can be used to shift the boundary points outwards (or inwards with negative values) by multiples of the grid spacing.</p>
+<p><img alt="" src="../media/15522671679502.jpg" /></p>
+<h3 id="mesh-refinement">Mesh refinement</h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;Carpet CarpetLib CarpetInterp LoopControl CarpetReduce CarpetSlab CarpetRegrid2&quot;
+
+# Choose the time step size adaptively
+Carpet::adaptive_stepsize = &quot;no&quot;
+
+# Insert barriers between scheduled items
+Carpet::schedule_barriers = no
+
+# Output bounding box information to the screen
+CarpetLib::output_bboxes  = no
+
+
+Carpet::init_fill_timelevels = &quot;yes&quot;
+
+# Use the domain description from CoordBase
+Carpet::domain_from_coordbase = yes
+# Maximum number of refinement levels (including the base level)
+Carpet::max_refinement_levels = 6
+
+driver::ghost_size       = 3
+Carpet::use_buffer_zones = yes
+
+Carpet::prolongation_order_space = 5
+Carpet::prolongation_order_time  = 2
+
+Carpet::convergence_level = 0
+
+Carpet::poison_new_timelevels = yes
+CarpetLib::poison_new_memory  = yes
+CarpetLib::poison_value       = 250
+
+Carpet::output_timers_every      = 0
+</pre></div>
+</td></tr></table>
+
+<p><img alt="" src="../media/15522675427766.jpg" /></p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CarpetRegrid2::num_centres  = 5
+
+CarpetRegrid2::num_levels_1 = 6
+CarpetRegrid2::position_x_1 = -0.5
+CarpetRegrid2::position_y_1 = -0.5
+CarpetRegrid2::radius_1[1]  = 5
+CarpetRegrid2::radius_1[2]  = 5
+CarpetRegrid2::radius_1[3]  = 5
+CarpetRegrid2::radius_1[4]  = 5
+CarpetRegrid2::radius_1[5]  = 0.4
+CarpetRegrid2::radius_1[6]  = 0.4
+CarpetRegrid2::radius_1[7]  = 0.4
+
+CarpetRegrid2::num_levels_2 = 6
+CarpetRegrid2::position_x_2 = -0.1
+CarpetRegrid2::position_y_2 = -0.1
+CarpetRegrid2::radius_2[1]  = 5
+CarpetRegrid2::radius_2[2]  = 5
+CarpetRegrid2::radius_2[3]  = 5
+CarpetRegrid2::radius_2[4]  = 5
+CarpetRegrid2::radius_2[5]  = 0.2
+CarpetRegrid2::radius_2[6]  = 0.2
+CarpetRegrid2::radius_2[7]  = 0.2
+
+CarpetRegrid2::num_levels_3 = 6
+CarpetRegrid2::position_x_3 = 0.5
+CarpetRegrid2::position_y_3 = 0.5
+CarpetRegrid2::radius_3[1]  = 5
+CarpetRegrid2::radius_3[2]  = 5
+CarpetRegrid2::radius_3[3]  = 5
+CarpetRegrid2::radius_3[4]  = 5
+CarpetRegrid2::radius_3[5]  = 0.2
+CarpetRegrid2::radius_3[6]  = 0.2
+CarpetRegrid2::radius_3[7]  = 0.2
+
+CarpetRegrid2::num_levels_4 = 6
+CarpetRegrid2::position_x_4 = -0.6
+CarpetRegrid2::position_y_4 = 0
+CarpetRegrid2::radius_4[1]  = 5
+CarpetRegrid2::radius_4[2]  = 5
+CarpetRegrid2::radius_4[3]  = 5
+CarpetRegrid2::radius_4[4]  = 5
+CarpetRegrid2::radius_4[5]  = 0.8
+CarpetRegrid2::radius_4[6]  = 0.8
+CarpetRegrid2::radius_4[7]  = 0.8
+
+CarpetRegrid2::num_levels_5 = 6
+CarpetRegrid2::position_x_5 = 0.6
+CarpetRegrid2::position_y_5 = -0.3
+CarpetRegrid2::radius_5[1]  = 5
+CarpetRegrid2::radius_5[2]  = 5
+CarpetRegrid2::radius_5[3]  = 5
+CarpetRegrid2::radius_5[4]  = 5
+CarpetRegrid2::radius_5[5]  = 0.8
+CarpetRegrid2::radius_5[6]  = 0.8
+CarpetRegrid2::radius_5[7]  = 0.8
+</pre></div>
+</td></tr></table>
+
+<h3 id="ct_multilevel">CT_MultiLevel</h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;CT_MultiLevel CT_Analytic&quot;
+
+CT_MultiLevel::cycle_type          = &quot;FMG cycle&quot;
+CT_MultiLevel::tol                 = 1e-12
+CT_MultiLevel::omega               = 1
+CT_MultiLevel::fd_order            = 4
+CT_MultiLevel::output_norms        = &quot;yes&quot;
+CT_MultiLevel::nrelsteps_down      = 200
+CT_MultiLevel::nrelsteps_up        = 200
+CT_MultiLevel::nrelsteps_bottom    = 200
+CT_MultiLevel::nrelsteps_top       = 200
+CT_MultiLevel::topMGlevel          = 5
+CT_MultiLevel::compare_to_exact    = &quot;yes&quot;
+CT_MultiLevel::exact_solution_gfname[0] = &quot;CT_Analytic::epsi&quot;
+CT_MultiLevel::exact_laplacian_gfname[0] = &quot;CT_Analytic::elaplacian&quot;
+
+CT_MultiLevel::n0[0]               = 0
+CT_MultiLevel::inipsi_gfname[0]    = &quot;CT_Analytic::testinipsi&quot;
+CT_MultiLevel::cxx_gfname[0]       = &quot;CT_Analytic::testcxx&quot;
+CT_MultiLevel::cyy_gfname[0]       = &quot;CT_Analytic::testcyy&quot;
+CT_MultiLevel::czz_gfname[0]       = &quot;CT_Analytic::testczz&quot;
+CT_MultiLevel::c0_gfname[0]        = &quot;CT_Analytic::testc0&quot;
+
+CT_Analytic::free_data             = &quot;exact&quot;
+CT_Analytic::ampG                  = 1
+CT_Analytic::amp[0]                = 1
+CT_Analytic::x0[0]                 = -0.5
+CT_Analytic::y0[0]                 = -0.5
+CT_Analytic::sigmax[0]             = 0.2
+CT_Analytic::sigmay[0]             = 0.2
+CT_Analytic::sigmaz[0]             = 0.2
+CT_Analytic::amp[1]                = 1
+CT_Analytic::x0[1]                 = -0.1
+CT_Analytic::y0[1]                 = -0.1
+CT_Analytic::sigmax[1]             = 0.1
+CT_Analytic::sigmay[1]             = 0.1
+CT_Analytic::sigmaz[1]             = 0.1
+CT_Analytic::amp[2]                = 1
+CT_Analytic::x0[2]                 = 0.5
+CT_Analytic::y0[2]                 = 0.5
+CT_Analytic::sigmax[2]             = 0.1
+CT_Analytic::sigmay[2]             = 0.1
+CT_Analytic::sigmaz[2]             = 0.1
+CT_Analytic::amp[3]                = 1
+CT_Analytic::x0[3]                 = -0.6
+CT_Analytic::y0[3]                 = 0
+CT_Analytic::sigmax[3]             = 0.4
+CT_Analytic::sigmay[3]             = 0.4
+CT_Analytic::sigmaz[3]             = 0.4
+CT_Analytic::amp[4]                = 1
+CT_Analytic::x0[4]                 = 0.6
+CT_Analytic::y0[4]                 = -0.3
+CT_Analytic::sigmax[4]             = 0.4
+CT_Analytic::sigmay[4]             = 0.4
+CT_Analytic::sigmaz[4]             = 0.4
+
+CT_Analytic::other_timelevels      = 3
+</pre></div>
+</td></tr></table>
+
+<h3 id="io">IO</h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;IOUtil
 </pre></div>
 </td></tr></table>
               

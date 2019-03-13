@@ -123,6 +123,8 @@
         
             <li><a class="toctree-l4" href="#boundary">Boundary</a></li>
         
+            <li><a class="toctree-l4" href="#reflectionsymmetry">ReflectionSymmetry</a></li>
+        
         </ul>
     
 
@@ -130,11 +132,17 @@
     
         <ul>
         
+            <li><a class="toctree-l4" href="#pugh">PUGH</a></li>
+        
             <li><a class="toctree-l4" href="#carpet">Carpet</a></li>
         
             <li><a class="toctree-l4" href="#carpetlib">CarpetLib</a></li>
         
             <li><a class="toctree-l4" href="#carpetregrid2">CarpetRegrid2</a></li>
+        
+            <li><a class="toctree-l4" href="#carpetinterp">CarpetInterp</a></li>
+        
+            <li><a class="toctree-l4" href="#carpetreduce">CarpetReduce</a></li>
         
         </ul>
     
@@ -171,6 +179,8 @@
         
             <li><a class="toctree-l4" href="#initbase">InitBase</a></li>
         
+            <li><a class="toctree-l4" href="#tovsolver">TOVSolver</a></li>
+        
         </ul>
     
 
@@ -180,12 +190,16 @@
         
             <li><a class="toctree-l4" href="#admcoupling">ADMCoupling</a></li>
         
+            <li><a class="toctree-l4" href="#ml_bssn">ML_BSSN</a></li>
+        
         </ul>
     
 
     <li class="toctree-l3"><a href="#hydro">Hydro</a></li>
     
         <ul>
+        
+            <li><a class="toctree-l4" href="#tmunubase">TmunuBase</a></li>
         
             <li><a class="toctree-l4" href="#hydrobase">HydroBase</a></li>
         
@@ -236,6 +250,8 @@
         <ul>
         
             <li><a class="toctree-l4" href="#nanchecker">NaNChecker</a></li>
+        
+            <li><a class="toctree-l4" href="#terminationtrigger">TerminationTrigger</a></li>
         
         </ul>
     
@@ -1921,7 +1937,483 @@ time::dtfac = 0.5
 </tr>
 </tbody>
 </table>
+<h3 id="reflectionsymmetry">ReflectionSymmetry</h3>
+<p>Provide reflection symmetries, i.e., bitant, quadrant, and octant mode.</p>
+<h4 id="parameter_7">Parameter</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>verbose</td>
+<td>"no"</td>
+<td>Produce screen output while applying boundary conditions</td>
+<td></td>
+</tr>
+<tr>
+<td>reflection_x</td>
+<td>"no"</td>
+<td>Reflection symmetry at the lower x boundary</td>
+<td></td>
+</tr>
+<tr>
+<td>reflection_y</td>
+<td>"no"</td>
+<td>Reflection symmetry at the lower y boundary</td>
+<td></td>
+</tr>
+<tr>
+<td>reflection_z</td>
+<td>"no"</td>
+<td>Reflection symmetry at the lower z boundary</td>
+<td></td>
+</tr>
+<tr>
+<td>reflection_upper_x</td>
+<td>"no"</td>
+<td>Reflection symmetry at the upper x boundary</td>
+<td></td>
+</tr>
+<tr>
+<td>reflection_upper_y</td>
+<td>"no"</td>
+<td>Reflection symmetry at the upper y boundary</td>
+<td></td>
+</tr>
+<tr>
+<td>reflection_upper_z</td>
+<td>"no"</td>
+<td>Reflection symmetry at the upper z boundary</td>
+<td></td>
+</tr>
+<tr>
+<td>avoid_origin_x</td>
+<td>"yes"</td>
+<td>Stagger about the origin on the lower x boundary?</td>
+<td></td>
+</tr>
+<tr>
+<td>avoid_origin_y</td>
+<td>"yes"</td>
+<td>Stagger about the origin on the lower y boundary?</td>
+<td></td>
+</tr>
+<tr>
+<td>avoid_origin_z</td>
+<td>"yes"</td>
+<td>Stagger about the origin on the lower z boundary?</td>
+<td></td>
+</tr>
+<tr>
+<td>avoid_origin_upper_x</td>
+<td>"yes"</td>
+<td>Stagger about the origin on the upper x boundary?</td>
+<td></td>
+</tr>
+<tr>
+<td>avoid_origin_upper_y</td>
+<td>"yes"</td>
+<td>Stagger about the origin on the upper y boundary?</td>
+<td></td>
+</tr>
+<tr>
+<td>avoid_origin_upper_z</td>
+<td>"yes"</td>
+<td>Stagger about the origin on the upper z boundary?</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="mesh-refinement">Mesh refinement</h2>
+<h3 id="pugh">PUGH</h3>
+<p>This thorn provides a unigrid parallel driver with MPI.</p>
+<h4 id="description_2">Description</h4>
+<p>Grid Size</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># To set the global size of a N-D grid to be 40 grid points in each direction use
+PUGH::global_nsize = 40
+
+# To set the global size of a 2D grid to be 40×20 use
+PUGH::global_nx = 40
+PUGH::global_ny = 20
+
+# To set the local size of a 2D grid to be 40 × 20 on each processor, use
+PUGH::local_nx = 40
+PUGH::local_ny = 20
+</pre></div>
+</td></tr></table>
+
+<p>Periodic Boundary Conditions</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># By default, no periodic boundary conditions are applied. To apply periodic boundary conditions in all directions, set
+PUGH::periodic = &quot;yes&quot;
+
+# To apply periodic boundary conditions in just the x- and y- directions in a 3 dimensional domain, use
+PUGH::periodic = &quot;yes&quot;
+PUGH::periodic_z = &quot;no&quot;
+</pre></div>
+</td></tr></table>
+
+<p>Processor Decomposition</p>
+<p>By default PUGH will distribute the computational grid evenly across all processors</p>
+<p><img alt="-w1396" src="../media/15523948293012.jpg" /></p>
+<p>To manually specify the load distribution, set <code class="codehilite">PUGH::partition = &quot;manual&quot;</code> and then, depending on the grid dimension, set the remaining parameters to distribute the load in each direction. </p>
+<p>The computational grid can be manually distributed using PUGH’s string parameters <code class="codehilite">partition_[1d_x|2d_x|2d_y|3d_x|3d_y|3d_z]</code></p>
+<h4 id="parameter_8">Parameter</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>periodic</td>
+<td>"no"</td>
+<td>Periodic boundary conditions</td>
+<td></td>
+</tr>
+<tr>
+<td>periodic_x</td>
+<td>"yes"</td>
+<td>Periodic boundary conditions in x-direction</td>
+<td></td>
+</tr>
+<tr>
+<td>periodic_y</td>
+<td>"yes"</td>
+<td>Periodic boundary conditions in y-direction</td>
+<td></td>
+</tr>
+<tr>
+<td>periodic_z</td>
+<td>"yes"</td>
+<td>Periodic boundary conditions in z-direction</td>
+<td></td>
+</tr>
+<tr>
+<td>global_nx</td>
+<td>10</td>
+<td>The size of the grid in the x direction</td>
+<td>0: :: "Grid of this size distributed across all processors"</td>
+</tr>
+<tr>
+<td>global_ny</td>
+<td>10</td>
+<td>The size of the grid in the y direction</td>
+<td>0: :: "Grid of this size distributed across all processors"</td>
+</tr>
+<tr>
+<td>global_nz</td>
+<td>10</td>
+<td>The size of the grid in the z direction</td>
+<td>0: :: "Grid of this size distributed across all processors"</td>
+</tr>
+<tr>
+<td>global_nsize</td>
+<td>-1</td>
+<td>The size of the grid in each spatial direction</td>
+<td>-1: :: "Grid of this size in each dir distributed across all processors"</td>
+</tr>
+<tr>
+<td>ghost_size_x</td>
+<td>1</td>
+<td>The width of the ghost zone in the x direction</td>
+<td>0: :: "Must be a positive integer"</td>
+</tr>
+<tr>
+<td>ghost_size_y</td>
+<td>1</td>
+<td>The width of the ghost zone in the y direction</td>
+<td>0: :: "Must be a positive integer"</td>
+</tr>
+<tr>
+<td>ghost_size_z</td>
+<td>1</td>
+<td>The width of the ghost zone in the z direction</td>
+<td>0: :: "Must be a positive integer"</td>
+</tr>
+<tr>
+<td>ghost_size</td>
+<td>-1</td>
+<td>The width of the ghost zone in each direction</td>
+<td>-1: :: "Any positive number to override the ghost_size_[xyz] parameters"</td>
+</tr>
+<tr>
+<td>info</td>
+<td>"none"</td>
+<td>Provide additional information about what PUGH is doing</td>
+<td>"none" :: "No extra information"; "load" :: "Load on each processor"</td>
+</tr>
+<tr>
+<td>local_nx</td>
+<td>-1</td>
+<td>The size of the grid in the x direction</td>
+<td>-1: :: "Grid of this size on each processor"</td>
+</tr>
+<tr>
+<td>local_ny</td>
+<td>-1</td>
+<td>The size of the grid in the y direction</td>
+<td>-1: :: "Grid of this size on each processor"</td>
+</tr>
+<tr>
+<td>local_nz</td>
+<td>-1</td>
+<td>The size of the grid in the z direction</td>
+<td>-1: :: "Grid of this size on each processor"</td>
+</tr>
+<tr>
+<td>local_nsize</td>
+<td>-1</td>
+<td>The size of the grid in each spatial direction</td>
+<td>-1: :: "Grid of this size in each dir on each processor"</td>
+</tr>
+<tr>
+<td>local_size_includes_ghosts</td>
+<td>"yes"</td>
+<td>Does the local grid size include the ghost zones?</td>
+<td></td>
+</tr>
+<tr>
+<td>enable_all_storage</td>
+<td>"no"</td>
+<td>Enable storage for all GFs?</td>
+<td></td>
+</tr>
+<tr>
+<td>physical2logical</td>
+<td>"direct"</td>
+<td>Physical process to logical process mapping method to use</td>
+<td>"direct":: "Maps MPI IDs directly to IJKs"; "example" :: "Maps MPI IDs directly to IJKs using a lookup table"</td>
+</tr>
+<tr>
+<td>processor_topology</td>
+<td>"automatic"</td>
+<td>How to determine the processor topology</td>
+<td>"manual":: "Specified by proc_top_nx etc"; "automatic" :: "Automatically generated"; "automatic_old" :: "Automatically generated (old method)"</td>
+</tr>
+<tr>
+<td>processor_topology_1d_x</td>
+<td>0</td>
+<td>Number of processors in X direction</td>
+<td>0::: "See proc_topology"</td>
+</tr>
+<tr>
+<td>processor_topology_2d_x</td>
+<td>0</td>
+<td>Number of processors in X direction</td>
+<td>0::: "See proc_topology"</td>
+</tr>
+<tr>
+<td>processor_topology_2d_y</td>
+<td>0</td>
+<td>Number of processors in Y direction</td>
+<td>0::: "See proc_topology"</td>
+</tr>
+<tr>
+<td>processor_topology_3d_x</td>
+<td>0</td>
+<td>Number of processors in X direction</td>
+<td>0::: "See proc_topology"</td>
+</tr>
+<tr>
+<td>processor_topology_3d_y</td>
+<td>0</td>
+<td>Number of processors in Y direction</td>
+<td>0::: "See proc_topology"</td>
+</tr>
+<tr>
+<td>processor_topology_3d_z</td>
+<td>0</td>
+<td>Number of processors in Z direction</td>
+<td>0::: "See proc_topology"</td>
+</tr>
+<tr>
+<td>initialize_memory</td>
+<td>"none"</td>
+<td>How to initialize memory for grid variables at allocation time</td>
+<td>"none" :: "Do not initialize storage for allocated grid variables (default)"; "zero" :: "Zero out all elements of all allocated grid variables"; "NaN":: "Set all elements of allocated floating point grid variables to Not-a-Number values"</td>
+</tr>
+<tr>
+<td>partition</td>
+<td>"automatic"</td>
+<td>Is the partition manual</td>
+<td>"automatic":: "even";  "manual" :: "specified by partition_XYZ .."</td>
+</tr>
+<tr>
+<td>partition_1d_x</td>
+<td>""</td>
+<td>Tells how to partition on direction X</td>
+<td>. :: "A regex which matches anything"</td>
+</tr>
+<tr>
+<td>partition_2d_x</td>
+<td>""</td>
+<td>Tells how to partition on direction X</td>
+<td>. :: "A regex which matches anything"</td>
+</tr>
+<tr>
+<td>partition_2d_y</td>
+<td>""</td>
+<td>Tells how to partition on direction y</td>
+<td>. :: "A regex which matches anything"</td>
+</tr>
+<tr>
+<td>partition_3d_x</td>
+<td>""</td>
+<td>Tells how to partition on direction X</td>
+<td>. :: "A regex which matches anything"</td>
+</tr>
+<tr>
+<td>partition_3d_y</td>
+<td>""</td>
+<td>Tells how to partition on direction y</td>
+<td>. :: "A regex which matches anything"</td>
+</tr>
+<tr>
+<td>partition_3d_z</td>
+<td>""</td>
+<td>Tells how to partition on direction z</td>
+<td>. :: "A regex which matches anything"</td>
+</tr>
+<tr>
+<td>storage_verbose</td>
+<td>"no"</td>
+<td>Report on memory assignment</td>
+<td>"yes":: "Standard storage information"; "report" :: "Provide a report of storage every storage_report_every iterations and at termination"; "no" :: "Provide no information"</td>
+</tr>
+<tr>
+<td>storage_report_every</td>
+<td>0</td>
+<td>How often to provide a report on storage information</td>
+<td>0:0 :: "Never report"; 1: :: "Report at intervals"</td>
+</tr>
+<tr>
+<td>cacheline_mult</td>
+<td>4001</td>
+<td>Multiplier for cacheline number</td>
+<td>0:::"Any positive number"</td>
+</tr>
+<tr>
+<td>overloadevolve</td>
+<td>"yes"</td>
+<td>Overload Evolve driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadsyncgroup</td>
+<td>"no"</td>
+<td>Overload SyncGroup driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadsyncgroupsbydiri</td>
+<td>"yes"</td>
+<td>Overload SyncGroupsByDirI driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadenablegroupstorage</td>
+<td>"yes"</td>
+<td>Overload EnableGroupStorage driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloaddisablegroupstorage</td>
+<td>"yes"</td>
+<td>Overload DisableGroupStorage driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadenablegroupcomm</td>
+<td>"yes"</td>
+<td>Overload EnableGroupComm driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloaddisablegroupcomm</td>
+<td>"yes"</td>
+<td>Overload DisableGroupComm driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadbarrier</td>
+<td>"yes"</td>
+<td>Overload Barrier driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadparallelinit</td>
+<td>"yes"</td>
+<td>Overload ParallelInit driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadexit</td>
+<td>"yes"</td>
+<td>Overload Exit driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadabort</td>
+<td>"yes"</td>
+<td>Overload Abort driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadmyproc</td>
+<td>"yes"</td>
+<td>Overload MyProc driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadnprocs</td>
+<td>"yes"</td>
+<td>Overload nProcs driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadarraygroupsizeb</td>
+<td>"yes"</td>
+<td>Overload ArrayGroupSizeB driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadquerygroupstorageb</td>
+<td>"yes"</td>
+<td>Overload QueryGroupStorageB driver function</td>
+<td></td>
+</tr>
+<tr>
+<td>overloadgroupdynamicdata</td>
+<td>"yes"</td>
+<td>Overload GroupDynamicData driver function</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="carpet"><a href="https://carpetcode.org">Carpet</a></h3>
 <p>The Carpet driver, which lives in the Carpet arrangement, is divided into several parts. The thorn Carpet is the main driver piece; it provides all the routines and structures that Cactus expects from it. The thorn CarpetLib is the workhorse that does all the bookkeeping and data shuffling. Those two alone form a valid Cactus driver; the other thorns provide additional functionality. The thorns CarpetInterp, CarpetReduce, and CarpetSlab provide the corresponding interpolation, reduction, and slabbing interfaces. The thorns CarpetIOASCII and CarpetIOFlexIO provide I/O methods. Finally, thorn CarpetRegrid provides a user interface to select where and what to refine. (The actual refinement is handled in CarpetLib.)</p>
 <p>Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. For historic reasons it also has a notion of multigrid levels, but those are currently unused.</p>
@@ -1935,7 +2427,7 @@ time::dtfac = 0.5
 <p>A regridding thorn, such as CarpetRegrid or CarpetRegrid2, sets up the grid hierarchy. The grid hierarchy consists of several refinement levels, and each refinement level consists of several refined regions.</p>
 <p>We assume that boundary location and boundary discretisation are set up via CoordBase. This is necessary since other methods do not allow specifying sufficient details to handle e.g. refined regions intersecting mesh refinement boundaries.</p>
 <p>The main distinction between an outer boundary point and an interior point from Carpet’s point of view is that an outer boundary point is not evolved in time. Instead, the value of boundary points must be completely determined by the value of interior points.</p>
-<h4 id="parameter_7">Parameter</h4>
+<h4 id="parameter_9">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -2526,7 +3018,7 @@ time::dtfac = 0.5
 </table>
 <h3 id="carpetlib">CarpetLib</h3>
 <p>This thorn contains the backend library that provides mesh refinement.</p>
-<h4 id="parameter_8">Parameter</h4>
+<h4 id="parameter_10">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -2775,7 +3267,8 @@ time::dtfac = 0.5
 </table>
 <h3 id="carpetregrid2">CarpetRegrid2</h3>
 <p>Set up refined regions by specifying a set of centres and radii about them.  The refined regions are then the conjunction of these regions.</p>
-<h4 id="parameter_9">Parameter</h4>
+<p>The grid hierarchy consists of several refinement levels, and each refinement level consists of several refined regions.</p>
+<h4 id="parameter_11">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -3020,341 +3513,92 @@ time::dtfac = 0.5
 <td>Minimum change in radius to trigger a regridding</td>
 <td>0.0: :: ""</td>
 </tr>
+</tbody>
+</table>
+<h3 id="carpetinterp">CarpetInterp</h3>
+<p>This thorn provides a parallel interpolator for Carpet.</p>
+<h4 id="parameter_12">Parameter</h4>
+<table>
+<thead>
 <tr>
-<td>num_levels_3</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>active_3</td>
-<td>"yes"</td>
-<td>Is this region active?</td>
+<td>barriers</td>
+<td>"no"</td>
+<td>Insert barriers at strategic places for debugging purposes (slows down execution)</td>
 <td></td>
 </tr>
 <tr>
-<td>position_x_3</td>
-<td>0.0</td>
-<td>Position of this centre</td>
+<td>poison</td>
+<td>-4.20042e+30</td>
+<td>Poison value</td>
 <td>: :: ""</td>
 </tr>
 <tr>
-<td>position_y_3</td>
-<td>0.0</td>
-<td>Position of this centre</td>
+<td>ipoison</td>
+<td>-420042</td>
+<td>Integer poison value</td>
 <td>: :: ""</td>
 </tr>
 <tr>
-<td>position_z_3</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_3</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_3</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
-</tr>
-<tr>
-<td>num_levels_4</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
-</tr>
-<tr>
-<td>active_4</td>
+<td>tree_search</td>
 <td>"yes"</td>
-<td>Is this region active?</td>
+<td>Use a tree search to find the source processor</td>
 <td></td>
 </tr>
 <tr>
-<td>position_x_4</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
+<td>check_tree_search</td>
+<td>"no"</td>
+<td>Cross-check the result of the tree search</td>
+<td></td>
 </tr>
+</tbody>
+</table>
+<h3 id="carpetreduce">CarpetReduce</h3>
+<p>This thorn provides parallel reduction operators for Carpet.</p>
+<p>This thorn now uses a weight function.  This makes it possible to
+perform physically meaningful spatial reduction operations.  The
+weight is 1 for all "normal" grid points.</p>
+<p>The weight is set to 0 on symmetry and possible the outer boundary,
+and it might be set to &frac12; on the edge of the boundary.  Setting this depends on the coordinate thorn, and currently works only when the coordinates are defined via CoordBase.</p>
+<p>The weight is also reduced or set to 0 on coarser grids that are
+overlaid by finer grid.</p>
+<p>The weight should also be reduced or set to 0 near and in excised
+regions.  This should happen in conjunction with an excision boundary thorn.</p>
+<h4 id="parameter_13">Parameter</h4>
+<table>
+<thead>
 <tr>
-<td>position_y_4</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>position_z_4</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_4</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_4</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
-</tr>
-<tr>
-<td>num_levels_5</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
-</tr>
-<tr>
-<td>active_5</td>
-<td>"yes"</td>
-<td>Is this region active?</td>
+<td>verbose</td>
+<td>"no"</td>
+<td>Produce screen output while running</td>
 <td></td>
 </tr>
 <tr>
-<td>position_x_5</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_y_5</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_z_5</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_5</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_5</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
-</tr>
-<tr>
-<td>num_levels_6</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
-</tr>
-<tr>
-<td>active_6</td>
-<td>"yes"</td>
-<td>Is this region active?</td>
+<td>debug_iweight</td>
+<td>"no"</td>
+<td>Allow debugging iweight grid function by keeping it allocated</td>
 <td></td>
 </tr>
 <tr>
-<td>position_x_6</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_y_6</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_z_6</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_6</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_6</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
-</tr>
-<tr>
-<td>num_levels_7</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
-</tr>
-<tr>
-<td>active_7</td>
+<td>min_max_time_interpolation</td>
 <td>"yes"</td>
-<td>Is this region active?</td>
+<td>Interpolate in time for min/max reductions</td>
 <td></td>
-</tr>
-<tr>
-<td>position_x_7</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_y_7</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_z_7</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_7</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_7</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
-</tr>
-<tr>
-<td>num_levels_8</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
-</tr>
-<tr>
-<td>active_8</td>
-<td>"yes"</td>
-<td>Is this region active?</td>
-<td></td>
-</tr>
-<tr>
-<td>position_x_8</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_y_8</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_z_8</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_8</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_8</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
-</tr>
-<tr>
-<td>num_levels_9</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
-</tr>
-<tr>
-<td>active_9</td>
-<td>"yes"</td>
-<td>Is this region active?</td>
-<td></td>
-</tr>
-<tr>
-<td>position_x_9</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_y_9</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_z_9</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_9</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_9</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
-</tr>
-<tr>
-<td>num_levels_10</td>
-<td>1</td>
-<td>Number of refinement levels for this centre</td>
-<td>1:30 :: ""</td>
-</tr>
-<tr>
-<td>active_10</td>
-<td>"yes"</td>
-<td>Is this region active?</td>
-<td></td>
-</tr>
-<tr>
-<td>position_x_10</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_y_10</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>position_z_10</td>
-<td>0.0</td>
-<td>Position of this centre</td>
-<td>: :: ""</td>
-</tr>
-<tr>
-<td>movement_threshold_10</td>
-<td>0.0</td>
-<td>Minimum movement to trigger a regridding</td>
-<td>0: :: ""</td>
-</tr>
-<tr>
-<td>radius_rel_change_threshold_10</td>
-<td>0.0</td>
-<td>Minimum change in radius to trigger a regridding</td>
-<td>0.0: :: ""</td>
 </tr>
 </tbody>
 </table>
@@ -3375,7 +3619,7 @@ time::dtfac = 0.5
 <p>All the coefficients <span><span class="MathJax_Preview">c_∗</span><script type="math/tex">c_∗</script></span> and the powers <span><span class="MathJax_Preview">n_∗</span><script type="math/tex">n_∗</script></span> can be specified by setting the parameters <code class="codehilite">*_gfname[*]</code> to the desired grid function name. These parameters are arrays to allow for the solution of systems of equations.</p>
 <p>The only other parameter which must be set to ensure correct operation is <code class="codehilite">CT_MultiLevel::topMGlevel</code>, which tells the solver which is the ﬁnest refinement level that covers the entire domain in which the equation is to be solved.</p>
 <p>CT_MultiLevel needs at least one external thorn to set the PDE coefficients <code class="codehilite">CT_Analytic</code>.</p>
-<h4 id="parameter_10">Parameter</h4>
+<h4 id="parameter_14">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -3569,7 +3813,7 @@ time::dtfac = 0.5
 </tbody>
 </table>
 <h3 id="ct_analytic">CT_Analytic</h3>
-<h4 id="parameter_11">Parameter</h4>
+<h4 id="parameter_15">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -4011,7 +4255,7 @@ K_{i j}=\frac{1}{2} \mathcal{L}_{n} \gamma_{i j}
 <h3 id="admbase">ADMBase</h3>
 <p>This thorn provides the basic variables used to communicate between
 thorns doing General Relativity in the 3+1 formalism.</p>
-<h4 id="description_2">Description</h4>
+<h4 id="description_3">Description</h4>
 <p>It provides the basic variables (3-metric, extrinsic curvature, lapse and shift vector) for the 3 + 1 formalism, in addition to a set of parameters to regulate the methods used for their evolution. These variables are used to communicate between thorns providing initial data, evolution methods and analysis routines for the 3 + 1 formalism.</p>
 <p>The variables provided by ADMBase are:
 - The 3-metric tensor, <span><span class="MathJax_Preview">g_{i j}</span><script type="math/tex">g_{i j}</script></span>
@@ -4024,7 +4268,7 @@ thorns doing General Relativity in the 3+1 formalism.</p>
     betax, betay, betaz</p>
 <p>Initial data for the 3 + 1 variables is specified by the <code class="codehilite">initial_data</code> (3-metric and extrinsic curvature), <code class="codehilite">initial_lapse</code> (lapse), and <code class="codehilite">initial_shift</code> (shift) parameters. By default, ADMBase initialises the 3- metric and extrinsic curvature to Minkowski and the lapse to one.</p>
 <p>Analogous to specifying initial data, evolution methods are chosen by the evolution method (3-metric and extrinsic curvature), <code class="codehilite">lapse_evolution_method</code> (lapse), and <code class="codehilite">shift_evolution_method</code> (shift) parameters. By default, ADMBase does not evolve the 3-metric or extrinsic curvature, and holds the lapse and shift static.</p>
-<h4 id="parameter_12">Parameter</h4>
+<h4 id="parameter_16">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -4165,7 +4409,7 @@ tensors.</p>
 </div>
 <p>If the parameter 'normalize_dtheta_dphi' is true, the thorn 
 projects the spherical components onto (<code class="codehilite">r*dtheta</code>, <code class="codehilite">r*sin(theta)*dphi</code>) instead of the default vector (<code class="codehilite">dtheta</code>, <code class="codehilite">dphi</code>).</p>
-<h4 id="parameter_13">Parameter</h4>
+<h4 id="parameter_17">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -4204,10 +4448,10 @@ projects the spherical components onto (<code class="codehilite">r*dtheta</code>
 </table>
 <h3 id="admmacros">ADMMacros</h3>
 <p>This thorn provides various macros which can be used to calculate quantities, such as the Christoffel Symbol or Riemann Tensor components, using the basic variables of thorn ADMBase. The macros work pointwise to calculate quantities at the grid point (i, j, k); it’s up to you to loop over all the grid points where you want computations done.</p>
-<h4 id="description_3">Description</h4>
+<h4 id="description_4">Description</h4>
 <p>By default, the macros use centered 2<sup>nd</sup> order finite differencing, with 3-point finite difference molecules. That is, when finite differencing the the grid-point indices i ± 1, j ± 1, and k ± 1 must also be valid, and <code class="codehilite">driver::ghost_size</code> must be set to at least 1.</p>
 <p>Some of the macros also support centered 4<sup>th</sup> order finite differencing; This is selected with the parameter <code class="codehilite">spatial_order</code>. This may be set to either 2 or 4; it defaults to 2. If it’s set to 4, then 5-point finite difference molecules are used, so the grid-point indices i ± 2, j ± 2, and k ± 2 must also be valid, and driver::ghost size must be set to at least 2.</p>
-<h4 id="parameter_14">Parameter</h4>
+<h4 id="parameter_18">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -4259,7 +4503,7 @@ can check their actions against this thorn.</p>
    number of active time levels.)</p>
 </li>
 </ol>
-<h4 id="parameter_15">Parameter</h4>
+<h4 id="parameter_19">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -4278,13 +4522,1503 @@ can check their actions against this thorn.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="tovsolver">TOVSolver</h3>
+<p>The Tolman-Oppenheimer-Volkoff solution is a static perfect fluid “star”. Here it is intended for use without evolving the matter terms. This provides a compact strong ﬁeld solution which is static but does not contain singularities.</p>
+<p>The equations for a TOV star are usually derived in Schwarzschild coordinates. In these coordinates, the metric can be brought into the form</p>
+<div>
+<div class="MathJax_Preview">
+d s^{2}=-e^{2 \phi} d t^{2}+\left(1-\frac{2 m}{r}\right)^{-1} d r^{2}+r^{2} d \Omega^{2}
+</div>
+<script type="math/tex; mode=display">
+d s^{2}=-e^{2 \phi} d t^{2}+\left(1-\frac{2 m}{r}\right)^{-1} d r^{2}+r^{2} d \Omega^{2}
+</script>
+</div>
+<p>Here we are assuming that the stress energy tensor is given by</p>
+<div>
+<div class="MathJax_Preview">
+T^{\mu \nu}=(\mu+P) u^{\mu} u^{\nu}+P g^{\mu \nu}
+</div>
+<script type="math/tex; mode=display">
+T^{\mu \nu}=(\mu+P) u^{\mu} u^{\nu}+P g^{\mu \nu}
+</script>
+</div>
+<h4 id="description_5">Description</h4>
+<h4 id="parameter_20">Parameter</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TOV_Num_TOVs</td>
+<td>1</td>
+<td>The number of TOVs</td>
+<td>1: :: "Greater than 0"</td>
+</tr>
+<tr>
+<td>TOV_Solve_for_TOVs</td>
+<td>3</td>
+<td>Solve for TOVs even if no TOV initial data was requested?</td>
+<td>0:3 :: "depreciated in favour of TOVSolver::TOV_Enforce_Interpolation"</td>
+</tr>
+<tr>
+<td>TOV_Enforce_Interpolation</td>
+<td>"no"</td>
+<td>Enforce the interpolation of the data onto the Hydro GFs even without tov as specified initial data</td>
+<td></td>
+</tr>
+<tr>
+<td>TOV_Num_Radial</td>
+<td>100000</td>
+<td>The number of radial points for the ODE integration</td>
+<td>1: :: "Greater than 0"</td>
+</tr>
+<tr>
+<td>TOV_Gamma</td>
+<td>2.0</td>
+<td>The polytropic constant in P = K rho^Gamma</td>
+<td>1.0: :: "The physical range at high Lorentz factors is [1,2], but otherwise higher values of gamma can also be used"</td>
+</tr>
+<tr>
+<td>TOV_K</td>
+<td>100.0</td>
+<td>The polytropic constant in P = K rho^Gamma</td>
+<td>(0.0: :: "Greater than 0"</td>
+</tr>
+<tr>
+<td>TOV_ProperPosition</td>
+<td>"no"</td>
+<td>For use only with two NSs, atm only handles equal mass</td>
+<td></td>
+</tr>
+<tr>
+<td>TOV_Fast_Interpolation</td>
+<td>"yes"</td>
+<td>Use faster interpolation algorithm? Default is yes.</td>
+<td></td>
+</tr>
+<tr>
+<td>TOV_Clear_Initial_Data</td>
+<td>"yes"</td>
+<td>Clear initial data (spacetime)? Default is yes.</td>
+<td></td>
+</tr>
+<tr>
+<td>TOV_Use_Old_Initial_Data</td>
+<td>"no"</td>
+<td>Take old initial data into account (spacetime)? Default is no.</td>
+<td></td>
+</tr>
+<tr>
+<td>TOV_Use_Old_Matter_Initial_Data</td>
+<td>"no"</td>
+<td>Use also old matter initial data? Default is no.</td>
+<td></td>
+</tr>
+<tr>
+<td>TOV_Conformal_Flat_Three_Metric</td>
+<td>"no"</td>
+<td>Use conformal factor to get the 3-metric flat. default is no</td>
+<td></td>
+</tr>
+<tr>
+<td>TOV_Combine_Method</td>
+<td>"average"</td>
+<td>Which combine method should be used.</td>
+<td>"maximum" :: "Take the maximum of rho and gxx as clue for the rest as clue."; "average" :: "Take the average of all available parts."</td>
+</tr>
+<tr>
+<td>TOV_Populate_Timelevels</td>
+<td>1</td>
+<td>Populate that amount of timelevels</td>
+<td>1:3 :: "1 (default) to 3"</td>
+</tr>
+<tr>
+<td>TOV_Momentum_Psi_Power</td>
+<td>0</td>
+<td>Power of Psi to be multiplied with J^i for Mom</td>
+<td>: :: "anything, 0 as default"</td>
+</tr>
+<tr>
+<td>TOV_fake_evolution</td>
+<td>0</td>
+<td>Fake evolution by setting ID at every step</td>
+<td>: :: "anything, 0 as off (default), everything else as on"</td>
+</tr>
+<tr>
+<td>TOV_save_to_datafile</td>
+<td>""</td>
+<td>Only save data to file and exit</td>
+<td>"." :: "Any filename, not used if empty"</td>
+</tr>
+</tbody>
+</table>
 <h2 id="evolution">Evolution</h2>
 <h3 id="admcoupling">ADMCoupling</h3>
 <p>This thorn allows seamless coupling of evolution and analysis thorns to any thorns which contribute matter terms to the stress energy tensor <span><span class="MathJax_Preview">T_{a b}</span><script type="math/tex">T_{a b}</script></span>.</p>
-<h4 id="description_4">Description</h4>
+<h4 id="description_6">Description</h4>
 <p>The point is to allow clean coupling of matter thorns and spacetime evolution thorns. This avoids explicit dependencies between the spacetime and matter evolution thorns.</p>
 <p>Spacetime evolution thorns and various analysis thorns may need to know the value of the stress-energy tensor.</p>
+<h3 id="ml_bssn">ML_BSSN</h3>
+<h4 id="parameter_21">Parameter</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>evolution_method</td>
+<td></td>
+<td>evolution_method</td>
+<td>"ML_BSSN" :: ""</td>
+</tr>
+<tr>
+<td>lapse_evolution_method</td>
+<td></td>
+<td>lapse_evolution_method</td>
+<td>"ML_BSSN" :: ""</td>
+</tr>
+<tr>
+<td>shift_evolution_method</td>
+<td></td>
+<td>shift_evolution_method</td>
+<td>"ML_BSSN" :: ""</td>
+</tr>
+<tr>
+<td>dtlapse_evolution_method</td>
+<td></td>
+<td>dtlapse_evolution_method</td>
+<td>"ML_BSSN" :: ""</td>
+</tr>
+<tr>
+<td>dtshift_evolution_method</td>
+<td></td>
+<td>dtshift_evolution_method</td>
+<td>"ML_BSSN" :: ""</td>
+</tr>
+<tr>
+<td>verbose</td>
+<td>0</td>
+<td>verbose</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>other_timelevels</td>
+<td>1</td>
+<td>Number of active timelevels for non-evolved grid functions</td>
+<td>0:4 :: ""</td>
+</tr>
+<tr>
+<td>harmonicF</td>
+<td>1</td>
+<td>d/dt alpha = - f alpha^n K   (harmonic: f=1, 1+log: f=2)</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>alphaDriver</td>
+<td>0</td>
+<td>d/dt alpha = ... - alphaDriver (alpha - 1)   (use 1/M (?))</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>shiftGammaCoeff</td>
+<td>0</td>
+<td>d/dt beta^i = C Xt^i   (use C=0.75/M)</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>betaDriver</td>
+<td>0</td>
+<td>d/dt beta^i = ... - betaDriver alpha^shiftAlphaPower beta^i   (use 1/M (?))</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>shiftAlphaPower</td>
+<td>0</td>
+<td>d/dt beta^i = ... - betaDriver alpha^shiftAlphaPower beta^i   (use 0 (?))</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>spatialBetaDriverRadius</td>
+<td>1000000000000</td>
+<td>Radius at which the betaDriver starts to be reduced</td>
+<td>(0: :: "positive"</td>
+</tr>
+<tr>
+<td>spatialShiftGammaCoeffRadius</td>
+<td>1000000000000</td>
+<td>Radius at which shiftGammaCoeff starts to be reduced</td>
+<td>(0: :: "positive"</td>
+</tr>
+<tr>
+<td>minimumLapse</td>
+<td>0</td>
+<td>Enforced minimum of the lapse function</td>
+<td>0: :: "non-negative"</td>
+</tr>
+<tr>
+<td>epsDiss</td>
+<td>0</td>
+<td>Dissipation strength</td>
+<td>0: :: "non-negative"</td>
+</tr>
+<tr>
+<td>LapseACoeff</td>
+<td>-1.</td>
+<td>(OUTDATED) Evolve time derivative of lapse A? (now evolveA)</td>
+<td>0. :: "off"; 1. :: "on"; -1. :: "default"</td>
+</tr>
+<tr>
+<td>ShiftBCoeff</td>
+<td>-1.</td>
+<td>(OUTDATED) Evolve time derivative of shift B^i? (now evolveB)</td>
+<td>0. :: "off"; 1. :: "on"; -1. :: "default"</td>
+</tr>
+<tr>
+<td>LapseAdvectionCoeff</td>
+<td>-1.</td>
+<td>(OUTDATED) Advect lapse? (now advectLapse)</td>
+<td>0. :: "off"; 1. :: "on"; -1. :: "default"</td>
+</tr>
+<tr>
+<td>ShiftAdvectionCoeff</td>
+<td>-1.</td>
+<td>(OUTDATED) Advect shift? (now advectShift)</td>
+<td>0. :: "off"; 1. :: "on"; -1. :: "default"</td>
+</tr>
+<tr>
+<td>fdOrder</td>
+<td>4</td>
+<td>Finite differencing order</td>
+<td>2 :: ""; 4 :: ""; 6 :: ""; 8 :: ""</td>
+</tr>
+<tr>
+<td>conformalMethod</td>
+<td>0</td>
+<td>Treatment of conformal factor</td>
+<td>0 :: "phi method"; 1 :: "W method"</td>
+</tr>
+<tr>
+<td>evolveA</td>
+<td>0</td>
+<td>Evolve time derivative of lapse A? (former LapseACoeff)</td>
+<td>0 :: "off"; 1 :: "on"</td>
+</tr>
+<tr>
+<td>evolveB</td>
+<td>1</td>
+<td>Evolve time derivative of shift B^i? (former ShiftBCoeff)</td>
+<td>0 :: "off"; 1 :: "on"</td>
+</tr>
+<tr>
+<td>harmonicN</td>
+<td>2</td>
+<td>d/dt alpha = - f alpha^n K  (harmonic: n=2, 1+log: n=1)</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>shiftFormulation</td>
+<td>0</td>
+<td>shift formulation</td>
+<td>0 :: "Gamma driver"; 1 :: "harmonic"</td>
+</tr>
+<tr>
+<td>useSpatialBetaDriver</td>
+<td>0</td>
+<td>Enable spatially varying betaDriver</td>
+<td>0 :: "off"; 1 :: "on"</td>
+</tr>
+<tr>
+<td>useSpatialShiftGammaCoeff</td>
+<td>0</td>
+<td>Enable spatially varying shiftGammaCoeff</td>
+<td>0 :: "off"; 1 :: "on"</td>
+</tr>
+<tr>
+<td>advectLapse</td>
+<td>1</td>
+<td>Advect lapse? (former LapseAdvectionCoeff)</td>
+<td>0 :: "off"; 1 :: "on"</td>
+</tr>
+<tr>
+<td>advectShift</td>
+<td>1</td>
+<td>Advect shift? (former ShiftAdvectionCoeff)</td>
+<td>0 :: "off"; 1 :: "on"</td>
+</tr>
+<tr>
+<td>fixAdvectionTerms</td>
+<td>0</td>
+<td>Modify driver and advection terms to work better?</td>
+<td>0 :: "off"; 1 :: "on"</td>
+</tr>
+<tr>
+<td>tile_size</td>
+<td>-1</td>
+<td>Loop tile size</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>initial_boundary_condition</td>
+<td>"scalar"</td>
+<td>Boundary condition for initial condition for some of the BSSN variables</td>
+<td>"scalar" :: "not recommended; use ML_BSSN_Helper's value 'extrapolate-gammas' instead"</td>
+</tr>
+<tr>
+<td>rhs_boundary_condition</td>
+<td>"scalar"</td>
+<td>Boundary condition for BSSN RHS and some of the ADMBase variables</td>
+<td>"scalar" :: "not recommended; use ML_BSSN_Helper's option 'NewRad' instead"</td>
+</tr>
+<tr>
+<td>rhs_evaluation</td>
+<td>"splitBy"</td>
+<td>Whether and how the RHS routine should be split to improve performance</td>
+<td>"combined" :: "use a single routine (probably slow)"; "splitBy" :: "split into 3 routines via Kranc"</td>
+</tr>
+<tr>
+<td>my_initial_data</td>
+<td>"default"</td>
+<td>(OUTDATED)</td>
+<td>"ADMBase" :: "from ADMBase"; "default" :: "do nothing"</td>
+</tr>
+<tr>
+<td>my_initial_boundary_condition</td>
+<td>"default"</td>
+<td>(OUTDATED)</td>
+<td>"none" :: "none"; "default" :: "do nothing"</td>
+</tr>
+<tr>
+<td>my_rhs_boundary_condition</td>
+<td>"default"</td>
+<td>(OUTDATED)</td>
+<td>"none" :: "none"; "static" :: "static"; "default" :: "do nothing"</td>
+</tr>
+<tr>
+<td>my_boundary_condition</td>
+<td>"default"</td>
+<td>(OUTDATED)</td>
+<td>"none" :: "none"; "Minkowski" :: "Minkowski"; "default" :: "do nothing"</td>
+</tr>
+<tr>
+<td>dt_lapse_shift_method</td>
+<td>"default"</td>
+<td>(OUTDATED) Treatment of ADMBase dtlapse and dtshift</td>
+<td>"correct" :: "(unused)"; "noLapseShiftAdvection" :: "(unused)"; "default" :: "do nothing"</td>
+</tr>
+<tr>
+<td>apply_dissipation</td>
+<td>"default"</td>
+<td>(OUTDATED) Whether to apply dissipation to the RHSs</td>
+<td>"always" :: "yes"; "never" :: "no"; "default" :: "do nothing"</td>
+</tr>
+<tr>
+<td>ML_BSSN_MaxNumEvolvedVars</td>
+<td>25</td>
+<td>Number of evolved variables used by this thorn</td>
+<td>25:25 :: "Number of evolved variables used by this thorn"</td>
+</tr>
+<tr>
+<td>ML_BSSN_MaxNumArrayEvolvedVars</td>
+<td>0</td>
+<td>Number of Array evolved variables used by this thorn</td>
+<td>0:0 :: "Number of Array evolved variables used by this thorn"</td>
+</tr>
+<tr>
+<td>timelevels</td>
+<td>3</td>
+<td>Number of active timelevels</td>
+<td>0:4 :: ""</td>
+</tr>
+<tr>
+<td>rhs_timelevels</td>
+<td>1</td>
+<td>Number of active RHS timelevels</td>
+<td>0:4 :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_InitialADMBase1Everywhere_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_InitialADMBase1Everywhere_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_InitialADMBase2Interior_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_InitialADMBase2Interior_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_InitialADMBase2BoundaryScalar_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_InitialADMBase2BoundaryScalar_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EnforceEverywhere_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EnforceEverywhere_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ADMBaseEverywhere_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_ADMBaseEverywhere_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ADMBaseInterior_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_ADMBaseInterior_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ADMBaseBoundaryScalar_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_ADMBaseBoundaryScalar_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInterior_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EvolutionInterior_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInteriorSplitBy1_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EvolutionInteriorSplitBy1_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInteriorSplitBy2_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EvolutionInteriorSplitBy2_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInteriorSplitBy3_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EvolutionInteriorSplitBy3_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionBoundaryScalar_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EvolutionBoundaryScalar_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionAnalysisInit_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EvolutionAnalysisInit_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionAnalysisInterior_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_EvolutionAnalysisInterior_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ConstraintsEverywhere_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_ConstraintsEverywhere_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ConstraintsInterior_calc_every</td>
+<td>1</td>
+<td>ML_BSSN_ConstraintsInterior_calc_every</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_InitialADMBase1Everywhere_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_InitialADMBase1Everywhere_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_InitialADMBase2Interior_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_InitialADMBase2Interior_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_InitialADMBase2BoundaryScalar_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_InitialADMBase2BoundaryScalar_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EnforceEverywhere_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EnforceEverywhere_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ADMBaseEverywhere_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_ADMBaseEverywhere_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ADMBaseInterior_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_ADMBaseInterior_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ADMBaseBoundaryScalar_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_ADMBaseBoundaryScalar_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInterior_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EvolutionInterior_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInteriorSplitBy1_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EvolutionInteriorSplitBy1_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInteriorSplitBy2_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EvolutionInteriorSplitBy2_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionInteriorSplitBy3_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EvolutionInteriorSplitBy3_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionBoundaryScalar_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EvolutionBoundaryScalar_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionAnalysisInit_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EvolutionAnalysisInit_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_EvolutionAnalysisInterior_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_EvolutionAnalysisInterior_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ConstraintsEverywhere_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_ConstraintsEverywhere_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>ML_BSSN_ConstraintsInterior_calc_offset</td>
+<td>0</td>
+<td>ML_BSSN_ConstraintsInterior_calc_offset</td>
+<td>: :: ""</td>
+</tr>
+<tr>
+<td>phi_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>gt11_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>gt12_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>gt13_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>gt22_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>gt23_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>gt33_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>Xt1_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>Xt2_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>Xt3_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>trK_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>At11_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>At12_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>At13_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>At22_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>At23_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>At33_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>alpha_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>A_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>beta1_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>beta2_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>beta3_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>B1_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>B2_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>B3_bound</td>
+<td>"skip"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_log_confac_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_metric_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_Gamma_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_trace_curv_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_curv_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_lapse_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_dtlapse_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_shift_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>ML_dtshift_bound</td>
+<td>"none"</td>
+<td>Boundary condition to implement</td>
+<td>"flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code"</td>
+</tr>
+<tr>
+<td>phi_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>gt11_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>gt12_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>gt13_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>gt22_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>gt23_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>gt33_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>Xt1_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>Xt2_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>Xt3_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>trK_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>At11_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>At12_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>At13_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>At22_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>At23_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>At33_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>alpha_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>A_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>beta1_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>beta2_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>beta3_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>B1_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>B2_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>B3_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_log_confac_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_metric_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_Gamma_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_trace_curv_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_curv_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_lapse_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_dtlapse_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_shift_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>ML_dtshift_bound_speed</td>
+<td>1.</td>
+<td>characteristic speed at boundary</td>
+<td>0: :: "outgoing characteristic speed &gt; 0"</td>
+</tr>
+<tr>
+<td>phi_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>gt11_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>gt12_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>gt13_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>gt22_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>gt23_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>gt33_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>Xt1_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>Xt2_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>Xt3_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>trK_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>At11_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>At12_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>At13_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>At22_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>At23_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>At33_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>alpha_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>A_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>beta1_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>beta2_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>beta3_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>B1_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>B2_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>B3_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_log_confac_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_metric_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_Gamma_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_trace_curv_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_curv_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_lapse_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_dtlapse_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_shift_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>ML_dtshift_bound_limit</td>
+<td>0.</td>
+<td>limit value for r -&gt; infinity</td>
+<td>: :: "value of limit value is unrestricted"</td>
+</tr>
+<tr>
+<td>phi_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>gt11_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>gt12_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>gt13_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>gt22_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>gt23_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>gt33_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>Xt1_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>Xt2_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>Xt3_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>trK_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>At11_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>At12_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>At13_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>At22_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>At23_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>At33_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>alpha_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>A_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>beta1_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>beta2_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>beta3_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>B1_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>B2_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>B3_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_log_confac_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_metric_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_Gamma_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_trace_curv_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_curv_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_lapse_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_dtlapse_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_shift_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+<tr>
+<td>ML_dtshift_bound_scalar</td>
+<td>0.</td>
+<td>Dirichlet boundary value</td>
+<td>: :: "unrestricted"</td>
+</tr>
+</tbody>
+</table>
 <h2 id="hydro">Hydro</h2>
+<p>Thorn locate in /Users/yuliu/Cactus/arrangements/EinsteinBase/TmunuBase</p>
+<h3 id="tmunubase">TmunuBase</h3>
+<p>Provide grid functions for the stress-energy tensor <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span>. Thorn TmunuBase is for the stress-energy tensor what thorn ADMBase is for the metric tensor.</p>
+<h4 id="description_7">Description</h4>
+<p>The variables provided by TmunuBase are:</p>
+<ul>
+<li>The “scalar” part of <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span>, its time-time component: eTtt</li>
+<li>The “vector” part of <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span>, its time-space components: eTtx, eTty, eTtz</li>
+<li>The “tensor” part of <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span>, its space-space components: eTxx, eTxy, eTxz, eTyy, eTyz, eTzz</li>
+</ul>
+<p>These components have the preﬁx e to avoid naming conflicts with existing variables. Many thorns dealing with matter already use variable names such as Ttt.</p>
+<p>Several parameters choose how TmunuBase behaves at run time:</p>
+<ul>
+<li>The parameter <code class="codehilite">stress_energy_storage</code> activates storage for <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span>.</li>
+<li>The parameter stress_energy_at_RHS moves calculating the <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span> from the evol bin into the <code class="codehilite">MoL_PostStep</code> group. This increases the order of accuracy of the spacetime–matter coupling, but is only possible when thorn MoL is used.</li>
+<li>The parameter timelevels chooses the number of time levels for <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span>. The default is a single time level, which is sufficient for unigrid simulation. Mesh refinement simulation may require several time levels if mesh refinement boundaries require correct values.</li>
+<li>The parameter <code class="codehilite">prolongation_type</code> defines the prolongation operator for mesh refinement boundaries.</li>
+</ul>
+<p>Since the values of <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span> change at each time step. <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span> needs to be recalculated frequently. This happens either in the schedule bin evol or in the schedule group MoL_PostStep.</p>
+<h4 id="parameter_22">Parameter</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stress_energy_storage</td>
+<td>no</td>
+<td>Should the stress-energy tensor have storage?</td>
+<td></td>
+</tr>
+<tr>
+<td>stress_energy_at_RHS</td>
+<td>no</td>
+<td>Should the stress-energy tensor be calculated for the RHS evaluation?</td>
+<td></td>
+</tr>
+<tr>
+<td>support_old_CalcTmunu_mechanism</td>
+<td>no</td>
+<td>Should the old CalcTmunu.inc mechanism be supported? This is deprecated.</td>
+<td></td>
+</tr>
+<tr>
+<td>timelevels</td>
+<td>1</td>
+<td>Number of time levels</td>
+<td>0:3 :: ""</td>
+</tr>
+<tr>
+<td>prolongation_type</td>
+<td>"Lagrange"</td>
+<td>The kind of boundary prolongation for the stress-energy tensor</td>
+<td>"<code class="codehilite">^Lagrange$</code>" :: "standard prolongation (requires several time levels)"; "<code class="codehilite">^none$</code>" :: "no prolongation (use this if you do not have enough time levels active)"; "" :: "any other supported prolongation type"</td>
+</tr>
+</tbody>
+</table>
 <h3 id="hydrobase"><a href="https://www.einsteintoolkit.org/thornguide/EinsteinBase/HydroBase/documentation.html">HydroBase</a></h3>
 <p>The idea behind this thorn is to create a slim, common set of variables, parameters and scheduling groups which can then be used by different hydrodynamics codes.</p>
 <p>Currently the deﬁned primitive variables are</p>
@@ -4316,7 +6050,7 @@ M_{\mathrm{sun}}=1 ; c=G=1
 </script>
 </div>
 <p>which are commonly used in astrophysics and in relativity. The former sets the mass scale to the solar one and the latter adopts the same units for time, length and mass.</p>
-<h4 id="parameter_16">Parameter</h4>
+<h4 id="parameter_23">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -4445,7 +6179,7 @@ M_{\mathrm{sun}}=1 ; c=G=1
 </script>
 </div>
 <p>where q is a set of conserved variables, <span><span class="MathJax_Preview">f^{(i)}(q)</span><script type="math/tex">f^{(i)}(q)</script></span> the fluxes and <span><span class="MathJax_Preview">s(q)</span><script type="math/tex">s(q)</script></span> the source terms. The 8 conserved variables are labeled D  the generalized particle number density, <span><span class="MathJax_Preview">S_{i}</span><script type="math/tex">S_{i}</script></span> the generalized momenta in each direction, <span><span class="MathJax_Preview">\tau</span><script type="math/tex">\tau</script></span> internal energy term and <span><span class="MathJax_Preview">\mathscr{B}^{k}</span><script type="math/tex">\mathscr{B}^{k}</script></span> the densitized magnetic field. </p>
-<h4 id="description_5">Description</h4>
+<h4 id="description_8">Description</h4>
 <ul>
 <li>recon_method: The type of reconstruction method to use. tvd is the standard. ppm is more accurate but it requires more resources. eno gives in theory arbitrary order of accuracy but it is practically unworthy to go beyond fifth order.</li>
 <li>tvd_limiter: When using tvd reconstruction the choice of limiter can have a large effect. vanleerffC2 is probably the best to use, but the extremes of minmod and Superbee are also interesting.</li>
@@ -4454,7 +6188,7 @@ M_{\mathrm{sun}}=1 ; c=G=1
 <p>Riemann solvers: Marquina is the standard solver used. HLLE is significantly faster, but sometimes provides cruder approximation.
 Equations of state: These are controlled by the GRHydro_eos_type and GRHydro_eos_table parameters. Changing these parameters will depend on which equation of state thorns you have compiled in.
 Initial data parameters: GRHydro_rho_central is inherited by many initial data thorns to set the central density of compact fluid objects such as single stars.</p>
-<h4 id="parameter_17">Parameter</h4>
+<h4 id="parameter_24">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -5231,7 +6965,7 @@ Initial data parameters: GRHydro_rho_central is inherited by many initial data t
 </table>
 <h3 id="grhydro_initdata">GRHydro_InitData</h3>
 <p>This thorn generates some initial data for the GRHydro code.</p>
-<h4 id="parameter_18">Parameter</h4>
+<h4 id="parameter_25">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -5674,7 +7408,7 @@ Initial data parameters: GRHydro_rho_central is inherited by many initial data t
 <h3 id="ahfinder">AHFinder</h3>
 <p>This thorn looks for apparent horizons (AH) in 3D.  An AH is defined
 as a surface where the expansion of outgoing null geodesics is zero. It calulates various quantities like horizon area and its corresponding mass.</p>
-<h4 id="description_6">Description</h4>
+<h4 id="description_9">Description</h4>
 <ul>
 <li>ahfinder::ahf_active
     To activate the thorn set <code class="codehilite">ahf_active = ”yes”</code>. This parameter is set by default to ”no”.</li>
@@ -5715,7 +7449,7 @@ as a surface where the expansion of outgoing null geodesics is zero. It calulate
 <li>ahfinder::ahf_nphi
     The number of subdivisions in <span><span class="MathJax_Preview">\phi</span><script type="math/tex">\phi</script></span>.</li>
 </ul>
-<h4 id="parameter_19">Parameter</h4>
+<h4 id="parameter_26">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -6222,7 +7956,7 @@ ahf_phi = &quot;yes&quot;
 <li>Less obviously, this also means that if there is a singularity in the geometry somewhere near the apparent horizon, then you need to have a high enough Cactus 3-D grid resolution that the geometry interpolation doesn’t “see” the singularity.</li>
 <li>At the moment AHFinderDirect and the Cactus interpolators don’t know how to avoid an excised region, so if the apparent horizon gets too close to an excised region, you’ll get garbage results as the interpolator tries to interpolate data from the excised region.</li>
 </ul>
-<h4 id="description_7">Description</h4>
+<h4 id="description_10">Description</h4>
 <p>This thorn has lots of parameters, but most of them have reasonable default values which you probably won’t need to change. Here I describe the parameters which you are likely to want to at least look at, and possibly set explicitly.</p>
 <ul>
 <li>find_every
@@ -6262,7 +7996,7 @@ ahf_phi = &quot;yes&quot;
     This specifies the base ﬁle name for h data files, as described above.</li>
 </ul>
 <p>This thorn can optionally set a mask grid function (or functions) at each point of the Cactus grid, to indicate where that point is with respect to the apparent horizon(s). This is usually used for excision. set_mask_for_all_horizons and set_mask_for_individual_horizon[n].</p>
-<h4 id="parameter_20">Parameter</h4>
+<h4 id="parameter_27">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -6685,7 +8419,7 @@ AHFinderDirect::initial_guess__coord_sphere__radius[1] = 2.0
 </table>
 <h3 id="ioutil">IOUtil</h3>
 <p>Input and output of data (I/O) in Cactus is provided by infrastructure thorns, which interact with the flesh via a fixed interface. Thorn IOUtil by itself provides no I/O methods.</p>
-<h4 id="description_8">Description</h4>
+<h4 id="description_11">Description</h4>
 <ul>
 <li>IO::out_dir
     The name of the directory to be used for output. All the I/O methods described here will write by default to this directory (which itself defaults to the current working directory). Individual methods have parameters which can direct their output to a different directory.</li>
@@ -6747,7 +8481,7 @@ AHFinderDirect::initial_guess__coord_sphere__radius[1] = 2.0
 <li>IO::truncate_files_after_recovering
     whether or not to truncate already existing output files after recovering.</li>
 </ul>
-<h4 id="parameter_21">Parameter</h4>
+<h4 id="parameter_28">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -7238,7 +8972,7 @@ IO::recover_dir  = &quot;/scratch/tmp&quot;
 <li>Info
     This method prints the data as runtime information to stdout. The output occurs as a table with columns containing the current iteration number, the physical time at this iteration, and more columns for scalar/reduction values of each variable to be output.</li>
 </ul>
-<h4 id="description_9">Description</h4>
+<h4 id="description_12">Description</h4>
 <p>Parameters to control the Scalar I/O method are:</p>
 <ul>
 <li>IOBasic::outScalar_criterion
@@ -7269,7 +9003,7 @@ Possible choices for this keywork parameter are xgraph and gnuplot.</li>
 <li>IOBasic::outInfo_reductions
     The default list of global reduction operations to perform on CCTK_GF and CCTK_ARRAY variables.</li>
 </ul>
-<h4 id="parameter_22">Parameter</h4>
+<h4 id="parameter_29">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -7399,7 +9133,7 @@ IOBasic::out_dir = &quot;scalar_output&quot;
 <p><img alt="-w971" src="../media/15520989399616.jpg" /></p>
 <h3 id="carpetiobasic">CarpetIOBasic</h3>
 <p>This thorn provides info output for Carpet.</p>
-<h4 id="parameter_23">Parameter</h4>
+<h4 id="parameter_30">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -7504,7 +9238,7 @@ IOBasic::out_dir = &quot;scalar_output&quot;
 </table>
 <h3 id="carpetioscalar">CarpetIOScalar</h3>
 <p>This thorn provides scalar output for Carpet.</p>
-<h4 id="parameter_24">Parameter</h4>
+<h4 id="parameter_31">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -7573,7 +9307,7 @@ IOBasic::out_dir = &quot;scalar_output&quot;
 </table>
 <h3 id="iohdf5">IOHDF5</h3>
 <p>This thorn does output of arbitrary Cactus variables in HDF5 file format. It also provides checkpointing/recovery functionality.</p>
-<h4 id="parameter_25">Parameter</h4>
+<h4 id="parameter_32">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -7618,7 +9352,7 @@ IOBasic::out_dir = &quot;scalar_output&quot;
 </table>
 <h3 id="carpetiohdf5"><a href="https://www.einsteintoolkit.org/thornguide/Carpet/CarpetIOHDF5/documentation.html">CarpetIOHDF5</a></h3>
 <p>The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate files named "<varname>.h5". Such dataﬁles can be used for further postprocessing or fed back into Cactus via the filereader capabilities of thorn IOUtil. Checkpointing for thorn CarpetIOHDF5 is enabled by setting the parameter <code class="codehilite">IOHDF5::checkpoint = &quot;yes&quot;</code>.</p>
-<h4 id="description_10">Description</h4>
+<h4 id="description_13">Description</h4>
 <ul>
 <li>IOHDF5::out_every
     How often to do periodic CarpetIOHDF5 output. If this parameter is set in the parameter ﬁle, it will override the setting of the shared <code class="codehilite">IO::out_every</code> parameter.</li>
@@ -7665,7 +9399,7 @@ IO::out_unchunked = &quot;no&quot;
 
 <p>will cause the variable phi to be output into a single unchunked file whereas other variables will still be output into separate chunked files.</p>
 <p>When visualising chunked datasets, they probably need to be recombined for a global view on the data. This needs to be done within the visualisation tool, Cactus itself does not provide its own recombiner utility program for CarpetIOHDF5’s output files.</p>
-<h4 id="parameter_26">Parameter</h4>
+<h4 id="parameter_33">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -8203,7 +9937,7 @@ IO::recover      = &quot;auto&quot;
 
 <h3 id="timerreport">TimerReport</h3>
 <p>This thorn provides mechanisms for obtaining different information from timers during a Cactus run.</p>
-<h4 id="parameter_27">Parameter</h4>
+<h4 id="parameter_34">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -8285,7 +10019,7 @@ IO::recover      = &quot;auto&quot;
 <h2 id="extension">Extension</h2>
 <h3 id="nanchecker"><a href="https://www.einsteintoolkit.org/thornguide/CactusUtils/NaNChecker/documentation.html">NaNChecker</a></h3>
 <p>The NaNChecker thorn can be used to analyze Cactus grid variables (that is grid functions, arrays or scalars) of real or complex data type for NaN (Not-a-Number) and inﬁnite values.</p>
-<h4 id="parameter_28">Parameter</h4>
+<h4 id="parameter_35">Parameter</h4>
 <table>
 <thead>
 <tr>
@@ -8354,6 +10088,69 @@ IO::recover      = &quot;auto&quot;
 <td>setup_test</td>
 <td>"no"</td>
 <td>set up grid function with NaNs</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="terminationtrigger">TerminationTrigger</h3>
+<p>This thorn watches the elapsed walltime. If only n minutes are left before the some limit set by the user, it triggers termination of the simulation. </p>
+<h4 id="parameter_36">Parameter</h4>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Defaults</th>
+<th>Describe</th>
+<th>Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>on_remaining_walltime</td>
+<td>0.0</td>
+<td>When to trigger termination in MINUTES</td>
+<td>0.0:: "Don't trigger termination"; (0.0: :: "So many minutes before your job walltime is over"</td>
+</tr>
+<tr>
+<td>max_walltime</td>
+<td>0.0</td>
+<td>Walltime in HOURS allocated for this job</td>
+<td>0.0:: "Don't trigger termination"; (0.0: :: "Should be positive, right"</td>
+</tr>
+<tr>
+<td>termination_from_file</td>
+<td>"no"</td>
+<td>Use termination file; specified by termination_filename</td>
+<td></td>
+</tr>
+<tr>
+<td>create_termination_file</td>
+<td>"no"</td>
+<td>Create an empty termination file at startup</td>
+<td></td>
+</tr>
+<tr>
+<td>termination_file</td>
+<td>"/tmp/cactus_terminate"</td>
+<td>Termination file name (either full path or relative to IO::out_dir)</td>
+<td>"" ::"Termination file"</td>
+</tr>
+<tr>
+<td>check_file_every</td>
+<td>1</td>
+<td>Check termination file every n timesteps</td>
+<td>1: :: ""</td>
+</tr>
+<tr>
+<td>output_remtime_every_minutes</td>
+<td>60.0</td>
+<td>Output remaining wall time every n minutes</td>
+<td>0.0:: "No output"; (0.0: :: "Output"</td>
+</tr>
+<tr>
+<td>testsuite</td>
+<td>"no"</td>
+<td>manually trigger termination</td>
 <td></td>
 </tr>
 </tbody>

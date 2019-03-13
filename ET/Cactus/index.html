@@ -218,7 +218,9 @@
           <div role="main">
             <div class="section">
               
-                <p>Cactus executables always run from a parameter file, which specifies which thorns to use and sets the values of each thorn’s parameters (the parameters that are not set will take on default values).</p>
+                <p><strong>Program Flow</strong></p>
+<p><img alt="-w847" src="../media/15524403552358.jpg" /></p>
+<p>Cactus executables always run from a parameter file, which specifies which thorns to use and sets the values of each thorn’s parameters (the parameters that are not set will take on default values).</p>
 <p>There is no restriction on the name of the parameter file, although it is conventional to use the file extension <code class="codehilite"><span class="na">.par</span></code>.</p>
 <p>A parameter file is a text file whose lines are either comments or parameter statements. Comments are blank lines or lines that begin with ‘#’. A parameter statement consists of one or more parameter names, followed by an ‘=’, followed by the value(s) for this (these) parameter(s).</p>
 <p>The first parameter statement in any parameter file should set ActiveThorns, which is a special parameter that tells the program which thorns are to be activated. Only parameters from active thorns can be set (and only those routines scheduled by active thorns are run). By default all thorns are inactive.</p>

@@ -84,6 +84,9 @@
     <a class="current" href="./">Thorn</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#flesh-thorn-interface">Flesh-Thorn Interface</a></li>
+    
+
     <li class="toctree-l3"><a href="#general-syntax-of-ccl-files">General Syntax of CCL Files</a></li>
     
         <ul>
@@ -268,6 +271,8 @@
 <li>a par directory for example parameter files</li>
 <li>a test subdirectory may also be added, to hold the thorn’s test suite.</li>
 </ul>
+<h2 id="flesh-thorn-interface">Flesh-Thorn Interface</h2>
+<p>Each thorn provides 3 configuration files (interface.ccl, param.ccl, schedule.ccl), detailing its interface with the Flesh and with other thorns.</p>
 <h2 id="general-syntax-of-ccl-files">General Syntax of CCL Files</h2>
 <p><strong>Cactus Configuration Language (CCL) files are text files used to define configuration information for a thorn.</strong></p>
 <p>A Grammar File for each type of CCL file is provided in the <code class="codehilite">src/piraha/pegs</code> directory of the Cactus source tree.</p>
