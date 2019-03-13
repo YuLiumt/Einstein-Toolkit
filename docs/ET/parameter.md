@@ -442,7 +442,130 @@ Thorn Boundary also provides seven standard boundary conditions, which can be ap
 | register_static | "yes" | Register routine to handle the 'Static' boundary condition |  |
 | register_none | "yes" | Register routine to handle the 'None' boundary condition |  |
 
+### ReflectionSymmetry
+
+Provide reflection symmetries, i.e., bitant, quadrant, and octant mode.
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| verbose | "no" | Produce screen output while applying boundary conditions |  |
+| reflection_x | "no" | Reflection symmetry at the lower x boundary |  |
+| reflection_y | "no" | Reflection symmetry at the lower y boundary |  |
+| reflection_z | "no" | Reflection symmetry at the lower z boundary |  |
+| reflection_upper_x | "no" | Reflection symmetry at the upper x boundary |  |
+| reflection_upper_y | "no" | Reflection symmetry at the upper y boundary |  |
+| reflection_upper_z | "no" | Reflection symmetry at the upper z boundary |  |
+| avoid_origin_x | "yes" | Stagger about the origin on the lower x boundary? |  |
+| avoid_origin_y | "yes" | Stagger about the origin on the lower y boundary? |  |
+| avoid_origin_z | "yes" | Stagger about the origin on the lower z boundary? |  |
+| avoid_origin_upper_x | "yes" | Stagger about the origin on the upper x boundary? |  |
+| avoid_origin_upper_y | "yes" | Stagger about the origin on the upper y boundary? |  |
+| avoid_origin_upper_z | "yes" | Stagger about the origin on the upper z boundary? |  |
+
 ## Mesh refinement
+
+### PUGH
+
+This thorn provides a unigrid parallel driver with MPI.
+
+#### Description
+
+Grid Size
+
+```
+# To set the global size of a N-D grid to be 40 grid points in each direction use
+PUGH::global_nsize = 40
+
+# To set the global size of a 2D grid to be 40×20 use
+PUGH::global_nx = 40
+PUGH::global_ny = 20
+
+# To set the local size of a 2D grid to be 40 × 20 on each processor, use
+PUGH::local_nx = 40
+PUGH::local_ny = 20
+```
+
+Periodic Boundary Conditions
+
+```
+# By default, no periodic boundary conditions are applied. To apply periodic boundary conditions in all directions, set
+PUGH::periodic = "yes"
+
+# To apply periodic boundary conditions in just the x- and y- directions in a 3 dimensional domain, use
+PUGH::periodic = "yes"
+PUGH::periodic_z = "no"
+```
+  
+Processor Decomposition
+
+By default PUGH will distribute the computational grid evenly across all processors
+
+![-w1396](media/15523948293012.jpg)
+
+To manually specify the load distribution, set `PUGH::partition = "manual"` and then, depending on the grid dimension, set the remaining parameters to distribute the load in each direction. 
+
+The computational grid can be manually distributed using PUGH’s string parameters `partition_[1d_x|2d_x|2d_y|3d_x|3d_y|3d_z]`
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| periodic | "no" | Periodic boundary conditions |  |
+| periodic_x | "yes" | Periodic boundary conditions in x-direction |  |
+| periodic_y | "yes" | Periodic boundary conditions in y-direction |  |
+| periodic_z | "yes" | Periodic boundary conditions in z-direction |  |
+| global_nx | 10 | The size of the grid in the x direction | 0: :: "Grid of this size distributed across all processors" |
+| global_ny | 10 | The size of the grid in the y direction | 0: :: "Grid of this size distributed across all processors" |
+| global_nz | 10 | The size of the grid in the z direction | 0: :: "Grid of this size distributed across all processors" |
+| global_nsize | -1 | The size of the grid in each spatial direction | -1: :: "Grid of this size in each dir distributed across all processors" |
+| ghost_size_x | 1 | The width of the ghost zone in the x direction | 0: :: "Must be a positive integer" |
+| ghost_size_y | 1 | The width of the ghost zone in the y direction | 0: :: "Must be a positive integer" |
+| ghost_size_z | 1 | The width of the ghost zone in the z direction | 0: :: "Must be a positive integer" |
+| ghost_size | -1 | The width of the ghost zone in each direction | -1: :: "Any positive number to override the ghost_size_[xyz] parameters" |
+| info | "none" | Provide additional information about what PUGH is doing | "none" :: "No extra information"; "load" :: "Load on each processor" |
+| local_nx | -1 | The size of the grid in the x direction | -1: :: "Grid of this size on each processor" |
+| local_ny | -1 | The size of the grid in the y direction | -1: :: "Grid of this size on each processor" |
+| local_nz | -1 | The size of the grid in the z direction | -1: :: "Grid of this size on each processor" |
+| local_nsize | -1 | The size of the grid in each spatial direction | -1: :: "Grid of this size in each dir on each processor" |
+| local_size_includes_ghosts | "yes" | Does the local grid size include the ghost zones? |  |
+| enable_all_storage | "no" | Enable storage for all GFs? |  |
+| physical2logical | "direct" | Physical process to logical process mapping method to use | "direct":: "Maps MPI IDs directly to IJKs"; "example" :: "Maps MPI IDs directly to IJKs using a lookup table" |
+| processor_topology | "automatic" | How to determine the processor topology | "manual":: "Specified by proc_top_nx etc"; "automatic" :: "Automatically generated"; "automatic_old" :: "Automatically generated (old method)" |
+| processor_topology_1d_x | 0 | Number of processors in X direction | 0::: "See proc_topology" |
+| processor_topology_2d_x | 0 | Number of processors in X direction | 0::: "See proc_topology" |
+| processor_topology_2d_y | 0 | Number of processors in Y direction | 0::: "See proc_topology" |
+| processor_topology_3d_x | 0 | Number of processors in X direction | 0::: "See proc_topology" |
+| processor_topology_3d_y | 0 | Number of processors in Y direction | 0::: "See proc_topology" |
+| processor_topology_3d_z | 0 | Number of processors in Z direction | 0::: "See proc_topology" |
+| initialize_memory | "none" | How to initialize memory for grid variables at allocation time | "none" :: "Do not initialize storage for allocated grid variables (default)"; "zero" :: "Zero out all elements of all allocated grid variables"; "NaN":: "Set all elements of allocated floating point grid variables to Not-a-Number values" |
+| partition | "automatic" | Is the partition manual | "automatic":: "even";  "manual" :: "specified by partition_XYZ .." |
+| partition_1d_x | "" | Tells how to partition on direction X | . :: "A regex which matches anything" |
+| partition_2d_x | "" | Tells how to partition on direction X | . :: "A regex which matches anything" |
+| partition_2d_y | "" | Tells how to partition on direction y | . :: "A regex which matches anything" |
+| partition_3d_x | "" | Tells how to partition on direction X | . :: "A regex which matches anything" |
+| partition_3d_y | "" | Tells how to partition on direction y | . :: "A regex which matches anything" |
+| partition_3d_z | "" | Tells how to partition on direction z | . :: "A regex which matches anything" |
+| storage_verbose | "no" | Report on memory assignment | "yes":: "Standard storage information"; "report" :: "Provide a report of storage every storage_report_every iterations and at termination"; "no" :: "Provide no information" |
+| storage_report_every | 0 | How often to provide a report on storage information | 0:0 :: "Never report"; 1: :: "Report at intervals" |
+| cacheline_mult | 4001 | Multiplier for cacheline number | 0:::"Any positive number" |
+| overloadevolve | "yes" | Overload Evolve driver function |  |
+| overloadsyncgroup | "no" | Overload SyncGroup driver function |  |
+| overloadsyncgroupsbydiri | "yes" | Overload SyncGroupsByDirI driver function |  |
+| overloadenablegroupstorage | "yes" | Overload EnableGroupStorage driver function |  |
+| overloaddisablegroupstorage | "yes" | Overload DisableGroupStorage driver function |  |
+| overloadenablegroupcomm | "yes" | Overload EnableGroupComm driver function |  |
+| overloaddisablegroupcomm | "yes" | Overload DisableGroupComm driver function |  |
+| overloadbarrier | "yes" | Overload Barrier driver function |  |
+| overloadparallelinit | "yes" | Overload ParallelInit driver function |  |
+| overloadexit | "yes" | Overload Exit driver function |  |
+| overloadabort | "yes" | Overload Abort driver function |  |
+| overloadmyproc | "yes" | Overload MyProc driver function |  |
+| overloadnprocs | "yes" | Overload nProcs driver function |  |
+| overloadarraygroupsizeb | "yes" | Overload ArrayGroupSizeB driver function |  |
+| overloadquerygroupstorageb | "yes" | Overload QueryGroupStorageB driver function |  |
+| overloadgroupdynamicdata | "yes" | Overload GroupDynamicData driver function |  |
 
 ### [Carpet](https://carpetcode.org)
 
@@ -617,6 +740,8 @@ This thorn contains the backend library that provides mesh refinement.
 
 Set up refined regions by specifying a set of centres and radii about them.  The refined regions are then the conjunction of these regions.
 
+The grid hierarchy consists of several refinement levels, and each refinement level consists of several refined regions.
+
 #### Parameter
 
 | Key | Defaults | Describe | Option |
@@ -660,62 +785,45 @@ Set up refined regions by specifying a set of centres and radii about them.  The
 | position_z_2 | 0.0 | Position of this centre | : :: "" |
 | movement_threshold_2 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
 | radius_rel_change_threshold_2 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_3 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_3 | "yes" | Is this region active? |  |
-| position_x_3 | 0.0 | Position of this centre | : :: "" |
-| position_y_3 | 0.0 | Position of this centre | : :: "" |
-| position_z_3 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_3 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_3 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_4 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_4 | "yes" | Is this region active? |  |
-| position_x_4 | 0.0 | Position of this centre | : :: "" |
-| position_y_4 | 0.0 | Position of this centre | : :: "" |
-| position_z_4 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_4 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_4 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_5 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_5 | "yes" | Is this region active? |  |
-| position_x_5 | 0.0 | Position of this centre | : :: "" |
-| position_y_5 | 0.0 | Position of this centre | : :: "" |
-| position_z_5 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_5 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_5 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_6 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_6 | "yes" | Is this region active? |  |
-| position_x_6 | 0.0 | Position of this centre | : :: "" |
-| position_y_6 | 0.0 | Position of this centre | : :: "" |
-| position_z_6 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_6 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_6 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_7 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_7 | "yes" | Is this region active? |  |
-| position_x_7 | 0.0 | Position of this centre | : :: "" |
-| position_y_7 | 0.0 | Position of this centre | : :: "" |
-| position_z_7 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_7 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_7 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_8 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_8 | "yes" | Is this region active? |  |
-| position_x_8 | 0.0 | Position of this centre | : :: "" |
-| position_y_8 | 0.0 | Position of this centre | : :: "" |
-| position_z_8 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_8 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_8 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_9 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_9 | "yes" | Is this region active? |  |
-| position_x_9 | 0.0 | Position of this centre | : :: "" |
-| position_y_9 | 0.0 | Position of this centre | : :: "" |
-| position_z_9 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_9 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_9 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
-| num_levels_10 | 1 | Number of refinement levels for this centre | 1:30 :: "" |
-| active_10 | "yes" | Is this region active? |  |
-| position_x_10 | 0.0 | Position of this centre | : :: "" |
-| position_y_10 | 0.0 | Position of this centre | : :: "" |
-| position_z_10 | 0.0 | Position of this centre | : :: "" |
-| movement_threshold_10 | 0.0 | Minimum movement to trigger a regridding | 0: :: "" |
-| radius_rel_change_threshold_10 | 0.0 | Minimum change in radius to trigger a regridding | 0.0: :: "" |
+
+### CarpetInterp
+
+This thorn provides a parallel interpolator for Carpet.
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| barriers | "no" | Insert barriers at strategic places for debugging purposes (slows down execution) |  |
+| poison | -4.20042e+30 | Poison value | : :: "" |
+| ipoison | -420042 | Integer poison value | : :: "" |
+| tree_search | "yes" | Use a tree search to find the source processor |  |
+| check_tree_search | "no" | Cross-check the result of the tree search |  |
+
+### CarpetReduce
+
+This thorn provides parallel reduction operators for Carpet.
+
+This thorn now uses a weight function.  This makes it possible to
+perform physically meaningful spatial reduction operations.  The
+weight is 1 for all "normal" grid points.
+
+The weight is set to 0 on symmetry and possible the outer boundary,
+and it might be set to 1/2 on the edge of the boundary.  Setting this depends on the coordinate thorn, and currently works only when the coordinates are defined via CoordBase.
+
+The weight is also reduced or set to 0 on coarser grids that are
+overlaid by finer grid.
+
+The weight should also be reduced or set to 0 near and in excised
+regions.  This should happen in conjunction with an excision boundary thorn.
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| verbose | "no" | Produce screen output while running |  |
+| debug_iweight | "no" | Allow debugging iweight grid function by keeping it allocated |  |
+| min_max_time_interpolation | "yes" | Interpolate in time for min/max reductions |  |
 
 ## Partial Differential Equation (PDE)
 
@@ -1031,6 +1139,48 @@ There are several possibilities:
 | ------------ | ------------- | ------------- | ------------- |
 | initial_data_setup_method | "init_some_levels" | Procedure for setting up initial data | "init_some_levels":: "Set up at least one time level; other time levels are scratch space"; "init_single_level" :: "Set up exactly one time level; other time levels are not accessed"; "init_two_levels" :: "Set up exactly two time levels; other time levels are not accessed"; "init_all_levels" :: "Set up all active time levels" |
 
+### TOVSolver
+
+The Tolman-Oppenheimer-Volkoff solution is a static perfect fluid “star”. Here it is intended for use without evolving the matter terms. This provides a compact strong ﬁeld solution which is static but does not contain singularities.
+
+The equations for a TOV star are usually derived in Schwarzschild coordinates. In these coordinates, the metric can be brought into the form
+
+$$
+d s^{2}=-e^{2 \phi} d t^{2}+\left(1-\frac{2 m}{r}\right)^{-1} d r^{2}+r^{2} d \Omega^{2}
+$$
+
+Here we are assuming that the stress energy tensor is given by
+
+$$
+T^{\mu \nu}=(\mu+P) u^{\mu} u^{\nu}+P g^{\mu \nu}
+$$
+
+#### Description
+
+
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| TOV_Num_TOVs | 1 | The number of TOVs | 1: :: "Greater than 0" |
+| TOV_Solve_for_TOVs | 3 | Solve for TOVs even if no TOV initial data was requested? | 0:3 :: "depreciated in favour of TOVSolver::TOV_Enforce_Interpolation" |
+| TOV_Enforce_Interpolation | "no" | Enforce the interpolation of the data onto the Hydro GFs even without tov as specified initial data |  |
+| TOV_Num_Radial | 100000 | The number of radial points for the ODE integration | 1: :: "Greater than 0" |
+| TOV_Gamma | 2.0 | The polytropic constant in P = K rho^Gamma | 1.0: :: "The physical range at high Lorentz factors is [1,2], but otherwise higher values of gamma can also be used" |
+| TOV_K | 100.0 | The polytropic constant in P = K rho^Gamma | (0.0: :: "Greater than 0" |
+| TOV_ProperPosition | "no" | For use only with two NSs, atm only handles equal mass |  |
+| TOV_Fast_Interpolation | "yes" | Use faster interpolation algorithm? Default is yes. |  |
+| TOV_Clear_Initial_Data | "yes" | Clear initial data (spacetime)? Default is yes. |  |
+| TOV_Use_Old_Initial_Data | "no" | Take old initial data into account (spacetime)? Default is no. |  |
+| TOV_Use_Old_Matter_Initial_Data | "no" | Use also old matter initial data? Default is no. |  |
+| TOV_Conformal_Flat_Three_Metric | "no" | Use conformal factor to get the 3-metric flat. default is no |  |
+| TOV_Combine_Method | "average" | Which combine method should be used. | "maximum" :: "Take the maximum of rho and gxx as clue for the rest as clue."; "average" :: "Take the average of all available parts." |
+| TOV_Populate_Timelevels | 1 | Populate that amount of timelevels | 1:3 :: "1 (default) to 3" |
+| TOV_Momentum_Psi_Power | 0 | Power of Psi to be multiplied with J^i for Mom | : :: "anything, 0 as default" |
+| TOV_fake_evolution | 0 | Fake evolution by setting ID at every step | : :: "anything, 0 as off (default), everything else as on" |
+| TOV_save_to_datafile | "" | Only save data to file and exit | "." :: "Any filename, not used if empty" |
+
 ## Evolution
 
 ### ADMCoupling
@@ -1043,7 +1193,261 @@ The point is to allow clean coupling of matter thorns and spacetime evolution th
 
 Spacetime evolution thorns and various analysis thorns may need to know the value of the stress-energy tensor.
 
+### ML_BSSN
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| evolution_method |  | evolution_method | "ML_BSSN" :: "" |
+| lapse_evolution_method |  | lapse_evolution_method | "ML_BSSN" :: "" |
+| shift_evolution_method |  | shift_evolution_method | "ML_BSSN" :: "" |
+| dtlapse_evolution_method |  | dtlapse_evolution_method | "ML_BSSN" :: "" |
+| dtshift_evolution_method |  | dtshift_evolution_method | "ML_BSSN" :: "" |
+| verbose | 0 | verbose | : :: "" |
+| other_timelevels | 1 | Number of active timelevels for non-evolved grid functions | 0:4 :: "" |
+| harmonicF | 1 | d/dt alpha = - f alpha^n K   (harmonic: f=1, 1+log: f=2) | : :: "" |
+| alphaDriver | 0 | d/dt alpha = ... - alphaDriver (alpha - 1)   (use 1/M (?)) | : :: "" |
+| shiftGammaCoeff | 0 | d/dt beta^i = C Xt^i   (use C=0.75/M) | : :: "" |
+| betaDriver | 0 | d/dt beta^i = ... - betaDriver alpha^shiftAlphaPower beta^i   (use 1/M (?)) | : :: "" |
+| shiftAlphaPower | 0 | d/dt beta^i = ... - betaDriver alpha^shiftAlphaPower beta^i   (use 0 (?)) | : :: "" |
+| spatialBetaDriverRadius | 1000000000000 | Radius at which the betaDriver starts to be reduced | (0: :: "positive" |
+| spatialShiftGammaCoeffRadius | 1000000000000 | Radius at which shiftGammaCoeff starts to be reduced | (0: :: "positive" |
+| minimumLapse | 0 | Enforced minimum of the lapse function | 0: :: "non-negative" |
+| epsDiss | 0 | Dissipation strength | 0: :: "non-negative" |
+| LapseACoeff | -1. | (OUTDATED) Evolve time derivative of lapse A? (now evolveA) | 0. :: "off"; 1. :: "on"; -1. :: "default" |
+| ShiftBCoeff | -1. | (OUTDATED) Evolve time derivative of shift B^i? (now evolveB) | 0. :: "off"; 1. :: "on"; -1. :: "default" |
+| LapseAdvectionCoeff | -1. | (OUTDATED) Advect lapse? (now advectLapse) | 0. :: "off"; 1. :: "on"; -1. :: "default" |
+| ShiftAdvectionCoeff | -1. | (OUTDATED) Advect shift? (now advectShift) | 0. :: "off"; 1. :: "on"; -1. :: "default" |
+| fdOrder | 4 | Finite differencing order | 2 :: ""; 4 :: ""; 6 :: ""; 8 :: "" |
+| conformalMethod | 0 | Treatment of conformal factor | 0 :: "phi method"; 1 :: "W method" |
+| evolveA | 0 | Evolve time derivative of lapse A? (former LapseACoeff) | 0 :: "off"; 1 :: "on" |
+| evolveB | 1 | Evolve time derivative of shift B^i? (former ShiftBCoeff) | 0 :: "off"; 1 :: "on" |
+| harmonicN | 2 | d/dt alpha = - f alpha^n K  (harmonic: n=2, 1+log: n=1) | : :: "" |
+| shiftFormulation | 0 | shift formulation | 0 :: "Gamma driver"; 1 :: "harmonic" |
+| useSpatialBetaDriver | 0 | Enable spatially varying betaDriver | 0 :: "off"; 1 :: "on" |
+| useSpatialShiftGammaCoeff | 0 | Enable spatially varying shiftGammaCoeff | 0 :: "off"; 1 :: "on" |
+| advectLapse | 1 | Advect lapse? (former LapseAdvectionCoeff) | 0 :: "off"; 1 :: "on" |
+| advectShift | 1 | Advect shift? (former ShiftAdvectionCoeff) | 0 :: "off"; 1 :: "on" |
+| fixAdvectionTerms | 0 | Modify driver and advection terms to work better? | 0 :: "off"; 1 :: "on" |
+| tile_size | -1 | Loop tile size | : :: "" |
+| initial_boundary_condition | "scalar" | Boundary condition for initial condition for some of the BSSN variables | "scalar" :: "not recommended; use ML_BSSN_Helper's value 'extrapolate-gammas' instead" |
+| rhs_boundary_condition | "scalar" | Boundary condition for BSSN RHS and some of the ADMBase variables | "scalar" :: "not recommended; use ML_BSSN_Helper's option 'NewRad' instead" |
+| rhs_evaluation | "splitBy" | Whether and how the RHS routine should be split to improve performance | "combined" :: "use a single routine (probably slow)"; "splitBy" :: "split into 3 routines via Kranc" |
+| my_initial_data | "default" | (OUTDATED) | "ADMBase" :: "from ADMBase"; "default" :: "do nothing" |
+| my_initial_boundary_condition | "default" | (OUTDATED) | "none" :: "none"; "default" :: "do nothing" |
+| my_rhs_boundary_condition | "default" | (OUTDATED) | "none" :: "none"; "static" :: "static"; "default" :: "do nothing" |
+| my_boundary_condition | "default" | (OUTDATED) | "none" :: "none"; "Minkowski" :: "Minkowski"; "default" :: "do nothing" |
+| dt_lapse_shift_method | "default" | (OUTDATED) Treatment of ADMBase dtlapse and dtshift | "correct" :: "(unused)"; "noLapseShiftAdvection" :: "(unused)"; "default" :: "do nothing" |
+| apply_dissipation | "default" | (OUTDATED) Whether to apply dissipation to the RHSs | "always" :: "yes"; "never" :: "no"; "default" :: "do nothing" |
+| ML_BSSN_MaxNumEvolvedVars | 25 | Number of evolved variables used by this thorn | 25:25 :: "Number of evolved variables used by this thorn" |
+| ML_BSSN_MaxNumArrayEvolvedVars | 0 | Number of Array evolved variables used by this thorn | 0:0 :: "Number of Array evolved variables used by this thorn" |
+| timelevels | 3 | Number of active timelevels | 0:4 :: "" |
+| rhs_timelevels | 1 | Number of active RHS timelevels | 0:4 :: "" |
+| ML_BSSN_InitialADMBase1Everywhere_calc_every | 1 | ML_BSSN_InitialADMBase1Everywhere_calc_every | : :: "" |
+| ML_BSSN_InitialADMBase2Interior_calc_every | 1 | ML_BSSN_InitialADMBase2Interior_calc_every | : :: "" |
+| ML_BSSN_InitialADMBase2BoundaryScalar_calc_every | 1 | ML_BSSN_InitialADMBase2BoundaryScalar_calc_every | : :: "" |
+| ML_BSSN_EnforceEverywhere_calc_every | 1 | ML_BSSN_EnforceEverywhere_calc_every | : :: "" |
+| ML_BSSN_ADMBaseEverywhere_calc_every | 1 | ML_BSSN_ADMBaseEverywhere_calc_every | : :: "" |
+| ML_BSSN_ADMBaseInterior_calc_every | 1 | ML_BSSN_ADMBaseInterior_calc_every | : :: "" |
+| ML_BSSN_ADMBaseBoundaryScalar_calc_every | 1 | ML_BSSN_ADMBaseBoundaryScalar_calc_every | : :: "" |
+| ML_BSSN_EvolutionInterior_calc_every | 1 | ML_BSSN_EvolutionInterior_calc_every | : :: "" |
+| ML_BSSN_EvolutionInteriorSplitBy1_calc_every | 1 | ML_BSSN_EvolutionInteriorSplitBy1_calc_every | : :: "" |
+| ML_BSSN_EvolutionInteriorSplitBy2_calc_every | 1 | ML_BSSN_EvolutionInteriorSplitBy2_calc_every | : :: "" |
+| ML_BSSN_EvolutionInteriorSplitBy3_calc_every | 1 | ML_BSSN_EvolutionInteriorSplitBy3_calc_every | : :: "" |
+| ML_BSSN_EvolutionBoundaryScalar_calc_every | 1 | ML_BSSN_EvolutionBoundaryScalar_calc_every | : :: "" |
+| ML_BSSN_EvolutionAnalysisInit_calc_every | 1 | ML_BSSN_EvolutionAnalysisInit_calc_every | : :: "" |
+| ML_BSSN_EvolutionAnalysisInterior_calc_every | 1 | ML_BSSN_EvolutionAnalysisInterior_calc_every | : :: "" |
+| ML_BSSN_ConstraintsEverywhere_calc_every | 1 | ML_BSSN_ConstraintsEverywhere_calc_every | : :: "" |
+| ML_BSSN_ConstraintsInterior_calc_every | 1 | ML_BSSN_ConstraintsInterior_calc_every | : :: "" |
+| ML_BSSN_InitialADMBase1Everywhere_calc_offset | 0 | ML_BSSN_InitialADMBase1Everywhere_calc_offset | : :: "" |
+| ML_BSSN_InitialADMBase2Interior_calc_offset | 0 | ML_BSSN_InitialADMBase2Interior_calc_offset | : :: "" |
+| ML_BSSN_InitialADMBase2BoundaryScalar_calc_offset | 0 | ML_BSSN_InitialADMBase2BoundaryScalar_calc_offset | : :: "" |
+| ML_BSSN_EnforceEverywhere_calc_offset | 0 | ML_BSSN_EnforceEverywhere_calc_offset | : :: "" |
+| ML_BSSN_ADMBaseEverywhere_calc_offset | 0 | ML_BSSN_ADMBaseEverywhere_calc_offset | : :: "" |
+| ML_BSSN_ADMBaseInterior_calc_offset | 0 | ML_BSSN_ADMBaseInterior_calc_offset | : :: "" |
+| ML_BSSN_ADMBaseBoundaryScalar_calc_offset | 0 | ML_BSSN_ADMBaseBoundaryScalar_calc_offset | : :: "" |
+| ML_BSSN_EvolutionInterior_calc_offset | 0 | ML_BSSN_EvolutionInterior_calc_offset | : :: "" |
+| ML_BSSN_EvolutionInteriorSplitBy1_calc_offset | 0 | ML_BSSN_EvolutionInteriorSplitBy1_calc_offset | : :: "" |
+| ML_BSSN_EvolutionInteriorSplitBy2_calc_offset | 0 | ML_BSSN_EvolutionInteriorSplitBy2_calc_offset | : :: "" |
+| ML_BSSN_EvolutionInteriorSplitBy3_calc_offset | 0 | ML_BSSN_EvolutionInteriorSplitBy3_calc_offset | : :: "" |
+| ML_BSSN_EvolutionBoundaryScalar_calc_offset | 0 | ML_BSSN_EvolutionBoundaryScalar_calc_offset | : :: "" |
+| ML_BSSN_EvolutionAnalysisInit_calc_offset | 0 | ML_BSSN_EvolutionAnalysisInit_calc_offset | : :: "" |
+| ML_BSSN_EvolutionAnalysisInterior_calc_offset | 0 | ML_BSSN_EvolutionAnalysisInterior_calc_offset | : :: "" |
+| ML_BSSN_ConstraintsEverywhere_calc_offset | 0 | ML_BSSN_ConstraintsEverywhere_calc_offset | : :: "" |
+| ML_BSSN_ConstraintsInterior_calc_offset | 0 | ML_BSSN_ConstraintsInterior_calc_offset | : :: "" |
+| phi_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| gt11_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| gt12_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| gt13_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| gt22_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| gt23_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| gt33_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| Xt1_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| Xt2_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| Xt3_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| trK_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| At11_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| At12_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| At13_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| At22_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| At23_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| At33_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| alpha_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| A_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| beta1_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| beta2_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| beta3_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| B1_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| B2_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| B3_bound | "skip" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_log_confac_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_metric_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_Gamma_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_trace_curv_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_curv_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_lapse_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_dtlapse_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_shift_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| ML_dtshift_bound | "none" | Boundary condition to implement | "flat" :: "Flat boundary condition"; "none" :: "No boundary condition"; "static" :: "Boundaries held fixed"; "radiative" :: "Radiation boundary condition"; "scalar" :: "Dirichlet boundary condition"; "newrad" :: "Improved radiative boundary condition"; "skip" :: "skip boundary condition code" |
+| phi_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| gt11_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| gt12_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| gt13_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| gt22_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| gt23_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| gt33_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| Xt1_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| Xt2_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| Xt3_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| trK_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| At11_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| At12_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| At13_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| At22_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| At23_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| At33_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| alpha_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| A_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| beta1_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| beta2_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| beta3_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| B1_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| B2_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| B3_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_log_confac_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_metric_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_Gamma_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_trace_curv_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_curv_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_lapse_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_dtlapse_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_shift_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| ML_dtshift_bound_speed | 1. | characteristic speed at boundary | 0: :: "outgoing characteristic speed > 0" |
+| phi_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| gt11_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| gt12_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| gt13_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| gt22_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| gt23_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| gt33_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| Xt1_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| Xt2_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| Xt3_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| trK_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| At11_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| At12_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| At13_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| At22_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| At23_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| At33_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| alpha_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| A_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| beta1_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| beta2_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| beta3_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| B1_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| B2_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| B3_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_log_confac_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_metric_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_Gamma_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_trace_curv_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_curv_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_lapse_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_dtlapse_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_shift_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| ML_dtshift_bound_limit | 0. | limit value for r -> infinity | : :: "value of limit value is unrestricted" |
+| phi_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| gt11_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| gt12_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| gt13_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| gt22_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| gt23_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| gt33_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| Xt1_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| Xt2_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| Xt3_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| trK_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| At11_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| At12_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| At13_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| At22_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| At23_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| At33_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| alpha_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| A_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| beta1_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| beta2_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| beta3_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| B1_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| B2_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| B3_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_log_confac_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_metric_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_Gamma_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_trace_curv_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_curv_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_lapse_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_dtlapse_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_shift_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+| ML_dtshift_bound_scalar | 0. | Dirichlet boundary value | : :: "unrestricted" |
+
 ## Hydro
+
+Thorn locate in /Users/yuliu/Cactus/arrangements/EinsteinBase/TmunuBase
+### TmunuBase
+
+Provide grid functions for the stress-energy tensor $T_{\mu \nu}$. Thorn TmunuBase is for the stress-energy tensor what thorn ADMBase is for the metric tensor.
+
+#### Description
+
+The variables provided by TmunuBase are:
+
+- The “scalar” part of $T_{\mu \nu}$, its time-time component: eTtt
+- The “vector” part of $T_{\mu \nu}$, its time-space components: eTtx, eTty, eTtz
+- The “tensor” part of $T_{\mu \nu}$, its space-space components: eTxx, eTxy, eTxz, eTyy, eTyz, eTzz
+
+These components have the preﬁx e to avoid naming conflicts with existing variables. Many thorns dealing with matter already use variable names such as Ttt.
+
+Several parameters choose how TmunuBase behaves at run time:
+
+- The parameter `stress_energy_storage` activates storage for $T_{\mu \nu}$.
+- The parameter stress_energy_at_RHS moves calculating the $T_{\mu \nu}$ from the evol bin into the `MoL_PostStep` group. This increases the order of accuracy of the spacetime–matter coupling, but is only possible when thorn MoL is used.
+- The parameter timelevels chooses the number of time levels for $T_{\mu \nu}$. The default is a single time level, which is sufficient for unigrid simulation. Mesh refinement simulation may require several time levels if mesh refinement boundaries require correct values.
+- The parameter `prolongation_type` defines the prolongation operator for mesh refinement boundaries.
+
+Since the values of $T_{\mu \nu}$ change at each time step. $T_{\mu \nu}$ needs to be recalculated frequently. This happens either in the schedule bin evol or in the schedule group MoL_PostStep.
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| stress_energy_storage | no | Should the stress-energy tensor have storage? |  |
+| stress_energy_at_RHS | no | Should the stress-energy tensor be calculated for the RHS evaluation? |  |
+| support_old_CalcTmunu_mechanism | no | Should the old CalcTmunu.inc mechanism be supported? This is deprecated. |  |
+| timelevels | 1 | Number of time levels | 0:3 :: "" |
+| prolongation_type | "Lagrange" | The kind of boundary prolongation for the stress-energy tensor | "`^Lagrange$`" :: "standard prolongation (requires several time levels)"; "`^none$`" :: "no prolongation (use this if you do not have enough time levels active)"; "" :: "any other supported prolongation type" |
 
 ### [HydroBase](https://www.einsteintoolkit.org/thornguide/EinsteinBase/HydroBase/documentation.html)
 
@@ -2222,4 +2626,21 @@ The NaNChecker thorn can be used to analyze Cactus grid variables (that is grid 
 | verbose | "standard" | How much information to give | "all":: "All information"; "standard" :: "Standard information" |
 | ignore_restricted_points | "no" | do not check grid points whose values will be restricted away |  |
 | setup_test | "no" | set up grid function with NaNs |  |
+
+### TerminationTrigger
+
+This thorn watches the elapsed walltime. If only n minutes are left before the some limit set by the user, it triggers termination of the simulation. 
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| on_remaining_walltime | 0.0 | When to trigger termination in MINUTES | 0.0:: "Don't trigger termination"; (0.0: :: "So many minutes before your job walltime is over" |
+| max_walltime | 0.0 | Walltime in HOURS allocated for this job | 0.0:: "Don't trigger termination"; (0.0: :: "Should be positive, right" |
+| termination_from_file | "no" | Use termination file; specified by termination_filename |  |
+| create_termination_file | "no" | Create an empty termination file at startup |  |
+| termination_file | "/tmp/cactus_terminate" | Termination file name (either full path or relative to IO::out_dir) | "" ::"Termination file" |
+| check_file_every | 1 | Check termination file every n timesteps | 1: :: "" |
+| output_remtime_every_minutes | 60.0 | Output remaining wall time every n minutes | 0.0:: "No output"; (0.0: :: "Output" |
+| testsuite | "no" | manually trigger termination |  |
 

@@ -255,3 +255,28 @@ A standard way of solving partial differential equations are finite differences 
 Instead of only one grid, there are several grids or grid patches with different resolutions. The coarsest grid usually encloses the whole simulation domain. Successively finer grids overlay the coarse grid at those locations where a higher resolutions is needed. The coarser grids provide boundary conditions to the finer grid through interpolation.
 
 Instead of updating only one grid, the application has to update all grids. The usual approach is to first take a step on the coarsest grid, and then recursively take several smaller steps on the finer grids. The Courant criterion requires that the step sizes on the finer grids be smaller than on the coarse grid. The boundary values for the finer grids are found through interpolation in space and time from the coarser grid. In the end, the information on the finer grids is injected into the coarse grids.
+
+### Adaptive mesh refinement (AMR)
+
+For well behaved problems a grid of uniform mesh spacing (in each of the coordinate directions) gives satisfactory results. However, there are classes of problems where the solution is more difficult to estimate in some regions (perhaps due to discontinuities, steep gradients, shocks, etc.) than in others. One could use a uniform grid having a **spacing fine enough so that the local errors estimated in these difficult regions are acceptable**. But this approach is computationally extremely costly.
+
+In numerical analysis, **adaptive mesh refinement (AMR)** is a method of **adapting the accuracy of a solution within certain sensitive or turbulent regions** of simulation, dynamically and during the time the solution is being calculated. The use of AMR has since then proved of broad use and has been used in studying turbulence problems in hydrodynamics as well as in the study of large scale structures in astrophysics。
+
+![](media/15523870802272.jpg)
+
+1. Start with a coarse grid
+2. Identify regions that need finer resolution
+3. Superimpose finer sub-grids only on those regions 
+4. Finer and finer subgrids are added recursively until either a given maximum level of refinement is reached or the local truncation error has dropped below the desired level
+
+![](media/15523870938244.jpg)
+
+The complete computational grid consists of a collection of blocks with different physical cell sizes, which are related to each other in a hierarchical fashion using a tree data structure. The blocks at the root of the tree have the largest cells, while their children have smaller cells and are said to be refined. 
+
+![](media/15523871071222.jpg)
+
+Three rules govern the establishment of refined child blocks.
+
+1. a refined child block must be one-half as large as its parent block in each spatial dimension. 
+2. a block’s children must be nested; i.e., the child blocks must fit within their parent block and cannot overlap one another, and the complete set of children of a block must fill its volume. Thus, in d dimensions a given block has either zero or $2^d$ children.
+3. blocks which share a common border may not differ from each other by more than one level of refinement.

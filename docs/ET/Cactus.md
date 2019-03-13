@@ -1,3 +1,7 @@
+**Program Flow**
+
+![-w847](media/15524403552358.jpg)
+
 Cactus executables always run from a parameter file, which specifies which thorns to use and sets the values of each thorn’s parameters (the parameters that are not set will take on default values).
 
 There is no restriction on the name of the parameter file, although it is conventional to use the file extension `.par`.

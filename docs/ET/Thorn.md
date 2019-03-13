@@ -20,6 +20,10 @@ Thorns can also contain
 - a par directory for example parameter files
 - a test subdirectory may also be added, to hold the thorn’s test suite.
 
+## Flesh-Thorn Interface
+
+Each thorn provides 3 configuration files (interface.ccl, param.ccl, schedule.ccl), detailing its interface with the Flesh and with other thorns.
+
 ## General Syntax of CCL Files
 
 **Cactus Configuration Language (CCL) files are text files used to define configuration information for a thorn.**
