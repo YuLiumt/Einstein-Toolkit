@@ -1,1 +1,0 @@
-Here we show an example evolution of a wave equation on a Kerr background.

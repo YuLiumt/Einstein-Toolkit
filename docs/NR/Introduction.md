@@ -24,7 +24,7 @@ $$
 G^{ij} = 8 \pi T^{ij}
 $$
 
-It is not surprising that there is a mismatch between the required number (10) of second time 2 derivatives $\partial_t^2 g_{ab}$ and the available number (6) of dynamical ﬁeld equations. After all, there is always a fourfold ambiguity associated with the freedom to choose four different coordinates to label points in spacetime. So, for example, we could always choose Gaussian normal coordinates and set $g_{00} = −1 $ and $g_{0i} = 0$.
+It is not surprising that there is a mismatch between the required number (10) of second time 2 derivatives $\partial_t^2 g_{ab}$ and the available number (6) of dynamical ﬁeld equations. After all, there is always a fourfold ambiguity associated with the freedom to choose four different coordinates to label points in spacetime. So, for example, we could always choose Gaussian normal coordinates and set $g_{00} = −1$ and $g_{0i} = 0$.
 
 The Cauchy problem in general relativity logically involves a **decomposition of four-dimensional spacetime into three dimensional space and one-dimensional time**.
 

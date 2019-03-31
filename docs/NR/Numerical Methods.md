@@ -246,7 +246,208 @@ The Courant condition states that the the grid point $u _ { j } ^ { n + 1 }$ at 
 
 Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.
 
+**It seems somewhat like a miracle that simply replacing a grid function by a local average manages to change the numerical scheme from unconditionally unstable to conditionally stable.**
+
+This change can be interpreted in very physical terms
+
+$$
+u_{j}^{n+1}=u_{j}^{n}+\frac{1}{2}\left(u_{j+1}^{n}-2 u_{j}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+$$
+
+or
+
+$$
+\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}=-v \frac{u_{j+1}^{n}-u_{j-1}^{n}}{2 \Delta x}+\frac{(\Delta x)^{2}}{2 \Delta t} \frac{u_{j+1}^{n}-2 u_{j}^{n}+u_{j-1}^{n}}{(\Delta x)^{2}}
+$$
+
+But equation is a finite-difference representation of the differential equation
+
+$$
+\partial_{t} u+v \partial_{x} u=D \partial_{x}^{2} u
+$$
+
+where the term on the right-hand side is essentially a diffusion term, with parameter $D=(\Delta x)^{2} /(2 \Delta t)$ serving as a constant coefficient of diffusion.
+
+This feature implies the amplitude of any wave will decrease spuriously with time as it propagates. A related effect is anomalous dispersion, an additional price we pay for stablity in the Lax scheme and many other finite-difference schemes for hyperbolic systems.
+
+#### Other scheme
+
+Lax scheme
+
+___
+
+There are a number of other ways of constructing stable finite difference schemes for the model equation. A popular alternative to the Lax scheme is upwind differencing
+
+$$
+\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}=-v \left\{\begin{array}{l}{\frac{u_{j}^{n}-u_{j-1}^{n}}{\Delta x},} & {v>0} \\ {\frac{u_{j+1}^{n}-u_{j}^{n}}{\Delta x},} & {v>0}\end{array}\right.
+$$
+
+This scheme borrows its name from the fact that for a wave with $v>0$, that travels “to the right”, say, the new grid-point $u_{j}^{n+1}$ is affected only by the “upwind” grid-points to its left, i.e. that lie in the region through which the wave travels before reaching $x_{j}$.
+
+three-level scheme
+
+___
+
+It would be desirable, however, to have a scheme that is second order in both in space and time. One way to construct such a code is to abandon two-level schemes, and instead consider a three-level scheme. We can then construct centered derivatives both for the time-derivative,
+
+$$
+\left(\partial_{t} u\right)_{j}^{n}=\frac{u_{j}^{n+1}-u_{j}^{n-1}}{2 \Delta t}+\mathcal{O}\left(\Delta t^{2}\right)
+$$
+
+the leap-frog scheme,
+
+$$
+u_{j}^{n+1}=u_{j}^{n-1}-v \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+$$
+
+Some researchers prefer two-level schemes over three-level schemes because three level schemes require initial data on two different time levels, which can be somewhat awkward.
+
+![-w619](media/15532637365521.jpg)
+
+The leap-frog scheme has the additional disadvantage that, it only connects fields of the same color. “Black” gridpoints can therefore evolve completely independently of “white” gridpoints, and the two sets of grid points may drift apart as numerical error accumulates differently for the two sets of points. If necessary, this problem can be solved by artificially adding a very small viscous term that links the two sets together. Once these potential issues are resolved, leap-frog is a very simple, accurate and powerful method.
+
+implicit scheme
+
+___
+
+Yet another way of constructing a stable two-level scheme is to use backward time differencing instead of forward differencing. This approach then yields the “backward-time, centered-space” scheme,
+
+$$
+u_{j}^{n+1}=u_{j}^{n}-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n+1}-u_{j-1}^{n+1}\right)
+$$
+
+![-w600](media/15532642037929.jpg)
+
+Performing a von Neumann stability analysis we find the amplification factor
+
+$$
+|\xi(k)| \leq 1
+$$
+
+for all values of $\Delta t$. This finding means that this scheme is unconditionally stable. **The size of the stepsize ∆t is no longer restricted by stability, and instead is limited only by accuracy requirements.** this property is even more important for parabolic equations.
+
+The disadvantage of the backward differencing scheme is that we can no longer solve for the new grid function $u_{j}^{n+1}$ at the new time $t^{n+1}$ explicitly in terms of old grid functions at $t^{n}$ alone. Instead, now couples $u_{j}^{n+1}$ with the its closest neighbors $u_{j+1}^{n+1}$ and $u_{j-1}^{n+1}$. This coupling provides an implicit linear relation between the new grid functions, and is therefore an example of an implicit finite-differencing scheme. We can no longer sweep through the grid and update one point at a time; instead **we now have to solve for all grid points simultaneously**. Writing equation at all interior grid points, and then taking into account the boundary conditions, leads to a system of equations quite similar to elliptic equations.
+
+Crank-Nicholson scheme
+
+___
+
+A second-order scheme would be time-centered, meaning that we should estimate the the time derivative at the mid-point between the two time levels n and n + 1,
+
+Implementing time-centering means that we also have to evaluate the space derivative at this same midpoint $n+1/2$  which we can do by averaging between the values at n and n+1.
+
+$$
+\left(\partial_{t} u\right)_{j}^{n+1 / 2}=\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}+\mathcal{O}\left(\Delta t^{2}\right)
+$$
+
+This approach yields the Crank-Nicholson scheme
+
+$$
+u_{j}^{n+1}=u_{j}^{n}-\frac{v}{4} \frac{\Delta t}{\Delta x}\left(\left(u_{j+1}^{n+1}-u_{j-1}^{n+1}\right)+\left(u_{j+1}^{n}-u_{j-1}^{n}\right)\right)
+$$
+
+![-w696](media/15532650020363.jpg)
+
+Crank-Nicholson is second order in both space and time, and shows that it is unconditionally stable.
+
+The iterative Crank-Nicholson scheme uses a predictor-corrector approach. In the predictor step we predict the new values $u_{j}^{n+1}$ by using the fully explicit FTCS scheme.
+
+$$
+^{(1)} u_{j}^{n+1}=u_{j}^{n}-\frac{v \Delta t}{2 \Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+$$
+
+which, as we have seen above, would be unconditionally unstable by itself. In a subsequent corrector step we use these predicted values $^{(1)}{u_{j}}^{n+1}$ together with the $u_{j}^{n}$ to obtain a time-centered approximation for the spatial derivative on the right-hand side of equation. This step yields the corrected values of the grid function,
+
+$$
+^{(2)} u_{j}^{n+1}=u_{j}^{n} - \frac{v \Delta t}{4 \Delta x} \left(\left( ^{(1)} u_{j+1}^{n+1} - ^{(1)} u_{j-1}^{n+1}\right)\right)+\left(u_{j+1}^{n}-u_{j-1}^{n}\right) )
+$$
+
+The corrector step can be repeated an arbitrary number times N, always using the previous values $^{(N-1)} u_{j}^{n+1}$ on the right-hand side to find new corrected values $^{(N)} u_{j}^{n+1}$.
+
+The iterative Crank-Nicholson scheme is an explicit two-level scheme that is second order in both space and time. Since this form is very similar to the 3 + 1 equations and related formulations, the iterative Crank-Nicholson scheme has often been used in numerical relativity simulations.
+
+#### Method of Lines
+
+A popular alternative to these complete finite difference schemes is therefore the method of lines (or MOL for short).
+
+**The basic idea of the method of lines is to finite difference the space derivatives only.** Now we introduce a spatial grid only, at least for now, so that the function values at these gridpoint, $u_{j}(t)=u\left(t, x_{j}\right)$, remain functions of time. As a result, our partial differential equation for $u(t, x)$ becomes a set of ordinary differential equations for the grid values $u_{j}(t)$. The next question is how to integrate the ordinary differential equations. The appealing feature of the method of lines, however, is that we can use any method for the integration of the ordinary differential equations that we like. In fact, many such methods, including very efficient, high-order methods, are precoded and readily available. One such algorithm is the ever-popular Runge-Kutta method.
+
+To implement, say, a fourth-order scheme for our model
+
+$$
+\partial_{t} u+v \partial_{x} u=0
+$$
+
+we could adopt the fourth-order differencing stencil to replace the spatial derivative, yielding
+
+$$
+\frac{d u_{j}}{d t}=-\frac{v}{12 \Delta x}\left(u_{i-2}-8 u_{j-1}+8 u_{j+1}-u_{i+2}\right)
+$$
+
+and then integrate this set of ordinary differential equations with a fourth-order Runge-Kutta method.
+
+## Ghost Zones
+
+Cactus is based upon a distributed computing paradigm. That is, the problem domain is split into blocks, each of which is assigned to a processor.
+
+Consider the 1-D wave equation
+ 
+$$
+\frac{\partial^{2} \phi}{\partial t^{2}}=\frac{\partial^{2} \phi}{\partial x^{2}}
+$$
+
+To solve this by partial differences, one discretises the derivatives to get an equation relating the solution
+at different times.
+
+$$
+\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}
+$$
+
+On examination, you can see that to generate the data at the point $(t+\Delta t, x)$ we need data from the four points $(t, x)$, $(t -\Delta t, x)$, $(t, x + \Delta x)$ and $(t, x- \Delta x)$ only.
+
+Now, if you evolve the above scheme, it becomes apparent that at each iteration the number of grid points you can evolve decreases by one at each edge.
+
+![-w816](media/15528964483464.jpg)
+
+At the outer boundary of the physical domain, the data for the boundary point can be generated by the boundary conditions, however, at internal boundaries, the data has to be copied from the adjacent processor.
+
+It would be inefficient to copy each point individually, so instead, a number of ghostzones are created at the internal boundaries. A ghostzone consists of a copy of the whole plane (in 3D, line in 2D, point in 1D) of the data from the adjacent processor.
+
+![-w785](media/15528964642193.jpg)
+
+Once the data has been evolved one step, the data in the ghostzones can be exchanged (or synchronised) between processors in one fell swoop before the next evolution step.
+
 ## Mesh Refinement
+
+Many current numerical relativity codes use a uniform grid spacing to cover the entire spatial domain. Given that computational resources are limited, so that we can afford only a finite number of gridpoints, such a “unigrid” implementation may pose a problem.
+
+Imagine, for concreteness, a simulation of a strong-field gravitational wave source, like a compact binary containing neutron stars or black holes. On the one hand we have to resolve these sources well, so as to minimize truncation error in the strong-field region. On the other hand, the grid must extend into the weak-field region at large distances from the sources, so as to minimize error from the outer boundaries and to enable us to extract the emitted gravitational radiation accurately.
+
+![-w1062](media/15533057187758.jpg)
+
+A very promising alternative is mesh refinement, which has been widely developed and used in the computational fluid dynamics community and is becoming increasingly popular in numerical relativity.
+
+The basic idea underlying mesh refinement techniques is to perform the simulation not on one numerical grid, but on several, as in the multigrid methods.
+
+![-w731](media/15533068726818.jpg)
+
+In multigrid methods, the numerical solution is computed on a hierarchy of computational grids with increasing grid resolution. The finer grids may or may not cover all the physical space that is covered by the coarser grids. The numerical solution is then computed by completing sweeps through the grid hierarchy. 
+
+The coarse grid is sufficiently small so that we can compute a solution with a direct solver. This provides the “global” features of the solution, albeit on a coarse grid and hence with a large local truncation error. We then interpolate this approximate solution to the next finer grid. This interpolation from a coarser grid to a finer grid is called a “prolongation”, and we point out that the details of this interpolation depend on whether the grid is cell-centered or vertex-centered. 
+
+> In the mathematical field of numerical analysis, interpolation is a method of constructing new data points within the range of a discrete set of known data points.
+
+On the finer grid we can then apply a relaxation method, for example a Gauss-Seidel sweep. While this method is too slow to solve the problem globally, as we have discussed above, it is very well suited to improve the solution locally. This step is often called a “smoothing sweep”. 
+
+After this smoothing sweep the solution can be prolonged to the next finer grid, where the procedure is repeated. Once we have smoothed the solution on the finest grid, we start ascending back to coarser grids. The interpolation from a finer grid to a coarser grid is called a “restriction”. 
+
+The coarser grids now “learn” from the finer grids by comparing their last solution with the one that comes back from a finer grid. This comparison provides an estimate for the local truncation error, which can be accounted for with the help of an artificial source term. On each grid we again perform smoothing sweeps, again improving the solution because we inherit the smaller truncation error from the finer grids. These sweeps through the grid hierarchy can be repeated until the solution has converged to a pre-determined accuracy.
+
+Typically, the gridspacing on the finer grid is half that on the next coarser grid, but clearly other refinement factors can be chosen. The hierarchy can be extended, and typical mesh refinement applications employ multiple refinement levels.
+
+Two versions of mesh refinement can be implemented. In the simpler version, called fixed mesh refinement or FMR, it is assumed that the refined grids will be needed only at known locations in space that remain fixed throughout the simulation.
+
+The situation is more complicated for objects that are moving, as is the case for a coalescing binary star system. In this case we do not know a priori the trajectories of the companion stars, hence do not know which regions need refining. Moreover, these regions will be changing as the system evolves and the stars move. Clearly, we would like to move the refined grids with the stars. Such an approach, whereby the grid is relocated during the simulation to give optimal resolution at each time step, is called adaptive mesh refinement or AMR.
 
 ### Fixed Mesh Refinement
 

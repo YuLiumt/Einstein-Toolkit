@@ -1,4 +1,6 @@
-## Flesh parameters
+## Flesh
+
+The Cactus flesh knows about everything in `schedule.ccl` files, and handles sorting scheduled routines into an order which is consistent with the BEFORE and AFTER clauses in all the schedule groups. The flesh also handles repeatedly calling scheduled routines which are scheduled with a WHILE clause. In addition, the flesh determines when storage is turned on/off for grid scalars, functions, and arrays and when grid arrays and functions are synchronised, based on the `STORAGE:` and `SYNC:` statements in schedule blocks.
 
 ```
 # Flesh parameters
@@ -279,21 +281,27 @@ The method is chosen using the keyword parameter `time::timestep` method.
 - courant_static
     Calculates the timestep once at the start of the simulation, based
 on a simple courant type condition using the spatial gridsizes and the parameter `time::dtfac`.
+
     $$
     \Delta t=\operatorname{dt} \mathrm{fac} * \min \left(\Delta x^{i}\right)
     $$
+    
     Note that it is up to the user to custom `dtfac` to take into account the dimension of the space being used, and the wave speed.
 - courant_speed
-     The timestep being set before each iteration using the spatial dimension of the grid, the spatial grid sizes, the parameter `courant_fac` and the grid variable `courant_wave_speed`. The algorithm used is
+    The timestep being set before each iteration using the spatial dimension of the grid, the spatial grid sizes, the parameter `courant_fac` and the grid variable `courant_wave_speed`. The algorithm used is
+     
     $$
     \Delta t=\operatorname{courant}\_ \mathrm{fac} * \min \left(\Delta x^{i}\right) / \mathrm{courant}\_\mathrm{wave}\_ \text { speed } / \sqrt{\mathrm{dim}}
     $$
+    
     For this algorithm to be successful, the variable `courant_wave_speed` must have been set by some thorn to the maximum propagation speed on the grid before this thorn sets the timestep,
 - courant_time
     the timestep is chosen using
+    
     $$
     \Delta t=\operatorname{courant}\_ \mathrm{fac} * \mathrm{courant}\_\mathrm{min}\_ \text { time } / \sqrt{\mathrm{dim}}
     $$
+    
     where the grid variable `courant_min_time` must be set by some thorn to the minimum time for a wave to cross a gridzone before this thorn sets the timestep,
 
 #### Parameter
@@ -569,11 +577,13 @@ The computational grid can be manually distributed using PUGH’s string paramet
 
 ### [Carpet](https://carpetcode.org)
 
+https://arxiv.org/pdf/gr-qc/0310042.pdf
+
 The Carpet driver, which lives in the Carpet arrangement, is divided into several parts. The thorn Carpet is the main driver piece; it provides all the routines and structures that Cactus expects from it. The thorn CarpetLib is the workhorse that does all the bookkeeping and data shuffling. Those two alone form a valid Cactus driver; the other thorns provide additional functionality. The thorns CarpetInterp, CarpetReduce, and CarpetSlab provide the corresponding interpolation, reduction, and slabbing interfaces. The thorns CarpetIOASCII and CarpetIOFlexIO provide I/O methods. Finally, thorn CarpetRegrid provides a user interface to select where and what to refine. (The actual refinement is handled in CarpetLib.)
 
 Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. For historic reasons it also has a notion of multigrid levels, but those are currently unused.
 
-In order to allow multiple processors to run efficiently in parallel, the grid is broken down into several rectangular components, and each processor is assigned one of these components. The components will usually overlap by a few grid points, so as to allow the processors to calculate spatial derivatives (which require neighbouring grid points) without having to communicate for every grid point. From time to time it is then necessary to synchronise the overlapping region, which is the only time at which communication happens.
+In order to allow multiple processors to run efficiently in parallel, **the grid is broken down into several rectangular components, and each processor is assigned one of these components.** The components will usually **overlap by a few grid points, so as to allow the processors to calculate spatial derivatives** (which require neighbouring grid points) without having to communicate for every grid point. From time to time it is then necessary to synchronise the overlapping region, which is the only time at which communication happens.
 
 Setting up a grid hierarch is in Carpet handled by three different entities:
 

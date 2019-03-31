@@ -12,9 +12,12 @@ nav:
     - Install: 'ET/Install.md'
     - Cactus: 'ET/Cactus.md'
     - Thorn: 'ET/Thorn.md'
+    - Source File: 'ET/Source File.md'
     - Parameter: 'ET/parameter.md'
     - Visualization: 'ET/Visualization.md'
 - General Relativity:
+    - Differential geometry: 'GR/Differential geometry.md'
+    - Einstein Equation: 'GR/Einstein Equation.md'
     - Solutions: 'GR/Solutions.md'
 - Gravitational Wave:
     - Introduction: 'GW/Introduction.md'
@@ -23,8 +26,12 @@ nav:
 - Numerical Relativity:
     - Introduction: 'NR/Introduction.md'
     - 3+1 Decomposition: 'NR/3+1 Decomposition.md'
-    - Numerical Methods: 'NR/Numerical Methods.md'
     - ADM: 'NR/ADM.md'
+    - BSSN: 'NR/BSSN.md'
+    - Conformal Transformation: 'NR/Conformal Transformation.md'
+    - Coordinates: 'NR/Coordinates.md'
+    - Matter Sources: 'NR/Matter Sources.md'
+    - Numerical Methods: 'NR/Numerical Methods.md'
 - Search Pipeline:
     - Introduction: 'SP/Introduction.md'
     - Matched Filtering: 'SP/matched filter.md'
@@ -38,6 +45,8 @@ site_url: https://YuLiumt.github.io/Einstein-Toolkit
 google_analytics: ['UA-36723568-3', 'https://yuliumt.github.io']
 
 markdown_extensions:
+  - toc:
+      baselevel: 2
   - footnotes
   - codehilite:
       linenums: true

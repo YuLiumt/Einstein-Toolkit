@@ -80,4 +80,47 @@ The parameter file is read sequentially from top to bottom, this means that if y
     
     `-o`: Prints the description and allowed values for a given parameter—takes one argument.
 
+## Cactus Application Interfaces
 
+### Iterating Over Grid Points
+
+___
+
+A grid function consists of a multi-dimensional array of grid points. These grid points fall into several types:
+
+- interior: regular grid point, presumably evolved in time
+- ghost: inter-process boundary, containing copies of values owned by another process 
+- physical boundary: outer boundary, presumably defined via a boundary condition 
+- symmetry boundary: defined via a symmetry, e.g. a reflection symmetry or periodicity
+
+Grid points in the edges and corners may combine several types. For example, a point in a corner may be a ghost point in the x direction, a physical boundary point in the y direction, and a symmetry point in the z direction.
+
+The size of the physical boundary depends on the application. The number of ghost points is defined by the driver; the number of symmetry points is in principle defined by the thorn implementing the respective symmetry condition, but will in general be the same as the number of ghost points to avoid inconsistencies.
+
+!!! note 
+    When iterating over grid points, one usually needs to know about the boundary sizes and boundary types present.
+    
+The flesh provides a set of macros to iterate over particular types of grid points:
+
+- CCTK_LOOP_ALL: Loop over all grid points
+- CCTK_LOOP_INT: Loop over all interior grid points
+- CCTK_LOOP_BND: Loop over all physical boundary points
+- CCTK_LOOP_INTBND: Loop over all “interior” physical boundary points, i.e. over all those physical boundary points that are not also ghost or symmetry points
+
+As described above, points on edges and corners can have several boundary types at once, e.g. can be both a physical and a symmetry point. LOOP_BND and LOOP_INTBND treat these different: LOOP_BND loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries), while LOOP_INTBND loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary). LOOP_BND does not require applying a symmetry condition or synchronisation afterwards (but does not allow taking tangential derivatives); LOOP_INTBND allows taking tangential derivatives (but requires applying symmetry boundaries and synchronising afterwards).
+
+### Coordinates
+
+The flesh provides utility routines for registering and querying coordinate information. The flesh does not provide any coordinates itself, these must be supplied by a thorn. Thorns are not required to register coordinates to the flesh, but registering coordinates provides a means for infrastructure thorns to make use of coordinate information.
+
+### I/O
+
+To allow flexible I/O, the flesh itself does not provide any output routines, however it provides a mechanism for thorns to register different routines as I/O methods.
+
+### Interpolation Operators
+
+The flesh does not provide interpolation routines by itself. Instead, it offers a general function API to thorns, for the registration and invocation of interpolation operators.
+
+### Reduction Operators
+
+A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. A typical application is, for example, finding the maximum reduction from processor local error estimates, therefore, making the previous processor local error known to all processors.
