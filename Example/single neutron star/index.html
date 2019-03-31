@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Single neutron star - Yu Liu's Notebook</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Single neutron star";
+    var mkdocs_page_input_path = "Example/single neutron star.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/Example/single neutron star/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../ET/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Cactus/">Cactus</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Thorn/">Thorn</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/parameter/">Parameter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Visualization/">Visualization</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Solutions/">Solutions</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GW/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Linearized Waves/">Linearized Waves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Extracting Gravitational Waveforms/">Extracting Gravitational Waveforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Numerical Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../NR/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/ADM/">ADM</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Example</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Poisson/">Poisson</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Yu Liu's Notebook</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Single neutron star</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/Example/single neutron star.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>This simulation shows how to evolve a stable, single neutron star.</p>
+<p>What can be seen is the initial perturbation (due to numerical errors) ringing down (look at the density maximum), and later numerical errors governing the solution. Try higher resolutions to decrease this error.</p>
+<h3 id="parameter-file">Parameter File</h3>
+<h4 id="flesh-parameters">Flesh parameters</h4>
+<p>时间演化到 800 时结束</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Cactus::terminate           = &quot;time&quot;
+Cactus::cctk_final_time     = 800
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># Termination Trigger
+ActiveThorns = &quot;TerminationTrigger&quot;
+
+# Walltime in HOURS allocated for this job
+TerminationTrigger::max_walltime = 24          # hours
+
+# When to trigger termination in MINUTES
+TerminationTrigger::on_remaining_walltime = 15 # minutes
+
+# Check termination file every n timesteps
+TerminationTrigger::check_file_every = 512
+
+# Termination file name
+TerminationTrigger::termination_file = &quot;TerminationTrigger.txt&quot;
+
+# Use termination file
+TerminationTrigger::termination_from_file   = &quot;yes&quot;
+
+# Create an empty termination file at startup
+TerminationTrigger::create_termination_file = &quot;yes&quot;
+</pre></div>
+</td></tr></table>
+
+<h4 id="time-integration">Time integration</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>time::dtfac = 0.25
+
+MoL::ODE_Method             = &quot;rk4&quot;
+
+# Number of intermediate steps taken by the ODE method
+MoL::MoL_Intermediate_Steps = 4
+
+# Number of scratch levels required by the ODE metho
+MoL::MoL_Num_Scratch_Levels = 1
+</pre></div>
+</td></tr></table>
+
+<h4 id="grid-parameters">grid parameters</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># grid parameters
+Carpet::domain_from_coordbase = &quot;yes&quot;
+CartGrid3D::type         = &quot;coordbase&quot;
+
+# Use the full domain
+CartGrid3D::domain       = &quot;full&quot;
+
+# Don&#39;t place grid points on the coordinate origin
+CartGrid3D::avoid_origin = &quot;no&quot;
+
+CoordBase::xmin =  0.0
+CoordBase::ymin =  0.0
+CoordBase::zmin =  0.0
+CoordBase::xmax = 48.0
+CoordBase::ymax = 48.0
+CoordBase::zmax = 48.0
+
+# Change these parameters to change resolution. The max settings above have to be multiples of these. &#39;dx&#39; is the size of one cell in x-direction. Making this smaller means using higher resolution, because more points will be used to cover the same space.
+CoordBase::dx   =   4.0
+CoordBase::dy   =   4.0
+CoordBase::dz   =   4.0
+
+CoordBase::boundary_size_x_lower        = 3
+CoordBase::boundary_size_y_lower        = 3
+CoordBase::boundary_size_z_lower        = 3
+CoordBase::boundary_size_x_upper        = 3
+CoordBase::boundary_size_y_upper        = 3
+CoordBase::boundary_size_z_upper        = 3
+CoordBase::boundary_shiftout_x_lower    = 1
+CoordBase::boundary_shiftout_y_lower    = 1
+CoordBase::boundary_shiftout_z_lower    = 1
+CoordBase::boundary_shiftout_x_upper    = 0
+CoordBase::boundary_shiftout_y_upper    = 0
+CoordBase::boundary_shiftout_z_upper    = 0
+</pre></div>
+</td></tr></table>
+
+<h4 id="boundary">Boundary</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;ReflectionSymmetry&quot;
+
+# Reflection symmetry at the lower x boundary
+ReflectionSymmetry::reflection_x = &quot;yes&quot;
+ReflectionSymmetry::reflection_y = &quot;yes&quot;
+ReflectionSymmetry::reflection_z = &quot;yes&quot;
+# Stagger about the origin on the lower x boundary?
+ReflectionSymmetry::avoid_origin_x = &quot;no&quot;
+ReflectionSymmetry::avoid_origin_y = &quot;no&quot;
+ReflectionSymmetry::avoid_origin_z = &quot;no&quot;
+</pre></div>
+</td></tr></table>
+
+<h4 id="mesh-refinement">Mesh refinement</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Carpet::enable_all_storage       = no
+Carpet::use_buffer_zones         = &quot;yes&quot;
+
+Carpet::poison_new_timelevels    = &quot;yes&quot;
+Carpet::check_for_poison         = &quot;no&quot;
+
+Carpet::init_3_timelevels        = no
+Carpet::init_fill_timelevels     = &quot;yes&quot;
+
+CarpetLib::poison_new_memory = &quot;yes&quot;
+CarpetLib::poison_value      = 114
+
+# system specific Carpet paramters
+Carpet::max_refinement_levels    = 10
+driver::ghost_size               = 3
+Carpet::prolongation_order_space = 3
+Carpet::prolongation_order_time  = 2
+
+# regrid during initial data calculation only
+CarpetRegrid2::regrid_every = 0
+
+# Number of refinement centres
+CarpetRegrid2::num_centres  =   1
+
+# Number of refinement levels for this centre
+CarpetRegrid2::num_levels_1 =   3
+CarpetRegrid2::radius_1[1]  = 24.0
+CarpetRegrid2::radius_1[2]  = 12.0
+</pre></div>
+</td></tr></table>
+
+<h4 id="hydro-paramters">Hydro paramters</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;HydroBase EOS_Omni GRHydro&quot;
+
+HydroBase::timelevels            = 3
+
+HydroBase::evolution_method      = &quot;GRHydro&quot;
+
+# Which Riemann solver to use
+GRHydro::riemann_solver            = &quot;HLLE&quot;
+
+# Type of Equation of State P = P(rho, eps)
+GRHydro::GRHydro_eos_type          = &quot;General&quot;
+# Name for the Equation of State
+GRHydro::GRHydro_eos_table         = &quot;Ideal_Fluid&quot;
+#  PPM reconstruction method to use
+GRHydro::recon_method              = &quot;ppm&quot;
+# Width of the stencil
+GRHydro::GRHydro_stencil            = 3
+# static boundary condition to use
+GRHydro::bound                     = &quot;none&quot;
+# A minimum rho below which evolution is turned off 
+GRHydro::rho_abs_min               = 1.e-10
+# A point is set to atmosphere in the Con2Prim&#39;s if its rho &lt; GRHydro_rho_min *(1+GRHydro_atmo_tolerance). This avoids occasional spurious oscillations in carpet buffer zones lying in the atmosphere (because prolongation happens on conserved variables)
+GRHydro::GRHydro_atmo_tolerance    = 1.e-3
+# Order of spatial differencing of the source terms
+GRHydro::sources_spatial_order     = 4
+</pre></div>
+</td></tr></table>
+
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># storage and coupling
+TmunuBase::stress_energy_storage = yes
+TmunuBase::stress_energy_at_RHS  = yes
+TmunuBase::timelevels            =  1
+TmunuBase::prolongation_type     = none
+</pre></div>
+</td></tr></table>
+
+<h4 id="evolution-parameters">evolution parameters</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;GenericFD NewRad&quot;
+ActiveThorns = &quot;ML_BSSN ML_BSSN_Helper&quot;
+
+ADMBase::evolution_method        = &quot;ML_BSSN&quot;
+ADMBase::lapse_evolution_method  = &quot;ML_BSSN&quot;
+ADMBase::shift_evolution_method  = &quot;ML_BSSN&quot;
+ADMBase::dtlapse_evolution_method= &quot;ML_BSSN&quot;
+ADMBase::dtshift_evolution_method= &quot;ML_BSSN&quot;
+
+ML_BSSN::timelevels = 3
+
+# d/dt alpha = - f alpha^n K  (harmonic: n=2, 1+log: n=1)
+ML_BSSN::harmonicN           = 1      # 1+log
+# d/dt alpha = - f alpha^n K   (harmonic: f=1, 1+log: f=2)
+ML_BSSN::harmonicF           = 2.0    # 1+log
+
+# Evolve time derivative of shift B^i?
+ML_BSSN::ShiftBCoeff         = 1
+ML_BSSN::ShiftGammaCoeff     = 0.75
+ML_BSSN::BetaDriver          = 2.66
+ML_BSSN::LapseAdvectionCoeff = 0.0
+ML_BSSN::ShiftAdvectionCoeff = 0.0
+
+ML_BSSN::my_initial_boundary_condition = &quot;extrapolate-gammas&quot;
+ML_BSSN::my_rhs_boundary_condition     = &quot;NewRad&quot;
+</pre></div>
+</td></tr></table>
+
+<h4 id="init-parameters">init parameters</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>InitBase::initial_data_setup_method = &quot;init_some_levels&quot;
+
+# Use TOV as initial data
+ActiveThorns = &quot;TOVSolver&quot;
+
+HydroBase::initial_hydro         = &quot;tov&quot;
+ADMBase::initial_data            = &quot;tov&quot;
+ADMBase::initial_lapse           = &quot;tov&quot;
+ADMBase::initial_shift           = &quot;tov&quot;
+ADMBase::initial_dtlapse         = &quot;zero&quot;
+ADMBase::initial_dtshift         = &quot;zero&quot;
+
+# Parameters for initial star
+TOVSolver::TOV_Rho_Central[0] = 1.28e-3
+TOVSolver::TOV_Gamma          = 2
+TOVSolver::TOV_K              = 100
+
+# Set equation of state for evolution
+EOS_Omni::poly_gamma                   = 2
+EOS_Omni::poly_k                       = 100
+EOS_Omni::gl_gamma                     = 2
+EOS_Omni::gl_k                         = 100
+</pre></div>
+</td></tr></table>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

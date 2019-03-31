@@ -85,6 +85,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../ET/parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -98,6 +102,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -136,16 +148,41 @@
                     
     <a class="" href="../3+1 Decomposition/">3+1 Decomposition</a>
                 </li>
-                <li class="">
-                    
-    <a class="" href="../Numerical Methods/">Numerical Methods</a>
-                </li>
                 <li class=" current">
                     
     <a class="current" href="./">ADM</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#constraint-equations">Constraint equations</a></li>
+    
+
+    <li class="toctree-l3"><a href="#evolution-equations">Evolution Equations</a></li>
+    
+
+    <li class="toctree-l3"><a href="#adm-equations">ADM Equations</a></li>
+    
+
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -215,7 +252,383 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="_1"></h1>
+                <p>The metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span> and the extrinsic curvature <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span> cannot be chosen arbitrarily. Instead, they have to satisfy <strong>certain constraints</strong>.</p>
+<p>In order to find these relations, we have to relate the three-dimensional Riemann tensor <span><span class="MathJax_Preview">R^a_{\space bcd}</span><script type="math/tex">R^a_{\space bcd}</script></span> of the the hypersurfaces Σ to the four-dimensional Riemann tensor <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span> of M. To do so, we first take a completely spatial projection of <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span>, then a projection with one index projected in the normal direction, and finally a projection with two indices projected in the normal direction. All other projections vanish identically because of the symmetries of the Riemann tensor. A decomposition of <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span> into spatial and normal pieces therefore involves these <strong>three different types of projections</strong>.</p>
+<div>
+<div class="MathJax_Preview">
+\begin{align}
+^{(4)} R_{abcd} &amp;= \gamma_a^{\space p} \gamma_b^{\space q} \gamma_c^{\space r} \gamma_d^{\space s} {}^{(4)} R_{pqrs} - 2 \gamma_a^{\space p} \gamma_b^{\space q} \gamma_{[c}^{\space r} n_{d]} n^s {}^{(4)} R_{pqrs} \\
+&amp;- 2 \gamma_c^{\space p} \gamma_d^{\space q} \gamma_{[a}^{\space r} n_{b]} n^s {}^{(4)} R_{pqrs} + 2 \gamma_a^{\space p} \gamma_{[c}^{\space r} n_{d]} n_b n^q n^s {}^{(4)} R_{pqrs} \\
+&amp;- 2 \gamma_b^{\space p} \gamma_{[c}^{\space r} n_{d]} n_a n^q n^s {}^{(4)} R_{pqrs} 
+\end{align}
+</div>
+<script type="math/tex; mode=display">
+\begin{align}
+^{(4)} R_{abcd} &= \gamma_a^{\space p} \gamma_b^{\space q} \gamma_c^{\space r} \gamma_d^{\space s} {}^{(4)} R_{pqrs} - 2 \gamma_a^{\space p} \gamma_b^{\space q} \gamma_{[c}^{\space r} n_{d]} n^s {}^{(4)} R_{pqrs} \\
+&- 2 \gamma_c^{\space p} \gamma_d^{\space q} \gamma_{[a}^{\space r} n_{b]} n^s {}^{(4)} R_{pqrs} + 2 \gamma_a^{\space p} \gamma_{[c}^{\space r} n_{d]} n_b n^q n^s {}^{(4)} R_{pqrs} \\
+&- 2 \gamma_b^{\space p} \gamma_{[c}^{\space r} n_{d]} n_a n^q n^s {}^{(4)} R_{pqrs} 
+\end{align}
+</script>
+</div>
+<p>The above projections give rise to the equations of Gauss, Codazzi and Ricci.</p>
+<div class="admonition note">
+<p class="admonition-title">Gauss’ equation and Codazzi equations give rise to the “constraint” equations.</p>
+<p>Gauss’ equation:</p>
+<p>a completely spatial projection.</p>
+<div>
+<div class="MathJax_Preview">
+R_{abcd} + K_{ac} K_{bd} -K_{ad} K_{cb} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} \gamma^s_{\space d} {}^{(4)} R_{pqrs}
+</div>
+<script type="math/tex; mode=display">
+R_{abcd} + K_{ac} K_{bd} -K_{ad} K_{cb} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} \gamma^s_{\space d} {}^{(4)} R_{pqrs}
+</script>
+</div>
+<p>Codazzi equation:</p>
+<p><span><span class="MathJax_Preview">R^a_{\space bcd}</span><script type="math/tex">R^a_{\space bcd}</script></span> with one index projected in the normal direction.</p>
+<div>
+<div class="MathJax_Preview">
+D_b K_{ac} - D_a K_{bc} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} n^s_{\space d} {}^{(4)} R_{pqrs}
+</div>
+<script type="math/tex; mode=display">
+D_b K_{ac} - D_a K_{bc} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} n^s_{\space d} {}^{(4)} R_{pqrs}
+</script>
+</div>
+</div>
+<h3 id="constraint-equations">Constraint equations</h3>
+<p>We can rewrite Einstein’s ﬁeld equations in a 3+1 form. Basically, we just need to take the equations of Gauss, Codazzi and Ricci and eliminate the four-dimensional Rieman tensor using Einstein’s equations.</p>
+<div>
+<div class="MathJax_Preview">
+G_{ab} = {}^{(4)} R_{ab} - \frac{1}{2} {}^{(4)} R g_{ab} = 8 \pi T_{ab}
+</div>
+<script type="math/tex; mode=display">
+G_{ab} = {}^{(4)} R_{ab} - \frac{1}{2} {}^{(4)} R g_{ab} = 8 \pi T_{ab}
+</script>
+</div>
+<p>We will first derive the constraint equations from Gauss’ equation and the Codazzi equation.</p>
+<ul>
+<li>Contracting Gauss’ equation:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+R + K^2 - K_{ab}K^{ab} = 16 \pi \rho
+</div>
+<script type="math/tex; mode=display">
+R + K^2 - K_{ab}K^{ab} = 16 \pi \rho
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We now define the energy density ρ to be the total energy density as measured by a normal observer <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+\rho = n_a n_b T^{ab} \\
+2 n^p n^r G_{pr} = R + K^2 - K_{ab} K^{ab}
+</div>
+<script type="math/tex; mode=display">
+\rho = n_a n_b T^{ab} \\
+2 n^p n^r G_{pr} = R + K^2 - K_{ab} K^{ab}
+</script>
+</div>
+</div>
+<ul>
+<li>Contracting the Codazzi equation:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+D_b K^b_{\space a} - D_a K = 8 \pi S_a
+</div>
+<script type="math/tex; mode=display">
+D_b K^b_{\space a} - D_a K = 8 \pi S_a
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We now define <span><span class="MathJax_Preview">S_a</span><script type="math/tex">S_a</script></span> to be the momentum density as measured by a normal observer <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+S_a = - \gamma^b_{\space a} n^c T_{bc} \\
+D_b K^b_{\space a} - D_a K = - \gamma^q_{\space a} n^s G_{qs}
+</div>
+<script type="math/tex; mode=display">
+S_a = - \gamma^b_{\space a} n^c T_{bc} \\
+D_b K^b_{\space a} - D_a K = - \gamma^q_{\space a} n^s G_{qs}
+</script>
+</div>
+</div>
+<p>They are <strong>the conditions</strong> that allow a three-dimensional slice Σ with data <span><span class="MathJax_Preview">(\gamma_{ab}, K_{ab})</span><script type="math/tex">(\gamma_{ab}, K_{ab})</script></span> to be embedded in a four-dimensional manifold M with data <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span>. We will discuss strategies for <strong>solving the constraint equations and finding initial data</strong> that represent a snapshot of the gravitational fields at a certain instant of time.</p>
+<p><strong>Constraint equations constrain the fields in space at one instant of time, independently of their past history.</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Freedom</p>
+<p>The four constraint equations cannot determine all of the gravitational fields <span><span class="MathJax_Preview">(\gamma_{ij}, K_{ij})</span><script type="math/tex">(\gamma_{ij}, K_{ij})</script></span>.</p>
+<p>Both <span><span class="MathJax_Preview">\gamma_{ij}</span><script type="math/tex">\gamma_{ij}</script></span> and <span><span class="MathJax_Preview">K_{ij}</span><script type="math/tex">K_{ij}</script></span> are symmetric, three-dimensional tensors, they together have <strong>twelve independent components</strong>.</p>
+<ul>
+<li>The <strong>four constraint equations</strong> can only determine four of these</li>
+<li>Four undetermined functions are related to <strong>coordinate choices</strong></li>
+<li>Two independent sets of values for <strong>the conjugate pair</strong> <span><span class="MathJax_Preview">(\gamma_{ij}, K_{ij})</span><script type="math/tex">(\gamma_{ij}, K_{ij})</script></span>.</li>
+<li>Two dynamical degrees of freedom correspond to <strong>the two polarization modes of a gravitational wave</strong></li>
+</ul>
+<p>It is quite intuitive that the state of a dynamical field, like a <strong>gravitational wave, cannot be determined from constraint equations</strong>. Waves satisfy hyperbolic equations, and their state at any time depends on their past history. It is therefore natural that the constraint equations serve to constrain only the “longitudinal” parts of the fields, while the “transverse” parts, related to the dynamical degrees of freedom, remain freely specifiable.</p>
+<p>Ideally one would like to separate unambiguously the longitudinal from the transverse parts of the fields at some initial time, freely specifying the latter and then solving the constraints for the former. Given the nonlinear nature of general relativity such a rigorous separation is not possible; instead, all these fields are entangled in the spatial metric and the extrinsic curvature.</p>
+</div>
+<h3 id="evolution-equations">Evolution Equations</h3>
+<p>The evolution equations evolve the data <span><span class="MathJax_Preview">(γ_{ab},K_{ab})</span><script type="math/tex">(γ_{ab},K_{ab})</script></span> forward in time. However, the Lie derivative along <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>, <span><span class="MathJax_Preview">\mathcal { L } _ { \mathbf { n } }</span><script type="math/tex">\mathcal { L } _ { \mathbf { n } }</script></span>, is not a natural time derivative since <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> is not dual to the surface 1-form <span><span class="MathJax_Preview">Ω_a</span><script type="math/tex">Ω_a</script></span>, i.e. their dot product is not unity</p>
+<div>
+<div class="MathJax_Preview">
+n ^ { a } \Omega _ { a } = - \alpha g ^ { a b } \nabla _ { a } t \nabla _ { b } t = \alpha ^ { - 1 }
+</div>
+<script type="math/tex; mode=display">
+n ^ { a } \Omega _ { a } = - \alpha g ^ { a b } \nabla _ { a } t \nabla _ { b } t = \alpha ^ { - 1 }
+</script>
+</div>
+<p>Instead, consider the vector</p>
+<div>
+<div class="MathJax_Preview">
+t ^ { a } = \alpha n ^ { a } + \beta ^ { a }
+</div>
+<script type="math/tex; mode=display">
+t ^ { a } = \alpha n ^ { a } + \beta ^ { a }
+</script>
+</div>
+<p>which is dual to <span><span class="MathJax_Preview">Ω_a</span><script type="math/tex">Ω_a</script></span> for any spatial shift vector <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+t ^ { a } \Omega _ { a } = \alpha n ^ { a } \Omega _ { a } + \beta ^ { a } \Omega _ { a } = 1
+</div>
+<script type="math/tex; mode=display">
+t ^ { a } \Omega _ { a } = \alpha n ^ { a } \Omega _ { a } + \beta ^ { a } \Omega _ { a } = 1
+</script>
+</div>
+<p>It will prove useful to choose <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> to be the congruence along which we propagate the spatial coordinate grid from one time slice to the next slice. In other words, <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> will connect points with the same spatial coordinates on neighboring time slices. Then the shift vector <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> will measure the amount by which the spatial coordinates are shifted within a slice with respect to the normal vector. The lapse function <span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> measures how much proper time elapses between neighboring time slices along the normal vector. The lapse and the shift therefore determine how the coordinates evolve in time. The choice of <span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> and <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> is quite arbitrary. <strong>The freedom to choose these four gauge functions<span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> and <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> completely arbitrarily embodies the four-fold coordinate degrees of freedom inherent in general relativity</strong>.</p>
+<p>The lapse and the shift determine how the coordinates evolve from one time slice Σ to the next, whereas the constraint equations represent integrability conditions which have to be satisfied within each slice. Therefore, the constraints have to be independent of how the coordinates evolve, and <strong>the lapse and the shift can enter only the evolution equations</strong>.</p>
+<p><img alt="" src="../media/15533305224645.jpg" /></p>
+<p>Observers who are “at rest” relative to the slices follow the normal congruence <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> and are called either normal or Eulerian observers. while observers following the congruence <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> are called coordinate observers. If matter is present it moves entirely independently of the coordinates with four-velocity <span><span class="MathJax_Preview">u^a</span><script type="math/tex">u^a</script></span>.</p>
+<p>Ricci’s equation:</p>
+<ul>
+<li>The evolution equation for the extrinsic curvature:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\begin{align}
+\mathcal{L}_{t} K_{ab} = &amp;- D_{a} D_{b} \alpha + \alpha (R_{ab} - 2 K_{ac} K^{c}_{\space b} + K K_{ab}) \\
+ &amp;- 8 \pi \alpha \left( S_{ab} - \frac{1}{2} \gamma_{ab} \left( S-\rho \right) \right) + \mathcal{L}_{\beta}K_{ab}
+\end{align}
+</div>
+<script type="math/tex; mode=display">
+\begin{align}
+\mathcal{L}_{t} K_{ab} = &- D_{a} D_{b} \alpha + \alpha (R_{ab} - 2 K_{ac} K^{c}_{\space b} + K K_{ab}) \\
+ &- 8 \pi \alpha \left( S_{ab} - \frac{1}{2} \gamma_{ab} \left( S-\rho \right) \right) + \mathcal{L}_{\beta}K_{ab}
+\end{align}
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>a projection with two indices projected in the normal direction.</p>
+<div>
+<div class="MathJax_Preview">
+\mathcal{L}_n K_{ab} = n^d n^c \gamma^q_{\space a} \gamma^r_{\space b} {}^{(4)} R_{drcq} - \frac{1}{\alpha} D_a D_b \alpha - K^c_{\space b} K_{ac} \\
+S_{ab} = \gamma^c_{\space a} \gamma^d_{\space b} T_{cd} \\
+S = S^a_{\space a}
+</div>
+<script type="math/tex; mode=display">
+\mathcal{L}_n K_{ab} = n^d n^c \gamma^q_{\space a} \gamma^r_{\space b} {}^{(4)} R_{drcq} - \frac{1}{\alpha} D_a D_b \alpha - K^c_{\space b} K_{ac} \\
+S_{ab} = \gamma^c_{\space a} \gamma^d_{\space b} T_{cd} \\
+S = S^a_{\space a}
+</script>
+</div>
+</div>
+<ul>
+<li>The evolution equation for the spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span>:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\mathcal{L}_t \gamma_{ab} = - 2 \alpha K_{ab} + \mathcal{L}_{\beta} \gamma_{ab}
+</div>
+<script type="math/tex; mode=display">
+\mathcal{L}_t \gamma_{ab} = - 2 \alpha K_{ab} + \mathcal{L}_{\beta} \gamma_{ab}
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div>
+<div class="MathJax_Preview">
+K_{ab} = - \frac{1}{2} \mathcal{L}_n \gamma_{ab}
+</div>
+<script type="math/tex; mode=display">
+K_{ab} = - \frac{1}{2} \mathcal{L}_n \gamma_{ab}
+</script>
+</div>
+</div>
+<p>It is quite intuitive, though, that things will simplify if we adopt a coordinate system that reflects our 3 + 1 split of spacetime in a natural way. We will see that <strong>the Lie derivative in the evolution equations then reduces to a partial derivative</strong> with respect to coordinate time and, as an additional beneﬁt, we will be able to ignore all timelike components of spatial tensors.</p>
+<p>The coupled evolution equations the extrinsic curvature and the spatial metric determine the evolution of the gravitational ﬁeld data <span><span class="MathJax_Preview">(\gamma_{ab}, K_{ab})</span><script type="math/tex">(\gamma_{ab}, K_{ab})</script></span>. Together with the constraint equations they are completely equivalent to Einstein’s equations.</p>
+<p>Note we have succeeded in recasting Einstein’s equations, which are <strong>second order in time</strong> in their original form, as a coupled set of partial differential equations that are now <strong>first order in time</strong>.</p>
+<p>So far, we have expressed our equations in a covariant, coordinate independent manner, i.e. the basis vectors <span><span class="MathJax_Preview">e_a</span><script type="math/tex">e_a</script></span> have been completely arbitrary and have no particular relationship to the 1-form <span><span class="MathJax_Preview">Ω_a</span><script type="math/tex">Ω_a</script></span> or to the congruence defined by <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span>.</p>
+<h3 id="adm-equations">ADM Equations</h3>
+<p>It is quite intuitive, though, that things will simplify if we adopt a coordinate system that effects our 3 + 1 split of spacetime in a natural way.</p>
+<p>To do so, we first introduce a basis of three spatial vectors <span><span class="MathJax_Preview">e^a_{(i)}</span><script type="math/tex">e^a_{(i)}</script></span>, reside in a particular time slice Σ:</p>
+<div>
+<div class="MathJax_Preview">
+\Omega_a e^a_{(i)} = 0
+</div>
+<script type="math/tex; mode=display">
+\Omega_a e^a_{(i)} = 0
+</script>
+</div>
+<p>We extend our spatial vectors to other slices Σ by Lie dragging along <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\mathcal{L}_t e^a_{(i)} = 0
+</div>
+<script type="math/tex; mode=display">
+\mathcal{L}_t e^a_{(i)} = 0
+</script>
+</div>
+<p><img alt="" src="../media/15533309561126.jpg" /></p>
+<p>As the fourth basis vector we pick <span><span class="MathJax_Preview">e^a_0 = t^a</span><script type="math/tex">e^a_0 = t^a</script></span>. The duality condition then implies that <span><span class="MathJax_Preview">e^a_{(0)}</span><script type="math/tex">e^a_{(0)}</script></span> has the components</p>
+<div>
+<div class="MathJax_Preview">
+t ^ { a } = e _ { ( 0 ) } ^ { a } = ( 1,0,0,0 )
+</div>
+<script type="math/tex; mode=display">
+t ^ { a } = e _ { ( 0 ) } ^ { a } = ( 1,0,0,0 )
+</script>
+</div>
+<p>This means that the Lie derivative along <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> reduces to a partial derivative with respect to t: <span><span class="MathJax_Preview">\mathcal{L}_t = \partial_t</span><script type="math/tex">\mathcal{L}_t = \partial_t</script></span>. </p>
+<p>Since spatial tensors vanish when contracted with the normal vector, this also means that all components of spatial tensors with a contravariant index equal to zero must vanish.</p>
+<p>For the shift vector,</p>
+<div>
+<div class="MathJax_Preview">
+\beta ^ { a } = \left( 0 , \beta ^ { i } \right)
+</div>
+<script type="math/tex; mode=display">
+\beta ^ { a } = \left( 0 , \beta ^ { i } \right)
+</script>
+</div>
+<p>Solving equation <span><span class="MathJax_Preview">t ^ { a } = \alpha n ^ { a } + \beta ^ { a }</span><script type="math/tex">t ^ { a } = \alpha n ^ { a } + \beta ^ { a }</script></span> for <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> then yields the contravariant components</p>
+<div>
+<div class="MathJax_Preview">
+n ^ { a } = \left( \alpha ^ { - 1 } , - \alpha ^ { - 1 } \beta ^ { i } \right)
+</div>
+<script type="math/tex; mode=display">
+n ^ { a } = \left( \alpha ^ { - 1 } , - \alpha ^ { - 1 } \beta ^ { i } \right)
+</script>
+</div>
+<p>and from the normalization condition <span><span class="MathJax_Preview">n_a n^a = −1</span><script type="math/tex">n_a n^a = −1</script></span> we find</p>
+<div>
+<div class="MathJax_Preview">
+n _ { a } = ( - \alpha , 0,0,0 )
+</div>
+<script type="math/tex; mode=display">
+n _ { a } = ( - \alpha , 0,0,0 )
+</script>
+</div>
+<p>From the definition of the spatial metric we have <span><span class="MathJax_Preview">\gamma_{ij} = g_{ij}</span><script type="math/tex">\gamma_{ij} = g_{ij}</script></span> meaning that the metric on Σ is just the spatial part of the four-metric. Since zeroth components of spatial contravariant tensors have to vanish, we also have <span><span class="MathJax_Preview">\gamma^{a0} = 0</span><script type="math/tex">\gamma^{a0} = 0</script></span>.</p>
+<p>The inverse metric can therefore be expressed as:</p>
+<div>
+<div class="MathJax_Preview">
+g^{ab} = \gamma^{ab} - n^{a} n^{b} = 
+\begin{pmatrix} 
+\alpha^{-2} &amp; \alpha^{-2} \beta^{i} \\
+\alpha^{-2} \beta^{j} &amp; \gamma^{ij} - \alpha^{2} \beta^{i} \beta^{j}
+\end{pmatrix}
+</div>
+<script type="math/tex; mode=display">
+g^{ab} = \gamma^{ab} - n^{a} n^{b} = 
+\begin{pmatrix} 
+\alpha^{-2} & \alpha^{-2} \beta^{i} \\
+\alpha^{-2} \beta^{j} & \gamma^{ij} - \alpha^{2} \beta^{i} \beta^{j}
+\end{pmatrix}
+</script>
+</div>
+<p>We can now invert it and find the components of the four-dimensional metric</p>
+<div>
+<div class="MathJax_Preview">
+g_{ab} = 
+\begin{pmatrix} 
+\alpha^{-2} + \beta_l \beta^l &amp; \beta_{i} \\
+\beta_{j} &amp; \gamma_{ij}
+\end{pmatrix}
+</div>
+<script type="math/tex; mode=display">
+g_{ab} = 
+\begin{pmatrix} 
+\alpha^{-2} + \beta_l \beta^l & \beta_{i} \\
+\beta_{j} & \gamma_{ij}
+\end{pmatrix}
+</script>
+</div>
+<p>Equivalently, the line element may be decomposed as:</p>
+<div>
+<div class="MathJax_Preview">
+ds^{2} = - \alpha^{2} dt^{2} + \gamma_{ij} \left( dx^{i} + \beta^{i} dt \right) \left( dx^{j} + \beta^{j}dt \right) 
+</div>
+<script type="math/tex; mode=display">
+ds^{2} = - \alpha^{2} dt^{2} + \gamma_{ij} \left( dx^{i} + \beta^{i} dt \right) \left( dx^{j} + \beta^{j}dt \right) 
+</script>
+</div>
+<p>which is often refered to as the metric in 3 + 1 form. We may interpret this line element as the Pythagorean Theorem for a 4-dimensional spacetime, </p>
+<div>
+<div class="MathJax_Preview">
+ds^2 = - (properTime)^2 + (properDistance)^2
+</div>
+<script type="math/tex; mode=display">
+ds^2 = - (properTime)^2 + (properDistance)^2
+</script>
+</div>
+<p>This equation thus determines the invariant interval between neighboring points A and B.</p>
+<p><img alt="" src="../media/15533309901685.jpg" /></p>
+<p>Therefore, the entire content of the decomposed Einstein equations is contained in their spatial components alone, and we can rewrite:</p>
+<ul>
+<li>the Hamiltonian constraint:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+R + K^2 - K_{ij} K^{ij} = 16 \pi \rho
+</div>
+<script type="math/tex; mode=display">
+R + K^2 - K_{ij} K^{ij} = 16 \pi \rho
+</script>
+</div>
+<ul>
+<li>the momentum constraint:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+D_{j} (K^{ij} - \gamma^{ij} K) = 8 \pi S^i
+</div>
+<script type="math/tex; mode=display">
+D_{j} (K^{ij} - \gamma^{ij} K) = 8 \pi S^i
+</script>
+</div>
+<ul>
+<li>the evolution equation for the extrinsic curvature:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\begin{align}
+\partial_{t} K_{ij} = &amp;- D_{i} D_{j} \alpha + \alpha \left( R_{ij} - 2 K_{ik} K^{k}_{\space j} + K K_{ij}\right) - 8 \pi \alpha \left( S_{ij} - \frac{1}{2} \gamma_{ij} \left( S - \rho \right) \right) \\
+                      &amp;+ \beta^{k} D_{k} K_{ij} + K_{ik} D_{j} \beta^{k} + K_{kj} D_{i} \beta^{k}
+\end{align}
+</div>
+<script type="math/tex; mode=display">
+\begin{align}
+\partial_{t} K_{ij} = &- D_{i} D_{j} \alpha + \alpha \left( R_{ij} - 2 K_{ik} K^{k}_{\space j} + K K_{ij}\right) - 8 \pi \alpha \left( S_{ij} - \frac{1}{2} \gamma_{ij} \left( S - \rho \right) \right) \\
+                      &+ \beta^{k} D_{k} K_{ij} + K_{ik} D_{j} \beta^{k} + K_{kj} D_{i} \beta^{k}
+\end{align}
+</script>
+</div>
+<ul>
+<li>the evolution equation for the spatial metric:</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\partial_t \gamma_{ij} = - 2 \alpha K_{ij} + D_i \beta_j + D_j \beta_i
+</div>
+<script type="math/tex; mode=display">
+\partial_t \gamma_{ij} = - 2 \alpha K_{ij} + D_i \beta_j + D_j \beta_i
+</script>
+</div>
+<p>Equations comprise the “standard” 3 + 1 equations. Sometimes they are referred to as the “ADM” equations.</p>
+<p><img alt="" src="../media/15533310424874.jpg" /></p>
               
             </div>
           </div>
@@ -223,10 +636,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../SP/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../BSSN/" class="btn btn-neutral float-right" title="BSSN">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Numerical Methods/" class="btn btn-neutral" title="Numerical Methods"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../3+1 Decomposition/" class="btn btn-neutral" title="3+1 Decomposition"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -254,10 +667,10 @@
           <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Numerical Methods/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../3+1 Decomposition/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../SP/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../BSSN/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

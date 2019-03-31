@@ -72,6 +72,9 @@
     <a class="current" href="./">Introduction</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#glossary">Glossary</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -88,6 +91,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -101,6 +108,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -141,11 +156,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -215,9 +246,256 @@
           <div role="main">
             <div class="section">
               
-                <p>The name Cactus comes from the design of a central core (or flesh) which connects to application modules (or thorns) through an extensible interface.</p>
+                <p>Cactus components (called thorns) interact with the framework (called the flesh) via a set of configuration (CCL) files provided by each thorn.</p>
 <p>The Cactus API supports C/C++ and F77/F90 programming languages for the thorns. This makes it easier for scientists to turn existing codes into thorns which can then make use of the complete Cactus infrastructure, and in turn be used by other thorns within Cactus.</p>
 <p>The <a href="https://www.einsteintoolkit.org/index.html">Einstein Toolkit</a> is a community-driven software platform of core computational tools to advance and support research in relativistic astrophysics and gravitational physics.</p>
+<h3 id="glossary">Glossary</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alias function</td>
+<td>function aliasing.</td>
+</tr>
+<tr>
+<td>AMR</td>
+<td>Automatic Mesh Refinement</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Applications Programming Interface, the interface provided by some software component to programmers who use the component. An API usually consists of subroutine/function calls, but may also include structure definitions and definition of constant values. The Cactus Reference Manual documents most of the Cactus flesh APIs.</td>
+</tr>
+<tr>
+<td>arrangement</td>
+<td>A collection of thorns, stored in a subdirectory of the Cactus arrangements directory.</td>
+</tr>
+<tr>
+<td>autoconf</td>
+<td>A GNU program which builds a configuration script which can be used to make a Makefile.</td>
+</tr>
+<tr>
+<td>boundary zone</td>
+<td>A boundary zone is a set of points at the edge of a grid, interpreted as the boundary of the physical problem, and which contains boundary data.</td>
+</tr>
+<tr>
+<td>CCTK</td>
+<td>Cactus Computational Tool Kit (The Cactus flesh and computational thorns).</td>
+</tr>
+<tr>
+<td>CCL</td>
+<td>The Cactus Configuration Language, this is the language that the thorn configuration files are written in.</td>
+</tr>
+<tr>
+<td>configuration</td>
+<td>The combination of a set of thorns, and all the Cactus configure options which affect what binary will be produced when compiling Cactus.</td>
+</tr>
+<tr>
+<td>checkout</td>
+<td>Get a copy of source code from SVN.</td>
+</tr>
+<tr>
+<td>checkpoint</td>
+<td>Save the entire state of a Cactus run to a file, so that the run can be restarted at a later time.</td>
+</tr>
+<tr>
+<td>computational grid</td>
+<td>A discrete finite set of spatial points in <span><span class="MathJax_Preview">\mathfrak{R}^{n}</span><script type="math/tex">\mathfrak{R}^{n}</script></span> (typically, <span><span class="MathJax_Preview">1 \leq n \leq 3</span><script type="math/tex">1 \leq n \leq 3</script></span>). Historically, Cactus has required these points to be uniformly spaced (uniformly spaced grid), but now, Cactus supports non-uniform spacings (non-uniformly spaced grid), and mesh refinement. The grid consists of the physical domain and the boundary and symmetry points.</td>
+</tr>
+<tr>
+<td>CST</td>
+<td>The Cactus Specification Tool, which is the set of Perl scripts which parse the thorns’ <code class="codehilite"><span class="na">.ccl</span></code> files, and generates the code that binds the thorn source files with the flesh.</td>
+</tr>
+<tr>
+<td>SVN</td>
+<td>Subversion is the favoured code distribution system for Cactus.</td>
+</tr>
+<tr>
+<td>domain decomposition</td>
+<td>The technique of breaking up a large computational problem into parts that are easier to solve. In Cactus, it refers especially to a decomposition wherein the parts are solved in parallel on separate computer processors.</td>
+</tr>
+<tr>
+<td>driver</td>
+<td>A special kind of thorn which creates and handles grid hierarchies and grid variables. Drivers are responsible for memory management for grid variables, and for all parallel operations, in response to requests from the scheduler.</td>
+</tr>
+<tr>
+<td>evolution</td>
+<td>An iteration interpreted as a step through time. Also, a particular Cactus schedule bin for executing routines when evolution occurs.</td>
+</tr>
+<tr>
+<td>flesh</td>
+<td>The Cactus routines which hold the thorns together, allowing them to communicate and scheduling things to happen with them.</td>
+</tr>
+<tr>
+<td>friend</td>
+<td>Interfaces that are friends, share their collective set of protected grid variables.</td>
+</tr>
+<tr>
+<td>function aliasing</td>
+<td>The process of referring to a function to be provided by an interface independently of which thorn actually contains the function, or what language the function is written in. The function is called an alias function.</td>
+</tr>
+<tr>
+<td>GA</td>
+<td>Shorthand for a grid array.</td>
+</tr>
+<tr>
+<td>GF</td>
+<td>Shorthand for a grid function.</td>
+</tr>
+<tr>
+<td>gmake</td>
+<td>GNU version of the make utility.</td>
+</tr>
+<tr>
+<td>ghost zone</td>
+<td>A set of points added for parallelisation purposes to a block of a grid lying on one processor, corresponding to points on the boundary of an adjoining block of the grid lying on another processor. Points from the boundary of the one block are copied (via an inter-processor communication mechanism) during synchronisation to the corresponding ghost zone of the other block, and vice versa. In single processor runs there are no ghost zones.</td>
+</tr>
+<tr>
+<td>grid</td>
+<td>Short for computational grid.</td>
+</tr>
+<tr>
+<td>grid array</td>
+<td>A grid variable whose global size need not be that of the computational grid; instead, the size is declared explicitly in an <code class="codehilite">interface.ccl</code> file.</td>
+</tr>
+<tr>
+<td>grid function</td>
+<td>A grid variable whose global size is the size of the computational grid. From another perspective, grid functions are functions defined on the domain of grid points. Typically, grid functions are used to discretely approximate functions defined on the domain <span><span class="MathJax_Preview">R^n</span><script type="math/tex">R^n</script></span>, with finite differencing used to approximate partial derivatives.</td>
+</tr>
+<tr>
+<td>grid hierarchy</td>
+<td>A computational grid, and the grid variables associated with it.</td>
+</tr>
+<tr>
+<td>grid point</td>
+<td>A spatial point in the computational grid.</td>
+</tr>
+<tr>
+<td>grid scalar</td>
+<td>A grid variable with index zero, i.e. just a number on each processor.</td>
+</tr>
+<tr>
+<td>grid variable</td>
+<td>A variable which is passed through the flesh interface, either between thorns or between routines of the same thorn. This implies the variable is related to the computational grid, as opposed to being an internal variable of the thorn or one of its routines. grid scalar, grid function, and grid array are all examples of grid variables.</td>
+</tr>
+<tr>
+<td>GNATS</td>
+<td>The GNU program we use for reporting and tracking bugs, comments and suggestions.</td>
+</tr>
+<tr>
+<td>GNU</td>
+<td>GNU’s Not Unix: a freely-distributable code project.</td>
+</tr>
+<tr>
+<td>GV</td>
+<td>Shorthand for grid variable.</td>
+</tr>
+<tr>
+<td>handle</td>
+<td>A signed integer value &gt;= 0 passed by many Cactus routines and used to represent a dynamic data or code object.</td>
+</tr>
+<tr>
+<td>implementation</td>
+<td>Defines the interface that a thorn presents to the rest of a Cactus program.</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>A thorn that inherits from another implementation can access all the other implementation’s public variables.</td>
+</tr>
+<tr>
+<td>interpolation</td>
+<td>Given a set of grid variables and interpolation points (points in the grid coordinate space, which are typically distinct from the grid points), interpolation is the act of producing values for the grid variables at each interpolation point over the entire grid hierarchy.</td>
+</tr>
+<tr>
+<td>local array</td>
+<td>An array that is declared in thorn code, but not declared in the thorn’s <code class="codehilite">interface.ccl</code>, as opposed to a grid array.</td>
+</tr>
+<tr>
+<td>local interpolation</td>
+<td>Given a set of grid variables and interpolation points (points in the grid coordinate space ,which are typically distinct from the grid points), interpolation is the act of producing values for the grid variables at each interpolation point on a particular grid.</td>
+</tr>
+<tr>
+<td>NUL character</td>
+<td>The C programming language uses a “NUL character” to terminate character strings. A NUL character has the integer value zero, but it’s useful to write it as ’\0’, to emphasize to human readers that this has type char rather than int.</td>
+</tr>
+<tr>
+<td>null pointer, NULL pointer</td>
+<td>C defines a “null pointer”, often (slightly incorrectly) called a “NULL pointer”, which is guaranteed not to point to any object. You get a null pointer by converting the integer constant 0 to a pointer type, e.g. <code class="codehilite">int* ptr = 0;</code>.</td>
+</tr>
+<tr>
+<td>parallelisation</td>
+<td>The process of utilising multiple computer processors to work on different parts of a computational problem at the same time, in order to obtain a solution of the problem more quickly. Cactus achieves parallelisation by means of domain decomposition.</td>
+</tr>
+<tr>
+<td>parameter</td>
+<td>A variable that controls the run time behaviour of the Cactus executable. Parameters have default values which can be set in a parameter file.</td>
+</tr>
+<tr>
+<td>parameter file</td>
+<td>Also called par file.) A text file used as the input of a Cactus program, specifying initial values of thorn parameters.</td>
+</tr>
+<tr>
+<td>PUGH</td>
+<td>The default driver thorn for Cactus which uses MPI.</td>
+</tr>
+<tr>
+<td>PVM</td>
+<td>Parallel Virtual Machine, provides interprocessor communication.</td>
+</tr>
+<tr>
+<td>reduction</td>
+<td>Given a set of grid variables on a computational grid, reduction is the process of producing values for the variables on a proper subset of points from the grid.</td>
+</tr>
+<tr>
+<td>scheduler</td>
+<td>The part of the Cactus flesh that determines the order and circumstances in which to execute Cactus routines. Thorn functions and schedule groups are registered with the flesh via the thorn’s <code class="codehilite">schedule.ccl</code> file to be executed in a certain schedule bin, before or after another function or group executes, and so forth.</td>
+</tr>
+<tr>
+<td>schedule bin</td>
+<td>One of a set of special timebins pre-defined by Cactus.</td>
+</tr>
+<tr>
+<td>schedule group</td>
+<td>A timebin defined by a thorn, in its <code class="codehilite">schedule.ccl</code> file. Each schedule group must be defined to occur in a Cactus schedule bin or another schedule group.</td>
+</tr>
+<tr>
+<td>shares</td>
+<td>An implementation may share restricted parameters with another implementation, which means the other implementation can get the parameter values, and if the parameters are steerable, it can change them.</td>
+</tr>
+<tr>
+<td>steerable parameter</td>
+<td>A parameter which can be changed at any time after the program has been initialised.</td>
+</tr>
+<tr>
+<td>symmetry operation</td>
+<td>A grid operation that is a manifestation of a geometrical symmetry, especially rotation or reflection.</td>
+</tr>
+<tr>
+<td>symmetry zone</td>
+<td>A set of points laying at the edge of the computational grid and containing data obtained by some symmetry operation from another part of the same grid.</td>
+</tr>
+<tr>
+<td>synchronisation</td>
+<td>The process of copying information from the outer part of a computational interior on one processor to the corresponding ghost zone (see) on another processor. Also refers to a special Cactus timebin corresponding to the occurrence of this process.</td>
+</tr>
+<tr>
+<td>thorn</td>
+<td>A collection of subroutines defining a Cactus interface.</td>
+</tr>
+<tr>
+<td>ThornList</td>
+<td>A file used by the Cactus CST to determine which thorns to compile into a Cactus executable. Can also be used to determine which thorns to check out from SVN.</td>
+</tr>
+<tr>
+<td>time bin</td>
+<td>A time interval in the duration of a Cactus run wherein the flesh runs specified routines. See scheduler, schedule bin.</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>

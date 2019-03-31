@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title> Kerr Schild Multipole - Yu Liu's Notebook</title>
+  <title>Minkowski Multipole - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = " Kerr Schild Multipole";
-    var mkdocs_page_input_path = "Example/ Kerr-Schild_Multipole.md";
-    var mkdocs_page_url = "/Einstein-Toolkit/Example/ Kerr-Schild_Multipole/";
+    var mkdocs_page_name = "Minkowski Multipole";
+    var mkdocs_page_input_path = "Example/Minkowski_Multipole.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/Example/Minkowski_Multipole/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
@@ -85,6 +85,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../ET/parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -98,6 +102,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -138,11 +150,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -195,10 +223,10 @@
     
       
     
-    <li> Kerr Schild Multipole</li>
+    <li>Minkowski Multipole</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/Example/ Kerr-Schild_Multipole.md"
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/Example/Minkowski_Multipole.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -208,7 +236,21 @@
           <div role="main">
             <div class="section">
               
-                <p>Here we show an example evolution of a wave equation on a Kerr background.</p>
+                <p>We present 3D simulations of a scalar field propagating in a Schwarzschild black hole background. The mass of the scalar field is considered negligible compared to the mass of the black hole and so the back reaction of the scalar field on the metric is not considered.</p>
+<p><a href="https://arxiv.org/pdf/gr-qc/0302072.pdf">https://arxiv.org/pdf/gr-qc/0302072.pdf</a></p>
+<h3 id="ibvp">IBVP</h3>
+<p>Numerical solutions of Einstein’s equations involve solving a nonlinear set of partial differential equations on a bounded domain, and formally constitute an initial-boundary-value problem (IBVP).</p>
+<p>An IBVP consists of three ingredients: a partial differential equation, initial and boundary data. It is well-posed if a solution exists, is unique, and depends continuously on the initial and boundary data.</p>
+<p>Consider the linear IBVP on a domain <span><span class="MathJax_Preview">[0, \infty) \times \Omega</span><script type="math/tex">[0, \infty) \times \Omega</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned} \partial_{t} u &amp;=A(t, \vec{x})^{i} \partial_{i} u+B(t, \vec{x}) u \\ u(0, \vec{x}) &amp;=f(\vec{x}) \\ w_{+}(t, \vec{x}) &amp;=S w_{-}(t, \vec{x})+g(t, \vec{x}), \vec{x} \in \partial \Omega \end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned} \partial_{t} u &=A(t, \vec{x})^{i} \partial_{i} u+B(t, \vec{x}) u \\ u(0, \vec{x}) &=f(\vec{x}) \\ w_{+}(t, \vec{x}) &=S w_{-}(t, \vec{x})+g(t, \vec{x}), \vec{x} \in \partial \Omega \end{aligned}
+</script>
+</div>
+<p>The equations are discretized on a domain <span><span class="MathJax_Preview">\Omega</span><script type="math/tex">\Omega</script></span> with an inner boundary to accommodate for black hole excision. We introduce the grid points <span><span class="MathJax_Preview">\vec{r}_{i j k}=(i \Delta x, j \Delta y, k \Delta z) \in \Omega</span><script type="math/tex">\vec{r}_{i j k}=(i \Delta x, j \Delta y, k \Delta z) \in \Omega</script></span> and assume that some of these points lie on the boundary <span><span class="MathJax_Preview">\partial \Omega</span><script type="math/tex">\partial \Omega</script></span>.</p>
               
             </div>
           </div>

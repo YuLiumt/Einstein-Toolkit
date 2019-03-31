@@ -85,6 +85,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../ET/parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -98,6 +102,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -136,6 +148,26 @@
                     
     <a class="" href="../3+1 Decomposition/">3+1 Decomposition</a>
                 </li>
+                <li class="">
+                    
+    <a class="" href="../ADM/">ADM</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Matter Sources/">Matter Sources</a>
+                </li>
                 <li class=" current">
                     
     <a class="current" href="./">Numerical Methods</a>
@@ -152,6 +184,9 @@
         </ul>
     
 
+    <li class="toctree-l3"><a href="#ghost-zones">Ghost Zones</a></li>
+    
+
     <li class="toctree-l3"><a href="#mesh-refinement">Mesh Refinement</a></li>
     
         <ul>
@@ -164,10 +199,6 @@
     
 
     </ul>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../ADM/">ADM</a>
                 </li>
     </ul>
 	    </li>
@@ -237,7 +268,7 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="finite-difference-methods">Finite Difference Methods</h2>
+                <h3 id="finite-difference-methods">Finite Difference Methods</h3>
 <p><strong>In a finite difference approximation a function <span><span class="MathJax_Preview">f(t,x)</span><script type="math/tex">f(t,x)</script></span> is represented by values at a discrete set of points.</strong> At the core of finite difference approximation is therefore a discretization of the spacetime, or a numerical grid. Instead of evaluating f at all values of x, for example, we only consider discrete values <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span>. The distance between the gridpoints <span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> is called the gridspacing <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span>. For uniform grids, for which <span><span class="MathJax_Preview">∆x</span><script type="math/tex">∆x</script></span> is constant, we have</p>
 <div>
 <div class="MathJax_Preview">
@@ -327,7 +358,7 @@ f _ { i - 1 } = f \left( x _ { i } - \Delta x \right) = f \left( x _ { i } \righ
 </div>
 <p>where we have omitted the truncation error, <span><span class="MathJax_Preview">\mathcal { O } \left( \Delta x ^ { 4 } \right)</span><script type="math/tex">\mathcal { O } \left( \Delta x ^ { 4 } \right)</script></span></p>
 </blockquote>
-<h3 id="elliptic-equations">Elliptic Equations</h3>
+<h4 id="elliptic-equations">Elliptic Equations</h4>
 <p>As an example of a simple, one-dimensional elliptic equation consider</p>
 <div>
 <div class="MathJax_Preview">
@@ -458,7 +489,7 @@ f_{N+1}=\frac{x_{N}}{x_{N+1}} f_{N}=\frac{x_{N}}{x_{N}+\Delta x} f_{N}
 </script>
 </div>
 <p>so that we have reduced the problem to inverting an N × N matrix.</p>
-<h3 id="hyperbolic-equations">Hyperbolic Equations</h3>
+<h4 id="hyperbolic-equations">Hyperbolic Equations</h4>
 <p>For simplicity it does not contain any source terms, and the the wave speed v is constant.</p>
 <div>
 <div class="MathJax_Preview">
@@ -492,7 +523,7 @@ u _ { j } ^ { n + 1 } = u _ { j } ^ { n } - \frac { v } { 2 } \frac { \Delta t }
 <p>or reasons that are quite obivous this differencing scheme is called forward-time centered-space, or FTCS.</p>
 <p><img alt="" src="../media/15512306516707.jpg" /></p>
 <p>It is an example of an explicit scheme, meaning that we can solve for the grid function <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n + 1 directly in terms of function values on the old time level n.</p>
-<h4 id="courant-friedrichs-lewy-condition">Courant-Friedrichs-Lewy condition</h4>
+<h5 id="courant-friedrichs-lewy-condition">Courant-Friedrichs-Lewy condition</h5>
 <p>Unfortunately, however, FTCS is fairly useless. The equation is satisfied exactly by any function of the form <span><span class="MathJax_Preview">u ( t , x ) = u ( x - v t )</span><script type="math/tex">u ( t , x ) = u ( x - v t )</script></span>. we can write the solution <span><span class="MathJax_Preview">u ( t , x )</span><script type="math/tex">u ( t , x )</script></span> to our continuum hyperbolic differential equation as a superposition of eigenmodes <span><span class="MathJax_Preview">e^{i(\omega t+k x)}</span><script type="math/tex">e^{i(\omega t+k x)}</script></span>. Here k is a spatial wave number.</p>
 <p>A real <span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span>, for which <span><span class="MathJax_Preview">e^{i \omega t}</span><script type="math/tex">e^{i \omega t}</script></span> has a magnitude of unity, yields sinusoidally oscillating modes, while the existence of a complex piece in <span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span> leads to exponentially growing or damping modes. In the case of exponential growth, the magnitude of <span><span class="MathJax_Preview">e^{i \omega t}</span><script type="math/tex">e^{i \omega t}</script></span> will exceed unity.</p>
 <p>We can perform a similar spectral analysis of the finite difference equation. Write the eigenmode for <span><span class="MathJax_Preview">u_{j}^{n}</span><script type="math/tex">u_{j}^{n}</script></span> as</p>
@@ -564,12 +595,211 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
 <p>The Courant condition states that the the grid point <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> at the new time level n+1 has to reside inside the domain of determinacy of the interval spanned by the finite difference stencil at the time level n. This makes intuitive sense: if <span><span class="MathJax_Preview">u _ { j } ^ { n + 1 }</span><script type="math/tex">u _ { j } ^ { n + 1 }</script></span> were outside this domain, its physical specification would require more information about the past than we are providing numerically, which may trigger an instability.</p>
 <p><img alt="" src="../media/15512306641761.jpg" /></p>
 <p>Recalling that v represents the speed of a characteristic, we may interpret the Courant condition in terms of the domain of determinacy.</p>
-<h2 id="mesh-refinement">Mesh Refinement</h2>
-<h3 id="fixed-mesh-refinement">Fixed Mesh Refinement</h3>
+<p><strong>It seems somewhat like a miracle that simply replacing a grid function by a local average manages to change the numerical scheme from unconditionally unstable to conditionally stable.</strong></p>
+<p>This change can be interpreted in very physical terms</p>
+<div>
+<div class="MathJax_Preview">
+u_{j}^{n+1}=u_{j}^{n}+\frac{1}{2}\left(u_{j+1}^{n}-2 u_{j}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</div>
+<script type="math/tex; mode=display">
+u_{j}^{n+1}=u_{j}^{n}+\frac{1}{2}\left(u_{j+1}^{n}-2 u_{j}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</script>
+</div>
+<p>or</p>
+<div>
+<div class="MathJax_Preview">
+\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}=-v \frac{u_{j+1}^{n}-u_{j-1}^{n}}{2 \Delta x}+\frac{(\Delta x)^{2}}{2 \Delta t} \frac{u_{j+1}^{n}-2 u_{j}^{n}+u_{j-1}^{n}}{(\Delta x)^{2}}
+</div>
+<script type="math/tex; mode=display">
+\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}=-v \frac{u_{j+1}^{n}-u_{j-1}^{n}}{2 \Delta x}+\frac{(\Delta x)^{2}}{2 \Delta t} \frac{u_{j+1}^{n}-2 u_{j}^{n}+u_{j-1}^{n}}{(\Delta x)^{2}}
+</script>
+</div>
+<p>But equation is a finite-difference representation of the differential equation</p>
+<div>
+<div class="MathJax_Preview">
+\partial_{t} u+v \partial_{x} u=D \partial_{x}^{2} u
+</div>
+<script type="math/tex; mode=display">
+\partial_{t} u+v \partial_{x} u=D \partial_{x}^{2} u
+</script>
+</div>
+<p>where the term on the right-hand side is essentially a diffusion term, with parameter <span><span class="MathJax_Preview">D=(\Delta x)^{2} /(2 \Delta t)</span><script type="math/tex">D=(\Delta x)^{2} /(2 \Delta t)</script></span> serving as a constant coefficient of diffusion.</p>
+<p>This feature implies the amplitude of any wave will decrease spuriously with time as it propagates. A related effect is anomalous dispersion, an additional price we pay for stablity in the Lax scheme and many other finite-difference schemes for hyperbolic systems.</p>
+<h5 id="other-scheme">Other scheme</h5>
+<p>Lax scheme</p>
+<hr />
+<p>There are a number of other ways of constructing stable finite difference schemes for the model equation. A popular alternative to the Lax scheme is upwind differencing</p>
+<div>
+<div class="MathJax_Preview">
+\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}=-v \left\{\begin{array}{l}{\frac{u_{j}^{n}-u_{j-1}^{n}}{\Delta x},} &amp; {v&gt;0} \\ {\frac{u_{j+1}^{n}-u_{j}^{n}}{\Delta x},} &amp; {v&gt;0}\end{array}\right.
+</div>
+<script type="math/tex; mode=display">
+\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}=-v \left\{\begin{array}{l}{\frac{u_{j}^{n}-u_{j-1}^{n}}{\Delta x},} & {v>0} \\ {\frac{u_{j+1}^{n}-u_{j}^{n}}{\Delta x},} & {v>0}\end{array}\right.
+</script>
+</div>
+<p>This scheme borrows its name from the fact that for a wave with <span><span class="MathJax_Preview">v&gt;0</span><script type="math/tex">v>0</script></span>, that travels “to the right”, say, the new grid-point <span><span class="MathJax_Preview">u_{j}^{n+1}</span><script type="math/tex">u_{j}^{n+1}</script></span> is affected only by the “upwind” grid-points to its left, i.e. that lie in the region through which the wave travels before reaching <span><span class="MathJax_Preview">x_{j}</span><script type="math/tex">x_{j}</script></span>.</p>
+<p>three-level scheme</p>
+<hr />
+<p>It would be desirable, however, to have a scheme that is second order in both in space and time. One way to construct such a code is to abandon two-level schemes, and instead consider a three-level scheme. We can then construct centered derivatives both for the time-derivative,</p>
+<div>
+<div class="MathJax_Preview">
+\left(\partial_{t} u\right)_{j}^{n}=\frac{u_{j}^{n+1}-u_{j}^{n-1}}{2 \Delta t}+\mathcal{O}\left(\Delta t^{2}\right)
+</div>
+<script type="math/tex; mode=display">
+\left(\partial_{t} u\right)_{j}^{n}=\frac{u_{j}^{n+1}-u_{j}^{n-1}}{2 \Delta t}+\mathcal{O}\left(\Delta t^{2}\right)
+</script>
+</div>
+<p>the leap-frog scheme,</p>
+<div>
+<div class="MathJax_Preview">
+u_{j}^{n+1}=u_{j}^{n-1}-v \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</div>
+<script type="math/tex; mode=display">
+u_{j}^{n+1}=u_{j}^{n-1}-v \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</script>
+</div>
+<p>Some researchers prefer two-level schemes over three-level schemes because three level schemes require initial data on two different time levels, which can be somewhat awkward.</p>
+<p><img alt="-w619" src="../media/15532637365521.jpg" /></p>
+<p>The leap-frog scheme has the additional disadvantage that, it only connects fields of the same color. “Black” gridpoints can therefore evolve completely independently of “white” gridpoints, and the two sets of grid points may drift apart as numerical error accumulates differently for the two sets of points. If necessary, this problem can be solved by artificially adding a very small viscous term that links the two sets together. Once these potential issues are resolved, leap-frog is a very simple, accurate and powerful method.</p>
+<p>implicit scheme</p>
+<hr />
+<p>Yet another way of constructing a stable two-level scheme is to use backward time differencing instead of forward differencing. This approach then yields the “backward-time, centered-space” scheme,</p>
+<div>
+<div class="MathJax_Preview">
+u_{j}^{n+1}=u_{j}^{n}-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n+1}-u_{j-1}^{n+1}\right)
+</div>
+<script type="math/tex; mode=display">
+u_{j}^{n+1}=u_{j}^{n}-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n+1}-u_{j-1}^{n+1}\right)
+</script>
+</div>
+<p><img alt="-w600" src="../media/15532642037929.jpg" /></p>
+<p>Performing a von Neumann stability analysis we find the amplification factor</p>
+<div>
+<div class="MathJax_Preview">
+|\xi(k)| \leq 1
+</div>
+<script type="math/tex; mode=display">
+|\xi(k)| \leq 1
+</script>
+</div>
+<p>for all values of <span><span class="MathJax_Preview">\Delta t</span><script type="math/tex">\Delta t</script></span>. This finding means that this scheme is unconditionally stable. <strong>The size of the stepsize ∆t is no longer restricted by stability, and instead is limited only by accuracy requirements.</strong> this property is even more important for parabolic equations.</p>
+<p>The disadvantage of the backward differencing scheme is that we can no longer solve for the new grid function <span><span class="MathJax_Preview">u_{j}^{n+1}</span><script type="math/tex">u_{j}^{n+1}</script></span> at the new time <span><span class="MathJax_Preview">t^{n+1}</span><script type="math/tex">t^{n+1}</script></span> explicitly in terms of old grid functions at <span><span class="MathJax_Preview">t^{n}</span><script type="math/tex">t^{n}</script></span> alone. Instead, now couples <span><span class="MathJax_Preview">u_{j}^{n+1}</span><script type="math/tex">u_{j}^{n+1}</script></span> with the its closest neighbors <span><span class="MathJax_Preview">u_{j+1}^{n+1}</span><script type="math/tex">u_{j+1}^{n+1}</script></span> and <span><span class="MathJax_Preview">u_{j-1}^{n+1}</span><script type="math/tex">u_{j-1}^{n+1}</script></span>. This coupling provides an implicit linear relation between the new grid functions, and is therefore an example of an implicit finite-differencing scheme. We can no longer sweep through the grid and update one point at a time; instead <strong>we now have to solve for all grid points simultaneously</strong>. Writing equation at all interior grid points, and then taking into account the boundary conditions, leads to a system of equations quite similar to elliptic equations.</p>
+<p>Crank-Nicholson scheme</p>
+<hr />
+<p>A second-order scheme would be time-centered, meaning that we should estimate the the time derivative at the mid-point between the two time levels n and n + 1,</p>
+<p>Implementing time-centering means that we also have to evaluate the space derivative at this same midpoint <span><span class="MathJax_Preview">n+1/2</span><script type="math/tex">n+1/2</script></span>  which we can do by averaging between the values at n and n+1.</p>
+<div>
+<div class="MathJax_Preview">
+\left(\partial_{t} u\right)_{j}^{n+1 / 2}=\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}+\mathcal{O}\left(\Delta t^{2}\right)
+</div>
+<script type="math/tex; mode=display">
+\left(\partial_{t} u\right)_{j}^{n+1 / 2}=\frac{u_{j}^{n+1}-u_{j}^{n}}{\Delta t}+\mathcal{O}\left(\Delta t^{2}\right)
+</script>
+</div>
+<p>This approach yields the Crank-Nicholson scheme</p>
+<div>
+<div class="MathJax_Preview">
+u_{j}^{n+1}=u_{j}^{n}-\frac{v}{4} \frac{\Delta t}{\Delta x}\left(\left(u_{j+1}^{n+1}-u_{j-1}^{n+1}\right)+\left(u_{j+1}^{n}-u_{j-1}^{n}\right)\right)
+</div>
+<script type="math/tex; mode=display">
+u_{j}^{n+1}=u_{j}^{n}-\frac{v}{4} \frac{\Delta t}{\Delta x}\left(\left(u_{j+1}^{n+1}-u_{j-1}^{n+1}\right)+\left(u_{j+1}^{n}-u_{j-1}^{n}\right)\right)
+</script>
+</div>
+<p><img alt="-w696" src="../media/15532650020363.jpg" /></p>
+<p>Crank-Nicholson is second order in both space and time, and shows that it is unconditionally stable.</p>
+<p>The iterative Crank-Nicholson scheme uses a predictor-corrector approach. In the predictor step we predict the new values <span><span class="MathJax_Preview">u_{j}^{n+1}</span><script type="math/tex">u_{j}^{n+1}</script></span> by using the fully explicit FTCS scheme.</p>
+<div>
+<div class="MathJax_Preview">
+^{(1)} u_{j}^{n+1}=u_{j}^{n}-\frac{v \Delta t}{2 \Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</div>
+<script type="math/tex; mode=display">
+^{(1)} u_{j}^{n+1}=u_{j}^{n}-\frac{v \Delta t}{2 \Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
+</script>
+</div>
+<p>which, as we have seen above, would be unconditionally unstable by itself. In a subsequent corrector step we use these predicted values <span><span class="MathJax_Preview">^{(1)}{u_{j}}^{n+1}</span><script type="math/tex">^{(1)}{u_{j}}^{n+1}</script></span> together with the <span><span class="MathJax_Preview">u_{j}^{n}</span><script type="math/tex">u_{j}^{n}</script></span> to obtain a time-centered approximation for the spatial derivative on the right-hand side of equation. This step yields the corrected values of the grid function,</p>
+<div>
+<div class="MathJax_Preview">
+^{(2)} u_{j}^{n+1}=u_{j}^{n} - \frac{v \Delta t}{4 \Delta x} \left(\left( ^{(1)} u_{j+1}^{n+1} - ^{(1)} u_{j-1}^{n+1}\right)\right)+\left(u_{j+1}^{n}-u_{j-1}^{n}\right) )
+</div>
+<script type="math/tex; mode=display">
+^{(2)} u_{j}^{n+1}=u_{j}^{n} - \frac{v \Delta t}{4 \Delta x} \left(\left( ^{(1)} u_{j+1}^{n+1} - ^{(1)} u_{j-1}^{n+1}\right)\right)+\left(u_{j+1}^{n}-u_{j-1}^{n}\right) )
+</script>
+</div>
+<p>The corrector step can be repeated an arbitrary number times N, always using the previous values <span><span class="MathJax_Preview">^{(N-1)} u_{j}^{n+1}</span><script type="math/tex">^{(N-1)} u_{j}^{n+1}</script></span> on the right-hand side to find new corrected values <span><span class="MathJax_Preview">^{(N)} u_{j}^{n+1}</span><script type="math/tex">^{(N)} u_{j}^{n+1}</script></span>.</p>
+<p>The iterative Crank-Nicholson scheme is an explicit two-level scheme that is second order in both space and time. Since this form is very similar to the 3 + 1 equations and related formulations, the iterative Crank-Nicholson scheme has often been used in numerical relativity simulations.</p>
+<h5 id="method-of-lines">Method of Lines</h5>
+<p>A popular alternative to these complete finite difference schemes is therefore the method of lines (or MOL for short).</p>
+<p><strong>The basic idea of the method of lines is to finite difference the space derivatives only.</strong> Now we introduce a spatial grid only, at least for now, so that the function values at these gridpoint, <span><span class="MathJax_Preview">u_{j}(t)=u\left(t, x_{j}\right)</span><script type="math/tex">u_{j}(t)=u\left(t, x_{j}\right)</script></span>, remain functions of time. As a result, our partial differential equation for <span><span class="MathJax_Preview">u(t, x)</span><script type="math/tex">u(t, x)</script></span> becomes a set of ordinary differential equations for the grid values <span><span class="MathJax_Preview">u_{j}(t)</span><script type="math/tex">u_{j}(t)</script></span>. The next question is how to integrate the ordinary differential equations. The appealing feature of the method of lines, however, is that we can use any method for the integration of the ordinary differential equations that we like. In fact, many such methods, including very efficient, high-order methods, are precoded and readily available. One such algorithm is the ever-popular Runge-Kutta method.</p>
+<p>To implement, say, a fourth-order scheme for our model</p>
+<div>
+<div class="MathJax_Preview">
+\partial_{t} u+v \partial_{x} u=0
+</div>
+<script type="math/tex; mode=display">
+\partial_{t} u+v \partial_{x} u=0
+</script>
+</div>
+<p>we could adopt the fourth-order differencing stencil to replace the spatial derivative, yielding</p>
+<div>
+<div class="MathJax_Preview">
+\frac{d u_{j}}{d t}=-\frac{v}{12 \Delta x}\left(u_{i-2}-8 u_{j-1}+8 u_{j+1}-u_{i+2}\right)
+</div>
+<script type="math/tex; mode=display">
+\frac{d u_{j}}{d t}=-\frac{v}{12 \Delta x}\left(u_{i-2}-8 u_{j-1}+8 u_{j+1}-u_{i+2}\right)
+</script>
+</div>
+<p>and then integrate this set of ordinary differential equations with a fourth-order Runge-Kutta method.</p>
+<h3 id="ghost-zones">Ghost Zones</h3>
+<p>Cactus is based upon a distributed computing paradigm. That is, the problem domain is split into blocks, each of which is assigned to a processor.</p>
+<p>Consider the 1-D wave equation</p>
+<div>
+<div class="MathJax_Preview">
+\frac{\partial^{2} \phi}{\partial t^{2}}=\frac{\partial^{2} \phi}{\partial x^{2}}
+</div>
+<script type="math/tex; mode=display">
+\frac{\partial^{2} \phi}{\partial t^{2}}=\frac{\partial^{2} \phi}{\partial x^{2}}
+</script>
+</div>
+<p>To solve this by partial differences, one discretises the derivatives to get an equation relating the solution
+at different times.</p>
+<div>
+<div class="MathJax_Preview">
+\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}
+</div>
+<script type="math/tex; mode=display">
+\phi(t+\Delta t, x)-2 \phi(t, x)+\phi(t-\Delta t, x)=\frac{\Delta t^{2}}{\Delta x^{2}}\{\phi(t, x+\Delta x)-2 \phi(t, x)+\phi(t, x-\Delta x)\}
+</script>
+</div>
+<p>On examination, you can see that to generate the data at the point <span><span class="MathJax_Preview">(t+\Delta t, x)</span><script type="math/tex">(t+\Delta t, x)</script></span> we need data from the four points <span><span class="MathJax_Preview">(t, x)</span><script type="math/tex">(t, x)</script></span>, <span><span class="MathJax_Preview">(t -\Delta t, x)</span><script type="math/tex">(t -\Delta t, x)</script></span>, <span><span class="MathJax_Preview">(t, x + \Delta x)</span><script type="math/tex">(t, x + \Delta x)</script></span> and <span><span class="MathJax_Preview">(t, x- \Delta x)</span><script type="math/tex">(t, x- \Delta x)</script></span> only.</p>
+<p>Now, if you evolve the above scheme, it becomes apparent that at each iteration the number of grid points you can evolve decreases by one at each edge.</p>
+<p><img alt="-w816" src="../media/15528964483464.jpg" /></p>
+<p>At the outer boundary of the physical domain, the data for the boundary point can be generated by the boundary conditions, however, at internal boundaries, the data has to be copied from the adjacent processor.</p>
+<p>It would be inefficient to copy each point individually, so instead, a number of ghostzones are created at the internal boundaries. A ghostzone consists of a copy of the whole plane (in 3D, line in 2D, point in 1D) of the data from the adjacent processor.</p>
+<p><img alt="-w785" src="../media/15528964642193.jpg" /></p>
+<p>Once the data has been evolved one step, the data in the ghostzones can be exchanged (or synchronised) between processors in one fell swoop before the next evolution step.</p>
+<h3 id="mesh-refinement">Mesh Refinement</h3>
+<p>Many current numerical relativity codes use a uniform grid spacing to cover the entire spatial domain. Given that computational resources are limited, so that we can afford only a finite number of gridpoints, such a “unigrid” implementation may pose a problem.</p>
+<p>Imagine, for concreteness, a simulation of a strong-field gravitational wave source, like a compact binary containing neutron stars or black holes. On the one hand we have to resolve these sources well, so as to minimize truncation error in the strong-field region. On the other hand, the grid must extend into the weak-field region at large distances from the sources, so as to minimize error from the outer boundaries and to enable us to extract the emitted gravitational radiation accurately.</p>
+<p><img alt="-w1062" src="../media/15533057187758.jpg" /></p>
+<p>A very promising alternative is mesh refinement, which has been widely developed and used in the computational fluid dynamics community and is becoming increasingly popular in numerical relativity.</p>
+<p>The basic idea underlying mesh refinement techniques is to perform the simulation not on one numerical grid, but on several, as in the multigrid methods.</p>
+<p><img alt="-w731" src="../media/15533068726818.jpg" /></p>
+<p>In multigrid methods, the numerical solution is computed on a hierarchy of computational grids with increasing grid resolution. The finer grids may or may not cover all the physical space that is covered by the coarser grids. The numerical solution is then computed by completing sweeps through the grid hierarchy. </p>
+<p>The coarse grid is sufficiently small so that we can compute a solution with a direct solver. This provides the “global” features of the solution, albeit on a coarse grid and hence with a large local truncation error. We then interpolate this approximate solution to the next finer grid. This interpolation from a coarser grid to a finer grid is called a “prolongation”, and we point out that the details of this interpolation depend on whether the grid is cell-centered or vertex-centered. </p>
+<blockquote>
+<p>In the mathematical field of numerical analysis, interpolation is a method of constructing new data points within the range of a discrete set of known data points.</p>
+</blockquote>
+<p>On the finer grid we can then apply a relaxation method, for example a Gauss-Seidel sweep. While this method is too slow to solve the problem globally, as we have discussed above, it is very well suited to improve the solution locally. This step is often called a “smoothing sweep”. </p>
+<p>After this smoothing sweep the solution can be prolonged to the next finer grid, where the procedure is repeated. Once we have smoothed the solution on the finest grid, we start ascending back to coarser grids. The interpolation from a finer grid to a coarser grid is called a “restriction”. </p>
+<p>The coarser grids now “learn” from the finer grids by comparing their last solution with the one that comes back from a finer grid. This comparison provides an estimate for the local truncation error, which can be accounted for with the help of an artificial source term. On each grid we again perform smoothing sweeps, again improving the solution because we inherit the smaller truncation error from the finer grids. These sweeps through the grid hierarchy can be repeated until the solution has converged to a pre-determined accuracy.</p>
+<p>Typically, the gridspacing on the finer grid is half that on the next coarser grid, but clearly other refinement factors can be chosen. The hierarchy can be extended, and typical mesh refinement applications employ multiple refinement levels.</p>
+<p>Two versions of mesh refinement can be implemented. In the simpler version, called fixed mesh refinement or FMR, it is assumed that the refined grids will be needed only at known locations in space that remain fixed throughout the simulation.</p>
+<p>The situation is more complicated for objects that are moving, as is the case for a coalescing binary star system. In this case we do not know a priori the trajectories of the companion stars, hence do not know which regions need refining. Moreover, these regions will be changing as the system evolves and the stars move. Clearly, we would like to move the refined grids with the stars. Such an approach, whereby the grid is relocated during the simulation to give optimal resolution at each time step, is called adaptive mesh refinement or AMR.</p>
+<h4 id="fixed-mesh-refinement">Fixed Mesh Refinement</h4>
 <p>A standard way of solving partial differential equations are finite differences on a regular grid. This is also called unigrid. Such an application discretises its problem space onto a single, rectangular grid which has everywhere the same grid spacing. Increasing the resolution in a unigrid application is somewhat expensive. For example, increasing the resolution by a factor of two requires a factor of eight more storage in three dimensions. Most applications need the high resolution only in a part of the simulation domain.</p>
 <p>Instead of only one grid, there are several grids or grid patches with different resolutions. The coarsest grid usually encloses the whole simulation domain. Successively finer grids overlay the coarse grid at those locations where a higher resolutions is needed. The coarser grids provide boundary conditions to the finer grid through interpolation.</p>
 <p>Instead of updating only one grid, the application has to update all grids. The usual approach is to first take a step on the coarsest grid, and then recursively take several smaller steps on the finer grids. The Courant criterion requires that the step sizes on the finer grids be smaller than on the coarse grid. The boundary values for the finer grids are found through interpolation in space and time from the coarser grid. In the end, the information on the finer grids is injected into the coarse grids.</p>
-<h3 id="adaptive-mesh-refinement-amr">Adaptive mesh refinement (AMR)</h3>
+<h4 id="adaptive-mesh-refinement-amr">Adaptive mesh refinement (AMR)</h4>
 <p>For well behaved problems a grid of uniform mesh spacing (in each of the coordinate directions) gives satisfactory results. However, there are classes of problems where the solution is more difficult to estimate in some regions (perhaps due to discontinuities, steep gradients, shocks, etc.) than in others. One could use a uniform grid having a <strong>spacing fine enough so that the local errors estimated in these difficult regions are acceptable</strong>. But this approach is computationally extremely costly.</p>
 <p>In numerical analysis, <strong>adaptive mesh refinement (AMR)</strong> is a method of <strong>adapting the accuracy of a solution within certain sensitive or turbulent regions</strong> of simulation, dynamically and during the time the solution is being calculated. The use of AMR has since then proved of broad use and has been used in studying turbulence problems in hydrodynamics as well as in the study of large scale structures in astrophysics。</p>
 <p><img alt="" src="../media/15523870802272.jpg" /></p>
@@ -595,10 +825,10 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../ADM/" class="btn btn-neutral float-right" title="ADM">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../SP/Introduction/" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../3+1 Decomposition/" class="btn btn-neutral" title="3+1 Decomposition"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Matter Sources/" class="btn btn-neutral" title="Matter Sources"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -626,10 +856,10 @@ u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\D
           <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../3+1 Decomposition/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Matter Sources/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../ADM/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../SP/Introduction/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

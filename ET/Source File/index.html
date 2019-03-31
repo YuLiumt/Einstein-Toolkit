@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Source File - Yu Liu's Notebook</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Source File";
+    var mkdocs_page_input_path = "ET/Source File.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/ET/Source File/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Cactus/">Cactus</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Thorn/">Thorn</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Source File</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#adding-source-files">Adding Source Files</a></li>
+    
+
+    <li class="toctree-l3"><a href="#coding-style">Coding Style</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#fortran">Fortran</a></li>
+        
+            <li><a class="toctree-l4" href="#c">C</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#cactus-variables">Cactus Variables</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#cactus-data-types">Cactus Data Types</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../parameter/">Parameter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Visualization/">Visualization</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Solutions/">Solutions</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GW/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Linearized Waves/">Linearized Waves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Extracting Gravitational Waveforms/">Extracting Gravitational Waveforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Numerical Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../NR/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/ADM/">ADM</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Example</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Example/Poisson/">Poisson</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Yu Liu's Notebook</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Einstein Toolkit &raquo;</li>
+        
+      
+    
+    <li>Source File</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/Source File.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>The make system uses file extensions to designate coding language, as well as other properties of the code in the file.</p>
+<p><img alt="-w546" src="../media/15534152007914.jpg" /></p>
+<p>In order to use Cactus <code class="codehilite">#include</code> directives in a file, it must be preprocessed.</p>
+<h3 id="adding-source-files">Adding Source Files</h3>
+<p>By default, the CCTK looks in the <code class="codehilite">src</code> directory of the thorn for source files.</p>
+<p>There are two ways in which to specify the sources. The easiest is to use the <code class="codehilite">make.code.defn</code> based method in which the CCTK does all the work, but you may instead put a <code class="codehilite">Makefile</code> in the <code class="codehilite">src</code> directory and do everything yourself.</p>
+<p>The Cactus make system looks for a file called <code class="codehilite">make.code.defn</code> in that directory (if there is no file called <code class="codehilite">Makefile</code> in the <code class="codehilite">src</code> directory). At its simplest, this file contains two lines</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>SRCS = &lt;list of all source files in this directory&gt;
+SUBDIRS = &lt;list of all subdirectories, including subdirectories of subdirectories&gt;
+</pre></div>
+</td></tr></table>
+
+<p>Each subdirectory listed should then have a <code class="codehilite">make.code.defn</code> file containing just a <code class="codehilite">SRCS =</code> line, a <code class="codehilite">SUBDIRS =</code> line will be ignored.</p>
+<h3 id="coding-style">Coding Style</h3>
+<p><strong>Indentation:</strong></p>
+<hr />
+<p>Two spaces, no tabs.</p>
+<p><strong>Brace positioning:</strong></p>
+<hr />
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>do
+{
+&lt;statement&gt;
+} while();
+</pre></div>
+</td></tr></table>
+
+<p><strong>GRDOC:</strong></p>
+<hr />
+<p>All files should start with a grdoc header, and all functions should have grdoc headers.</p>
+<p>The function grdoc should contain</p>
+<ul>
+<li>a description of the function, saying what it does.</li>
+<li>the functions called by this function.</li>
+<li>all function arguments with descriptions of what they are and what they are used for. </li>
+<li>the return codes should be described.</li>
+</ul>
+<p>The standard grdoc function header is of the form</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cm">/*@@</span>
+<span class="cm">  @routine  Template</span>
+<span class="cm">  @date  Fri Oct 6 10:51:49 2000</span>
+<span class="cm">  @author  Yu Liu</span>
+<span class="cm">  @desc  An example of grdoc</span>
+<span class="cm">  @enddesc</span>
+<span class="cm">  @calls  templatefunc2</span>
+<span class="cm">  @calledby</span>
+<span class="cm">  @history</span>
+<span class="cm">  @endhistory</span>
+<span class="cm">  @var     templatestring</span>
+<span class="cm">  @vdesc   string describing foobar</span>
+<span class="cm">  @vtype   const char *</span>
+<span class="cm">  @vio     in</span>
+<span class="cm">  @vcomment</span>
+<span class="cm">  @endvar</span>
+<span class="cm">  @returntype int *</span>
+<span class="cm">  @returndesc  0 - success</span>
+<span class="cm">  @endreturndesc</span>
+<span class="cm">@@*/</span>
+</pre></div>
+</td></tr></table>
+
+<p><strong>Header Files:</strong></p>
+<hr />
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#ifndef &lt;Name of Header File in Capitals&gt;</span>
+<span class="cp">#define &lt;Name of Header File in Capitals&gt;</span>
+<span class="o">&lt;</span><span class="n">body</span> <span class="n">of</span> <span class="n">header</span> <span class="n">file</span><span class="o">&gt;</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef __cplusplus</span>
+<span class="k">extern</span> <span class="s">&quot;C&quot;</span>
+<span class="p">{</span>
+<span class="cp">#endif</span>
+</pre></div>
+</td></tr></table>
+
+<p><strong>Source Files:</strong></p>
+<hr />
+<p>Source files should have as their first lines after all the include files:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>static const char *rcsid = &quot;$Header$&quot;;
+CCTK_FILEVERSION(MaintGuide_Template_c);
+</pre></div>
+</td></tr></table>
+
+<p><code class="codehilite">&lt;source file&gt;</code> should be replaced by</p>
+<ul>
+<li>Flesh: <code class="codehilite">&lt;directory&gt;_&lt;core filename&gt;_&lt;extension&gt;</code> (e.g. main_Groups_c)</li>
+<li>Thorn: <code class="codehilite">&lt;arrangement&gt;_&lt;thorn&gt;_&lt;core filename&gt;_&lt;extension&gt;</code>
+(e.g. CactusBase_CartGrid3D_CartGrid3D_c)</li>
+</ul>
+<p><strong>Naming Conventions:</strong></p>
+<hr />
+<p>All functions which may be used by thorns should have names beginning with <code class="codehilite">CCTK_</code> and then capitalised words with no underscores.</p>
+<p>All functions used internally by the flesh should have names beginning with <code class="codehilite">CCTKi_</code> and then capitalised words with no underscores.</p>
+<p>Header files to be included by thorns should have names beginning with <code class="codehilite">cctk_</code>, and followed by capitalised words with no underscores.</p>
+<p>All Cactus sourcefile names (except general utility files) should use capitilised words without underscores.</p>
+<h4 id="fortran">Fortran</h4>
+<p>Any source file using Cactus infrastructure should include the header file <code class="codehilite">cctk.h</code> using the line</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<h5 id="variables">Variables</h5>
+<p>Any routine using Cactus argument lists should include at the top of the file the header</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<p>A Cactus macro CCTK ARGUMENTS is defined for each thorn to contain:
+- General information about the grid hierarchy.
+- All the grid variables defined in the thorn’s interface.ccl
+- All the grid variables required from other thorns as requested by the inherits and friend lines in the interface.ccl</p>
+<p>These variables must be declared at the start of the routine using the macro <code class="codehilite">DECLARE_CCTK_ARGUMENTS</code>.</p>
+<h5 id="parameters">Parameters</h5>
+<p>Any routine using Cactus parameters should include at the top of the file the header</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<p>The parameters should be declared at the start of the routine using them with the macro <code class="codehilite">DECLARE_CCTK_PARAMETERS</code>.</p>
+<p>To compare a string valued parameter and Fortran string, use the macro <code class="codehilite">CCTK_EQUALS()</code> or the function <code class="codehilite">CCTK_Equals()</code>.</p>
+<p>To print the value of a string valued parameter to screen, use the subroutine <code class="codehilite">CCTK_PrintString()</code>. </p>
+<p>A further function <code class="codehilite">CCTK_FortranString</code> provides a mechanism for converting a string parameter to a Fortran string.</p>
+<h5 id="cactus-fortran-functions">Cactus Fortran Functions</h5>
+<p>Cactus Fortran functions can all be declared by adding the statement</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Functions.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<p>near the top of the file, and adding the declaration</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>DECLARE_CCTK_FUNCTIONS
+</pre></div>
+</td></tr></table>
+
+<p>to a module or a subroutine after the implicit none statement, but before any executable code.</p>
+<h5 id="fortran-modules">Fortran Modules</h5>
+<p>Fortran modules should be placed into source files that have the same name as the module, followed by the corresponding file name suffix. A module metric should thus be placed, e.g. into a file <code class="codehilite">metric.F90</code>. This convention allows the Cactus build system to automatically deduce the compile time dependencies.</p>
+<p>If you do not follow this convention, then you have to include the modules into the thorn’s <code class="codehilite">make.code.deps</code> file.</p>
+<h5 id="example">Example</h5>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+      <span class="n">subroutine</span> <span class="n">MyNewRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">,</span><span class="n">flag</span><span class="p">)</span>
+      <span class="n">implicit</span> <span class="n">none</span>
+      <span class="n">DECLARE_CCTK_ARGUMENTS</span>
+      <span class="n">DECLARE_CCTK_PARAMETERS</span>
+<span class="n">c</span>     <span class="n">Main</span> <span class="n">code</span> <span class="n">goes</span> <span class="n">here</span>
+      <span class="k">return</span> 
+      <span class="n">end</span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="c">C</h4>
+<p>Any source file using Cactus infrastructure should include the header file <code class="codehilite">cctk.h</code> using the line</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<h5 id="variables_1">Variables</h5>
+<p>Any routine using Cactus argument lists should include at the top of the file the header</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<p>A Cactus macro CCTK ARGUMENTS is defined for each thorn to contain:
+- General information about the grid hierarchy.
+- All the grid variables defined in the thorn’s interface.ccl
+- All the grid variables required from other thorns as requested by the inherits and friend lines in the interface.ccl</p>
+<p>These variables must be declared at the start of the routine using the macro <code class="codehilite">DECLARE_CCTK_ARGUMENTS</code>.</p>
+<h5 id="parameters_1">Parameters</h5>
+<p>Any routine using Cactus parameters should include at the top of the file the header</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<p>The parameters should be declared at the start of the routine using them with the macro <code class="codehilite">DECLARE_CCTK_PARAMETERS</code>.</p>
+<h5 id="example_1">Example</h5>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;cctk.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Arguments.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;cctk_Parameters.h&quot;</span><span class="cp"></span>
+<span class="kt">void</span> <span class="nf">MyCRoutine</span><span class="p">(</span><span class="n">CCTK_ARGUMENTS</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">DECLARE_CCTK_ARGUMENTS</span>
+  <span class="n">DECLARE_CCTK_PARAMETERS</span>
+  <span class="cm">/* Here goes your code */</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="cactus-variables">Cactus Variables</h3>
+<p>The Cactus variables which are passed through the macro CCTK ARGUMENTS are</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cctkGH</td>
+<td>A C pointer identifying the grid hierarchy.</td>
+</tr>
+<tr>
+<td>cctk_dim</td>
+<td>An integer with the number of dimensions used for this grid hierarchy.</td>
+</tr>
+<tr>
+<td>cctk_lsh</td>
+<td>An array of cctk_dim integers with the local grid size on this processor.</td>
+</tr>
+<tr>
+<td>cctk_ash</td>
+<td>An array of cctk_dim integers with the allocated size of the array. This may be larger than the local size; the additional points may not be used.</td>
+</tr>
+<tr>
+<td>cctk_gsh</td>
+<td>An array of cctk_dim integers with the global grid size.</td>
+</tr>
+<tr>
+<td>cctk_iteration</td>
+<td>The current iteration number.</td>
+</tr>
+<tr>
+<td>cctk_delta_time</td>
+<td>A CCTK_REAL with the timestep.</td>
+</tr>
+<tr>
+<td>cctk_time</td>
+<td>A CCTK_REAL with the current time.</td>
+</tr>
+<tr>
+<td>cctk_delta_space</td>
+<td>An array of cctk_dim CCTK_REALs with the grid spacing in each direction.</td>
+</tr>
+<tr>
+<td>cctk_nghostzones</td>
+<td>An array of cctk_dim integers with the number of ghostzones used in each direction.</td>
+</tr>
+<tr>
+<td>cctk_origin_space</td>
+<td>An array of cctk_dim CCTK_REALs with the spatial coordinates of the global origin of the grid.</td>
+</tr>
+</tbody>
+</table>
+<p>The following variables describe the location of the local grid (e.g. the grid treated on a given processor) within the global grid.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cctk_lbnd</td>
+<td>An array of cctk_dim integers containing the lowest index (in each direction) of the local grid, as seen on the global grid. Note that these indices start from zero, so you need to add one when using them in Fortran thorns.</td>
+</tr>
+<tr>
+<td>cctk_ubnd</td>
+<td>An array of cctk_dim integers containing the largest index (in each direction) of the local grid, as seen on the global grid. Note that these indices start from zero, so you need to add one when using them in Fortran thorns.</td>
+</tr>
+<tr>
+<td>cctk_bbox</td>
+<td>An array of 2*cctk_dim integers, which indicate whether the boundaries are internal boundaries (e.g. between processors), or physical boundaries. A value of 1 indicates a physical (outer) boundary at the edge of the computational grid, and 0 indicates an internal boundary.</td>
+</tr>
+</tbody>
+</table>
+<p>The following variable is needed for grid refinement methods</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cctk_levfac</td>
+<td>An array of cctk_dim integer factors by which the local grid is refined in the corresponding direction with respect to the base grid.</td>
+</tr>
+<tr>
+<td>cctk_levoff</td>
+<td>and cctk_levoffdenom Two arrays of cctk_dim integers describing the distance by which the local grid is offset with respect to the base grid, measured in local grid spacings. The distance in direction dir is given by 1.0 * cctk_levoff[dir] / cctk_levoffdenom[dir].</td>
+</tr>
+<tr>
+<td>cctk_timefac</td>
+<td>The integer factor by which the time step size is reduced with respect to the base grid.</td>
+</tr>
+</tbody>
+</table>
+<p>The following variables are used for identifying convergence levels.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cctk_convlevel</td>
+<td>The convergence level of this grid hierarchy. The base level is 0, and every level above that is coarsened by a factor of cctk_convfac.</td>
+</tr>
+<tr>
+<td>cctk_convfac</td>
+<td>The factor between convergence levels. The relation between the resolutions of different convergence levels is <span><span class="MathJax_Preview">\Delta x_{L}=\Delta x_{0} \cdot F^{L}</span><script type="math/tex">\Delta x_{L}=\Delta x_{0} \cdot F^{L}</script></span>, where L is the convergence level and F is the convergence factor. The convergence factor defaults to 2.</td>
+</tr>
+</tbody>
+</table>
+<p>The variables cctk_delta_space, cctk_delta_time, and cctk_origin space denote the grid spacings, time step size, and spatial origin on the base grid.</p>
+<h4 id="cactus-data-types">Cactus Data Types</h4>
+<p>To provide portability across platforms, the Cactus grid variables and parameters are defined and declared using Cactus data types (CCTK_INT, CCTK_REAL, CCTK_COMPLEX). </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../parameter/" class="btn btn-neutral float-right" title="Parameter">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Thorn/" class="btn btn-neutral" title="Thorn"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Thorn/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../parameter/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

@@ -85,6 +85,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../ET/parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -98,6 +102,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -137,15 +149,42 @@
     <a class="current" href="./">3+1 Decomposition</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#foliations-of-spacetime">Foliations of Spacetime</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#the-spatial-metric-gamma_abgamma_ab">The spatial metric \gamma_{ab}\gamma_{ab}</a></li>
+        
+            <li><a class="toctree-l4" href="#the-extrinsic-curvature-k_abk_ab">The Extrinsic Curvature K_{ab}K_{ab}</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../ADM/">ADM</a>
+    <a class="" href="../BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -216,6 +255,155 @@
             <div class="section">
               
                 <p>The 3+1 equations are entirely equivalent to the usual ﬁeld equations but they focus on the evolution of 12 purely spatial quantities closely related to <span><span class="MathJax_Preview">g_{ij}</span><script type="math/tex">g_{ij}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ij}</span><script type="math/tex">\partial_t g_{ij}</script></span> and the constraints that they must satisfy on spatial hypersurfaces. Once these spatial ﬁeld quantities are specified on some initial “time slice” (i.e. spatial hypersurface) consistent with the 3 + 1 constraint equations, the 3 + 1 evolution equations can then be integrated, together with evolution equations for the matter sources, to determine these ﬁeld quantities at all later times.</p>
+<h3 id="foliations-of-spacetime">Foliations of Spacetime</h3>
+<p><img alt="" src="../media/15533281773996.jpg" /></p>
+<p>We assume that the spacetime <span><span class="MathJax_Preview">(M, g_{ab})</span><script type="math/tex">(M, g_{ab})</script></span> can be foliated into a family of non-intersecting spacelike three-surfaces Σ, which arise, at least locally, as the level surfaces of a scalar function t that can be interpreted as a global time function. From t we can define the 1-form</p>
+<div>
+<div class="MathJax_Preview">
+\Omega _ { a } = \nabla _ { a } t
+</div>
+<script type="math/tex; mode=display">
+\Omega _ { a } = \nabla _ { a } t
+</script>
+</div>
+<p>which is closed by construction,</p>
+<div>
+<div class="MathJax_Preview">
+\nabla _ { [ a } \Omega _ { b ] } = \nabla _ { [ a } \nabla _ { b ] } t = 0
+</div>
+<script type="math/tex; mode=display">
+\nabla _ { [ a } \Omega _ { b ] } = \nabla _ { [ a } \nabla _ { b ] } t = 0
+</script>
+</div>
+<p>The 4-metric <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> allows us to compute the norm of <span><span class="MathJax_Preview">\tilde{Ω}</span><script type="math/tex">\tilde{Ω}</script></span>􏰞, which we call <span><span class="MathJax_Preview">- \alpha ^ { - 2 }</span><script type="math/tex">- \alpha ^ { - 2 }</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\| \Omega \| ^ { 2 } = g ^ { a b } \nabla _ { a } t \nabla _ { b } t \equiv - \frac { 1 } { \alpha ^ { 2 } }
+</div>
+<script type="math/tex; mode=display">
+\| \Omega \| ^ { 2 } = g ^ { a b } \nabla _ { a } t \nabla _ { b } t \equiv - \frac { 1 } { \alpha ^ { 2 } }
+</script>
+</div>
+<p><span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> measures how much proper time elapses between neighboring time slices along the normal vector <span><span class="MathJax_Preview">Ω^a</span><script type="math/tex">Ω^a</script></span> to the slice, and is therefore called the lapse function. We assume that <span><span class="MathJax_Preview">α &gt; 0</span><script type="math/tex">α > 0</script></span>, so that <span><span class="MathJax_Preview">Ω^a</span><script type="math/tex">Ω^a</script></span> is timelike and the hypersurface Σ is spacelike everywhere.</p>
+<p>We can now define the unit normal to the slices as</p>
+<div>
+<div class="MathJax_Preview">
+n ^ { a } \equiv - g ^ { a b } \alpha \Omega _ { b }
+</div>
+<script type="math/tex; mode=display">
+n ^ { a } \equiv - g ^ { a b } \alpha \Omega _ { b }
+</script>
+</div>
+<p>Here the negative sign has been chosen so that <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> points in the direction of increasing t, and may therefore be thought of as the four-velocity of a “normal” observer whose worldline is always normal to the spatial slices Σ.</p>
+<h4 id="the-spatial-metric-gamma_abgamma_ab">The spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span></h4>
+<p>With the normal vector we can construct the spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span> that is induced by <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> on the three-dimensional hypersurfaces Σ</p>
+<div>
+<div class="MathJax_Preview">
+\gamma_{ab} = g_{ab} + n_a n_b
+</div>
+<script type="math/tex; mode=display">
+\gamma_{ab} = g_{ab} + n_a n_b
+</script>
+</div>
+<p>Thus <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span> is a projection tensor that projects out all geometric objects lying along <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>. This metric allows us to compute distances within a slice Σ. To see that <span><span class="MathJax_Preview">γ_{ab}</span><script type="math/tex">γ_{ab}</script></span> is purely spatial, i.e., resides entirely in Σ with no piece along <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>, we contract it with the normal <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+n ^ { a } \gamma _ { a b } = n ^ { a } g _ { a b } + n ^ { a } n _ { a } n _ { b } = n _ { b } - n _ { b } = 0
+</div>
+<script type="math/tex; mode=display">
+n ^ { a } \gamma _ { a b } = n ^ { a } g _ { a b } + n ^ { a } n _ { a } n _ { b } = n _ { b } - n _ { b } = 0
+</script>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We break up 4-dimensional tensors by decomposing them into a purely spatial part, which lies in the hypersurfaces <span><span class="MathJax_Preview">\Sigma</span><script type="math/tex">\Sigma</script></span>, and a timelike part, which is normal to the spatial surface. To do so, we need two projection operators.</p>
+<p>The first one, which projects a 4-dimensional tensor into a spatial slice</p>
+<div>
+<div class="MathJax_Preview">
+\gamma^a_{\space b} = g^a_{\space b} + n^a n_b
+</div>
+<script type="math/tex; mode=display">
+\gamma^a_{\space b} = g^a_{\space b} + n^a n_b
+</script>
+</div>
+<p>Similarly, we may define the normal projection operator as</p>
+<div>
+<div class="MathJax_Preview">
+N^a_{\space b} = - n^a n_b
+</div>
+<script type="math/tex; mode=display">
+N^a_{\space b} = - n^a n_b
+</script>
+</div>
+<p>We can now use these two projection operators to decompose any tensor into its spatial and timelike parts.</p>
+<p>The three-dimensional metric only contains <strong>information about the curvature intrinsic to a slice Σ</strong>, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded. This information is contained in a tensor called <strong>extrinsic curvature</strong>.</p>
+</div>
+<p>The three-dimensional covariant derivative can be expressed in terms of three-dimensional connection coefficients, which, in a coordinate basis, are given by</p>
+<div>
+<div class="MathJax_Preview">
+\Gamma _ { b c } ^ { a } = \frac { 1 } { 2 } \gamma ^ { a d } \left( \partial _ { c } \gamma _ { d b } + \partial _ { b } \gamma _ { d c } - \partial _ { d } \gamma _ { b c } \right)
+</div>
+<script type="math/tex; mode=display">
+\Gamma _ { b c } ^ { a } = \frac { 1 } { 2 } \gamma ^ { a d } \left( \partial _ { c } \gamma _ { d b } + \partial _ { b } \gamma _ { d c } - \partial _ { d } \gamma _ { b c } \right)
+</script>
+</div>
+<p>The three-dimensional Riemann tensor can be computed from</p>
+<div>
+<div class="MathJax_Preview">
+R _ { a b c } ^ { d } = \partial _ { b } \Gamma _ { a c } ^ { d } - \partial _ { a } \Gamma _ { b c } ^ { d } + \Gamma _ { a c } ^ { e } \Gamma _ { e b } ^ { d } - \Gamma _ { b c } ^ { e } \Gamma _ { e a } ^ { d }
+</div>
+<script type="math/tex; mode=display">
+R _ { a b c } ^ { d } = \partial _ { b } \Gamma _ { a c } ^ { d } - \partial _ { a } \Gamma _ { b c } ^ { d } + \Gamma _ { a c } ^ { e } \Gamma _ { e b } ^ { d } - \Gamma _ { b c } ^ { e } \Gamma _ { e a } ^ { d }
+</script>
+</div>
+<p>The three-dimensional curvature <span><span class="MathJax_Preview">R _ { b c d } ^ { a }</span><script type="math/tex">R _ { b c d } ^ { a }</script></span> only contains information about the curvature intrinsic to a slice Σ, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded.</p>
+<h4 id="the-extrinsic-curvature-k_abk_ab">The Extrinsic Curvature <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span></h4>
+<p><img alt="" src="../media/15533289903023.jpg" /></p>
+<p><strong>The extrinsic curvature</strong> <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span> can be found by <strong>projecting gradients of the normal vector into the slice Σ</strong>. The metric and the extrinsic curvature <span><span class="MathJax_Preview">(\gamma_{ab}, K_{ab})</span><script type="math/tex">(\gamma_{ab}, K_{ab})</script></span> can therefore be considered as the equivalent of positions and velocities in classical mechanics – they measure the “instantaneous” state of the gravitational ﬁeld, and form the fundamental variables in our initial value formulation.
+We now define the extrinsic curvature, <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span>, as the negative expansion</p>
+<div>
+<div class="MathJax_Preview">
+K_{ab} = - \gamma_a^{\space c} \gamma_b^{\space d} \nabla_{(c} n_{d)} = - \gamma_a^{\space c} \gamma_b^{\space d} \nabla_c n_d
+</div>
+<script type="math/tex; mode=display">
+K_{ab} = - \gamma_a^{\space c} \gamma_b^{\space d} \nabla_{(c} n_{d)} = - \gamma_a^{\space c} \gamma_b^{\space d} \nabla_c n_d
+</script>
+</div>
+<p>By definition, the extrinsic curvature is symmetric and purely spatial. they can only differ in the direction in which they are pointing, and the extrinsic curvature therefore provides information on <strong>how much this direction changes from point to point across a spatial hypersurface.</strong> As a consequence, the extrinsic curvature measures the rate at which the hypersurface deforms as it is carried forward along a normal.</p>
+<p>Finally, we can write the extrinsic curvature as</p>
+<div>
+<div class="MathJax_Preview">
+K_{ab} = - \frac{1}{2} \mathcal{L}_n \gamma_{ab}
+</div>
+<script type="math/tex; mode=display">
+K_{ab} = - \frac{1}{2} \mathcal{L}_n \gamma_{ab}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">L_n</span><script type="math/tex">L_n</script></span> denotes the Lie derivative along <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>.</p>
+<p>Since <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> is a timelike vector, equation illustrates the intuitive interpretation of the extrinsic curvature as a geometric generalization of the “time derivative” of the spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Proof: <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span> changes proportionally to <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span></p>
+<div>
+<div class="MathJax_Preview">
+\begin{align}
+K_{ab} &amp;= - \gamma_a^{\space c} \gamma_b^{\space d} \nabla_c n_d = - (\delta_a^{\space c} + n_a n^c) (\delta_b^{\space d} + n_b n^d) \nabla_c n_d  \\
+       &amp;= -(\delta_a^{\space c} + n_a n^c) \delta_b^{\space d} \nabla_c n_d = - \nabla_a n_b - n_a a_b \\
+\mathcal{L}_n \gamma_{ab} &amp;= \mathcal{L}_n (g_{ab} + n_a n_b) = 2 \nabla_{(a} n_{b)} + n_a \mathcal{L}_n n_b + n_b \mathcal{L}_n n_a \\
+                          &amp;= 2 (\nabla_{(a} n_{b)} - n_{(a} a_{b)})  \\
+\mathcal{L}_n \gamma_{ab} &amp;= - 2 K_{ab}
+\end{align}
+</div>
+<script type="math/tex; mode=display">
+\begin{align}
+K_{ab} &= - \gamma_a^{\space c} \gamma_b^{\space d} \nabla_c n_d = - (\delta_a^{\space c} + n_a n^c) (\delta_b^{\space d} + n_b n^d) \nabla_c n_d  \\
+       &= -(\delta_a^{\space c} + n_a n^c) \delta_b^{\space d} \nabla_c n_d = - \nabla_a n_b - n_a a_b \\
+\mathcal{L}_n \gamma_{ab} &= \mathcal{L}_n (g_{ab} + n_a n_b) = 2 \nabla_{(a} n_{b)} + n_a \mathcal{L}_n n_b + n_b \mathcal{L}_n n_a \\
+                          &= 2 (\nabla_{(a} n_{b)} - n_{(a} a_{b)})  \\
+\mathcal{L}_n \gamma_{ab} &= - 2 K_{ab}
+\end{align}
+</script>
+</div>
+</div>
               
             </div>
           </div>
@@ -223,7 +411,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Numerical Methods/" class="btn btn-neutral float-right" title="Numerical Methods">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ADM/" class="btn btn-neutral float-right" title="ADM">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Introduction/" class="btn btn-neutral" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -257,7 +445,7 @@
         <span><a href="../Introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Numerical Methods/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../ADM/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

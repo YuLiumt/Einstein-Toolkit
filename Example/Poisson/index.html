@@ -85,6 +85,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../ET/parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -98,6 +102,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -138,11 +150,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -171,23 +199,6 @@
     <a class="current" href="./">Poisson</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#parameter-file">Parameter File</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#flesh-parameters">Flesh parameters</a></li>
-        
-            <li><a class="toctree-l4" href="#grid-structure">Grid Structure</a></li>
-        
-            <li><a class="toctree-l4" href="#mesh-refinement">Mesh refinement</a></li>
-        
-            <li><a class="toctree-l4" href="#ct_multilevel">CT_MultiLevel</a></li>
-        
-            <li><a class="toctree-l4" href="#io">IO</a></li>
-        
-        </ul>
-    
-
     </ul>
                 </li>
     </ul>
@@ -232,27 +243,7 @@
           <div role="main">
             <div class="section">
               
-                <p>Here we solve the Poisson equation</p>
-<div>
-<div class="MathJax_Preview">
-\Delta \Phi(x)=\rho(x)
-</div>
-<script type="math/tex; mode=display">
-\Delta \Phi(x)=\rho(x)
-</script>
-</div>
-<p>where the right hand side <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span> is given by</p>
-<div>
-<div class="MathJax_Preview">
-\rho(r)=\left\{\begin{array}{ll}{Q / V } &amp; {r \leq R} \\ {0} &amp; {r&gt;R}\end{array}\right.
-</div>
-<script type="math/tex; mode=display">
-\rho(r)=\left\{\begin{array}{ll}{Q / V } & {r \leq R} \\ {0} & {r>R}\end{array}\right.
-</script>
-</div>
-<h2 id="parameter-file">Parameter File</h2>
-<p><a href="https://www.einsteintoolkit.org/gallery/poisson/poisson.par">https://www.einsteintoolkit.org/gallery/poisson/poisson.par</a></p>
-<h3 id="flesh-parameters">Flesh parameters</h3>
+                <h3 id="_1"></h3>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -267,424 +258,35 @@
 12
 13
 14
-15
-16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># Description of this simulation
-Cactus::cctk_run_title = &quot;Solving Poisson&#39;s equation with CT_MultiLevel (multigrid setup, FMG)&quot;
-
-# Give detailed information for each warning statement
-Cactus::cctk_full_warnings         = yes
-Cactus::highlight_warning_messages = no
-
-# Give timing information
-Cactus::cctk_timer_output          = &quot;off&quot;
-
-# Condition on which to terminate evolution loop
-Cactus::terminate       = &quot;any&quot;
-Cactus::cctk_initial_time = 0
-Cactus::cctk_final_time = 0
-# Final iteration number ?
-Cactus::cctk_itlast     = 0
-</pre></div>
-</td></tr></table>
-
-<h3 id="grid-structure">Grid Structure</h3>
-<p>To do so, we first have to construct a numerical grid that covers an interval between <span><span class="MathJax_Preview">x_{min}</span><script type="math/tex">x_{min}</script></span> and <span><span class="MathJax_Preview">x_{max}</span><script type="math/tex">x_{max}</script></span>. We then divide the interval <span><span class="MathJax_Preview">\left[x_{\min }, x_{\max }\right]</span><script type="math/tex">\left[x_{\min }, x_{\max }\right]</script></span> into N gridcells, leading to a gridspacing of</p>
-<div>
-<div class="MathJax_Preview">
-\Delta x=\frac{x_{\max }-x_{\min }}{N}
-</div>
-<script type="math/tex; mode=display">
-\Delta x=\frac{x_{\max }-x_{\min }}{N}
-</script>
-</div>
-<p>We can choose our grid points to be located either at the center of these cells, which would be referred to as a cell-centered grid, or on the vertices, which would be referred to as a vertex-centered grid. For a cell-centered grid we have N grid points located at</p>
-<div>
-<div class="MathJax_Preview">
-x_{i}=x_{\min }+(i-1 / 2) \Delta x, \quad i=1, \ldots, N
-</div>
-<script type="math/tex; mode=display">
-x_{i}=x_{\min }+(i-1 / 2) \Delta x, \quad i=1, \ldots, N
-</script>
-</div>
-<p><img alt="-w1252" src="../media/15516017095776.jpg" /></p>
-<p>whereas for a vertex centered grid we have N + 1 gridpoints located a</p>
-<div>
-<div class="MathJax_Preview">
-x_{i}=x_{\min }+(i-1) \Delta x, \quad i=1, \ldots, N+1
-</div>
-<script type="math/tex; mode=display">
-x_{i}=x_{\min }+(i-1) \Delta x, \quad i=1, \ldots, N+1
-</script>
-</div>
-<p>For now, the difference between cell-centered and vertex-centered grids only affects the implementation of boundary conditions, but not the finite difference representation of the differential equation itself.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;Boundary CartGrid3D CoordBase Slab SymBase&quot;
-
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># Domain size specification: lower and upper boundary locations
 CoordBase::domainsize = &quot;minmax&quot;
 
+# Location of x, y, z boundary
 CoordBase::xmin =  -1.00
 CoordBase::ymin =  -1.00
 CoordBase::zmin =  -1.00
 CoordBase::xmax =  +1.00
 CoordBase::ymax =  +1.00
 CoordBase::zmax =  +1.00
+
+# Grid spacing in x, y, z direction
 CoordBase::dx   =  0.25
 CoordBase::dy   =  0.25
 CoordBase::dz   =  0.25
+</pre></div>
+</td></tr></table>
 
-CoordBase::boundary_size_x_lower     = 3
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CoordBase::boundary_size_x_lower     = 3
 CoordBase::boundary_size_y_lower     = 3
 CoordBase::boundary_size_z_lower     = 3
 CoordBase::boundary_size_x_upper     = 3
 CoordBase::boundary_size_y_upper     = 3
 CoordBase::boundary_size_z_upper     = 3
-
-CoordBase::boundary_shiftout_x_lower = 1
-CoordBase::boundary_shiftout_y_lower = 1
-CoordBase::boundary_shiftout_z_lower = 1
-CoordBase::boundary_shiftout_x_upper = 1
-CoordBase::boundary_shiftout_y_upper = 1
-CoordBase::boundary_shiftout_z_upper = 1
-
-CartGrid3D::type = &quot;coordbase&quot;
-</pre></div>
-</td></tr></table>
-
-<p>The size of the computational domain is specified through the (xmin, xmax) parameters.</p>
-<p><a href="https://arxiv.org/abs/0710.4397">https://arxiv.org/abs/0710.4397</a></p>
-<p><img alt="-w415" src="../media/15522664027874.jpg" /></p>
-<p>When it is necessary to increase the number of boundary points, then <code class="codehilite">boundary_size_x_lower</code> is the only parameter that needs to be changed.</p>
-<p><img alt="" src="../media/15522671244834.jpg" /></p>
-<p>The integer parameter <code class="codehilite">boundary_shiftout_x_lower</code> can be used to shift the boundary points outwards (or inwards with negative values) by multiples of the grid spacing.</p>
-<p><img alt="" src="../media/15522671679502.jpg" /></p>
-<h3 id="mesh-refinement">Mesh refinement</h3>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;Carpet CarpetLib CarpetInterp LoopControl CarpetReduce CarpetSlab CarpetRegrid2&quot;
-
-# Choose the time step size adaptively
-Carpet::adaptive_stepsize = &quot;no&quot;
-
-# Insert barriers between scheduled items
-Carpet::schedule_barriers = no
-
-# Output bounding box information to the screen
-CarpetLib::output_bboxes  = no
-
-
-Carpet::init_fill_timelevels = &quot;yes&quot;
-
-# Use the domain description from CoordBase
-Carpet::domain_from_coordbase = yes
-# Maximum number of refinement levels (including the base level)
-Carpet::max_refinement_levels = 6
-
-driver::ghost_size       = 3
-Carpet::use_buffer_zones = yes
-
-Carpet::prolongation_order_space = 5
-Carpet::prolongation_order_time  = 2
-
-Carpet::convergence_level = 0
-
-Carpet::poison_new_timelevels = yes
-CarpetLib::poison_new_memory  = yes
-CarpetLib::poison_value       = 250
-
-Carpet::output_timers_every      = 0
-</pre></div>
-</td></tr></table>
-
-<p><img alt="" src="../media/15522675427766.jpg" /></p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CarpetRegrid2::num_centres  = 5
-
-CarpetRegrid2::num_levels_1 = 6
-CarpetRegrid2::position_x_1 = -0.5
-CarpetRegrid2::position_y_1 = -0.5
-CarpetRegrid2::radius_1[1]  = 5
-CarpetRegrid2::radius_1[2]  = 5
-CarpetRegrid2::radius_1[3]  = 5
-CarpetRegrid2::radius_1[4]  = 5
-CarpetRegrid2::radius_1[5]  = 0.4
-CarpetRegrid2::radius_1[6]  = 0.4
-CarpetRegrid2::radius_1[7]  = 0.4
-
-CarpetRegrid2::num_levels_2 = 6
-CarpetRegrid2::position_x_2 = -0.1
-CarpetRegrid2::position_y_2 = -0.1
-CarpetRegrid2::radius_2[1]  = 5
-CarpetRegrid2::radius_2[2]  = 5
-CarpetRegrid2::radius_2[3]  = 5
-CarpetRegrid2::radius_2[4]  = 5
-CarpetRegrid2::radius_2[5]  = 0.2
-CarpetRegrid2::radius_2[6]  = 0.2
-CarpetRegrid2::radius_2[7]  = 0.2
-
-CarpetRegrid2::num_levels_3 = 6
-CarpetRegrid2::position_x_3 = 0.5
-CarpetRegrid2::position_y_3 = 0.5
-CarpetRegrid2::radius_3[1]  = 5
-CarpetRegrid2::radius_3[2]  = 5
-CarpetRegrid2::radius_3[3]  = 5
-CarpetRegrid2::radius_3[4]  = 5
-CarpetRegrid2::radius_3[5]  = 0.2
-CarpetRegrid2::radius_3[6]  = 0.2
-CarpetRegrid2::radius_3[7]  = 0.2
-
-CarpetRegrid2::num_levels_4 = 6
-CarpetRegrid2::position_x_4 = -0.6
-CarpetRegrid2::position_y_4 = 0
-CarpetRegrid2::radius_4[1]  = 5
-CarpetRegrid2::radius_4[2]  = 5
-CarpetRegrid2::radius_4[3]  = 5
-CarpetRegrid2::radius_4[4]  = 5
-CarpetRegrid2::radius_4[5]  = 0.8
-CarpetRegrid2::radius_4[6]  = 0.8
-CarpetRegrid2::radius_4[7]  = 0.8
-
-CarpetRegrid2::num_levels_5 = 6
-CarpetRegrid2::position_x_5 = 0.6
-CarpetRegrid2::position_y_5 = -0.3
-CarpetRegrid2::radius_5[1]  = 5
-CarpetRegrid2::radius_5[2]  = 5
-CarpetRegrid2::radius_5[3]  = 5
-CarpetRegrid2::radius_5[4]  = 5
-CarpetRegrid2::radius_5[5]  = 0.8
-CarpetRegrid2::radius_5[6]  = 0.8
-CarpetRegrid2::radius_5[7]  = 0.8
-</pre></div>
-</td></tr></table>
-
-<h3 id="ct_multilevel">CT_MultiLevel</h3>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;CT_MultiLevel CT_Analytic&quot;
-
-CT_MultiLevel::cycle_type          = &quot;FMG cycle&quot;
-CT_MultiLevel::tol                 = 1e-12
-CT_MultiLevel::omega               = 1
-CT_MultiLevel::fd_order            = 4
-CT_MultiLevel::output_norms        = &quot;yes&quot;
-CT_MultiLevel::nrelsteps_down      = 200
-CT_MultiLevel::nrelsteps_up        = 200
-CT_MultiLevel::nrelsteps_bottom    = 200
-CT_MultiLevel::nrelsteps_top       = 200
-CT_MultiLevel::topMGlevel          = 5
-CT_MultiLevel::compare_to_exact    = &quot;yes&quot;
-CT_MultiLevel::exact_solution_gfname[0] = &quot;CT_Analytic::epsi&quot;
-CT_MultiLevel::exact_laplacian_gfname[0] = &quot;CT_Analytic::elaplacian&quot;
-
-CT_MultiLevel::n0[0]               = 0
-CT_MultiLevel::inipsi_gfname[0]    = &quot;CT_Analytic::testinipsi&quot;
-CT_MultiLevel::cxx_gfname[0]       = &quot;CT_Analytic::testcxx&quot;
-CT_MultiLevel::cyy_gfname[0]       = &quot;CT_Analytic::testcyy&quot;
-CT_MultiLevel::czz_gfname[0]       = &quot;CT_Analytic::testczz&quot;
-CT_MultiLevel::c0_gfname[0]        = &quot;CT_Analytic::testc0&quot;
-
-CT_Analytic::free_data             = &quot;exact&quot;
-CT_Analytic::ampG                  = 1
-CT_Analytic::amp[0]                = 1
-CT_Analytic::x0[0]                 = -0.5
-CT_Analytic::y0[0]                 = -0.5
-CT_Analytic::sigmax[0]             = 0.2
-CT_Analytic::sigmay[0]             = 0.2
-CT_Analytic::sigmaz[0]             = 0.2
-CT_Analytic::amp[1]                = 1
-CT_Analytic::x0[1]                 = -0.1
-CT_Analytic::y0[1]                 = -0.1
-CT_Analytic::sigmax[1]             = 0.1
-CT_Analytic::sigmay[1]             = 0.1
-CT_Analytic::sigmaz[1]             = 0.1
-CT_Analytic::amp[2]                = 1
-CT_Analytic::x0[2]                 = 0.5
-CT_Analytic::y0[2]                 = 0.5
-CT_Analytic::sigmax[2]             = 0.1
-CT_Analytic::sigmay[2]             = 0.1
-CT_Analytic::sigmaz[2]             = 0.1
-CT_Analytic::amp[3]                = 1
-CT_Analytic::x0[3]                 = -0.6
-CT_Analytic::y0[3]                 = 0
-CT_Analytic::sigmax[3]             = 0.4
-CT_Analytic::sigmay[3]             = 0.4
-CT_Analytic::sigmaz[3]             = 0.4
-CT_Analytic::amp[4]                = 1
-CT_Analytic::x0[4]                 = 0.6
-CT_Analytic::y0[4]                 = -0.3
-CT_Analytic::sigmax[4]             = 0.4
-CT_Analytic::sigmay[4]             = 0.4
-CT_Analytic::sigmaz[4]             = 0.4
-
-CT_Analytic::other_timelevels      = 3
-</pre></div>
-</td></tr></table>
-
-<h3 id="io">IO</h3>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ActiveThorns = &quot;IOUtil
 </pre></div>
 </td></tr></table>
               

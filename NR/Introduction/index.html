@@ -85,6 +85,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../../ET/parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -98,6 +102,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -147,11 +159,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../ADM/">ADM</a>
+    <a class="" href="../BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -223,7 +251,7 @@
               
                 <p>For all but the simplest systems, <strong>analytic solutions for the evolution of such systems do not exist</strong>. Hence the task of <strong>solving Einstein's equations must be performed numerically on a computer</strong>.</p>
 <p>In classical dynamics, the evolution of a system is uniquely determined by the initial positions and velocities of its constituents. By analogy, the evolution of general relativistic gravitational field is determined by specifying <strong>the metric quantities <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ab}</span><script type="math/tex">\partial_t g_{ab}</script></span> at a given (initial) instant of time t</strong>. Now these metric quantities can be integrated forward in time provided we can obtain from <strong>the Einstein field equations expressions for <span><span class="MathJax_Preview">\partial^2_t g_{ab}</span><script type="math/tex">\partial^2_t g_{ab}</script></span> at all points on the hypersurface</strong>. That way we can integrate these expressions to compute <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ab}</span><script type="math/tex">\partial_t g_{ab}</script></span> on a new spacelike hypersurface at some new time <span><span class="MathJax_Preview">t + \delta t</span><script type="math/tex">t + \delta t</script></span>, and then, by repeating the process, obtain  <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> for all other points <span><span class="MathJax_Preview">x^0</span><script type="math/tex">x^0</script></span> and <span><span class="MathJax_Preview">x^i</span><script type="math/tex">x^i</script></span> in the (future) spacetime.</p>
-<h2 id="cauchy-problem">Cauchy problem</h2>
+<h3 id="cauchy-problem">Cauchy problem</h3>
 <p><strong>This is a fundamental problem arising in the mathematical theory of partial differential equations.</strong></p>
 <p>The Bianchi identities <span><span class="MathJax_Preview">\nabla_b G^{ab} = 0</span><script type="math/tex">\nabla_b G^{ab} = 0</script></span> give</p>
 <div>
@@ -252,7 +280,7 @@ G^{ij} = 8 \pi T^{ij}
 G^{ij} = 8 \pi T^{ij}
 </script>
 </div>
-<p>It is not surprising that there is a mismatch between the required number (10) of second time 2 derivatives <span><span class="MathJax_Preview">\partial_t^2 g_{ab}</span><script type="math/tex">\partial_t^2 g_{ab}</script></span> and the available number (6) of dynamical ﬁeld equations. After all, there is always a fourfold ambiguity associated with the freedom to choose four different coordinates to label points in spacetime. So, for example, we could always choose Gaussian normal coordinates and set $g_{00} = −1 $ and <span><span class="MathJax_Preview">g_{0i} = 0</span><script type="math/tex">g_{0i} = 0</script></span>.</p>
+<p>It is not surprising that there is a mismatch between the required number (10) of second time 2 derivatives <span><span class="MathJax_Preview">\partial_t^2 g_{ab}</span><script type="math/tex">\partial_t^2 g_{ab}</script></span> and the available number (6) of dynamical ﬁeld equations. After all, there is always a fourfold ambiguity associated with the freedom to choose four different coordinates to label points in spacetime. So, for example, we could always choose Gaussian normal coordinates and set <span><span class="MathJax_Preview">g_{00} = −1</span><script type="math/tex">g_{00} = −1</script></span> and <span><span class="MathJax_Preview">g_{0i} = 0</span><script type="math/tex">g_{0i} = 0</script></span>.</p>
 <p>The Cauchy problem in general relativity logically involves a <strong>decomposition of four-dimensional spacetime into three dimensional space and one-dimensional time</strong>.</p>
 <div class="admonition note">
 <p class="admonition-title">Cauchy surface</p>
@@ -300,7 +328,7 @@ B _ { i } = \epsilon _ { i j k } D ^ { j } A ^ { k }
 </div>
 <p>With the vector potential <span><span class="MathJax_Preview">A_i</span><script type="math/tex">A_i</script></span> we have introduced a gauge freedom into electrodynamics which is expressed in the freely specifiable gauge variable <span><span class="MathJax_Preview">Φ</span><script type="math/tex">Φ</script></span>.</p>
 <p>The initial value problem in electrodynamics can now be solved in two steps. In the first step, initial data (<span><span class="MathJax_Preview">A_i</span><script type="math/tex">A_i</script></span>, <span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>), together with the sources (ρ, <span><span class="MathJax_Preview">j_i</span><script type="math/tex">j_i</script></span>), are specified that satisfy the constraint equations. In the second step, these fields are evolved according to the evolution equations. <strong>Before the evolution equations can be solved, a suitable gauge condition has to be chosen</strong>.</p>
-<h2 id="complications">Complications</h2>
+<h3 id="complications">Complications</h3>
 <p>The equations that arise in <strong>numerical relativity are typically multidimensional, nonlinear, coupled partial differential equations in space and time</strong>. They have in common with other areas of computational physics, like magnetohydrodynamics. However, solving Einstein’s equations poses some additional complications that are unique to general relativity. In general relativity, coordinates are merely labels that distinguish points in spacetime; by themselves coordinate intervals have no physical significance. <strong>To use coordinate intervals to determine physically measurable proper distances and proper times requires the spacetime metric, but the metric is known only after Einstein’s equations have been solved</strong>. Moreover, as the numerical integrations that determine the metric proceed, it often turns out that the original, arbitrary choice of coordinates turns out to be bad, because, for example, singularities appear in the equations. Encountering such <strong>singularities</strong>, be they physical or coordinate, results in some of the terms in Einstein’s equations becoming infinite, <strong>potentially causing overflows in the computer output and premature termination of the numerical integration</strong>.</p>
 <p>Treating black holes is one of the main goals of numerical relativity, but this poses another complication. The reason is that <strong>black holes contain physical spacetime singularities</strong> – regions where the gravitational tidal field, the matter density and the spacetime curvature all become infinite. Thus, <strong>when dealing with black holes, it is crucial to choose a computational technique that avoids encountering their interior spacetime singularities in the course of the simulation</strong>.</p>
 <p>Another complication arises in the context of one of the most pressing goals of numerical relativity – the calculation of waveforms from promising astrophysical sources of gravitational radiation. These theoretical templates are essential for the identification and physical interpretation of gravitational wave sources. However, the gravitational wave components of the spacetime metric usually constitute small fractions of the smooth background metric. Moreover, to extract the waves from the background in a simulation requires that one probe the numerical spacetime in the far-field, or radiation, zone, which is typically at large distance from the strong-field central source. Yet it is the strong-field region which usually consumes most the computational resources (e.g. spatial resolution) to guarantee accuracy. Furthermore, waiting for the wave to propagate to the far-field region usually takes nonnegligible integration time.</p>

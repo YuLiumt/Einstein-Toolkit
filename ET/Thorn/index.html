@@ -84,25 +84,23 @@
     <a class="current" href="./">Thorn</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#flesh-thorn-interface">Flesh-Thorn Interface</a></li>
+    <li class="toctree-l3"><a href="#the-interfaceccl-file">The interface.ccl File</a></li>
     
 
-    <li class="toctree-l3"><a href="#general-syntax-of-ccl-files">General Syntax of CCL Files</a></li>
+    <li class="toctree-l3"><a href="#the-paramccl-file">The param.ccl File</a></li>
     
-        <ul>
-        
-            <li><a class="toctree-l4" href="#the-interfaceccl-file">The interface.ccl File</a></li>
-        
-            <li><a class="toctree-l4" href="#the-paramccl-file">The param.ccl File</a></li>
-        
-            <li><a class="toctree-l4" href="#the-scheduleccl-file">The schedule.ccl File</a></li>
-        
-            <li><a class="toctree-l4" href="#the-configurationccl-file">The configuration.ccl File</a></li>
-        
-        </ul>
+
+    <li class="toctree-l3"><a href="#the-scheduleccl-file">The schedule.ccl File</a></li>
+    
+
+    <li class="toctree-l3"><a href="#the-configurationccl-file">The configuration.ccl File</a></li>
     
 
     </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Source File/">Source File</a>
                 </li>
                 <li class="">
                     
@@ -119,6 +117,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -159,11 +165,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -234,7 +256,7 @@
             <div class="section">
               
                 <p><strong>A thorn is the basic working module within Cactus.</strong> All user supplied code goes into thorns, which are, by and large, independent of each other. Relationships among thorns are all based upon relationships among the implementations they provide.</p>
-<p>Thorns are grouped into arrangements. This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the <code class="codehilite">arrangements</code> directory of the main Cactus directory.</p>
+<p><strong>Thorns are grouped into arrangements.</strong> This is a logical grouping of thorns which is purely for organisational purposes. The arrangements live in the <code class="codehilite">arrangements</code> directory of the main Cactus directory.</p>
 <p>A thorn consists of a subdirectory of an arrangement containing four administrative files:</p>
 <table>
 <thead>
@@ -264,31 +286,36 @@
 </table>
 <p>Thorns can also contain</p>
 <ul>
-<li>a subdirectory called src, which should hold source files and compilation instructions for the thorn </li>
-<li>a subdirectory src/include for include files</li>
-<li>a README containing a brief description of the thorn</li>
-<li>a doc directory for documentation</li>
-<li>a par directory for example parameter files</li>
-<li>a test subdirectory may also be added, to hold the thorn’s test suite.</li>
+<li>a subdirectory called <code class="codehilite">src</code>, which should hold source files and compilation instructions for the thorn </li>
+<li>a subdirectory <code class="codehilite">src/include</code> for include files</li>
+<li>a <code class="codehilite">README</code> containing a brief description of the thorn</li>
+<li>a <code class="codehilite">doc</code> directory for documentation</li>
+<li>a <code class="codehilite">par</code> directory for example parameter files</li>
+<li>a <code class="codehilite">test</code> subdirectory may also be added, to hold the thorn’s test suite.</li>
 </ul>
-<h2 id="flesh-thorn-interface">Flesh-Thorn Interface</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Each thorn provides 3 configuration files (interface.ccl, param.ccl, schedule.ccl), detailing its interface with the Flesh and with other thorns.</p>
-<h2 id="general-syntax-of-ccl-files">General Syntax of CCL Files</h2>
-<p><strong>Cactus Configuration Language (CCL) files are text files used to define configuration information for a thorn.</strong></p>
-<p>A Grammar File for each type of CCL file is provided in the <code class="codehilite">src/piraha/pegs</code> directory of the Cactus source tree.</p>
+<p>Cactus contains a rule-based scheduling system, which determines which routines, from which thorns are run in which order.</p>
+</div>
+<p><strong>Cactus Configuration Language (CCL) files are text files used to define configuration information for a thorn.</strong> Their formal syntax is described using Piraha, a parsing expression grammar engine that supports multiple languages (see <a href="https://github.com/stevenrbrandt/piraha-peg">https://github.com/stevenrbrandt/piraha-peg</a> for a description of formal syntax).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>CCL files are (mostly) case independent, and may contain comments introduced by the hash ‘#’ character, which indicates that the rest of the line is a comment. If the last non-blank character of a line in a CCL file is a backslash ‘\’, the following line is treated as a continuation of the current line.</p>
-<p>see <a href="https://github.com/stevenrbrandt/piraha-peg">https://github.com/stevenrbrandt/piraha-peg</a> for a description of formal syntax.</p>
+</div>
 <h3 id="the-interfaceccl-file">The interface.ccl File</h3>
 <p>The <code class="codehilite">interface.ccl</code> file is used to declare</p>
 <ul>
-<li>the implementation provided by the thorn</li>
-<li>the variables provided by the thorn</li>
-<li>the include files provided by the thorn</li>
-<li>the functions provided by the thorn</li>
+<li>A header block giving details of the thorn’s relationship with other thorns.</li>
+<li>A block detailing which include files are used from other thorns, and which include files are provided by this thorn.</li>
+<li>Blocks detailing aliased functions provided or used by this thorn.</li>
+<li>A series of blocks listing the thorn’s global variables.</li>
 </ul>
-<h4 id="header-block">Header Block</h4>
+<p><strong>Header Block:</strong></p>
+<hr />
 <p>The implementation is declared by a single line at the top of the file</p>
 <p><code class="codehilite">implements: &lt;name&gt;</code></p>
+<p>declares that the thorn provides an implementation called <code class="codehilite">&lt;name&gt;</code>. The implementation name must be unique among all thorns.</p>
 <p>There are three different access levels available for variables</p>
 <table>
 <thead>
@@ -312,18 +339,28 @@
 </tr>
 </tbody>
 </table>
-<p>For example</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># This gets all Public variables from implementation &lt;name&gt;, and all variables that &lt;name&gt; has in turn inherited.
-Inherits: &lt;name&gt;
-# This gets all Protected variables from implementation &lt;name&gt;.
-Friend: &lt;name&gt;
-</pre></div>
-</td></tr></table>
-
-<h4 id="include-files">Include Files</h4>
+<p>By default, all groups are private, to change this, an access specification of the form <code class="codehilite">public:</code> or <code class="codehilite">protected:</code>. </p>
+<p>Corresponding to the first two access levels there are two relationship statements that can be used to get variables from other implementations.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inherits</td>
+<td>Inheriting from another implementation makes all that implementation’s public variables available to your thorn. Inheritance is transitive (if A inherits from B, and B inherits from C, then A also implicitly inherits from C), but not commutative.</td>
+</tr>
+<tr>
+<td>Friend</td>
+<td>Being a friend of another implementation makes all that implementation’s protected variables available to your thorn. Friendship is associative, commutative and transitive (i.e. if A is a friend of B, and B is a friend of C, then A is implicitly a friend of C).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Include Files:</strong></p>
+<hr />
 <p>The include file section has the form:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>USES INCLUDE [SOURCE|HEADER]: &lt;file_name&gt;
@@ -332,13 +369,44 @@ INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
 </td></tr></table>
 
 <p>The former is used when a thorn wishes to use an include file from another thorn. The latter indicates that this thorn adds the code in <file to include> to the include file <file name>. If the include file is described as SOURCE, the included code is only executed if the providing thorn is active. Both default to HEADER.</p>
-<h4 id="function-aliasing">Function Aliasing</h4>
+<p><strong>Function Aliasing:</strong></p>
+<hr />
 <p>If any aliased function is to be used or provided by the thorn, then the prototype must be declared with the form:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>&lt;return_type&gt; FUNCTION &lt;alias&gt;(&lt;arg1_type&gt; &lt;intent1&gt; [ARRAY] &lt;arg1&gt;, ...)
 </pre></div>
 </td></tr></table>
 
-<p>The <return_type> must be either void, CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, or CCTK_POINTER_TO_CONST. The keyword SUBROUTINE is equivalent to void FUNCTION. The name of the aliased function <alias> must contain at least one uppercase and one lowercase letter and follow the C standard for function names. The type of each argument, <arg* type>, must be either CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, CCTK_POINTER_TO_CONST, or STRING. All string arguments must be the last arguments in the list. The intent of each argument, <intent*>, must be either IN, OUT, or INOUT. An argument may only be modified if it is declared to have intent OUT or INOUT. If the argument is an array then the prefix ARRAY must also be given.</p>
+<ul>
+<li><code class="codehilite">&lt;return_type&gt;</code></li>
+</ul>
+<p>The <code class="codehilite">&lt;return_type&gt;</code> must be either void, CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, or CCTK_POINTER_TO_CONST. The keyword <code class="codehilite">SUBROUTINE</code> is equivalent to void FUNCTION. </p>
+<ul>
+<li><code class="codehilite">&lt;alias&gt;</code></li>
+</ul>
+<p>The name of the aliased function <code class="codehilite">&lt;alias&gt;</code> must contain at least one uppercase and one lowercase letter and follow the C standard for function names. </p>
+<ul>
+<li><code class="codehilite">&lt;arg_type&gt;</code></li>
+</ul>
+<p>The type of each argument, <code class="codehilite">&lt;arg type&gt;</code>, must be either CCTK_INT, CCTK_REAL, CCTK_COMPLEX, CCTK_POINTER, CCTK_POINTER_TO_CONST, or STRING. All string arguments must be the last arguments in the list. </p>
+<ul>
+<li><code class="codehilite">&lt;intent*&gt;</code></li>
+</ul>
+<p>The intent of each argument, <code class="codehilite">&lt;intent*&gt;</code>, must be either IN, OUT, or INOUT. An argument may only be modified if it is declared to have intent OUT or INOUT. </p>
+<ul>
+<li><code class="codehilite">[ARRAY]</code></li>
+</ul>
+<p>If the argument is an array then the prefix <code class="codehilite">ARRAY</code> must also be given.</p>
+<ul>
+<li>function pointer</li>
+</ul>
+<p>If the argument <code class="codehilite">&lt;arg*&gt;</code> is a function pointer, then the argument itself (which will preceded by the return type) should be</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>CCTK_FPOINTER &lt;function_arg1&gt;(&lt;arg1_type&gt; &lt;intent1&gt; &lt;arg1&gt;, ...)
+</pre></div>
+</td></tr></table>
+
+<ul>
+<li>aliased function</li>
+</ul>
 <p>If an aliased function is to be required, then the block is required.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>REQUIRES FUNCTION &lt;alias&gt;
 </pre></div>
@@ -349,7 +417,7 @@ INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
 </pre></div>
 </td></tr></table>
 
-<h4 id="variable-blocks">Variable Blocks</h4>
+<p><strong>Variable Blocks:</strong></p>
 <p>The thorn’s variables are collected into groups.</p>
 <p>The thorn’s variables are defined by:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
@@ -357,18 +425,19 @@ INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
 3
 4
 5
-6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">[&lt;access&gt;:]</span>
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">[&lt;access&gt;:]</span>
 
-<span class="na">&lt;data_type&gt; &lt;group_name&gt; [&lt;number&gt;] [TYPE</span><span class="o">=</span><span class="s">&lt;group_type&gt;] [DIM=&lt;dim&gt;] [TIMELEVELS=&lt;num&gt;] [SIZE=&lt;size in each direction&gt;] [DISTRIB=&lt;distribution_type&gt;] [GHOSTSIZE=&lt;ghostsize&gt;] [TAGS=&lt;string&gt;] [&quot;&lt;group_description&gt;&quot;]</span>
+<span class="na">&lt;data_type&gt; &lt;group_name&gt;[&lt;number&gt;] [TYPE</span><span class="o">=</span><span class="s">&lt;group_type&gt;] [DIM=&lt;dim&gt;] [TIMELEVELS=&lt;num&gt;] [SIZE=&lt;size in each direction&gt;] [DISTRIB=&lt;distribution_type&gt;] [GHOSTSIZE=&lt;ghostsize&gt;] [TAGS=&lt;string&gt;] [&quot;&lt;group_description&gt;&quot;]</span>
 <span class="na">{</span>
-<span class="na">&lt;variable_name&gt;</span>
-<span class="na">&lt;variable_name&gt;</span>
+<span class="na">&lt;variable_name&gt;[,] &lt;variable_name&gt;</span>
 <span class="na">} [&quot;&lt;group_description&gt;&quot;]</span>
 </pre></div>
 </td></tr></table>
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The options TYPE, DIM, etc., following <group name> must all appear on one line.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -407,11 +476,11 @@ INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
 </tr>
 <tr>
 <td>SIZE</td>
-<td>defines the number grid-points an ARRAY has in each direction. This should be a comma- separated list of valid arithmetical expressions consisting of integers or integer-valued parameters.</td>
+<td>defines the number grid-points an ARRAY has in each direction. This should be a comma-separated list of valid arithmetical expressions consisting of integers or integer-valued parameters.</td>
 </tr>
 <tr>
 <td>DISTRIB</td>
-<td>defines the processor decomposition of an ARRAY. DISTRIB=DEFAULT distributes SIZE grid- points across all processors. DISTRIB=CONSTANT implies that SIZE grid-points should be allocated on each processor. The default value is DISTRIB=DEFAULT.</td>
+<td>defines the processor decomposition of an ARRAY. DISTRIB=DEFAULT distributes SIZE grid-points across all processors. DISTRIB=CONSTANT implies that SIZE grid-points should be allocated on each processor. The default value is DISTRIB=DEFAULT.</td>
 </tr>
 <tr>
 <td>GHOSTSIZE</td>
@@ -424,9 +493,42 @@ INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
 </tbody>
 </table>
 <p>An optional description of the group can be given on the last line. If the variable block is omitted, this description can be given at the end of the declaration line.</p>
+<p>Cactus variables are used instead of local variables for a number of reasons:</p>
+<ul>
+<li>Cactus variables can be made visible to other thorns, allowing thorns to communicate and share data.</li>
+<li>Cactus variables can be distributed and communicated among processors, allowing parallel computation.</li>
+<li>A database of Cactus variables, and their attributes, is held by the flesh, and this information is used by thorns, for example, for obtaining a list of variables for checkpointing.</li>
+<li>Many Cactus APIs and tools can only be used with Cactus variables.</li>
+<li>Cactus provides features for error checking based on Cactus variables and their attributes.</li>
+</ul>
+<p>Cactus variables are collected into groups. All variables in a group are of the same data type, and have the same attributes. Most Cactus operations act on a group as a whole. A group must be declared in its thorn’s <code class="codehilite">interface.ccl</code> file.</p>
+<p>Groups can be either scalars, grid functions (GFs), or grid arrays.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCALAR</td>
+<td>This is just a single number, e.g. the total energy of some field. These variables aren’t communicated between processors—what would be the result of such communication?</td>
+</tr>
+<tr>
+<td>GF</td>
+<td>This is the most common group type. A GF is an array with a specific size, set at run time in the parameter file, which is distributed across processors. All GFs have the same size, and the same number of ghostzones. Groups of GFs can also specify a dimension, and number of timelevels.</td>
+</tr>
+<tr>
+<td>ARRAY</td>
+<td>This is a more general form of the GF. Each group of arrays can have a distinct size and number of ghostzones, in addition to dimension and number of timelevels. The drawback of using an array over a GF is that a lot of data about the array can only be determined by function calls, rather than the quicker methods available for GFs.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="the-paramccl-file">The param.ccl File</h3>
 <p>The param.ccl file is used to specify the parameters used to control an individual thorn, and to specify the values these parameters are allowed to take. If a parameter is not assigned in a parameter file, it is given its default value.</p>
-<h4 id="parameter-data-scoping-items">Parameter Data Scoping Items</h4>
+<p><strong>Parameter Data Scoping Items:</strong></p>
+<hr />
 <p><access>:</p>
 <p>The keyword <code class="codehilite">access</code> designates that all parameter object specification items, up to the next parameter data scoping item, are in the same protection or scoping class. access can take the values:</p>
 <table>
@@ -455,7 +557,8 @@ INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
 </tr>
 </tbody>
 </table>
-<h4 id="parameter-object-specification-items">Parameter Object Specification Items</h4>
+<p><strong>Parameter Object Specification Items</strong></p>
+<hr />
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -523,34 +626,28 @@ INCLUDE[S] [SOURCE|HEADER]: &lt;file_to_include&gt; in &lt;file_name&gt;
 </tr>
 <tr>
 <td>BOOLEAN</td>
-<td>No <parameter values> should be specified for a boolean parameter.</td>
+<td>No <code class="codehilite">&lt;parameter values&gt;</code> should be specified for a boolean parameter.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="the-scheduleccl-file">The schedule.ccl File</h3>
 <p>Cactus contains a rule-based scheduling system, which determines which routines, from which thorns are run in which order.</p>
-<p>A usual simple specification for a schedule declaration is</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>schedule &lt;function name&gt; AT &lt;schedule bin&gt; 
-{
-LANG: &lt;language&gt;
-[STORAGE: &lt;group&gt;[timelevels]
-} &quot;Description of function&quot;
-</pre></div>
-</td></tr></table>
-
-<p>Each schedule item is scheduled either AT a particular scheduling bin, or IN a schedule group.</p>
-<h4 id="assignment-statements">Assignment Statements</h4>
+<p>A schedule configuration file consists of:</p>
+<ul>
+<li>Assignment statements to switch on storage for grid variables for the entire duration of program execution.</li>
+<li>Schedule blocks to schedule a subroutine from a thorn to be called at specific times during program execution in a given manner.</li>
+<li>Conditional statements for both assignment statements and schedule blocks to allow them to be processed depending on parameter values.</li>
+</ul>
+<p><strong>Assignment Statements:</strong></p>
+<hr />
 <p>These lines have the form:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>STORAGE: &lt;group&gt;[timelevels]
 </pre></div>
 </td></tr></table>
 
 <p>The storage line includes the number of timelevels to activate storage for, this number can be from 1 up to the maximum number or timelevels for the group, as specified in the defining <code class="codehilite">interface.ccl</code> file. If the maximum number of timelevels is 1 (the default), this number may be omitted. Alternatively timelevels can be the name of a parameter accessible to the thorn. The parameter name is the same as used in C routines of the thorn, fully qualified parameter names of the form thorn::parameter are not allowed. In this case 0 (zero) timelevels can be requested, which is equivalent to the STORAGE statement being absent.</p>
-<h4 id="schedule-blocks">Schedule Blocks</h4>
+<p><strong>Schedule Blocks:</strong></p>
+<hr />
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -561,19 +658,17 @@ LANG: &lt;language&gt;
  8
  9
 10
-11
-12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>schedule [GROUP] &lt;function name|group name&gt; AT|IN &lt;time&gt; [AS &lt;alias&gt;] [WHILE &lt;variable&gt;] [IF &lt;variable&gt;] [BEFORE|AFTER &lt;function name&gt;|(&lt;function name&gt;)] 
-{
-[LANG: &lt;language&gt;]
-[OPTIONS: &lt;option&gt;,&lt;option &gt;...]
-[TAGS: &lt;keyword=value&gt;,&lt;keyword=value &gt;...]
-[STORAGE: &lt;group&gt;[timelevels],&lt;group&gt;[timelevels]...]
-[READS: &lt;group&gt;,&lt;group&gt;...]
-[WRITES: &lt;group&gt;,&lt;group&gt;...]
-[TRIGGER: &lt;group&gt;,&lt;group&gt;...]
-[SYNCHRONISE: &lt;group&gt;,&lt;group&gt;...]
-[OPTIONS: &lt;option&gt;,&lt;option&gt;...]
-} &quot;Description of function&quot;
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">schedule</span> <span class="p">[</span><span class="n">GROUP</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">name</span><span class="o">|</span><span class="n">group</span> <span class="n">name</span><span class="o">&gt;</span> <span class="n">AT</span><span class="o">|</span><span class="n">IN</span> <span class="p">[</span><span class="n">AS</span> <span class="o">&lt;</span><span class="n">alias</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">WHILE</span> <span class="o">&lt;</span><span class="n">variable</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">IF</span> <span class="o">&lt;</span><span class="n">variable</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="n">BEFORE</span><span class="o">|</span><span class="n">AFTER</span> <span class="o">&lt;</span><span class="n">function</span> <span class="n">name</span><span class="o">&gt;|</span><span class="p">(</span><span class="o">&lt;</span><span class="n">function</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">...)]</span> 
+<span class="p">{</span>
+<span class="nl">LANG</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">FORTRAN</span><span class="o">|</span><span class="n">C</span><span class="o">&gt;</span>
+<span class="nl">OPTIONS</span><span class="p">:</span>  <span class="p">[</span><span class="n">list</span> <span class="n">of</span> <span class="n">options</span><span class="p">]</span>
+<span class="nl">TAGS</span><span class="p">:</span>  <span class="p">[</span><span class="n">list</span> <span class="n">of</span> <span class="n">keyword</span><span class="o">=</span><span class="n">value</span> <span class="n">definitions</span><span class="p">]</span>
+<span class="nl">STORAGE</span><span class="p">:</span>  <span class="p">[</span><span class="n">group</span> <span class="n">list</span> <span class="n">with</span> <span class="n">timelevels</span><span class="p">]</span>
+<span class="nl">READS</span><span class="p">:</span>  <span class="p">[</span><span class="n">group</span> <span class="n">list</span><span class="p">]</span>
+<span class="nl">WRITES</span><span class="p">:</span>  <span class="p">[</span><span class="n">group</span> <span class="n">list</span><span class="p">]</span>
+<span class="nl">TRIGGERS</span><span class="p">:</span>  <span class="p">[</span><span class="n">group</span> <span class="n">list</span><span class="p">]</span>
+<span class="nl">SYNC</span><span class="p">:</span>  <span class="p">[</span><span class="n">group</span> <span class="n">list</span><span class="p">]</span>
+<span class="p">}</span> <span class="s">&quot;Description of function&quot;</span>
 </pre></div>
 </td></tr></table>
 
@@ -590,16 +685,12 @@ LANG: &lt;language&gt;
 <td>Schedule a schedule group with the same options as a schedule function. The schedule group will be created if it doesn’t exist.</td>
 </tr>
 <tr>
-<td>&lt;function name</td>
-<td>group name&gt;</td>
+<td><code class="codehilite">&lt;function name|group name&gt;</code></td>
+<td>The name of a function or a schedule group to be scheduled. Function and schedule group names are case sensitive.</td>
 </tr>
 <tr>
-<td>AT</td>
-<td>Functions can be scheduled to run at the Cactus schedule bins, for example, CCTK_EVOL, and CCTK_STARTUP. The initial letters CCTK_ are optional. Grid variables cannot be used in the CCTK_STARTUP and CCTK_SHUTDOWN timebins.</td>
-</tr>
-<tr>
-<td>IN</td>
-<td>Schedules a function or schedule group to run in a schedule group, rather than in a Cactus timebin.</td>
+<td><code class="codehilite">AT|IN</code></td>
+<td>Each schedule item is scheduled either AT a particular scheduling bin, or IN a schedule group.</td>
 </tr>
 <tr>
 <td>AS</td>
@@ -615,8 +706,126 @@ LANG: &lt;language&gt;
 </tr>
 <tr>
 <td>BEFORE/AFTER</td>
-<td>Takes a function name, a function alias, a schedule group name, or a parenthesesenclosed whitespace-separated list of these. (Any names that are not provided by an active thorn are ignored.) Note that a single schedule block may have multiple BEFORE/AFTER clauses.</td>
+<td>Takes a function name, a function alias, a schedule group name, or a parenthesesenclosed white space-separated list of these. (Any names that are not provided by an active thorn are ignored.) Note that a single schedule block may have multiple BEFORE/AFTER clauses.</td>
 </tr>
+</tbody>
+</table>
+<p>Using the schedule.ccl files, thorn functions can be scheduled to run in the different timebins which are executed by the Cactus flesh.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCTK_RECOVER_PARAMETERS</td>
+<td>Used by thorns with relevant I/O methods as the point to read parameters when recovering from checkpoint files. Grid variables are not available in this timebin. Scheduling in this timebin is special.</td>
+</tr>
+<tr>
+<td><strong>CCTK_STARTUP</strong></td>
+<td>Run before any grids are constructed, this is the timebin, for example, where grid independent information (e.g. output methods, reduction operators) is registered. Note that since no grids are setup at this point, grid variables cannot be used in routines scheduled here.</td>
+</tr>
+<tr>
+<td>CCTK_WRAGH</td>
+<td>This timebin is executed when all parameters are known, but before the driver thorn constructs the grid. It should only be used to set up information that is needed by the driver.</td>
+</tr>
+<tr>
+<td><strong>CCTK_PARAMCHECK</strong></td>
+<td>This timebin is for thorns to check the validity of parameter combinations. This bin is also executed before the grid hierarchy is made, so that routines scheduled here only have access to the global grid size and the parameters.</td>
+</tr>
+<tr>
+<td>CCTK_PREREGRIDINITIAL</td>
+<td>This timebin is used in mesh refinement settings. It is ignored for unigrid runs. This bin is executed whenever the grid hierarchy is about to change during evolution; compare CCTK_PREREGRID. Routines that decide the new grid structure should be scheduled in this bin.</td>
+</tr>
+<tr>
+<td>CCTK_POSTREGRIDINITIAL</td>
+<td>This timebin is used in mesh refinement settings. It is ignored for unigrid runs. This bin is executed whenever the grid hierarchy or patch setup has changed during evolution; see CCTK_POSTREGRID. It is, e.g. necessary to re-apply the boundary conditions or recalculate the grid points’ coordinates after every changing the grid hierarchy.</td>
+</tr>
+<tr>
+<td><strong>CCTK_BASEGRID</strong></td>
+<td>This timebin is executed very early after a driver thorn constructs grid; this bin should only be used to set up coordinate systems on the newly created grids.</td>
+</tr>
+<tr>
+<td><strong>CCTK_INITIAL</strong></td>
+<td>This is the place to set up any required initial data. This timebin is not run when recovering from a checkpoint file.</td>
+</tr>
+<tr>
+<td><strong>CCTK_POSTINITIAL</strong></td>
+<td>This is the place to modify initial data, or to calculate data that depend on the initial data. This timebin is also not run when recovering from a checkpoint file.</td>
+</tr>
+<tr>
+<td>CCTK_POSTRESTRICTINITIAL</td>
+<td>This timebin is used only in mesh refinement settings. It is ignored for unigrid runs. This bin is executed after each restriction operation while initial data are set up; compare CCTK_POSTRESTRICT. It is, e.g. necessary to re-apply the boundary conditions after every restriction operation.</td>
+</tr>
+<tr>
+<td>CCTK_POSTPOSTINITIAL</td>
+<td>This is the place to modify initial data, or to calculate data that depend on the initial data. This timebin is executed after the recursive initialisation of finer grids if there is a mesh refinement hierarchy, and it is also not run when recovering from a checkpoint file.</td>
+</tr>
+<tr>
+<td>CCTK_RECOVER_VARIABLES</td>
+<td>Used by thorns with relevant I/O methods as the point to read in all the grid variables when recovering from checkpoint files.</td>
+</tr>
+<tr>
+<td>CCTK_POST_RECOVER_VARIABLES</td>
+<td>This timebin exists for scheduling any functions which need to modify grid variables after recovery.</td>
+</tr>
+<tr>
+<td>CCTK_CPINITIAL</td>
+<td>Used by thorns with relevant I/O methods as the point to checkpoint initial data if required.</td>
+</tr>
+<tr>
+<td>CCTK_CHECKPOINT</td>
+<td>Used by thorns with relevant I/O methods as the point to checkpoint data during the iterative loop when required.</td>
+</tr>
+<tr>
+<td>CCTK_PREREGRID</td>
+<td>This timebin is used in mesh refinement settings. It is ignored for unigrid runs. This bin is executed whenever the grid hierarchy is about to change during evolution; compare CCTK_PREREGRIDINITIAL. Routines that decide the new grid structure should be scheduled in this bin.</td>
+</tr>
+<tr>
+<td>CCTK_POSTREGRID</td>
+<td>This timebin is used in mesh refinement settings. It is ignored for unigrid runs. This bin is executed whenever the grid hierarchy or patch setup has changed during evolution; see CCTK_POSTREGRIDINITIAL. It is, e.g. necessary to re-apply the boundary conditions or recalculate the grid points’ coordinates after every changing the grid hierarchy.</td>
+</tr>
+<tr>
+<td><strong>CCTK_PRESTEP</strong></td>
+<td>The timebin for scheduling any routines which need to be executed before any routines in the main evolution step. This timebin exists for thorn writers convenience, the BEFORE, AFTER, etc., functionality of the schedule.ccl file should allow all functions to be scheduled in the main CCTK_EVOL timebin.</td>
+</tr>
+<tr>
+<td><strong>CCTK_EVOL</strong></td>
+<td>The timebin for the main evolution step.</td>
+</tr>
+<tr>
+<td>CCTK_POSTRESTRICT</td>
+<td>This timebin is used only in mesh refinement settings. It is ignored for unigrid runs. This bin is executed after each restriction operation during evolution; compare CCTK_POSTRESTRICTINITIAL. It is, e.g. necessary to re-apply the boundary conditions after every restriction operation.</td>
+</tr>
+<tr>
+<td><strong>CCTK_POSTSTEP</strong></td>
+<td>The timebin for scheduling any routines which need to be executed after all the routines in the main evolution step. This timebin exists for thorn writers convenience, the BEFORE, AFTER, etc., functionality of the schedule.ccl file should allow all functions to be scheduled in the main CCTK_EVOL timebin.</td>
+</tr>
+<tr>
+<td><strong>CCTK_ANALYSIS</strong></td>
+<td>The ANALYSIS timebin is special, in that it is closely coupled with output, and routines which are scheduled here are typically only executed if output of analysis variables is required. Routines which perform analysis should be independent of the main evolution loop (that is, it should not matter for the results of a simulation whether routines in this timebin are executed or not).</td>
+</tr>
+<tr>
+<td>CCTK_TERMINATE</td>
+<td>Called after the main iteration loop when Cactus terminates. Note that sometime, in this timebin, a driver thorn should be destroying the grid hierarchy and removing grid variables.</td>
+</tr>
+<tr>
+<td>CCTK_SHUTDOWN</td>
+<td>Cactus final shutdown routines, after the grid hierarchy has been destroyed. Grid variables are no longer available.</td>
+</tr>
+</tbody>
+</table>
+<p>It is possible to state that the routine must run BEFORE or AFTER another routine or set of routines. It is also possible to schedule the routine under an alias name by using AS <code class="codehilite">&lt;alias name&gt;</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>LANG</td>
 <td>The code language for the function (either C or FORTRAN). No language should be specified for a schedule group.</td>
@@ -627,11 +836,11 @@ LANG: &lt;language&gt;
 </tr>
 <tr>
 <td>TAGS</td>
-<td>Schedule tags. These tags must have the form keyword=value, and must be in a syntax accepted by Util_TableCreateFromString.</td>
+<td>Schedule tags. These tags must have the form <code class="codehilite">keyword=value</code>, and must be in a syntax accepted by <code class="codehilite">Util_TableCreateFromString</code>.</td>
 </tr>
 <tr>
 <td>STORAGE</td>
-<td>List of variable groups which should have storage switched on for the duration of the function or schedule group. Each group must specify how many timelevels to activate storage for, from 1 up to the maximum number for the group as specified in the defining interface.ccl file. If the maximum is 1 (the default) this number may be omitted. Alternatively timelevels can be the name of a parameter accessible to the thorn. The parameter name is the same as used in C routines of the thorn, fully qualified parameter names of the form thorn ::parameter are not allowed. In this case 0 (zero) timelevels can be requested, which is equivalent to the STORAGE statement being absent.</td>
+<td>List of variable groups which should have storage switched on for the duration of the function or schedule group. Each group must specify how many timelevels to activate storage for, from 1 up to the maximum number for the group as specified in the defining interface.ccl file. If the maximum is 1 (the default) this number may be omitted. Alternatively timelevels can be the name of a parameter accessible to the thorn. The parameter name is the same as used in C routines of the thorn, fully qualified parameter names of the form <code class="codehilite">thorn::parameter</code> are not allowed. In this case 0 (zero) timelevels can be requested, which is equivalent to the STORAGE statement being absent.</td>
 </tr>
 <tr>
 <td>READS</td>
@@ -649,13 +858,77 @@ LANG: &lt;language&gt;
 <td>SYNCHRONISE</td>
 <td>List of groups to be synchronised, as soon as the function or schedule group is exited.</td>
 </tr>
+</tbody>
+</table>
+<p>Option names are case-insensitive. There can be several options given at the same time.</p>
+<table>
+<thead>
 <tr>
-<td>OPTIONS</td>
-<td>List of additional options (see below) for the scheduled function or group of functions.</td>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>META</td>
+<td>This routine will only be called once, even if several simulations are performed at the same time. This can be used, for example, to initialise external libraries, or to set up data structures that live in global variables.</td>
+</tr>
+<tr>
+<td>META-EARLY</td>
+<td>This option is identical to to META option with the exception that the routine will be called together with the routines on the first subgrid.</td>
+</tr>
+<tr>
+<td>META-LATE</td>
+<td>This option is identical to to META option with the exception that the routine will be called together with the routines on the last subgrid.</td>
+</tr>
+<tr>
+<td>GLOBAL</td>
+<td>This routine will only be called once on a grid hierarchy, not for all subgrids making up the hierarchy. This can be used, for example, for analysis routines which use global reduction or interpolation routines, rather than the local subgrid passed to them, and hence should only be called once.</td>
+</tr>
+<tr>
+<td>GLOBAL-EARLY</td>
+<td>This option is identical to to GLOBAL option with the exception that the routine will be called together with the routines on the first subgrid.</td>
+</tr>
+<tr>
+<td>GLOBAL-LATE</td>
+<td>This option is identical to to GLOBAL option with the exception that the routine will be called together with the routines on the last subgrid.</td>
+</tr>
+<tr>
+<td>LEVEL</td>
+<td>This routine will only be called once on any “level” of the grid hierarchy. That is, it will only be called once for any set of sub-grids which have the same <code class="codehilite">cctk_levfac</code> numbers.</td>
+</tr>
+<tr>
+<td>SINGLEMAP</td>
+<td>This routine will only be called once on any of the “patches” that form a “level” of the grid hierarchy.</td>
+</tr>
+<tr>
+<td>LOCAL</td>
+<td>This routine will be called on every “component”.</td>
+</tr>
+<tr>
+<td>LOOP-META</td>
+<td>Loop once.</td>
+</tr>
+<tr>
+<td>LOOP-GLOBAL</td>
+<td>Loop over all simulations.</td>
+</tr>
+<tr>
+<td>LOOP-LEVEL</td>
+<td>Loop over all “levels”.</td>
+</tr>
+<tr>
+<td>LOOP-SINGLEMAP</td>
+<td>Loop over all “patches”.</td>
+</tr>
+<tr>
+<td>LOOP-LOCAL</td>
+<td>Loop over all “components”.</td>
 </tr>
 </tbody>
 </table>
-<h4 id="conditional-statements">Conditional Statements</h4>
+<p><strong>Conditional Statements:</strong></p>
+<hr />
 <p>Any schedule block or assignment statements can be optionally surrounded by conditional if-elseif-else constructs using the parameter data base. These can be nested, and have the general form:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
@@ -663,13 +936,13 @@ LANG: &lt;language&gt;
 4
 5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>if (&lt;conditional-expression&gt;) 
 {
-[&lt;assignments &gt;]
+[&lt;assignments&gt;]
 [&lt;schedule blocks&gt;] 
 }
 </pre></div>
 </td></tr></table>
 
-<p>conditional-expression can be any valid C construct evaluating to a truth value. Such conditionals are evaluated only at program startup, and are used to pick between different static schedule options. For dynamic scheduling, the SCHEDULE WHILE construction should be used.</p>
+<p><code class="codehilite">&lt;conditional-expression&gt;</code> can be any valid C construct evaluating to a truth value. Such conditionals are evaluated only at program startup, and are used to pick between different static schedule options. For dynamic scheduling, the SCHEDULE WHILE construction should be used.</p>
 <h3 id="the-configurationccl-file">The configuration.ccl File</h3>
 <p>A configuration.ccl file defines capabilities which a thorn either provides or requires, or may use if available. Unlike implementations, only one thorn providing a particular capability may be compiled into a configuration at one time. Thus, this mechanism may be used to, for example: provide access to external libraries; provide access to functions which other thorns must call, but are too complex for function aliasing; or to split a thorn into several thorns, all of which require some common (not aliased) functions.</p>
 <p>A configuration options file can contain any number of the following sections:</p>
@@ -693,7 +966,7 @@ LANG &lt;Language&gt;
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../parameter/" class="btn btn-neutral float-right" title="Parameter">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Source File/" class="btn btn-neutral float-right" title="Source File">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Cactus/" class="btn btn-neutral" title="Cactus"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -727,7 +1000,7 @@ LANG &lt;Language&gt;
         <span><a href="../Cactus/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../parameter/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Source File/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

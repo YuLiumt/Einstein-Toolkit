@@ -83,11 +83,32 @@
     <li class="toctree-l3"><a href="#parameter-file-syntax">Parameter File Syntax</a></li>
     
 
+    <li class="toctree-l3"><a href="#cactus-application-interfaces">Cactus Application Interfaces</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#iterating-over-grid-points">Iterating Over Grid Points</a></li>
+        
+            <li><a class="toctree-l4" href="#coordinates">Coordinates</a></li>
+        
+            <li><a class="toctree-l4" href="#io">I/O</a></li>
+        
+            <li><a class="toctree-l4" href="#interpolation-operators">Interpolation Operators</a></li>
+        
+            <li><a class="toctree-l4" href="#reduction-operators">Reduction Operators</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
                 <li class="">
                     
     <a class="" href="../Thorn/">Thorn</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Source File/">Source File</a>
                 </li>
                 <li class="">
                     
@@ -104,6 +125,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -144,11 +173,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -259,7 +304,7 @@ Unable to set keyword CartGrid3D::type - ByMouth not in any active range
 <hr />
 <p>Checkpointing is defined as saving the current state of a run to a file. At a later time, this run can then be restarted from that state by recovering all the data from the checkpoint file.</p>
 <p>Cactus checkpointing and recovery methods are provided by thorns. In general, these thorns decide how often to generate a checkpoint.</p>
-<h2 id="parameter-file-syntax">Parameter File Syntax</h2>
+<h3 id="parameter-file-syntax">Parameter File Syntax</h3>
 <p>A parameter file (or par file) is used to control the behaviour of a Cactus executable. </p>
 <p>A parameter statement is an expression of the form <code class="codehilite">Left-Hand-Side = Right-Hand-Side</code>. The <code class="codehilite">Left-Hand-Side</code> may be a fully qualified parameter name. The <code class="codehilite">Right-Hand-Side</code> is a value.</p>
 <p>Values can be any of the following</p>
@@ -281,6 +326,38 @@ Unable to set keyword CartGrid3D::type - ByMouth not in any active range
 <p><code class="codehilite">-O</code>: Prints a full list of all parameters from all thorns which were compiled, along with descriptions and allowed values.</p>
 <p><code class="codehilite">-o</code>: Prints the description and allowed values for a given parameter—takes one argument.</p>
 </div>
+<h3 id="cactus-application-interfaces">Cactus Application Interfaces</h3>
+<h4 id="iterating-over-grid-points">Iterating Over Grid Points</h4>
+<hr />
+<p>A grid function consists of a multi-dimensional array of grid points. These grid points fall into several types:</p>
+<ul>
+<li>interior: regular grid point, presumably evolved in time</li>
+<li>ghost: inter-process boundary, containing copies of values owned by another process </li>
+<li>physical boundary: outer boundary, presumably defined via a boundary condition </li>
+<li>symmetry boundary: defined via a symmetry, e.g. a reflection symmetry or periodicity</li>
+</ul>
+<p>Grid points in the edges and corners may combine several types. For example, a point in a corner may be a ghost point in the x direction, a physical boundary point in the y direction, and a symmetry point in the z direction.</p>
+<p>The size of the physical boundary depends on the application. The number of ghost points is defined by the driver; the number of symmetry points is in principle defined by the thorn implementing the respective symmetry condition, but will in general be the same as the number of ghost points to avoid inconsistencies.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When iterating over grid points, one usually needs to know about the boundary sizes and boundary types present.</p>
+</div>
+<p>The flesh provides a set of macros to iterate over particular types of grid points:</p>
+<ul>
+<li>CCTK_LOOP_ALL: Loop over all grid points</li>
+<li>CCTK_LOOP_INT: Loop over all interior grid points</li>
+<li>CCTK_LOOP_BND: Loop over all physical boundary points</li>
+<li>CCTK_LOOP_INTBND: Loop over all “interior” physical boundary points, i.e. over all those physical boundary points that are not also ghost or symmetry points</li>
+</ul>
+<p>As described above, points on edges and corners can have several boundary types at once, e.g. can be both a physical and a symmetry point. LOOP_BND and LOOP_INTBND treat these different: LOOP_BND loops over all points that are physical boundaries (independent of whether they also are symmetry or ghost boundaries), while LOOP_INTBND loops over those points that are only physical boundaries (and excludes any points that belongs to a symmetry or ghost boundary). LOOP_BND does not require applying a symmetry condition or synchronisation afterwards (but does not allow taking tangential derivatives); LOOP_INTBND allows taking tangential derivatives (but requires applying symmetry boundaries and synchronising afterwards).</p>
+<h4 id="coordinates">Coordinates</h4>
+<p>The flesh provides utility routines for registering and querying coordinate information. The flesh does not provide any coordinates itself, these must be supplied by a thorn. Thorns are not required to register coordinates to the flesh, but registering coordinates provides a means for infrastructure thorns to make use of coordinate information.</p>
+<h4 id="io">I/O</h4>
+<p>To allow flexible I/O, the flesh itself does not provide any output routines, however it provides a mechanism for thorns to register different routines as I/O methods.</p>
+<h4 id="interpolation-operators">Interpolation Operators</h4>
+<p>The flesh does not provide interpolation routines by itself. Instead, it offers a general function API to thorns, for the registration and invocation of interpolation operators.</p>
+<h4 id="reduction-operators">Reduction Operators</h4>
+<p>A reduction operation can be defined as an operation on variables distributed across multiple processor resulting in a single number. Typical reduction operations are: sum, minimum/maximum value, and boolean operations. A typical application is, for example, finding the maximum reduction from processor local error estimates, therefore, making the previous processor local error known to all processors.</p>
               
             </div>
           </div>

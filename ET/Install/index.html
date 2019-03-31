@@ -100,6 +100,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../parameter/">Parameter</a>
                 </li>
                 <li class="">
@@ -113,6 +117,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -153,11 +165,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -250,7 +278,7 @@ brew install gnuplot pkg-config gcc fftw gsl hdf5 --with-fortran hwloc jpeg open
 </pre></div>
 </td></tr></table>
 
-<h2 id="prepare-tools">Prepare Tools</h2>
+<h3 id="prepare-tools">Prepare Tools</h3>
 <p>A script called GetComponents is used to fetch the components of the Einstein Toolkit. You may download and make it executable it as follows:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
@@ -309,7 +337,7 @@ chmod u+x GetComponents
 </tr>
 </tbody>
 </table>
-<h2 id="configuring-simfactory-for-your-machine">Configuring SimFactory for your machine</h2>
+<h3 id="configuring-simfactory-for-your-machine">Configuring SimFactory for your machine</h3>
 <p>Edit <code class="codehilite">simfactory/etc/defs.local.ini</code>.</p>
 <p>SimFactory also contains general support for specific operating systems commonly used on workstations or laptops, including Mac OS, Ubuntu, Cent OS and Scientific Linux. To configure SimFactory for one of these, you need to find the suitable files in <code class="codehilite">simfactory/mdb/optionlists</code> and <code class="codehilite">simfactory/mdb/runscripts</code> and specify their names on the sim setup command line.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
@@ -343,13 +371,13 @@ module load mpi
 </td></tr></table>
 
 </details>
-<h2 id="building-the-einstein-toolkit">Building the Einstein Toolkit</h2>
+<h3 id="building-the-einstein-toolkit">Building the Einstein Toolkit</h3>
 <p>Assuming that SimFactory has been successfully set up on your machine, you should be able to build the Einstein Toolkit with</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim build --mdbkey make <span class="s1">&#39;make -j2&#39;</span> --thornlist ../einsteintoolkit.th <span class="p">|</span> cat
 </pre></div>
 </td></tr></table>
 
-<h2 id="running">Running</h2>
+<h3 id="running">Running</h3>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./simfactory/bin/sim command [ options ]
 </pre></div>
 </td></tr></table>

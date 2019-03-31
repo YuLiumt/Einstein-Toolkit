@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yu Liu">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Differential geometry - Yu Liu's Notebook</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Differential geometry";
+    var mkdocs_page_input_path = "GR/Differential geometry.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/GR/Differential geometry/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-36723568-3', 'https://yuliumt.github.io');
+      ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Yu Liu's Notebook</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Einstein Toolkit</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../ET/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Install/">Install</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Cactus/">Cactus</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Thorn/">Thorn</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/parameter/">Parameter</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../ET/Visualization/">Visualization</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">General Relativity</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Differential geometry</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#manifolds">Manifolds</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#vectors">Vectors</a></li>
+        
+            <li><a class="toctree-l4" href="#dual-vector">Dual Vector</a></li>
+        
+            <li><a class="toctree-l4" href="#derivative-operators">Derivative Operators</a></li>
+        
+            <li><a class="toctree-l4" href="#parallel-transport">Parallel Transport</a></li>
+        
+            <li><a class="toctree-l4" href="#curvature">Curvature</a></li>
+        
+            <li><a class="toctree-l4" href="#the-lie-derivative">The Lie Derivative</a></li>
+        
+            <li><a class="toctree-l4" href="#killing-vectors">Killing Vectors</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Einstein Equation/">Einstein Equation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Solutions/">Solutions</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Gravitational Wave</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GW/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Linearized Waves/">Linearized Waves</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GW/Extracting Gravitational Waveforms/">Extracting Gravitational Waveforms</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Numerical Relativity</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../NR/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/ADM/">ADM</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search Pipeline</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../SP/Introduction/">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../SP/matched filter/">Matched Filtering</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Example</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Example/Poisson/">Poisson</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Yu Liu's Notebook</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>General Relativity &raquo;</li>
+        
+      
+    
+    <li>Differential geometry</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/GR/Differential geometry.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>A well-known feature of General Relativity is that space and time are relative but events are absolute. “matter tells spacetime how to curve, and curved spacetime tells matter how to move”.</p>
+<h3 id="manifolds">Manifolds</h3>
+<h4 id="vectors">Vectors</h4>
+<p><img alt="" src="../media/15540177756463.jpg" /></p>
+<p>We define a tangent vector <span><span class="MathJax_Preview">\upsilon</span><script type="math/tex">\upsilon</script></span> at point <span><span class="MathJax_Preview">p \in M</span><script type="math/tex">p \in M</script></span> to be a map <span><span class="MathJax_Preview">\upsilon : \mathcal{F}_M \rightarrow R</span><script type="math/tex">\upsilon : \mathcal{F}_M \rightarrow R</script></span></p>
+<ul>
+<li>Linear</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\upsilon (a f + b g) = a \upsilon (f) + b \upsilon (g)
+</div>
+<script type="math/tex; mode=display">
+\upsilon (a f + b g) = a \upsilon (f) + b \upsilon (g)
+</script>
+</div>
+<ul>
+<li>Obeys the Leibnitz rule</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\upsilon (f g) = f(p) \upsilon (g) + g(p) \upsilon (f)
+</div>
+<script type="math/tex; mode=display">
+\upsilon (f g) = f(p) \upsilon (g) + g(p) \upsilon (f)
+</script>
+</div>
+<p>Let M be an n-dimensional manifold. Let <span><span class="MathJax_Preview">p \in M</span><script type="math/tex">p \in M</script></span> and let <span><span class="MathJax_Preview">V_p</span><script type="math/tex">V_p</script></span> denote the tangent space at <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. Then <span><span class="MathJax_Preview">dim \space V_p = n</span><script type="math/tex">dim \space V_p = n</script></span>.</p>
+<p>If <span><span class="MathJax_Preview">f \in \mathcal{F}</span><script type="math/tex">f \in \mathcal{F}</script></span>, For <span><span class="MathJax_Preview">\mu = 1, ..., n</span><script type="math/tex">\mu = 1, ..., n</script></span> define <span><span class="MathJax_Preview">X_{\mu} : \mathcal{F} \rightarrow R</span><script type="math/tex">X_{\mu} : \mathcal{F} \rightarrow R</script></span> by </p>
+<div>
+<div class="MathJax_Preview">
+X_{\mu}(f):= \frac{\partial f(x)}{\partial x^{\mu}}, \forall f \in \mathcal{F}_M
+</div>
+<script type="math/tex; mode=display">
+X_{\mu}(f):= \frac{\partial f(x)}{\partial x^{\mu}}, \forall f \in \mathcal{F}_M
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">(x^1,  ... , x^n)</span><script type="math/tex">(x^1,  ... , x^n)</script></span> are the Cartesian coordinates of <span><span class="MathJax_Preview">R^n</span><script type="math/tex">R^n</script></span>. Then <span><span class="MathJax_Preview">X_1, \cdots, X_n</span><script type="math/tex">X_1, \cdots, X_n</script></span> are tangent vectors.</p>
+<p>An arbitrary tangent vector <span><span class="MathJax_Preview">\upsilon</span><script type="math/tex">\upsilon</script></span> as a sum of the <span><span class="MathJax_Preview">X_{\mu}</span><script type="math/tex">X_{\mu}</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+\upsilon = \sum^n_{\mu = 1} \upsilon^{\mu} X_{\mu}
+</div>
+<script type="math/tex; mode=display">
+\upsilon = \sum^n_{\mu = 1} \upsilon^{\mu} X_{\mu}
+</script>
+</div>
+<h4 id="dual-vector">Dual Vector</h4>
+<p>Let <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> be any finite-dimensional vector space, linear maps <span><span class="MathJax_Preview">\omega : V \rightarrow R</span><script type="math/tex">\omega : V \rightarrow R</script></span> are called dual vectors. </p>
+<div>
+<div class="MathJax_Preview">
+df|_p(\upsilon) := \upsilon (f),  \space \forall \upsilon \in V_p
+</div>
+<script type="math/tex; mode=display">
+df|_p(\upsilon) := \upsilon (f),  \space \forall \upsilon \in V_p
+</script>
+</div>
+<p>If <span><span class="MathJax_Preview">\frac{\partial}{\partial x^{\nu}}</span><script type="math/tex">\frac{\partial}{\partial x^{\nu}}</script></span> is a basis of <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>, we can define elements <span><span class="MathJax_Preview">dx^{\mu}</span><script type="math/tex">dx^{\mu}</script></span></p>
+<div>
+<div class="MathJax_Preview">
+dx^{\mu}(\frac{\partial}{\partial x^{\nu}}) = \frac{\partial}{\partial x^{\nu}}(x^{\mu}) = \delta^{\mu}_{\nu}
+</div>
+<script type="math/tex; mode=display">
+dx^{\mu}(\frac{\partial}{\partial x^{\nu}}) = \frac{\partial}{\partial x^{\nu}}(x^{\mu}) = \delta^{\mu}_{\nu}
+</script>
+</div>
+<p><span><span class="MathJax_Preview">{dx^{\mu}}</span><script type="math/tex">{dx^{\mu}}</script></span> is a basis of <span><span class="MathJax_Preview">V^{*}</span><script type="math/tex">V^{*}</script></span>. </p>
+<h4 id="derivative-operators">Derivative Operators</h4>
+<p>A derivative operator, <span><span class="MathJax_Preview">\nabla</span><script type="math/tex">\nabla</script></span>, (sometimes called a covariant derivative) on a manifold <span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span> is a map which takes each smooth tensor field of type <span><span class="MathJax_Preview">(k, l)</span><script type="math/tex">(k, l)</script></span> to a smooth tensor field of type <span><span class="MathJax_Preview">(k, l + 1)</span><script type="math/tex">(k, l + 1)</script></span>.
+Any tow derivative operators <span><span class="MathJax_Preview">\nabla_a</span><script type="math/tex">\nabla_a</script></span> and <span><span class="MathJax_Preview">\tilde{\nabla}_a</span><script type="math/tex">\tilde{\nabla}_a</script></span> must agree in their action on scalar fields. </p>
+<div>
+<div class="MathJax_Preview">
+\nabla_a f = \tilde{\nabla}_a f = (df)_a, \forall f \in \cal{F}_M
+</div>
+<script type="math/tex; mode=display">
+\nabla_a f = \tilde{\nabla}_a f = (df)_a, \forall f \in \cal{F}_M
+</script>
+</div>
+<p><span><span class="MathJax_Preview">\tilde{\nabla}_a - \nabla_a</span><script type="math/tex">\tilde{\nabla}_a - \nabla_a</script></span> defines a map of dual vectors at <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> to tensors of type <span><span class="MathJax_Preview">(0, 2)</span><script type="math/tex">(0, 2)</script></span> at <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>. Consequently <span><span class="MathJax_Preview">(\tilde{\nabla}_a - \nabla_a)</span><script type="math/tex">(\tilde{\nabla}_a - \nabla_a)</script></span> defines a tensor of type <span><span class="MathJax_Preview">(1, 2)</span><script type="math/tex">(1, 2)</script></span> at <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>, which we will denote as <span><span class="MathJax_Preview">C^c_{\space ab}</span><script type="math/tex">C^c_{\space ab}</script></span>.</p>
+<div>
+<div class="MathJax_Preview">
+\nabla_a \omega_b = \tilde{\nabla}_a \omega_b - C^{c}_{ab} \omega_c
+</div>
+<script type="math/tex; mode=display">
+\nabla_a \omega_b = \tilde{\nabla}_a \omega_b - C^{c}_{ab} \omega_c
+</script>
+</div>
+<p><span><span class="MathJax_Preview">C^c_{\space ab}</span><script type="math/tex">C^c_{\space ab}</script></span> must also have this property </p>
+<div>
+<div class="MathJax_Preview">
+C^c_{\space ab} = C^c_{\space ba}     \\
+\nabla_a \upsilon^b = C^b_{\space ac} \upsilon^c + \tilde{\nabla}_a \upsilon^b       \\
+\nabla_a T^b_{c} = \tilde{\nabla}_a T^b_c + C^b_{\space ad} T^d_c - C^{d}_{\space ac} T^b_d
+</div>
+<script type="math/tex; mode=display">
+C^c_{\space ab} = C^c_{\space ba}     \\
+\nabla_a \upsilon^b = C^b_{\space ac} \upsilon^c + \tilde{\nabla}_a \upsilon^b       \\
+\nabla_a T^b_{c} = \tilde{\nabla}_a T^b_c + C^b_{\space ad} T^d_c - C^{d}_{\space ac} T^b_d
+</script>
+</div>
+<p>This displays the possible disagreements of the actions of <span><span class="MathJax_Preview">\nabla_a</span><script type="math/tex">\nabla_a</script></span> and <span><span class="MathJax_Preview">\tilde{\nabla}_a</span><script type="math/tex">\tilde{\nabla}_a</script></span> on Tensor.</p>
+<h4 id="parallel-transport">Parallel Transport</h4>
+<p>Given a derivative operator <span><span class="MathJax_Preview">\nabla_a</span><script type="math/tex">\nabla_a</script></span> we can define the notion of the parallel transport of a vector along a curve <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span> with a tangent <span><span class="MathJax_Preview">T^a</span><script type="math/tex">T^a</script></span>. A vector <span><span class="MathJax_Preview">\upsilon^a</span><script type="math/tex">\upsilon^a</script></span> given at each point on the curve is said to be parallel transported as one moves along the curve if the equation </p>
+<div>
+<div class="MathJax_Preview">
+T^b \nabla_b \upsilon^a = 0
+</div>
+<script type="math/tex; mode=display">
+T^b \nabla_b \upsilon^a = 0
+</script>
+</div>
+<p>is satisfied along the curve.</p>
+<p>Given two vectors <span><span class="MathJax_Preview">u^a</span><script type="math/tex">u^a</script></span> and <span><span class="MathJax_Preview">\upsilon^a</span><script type="math/tex">\upsilon^a</script></span>, we demand that their inner product <span><span class="MathJax_Preview">g_{ab} u^a \upsilon^a</span><script type="math/tex">g_{ab} u^a \upsilon^a</script></span> remain unchanged if we parallel-transport them along any curve. Thus we require </p>
+<div>
+<div class="MathJax_Preview">
+0 = T^c \nabla_c (g_{ab} u^a \upsilon^b) = g_{ab} u^a T^c \nabla_c (\upsilon^b) + g_{ab} \upsilon^b T^c \nabla_c (u^a) + u^a \upsilon^b T^c \nabla_c (g_{ab})
+</div>
+<script type="math/tex; mode=display">
+0 = T^c \nabla_c (g_{ab} u^a \upsilon^b) = g_{ab} u^a T^c \nabla_c (\upsilon^b) + g_{ab} \upsilon^b T^c \nabla_c (u^a) + u^a \upsilon^b T^c \nabla_c (g_{ab})
+</script>
+</div>
+<p>Equation will hold for all curves and parallel transported vectors if and only if</p>
+<div>
+<div class="MathJax_Preview">
+\nabla_c (g_{ab}) = 0
+</div>
+<script type="math/tex; mode=display">
+\nabla_c (g_{ab}) = 0
+</script>
+</div>
+<p>which is the additional condition we wish to impose on <span><span class="MathJax_Preview">\nabla_a</span><script type="math/tex">\nabla_a</script></span>.
+We attempt to solve for <span><span class="MathJax_Preview">C^c_{\space ab}</span><script type="math/tex">C^c_{\space ab}</script></span> so that the derivative operator determined by <span><span class="MathJax_Preview">\tilde{\nabla}_a</span><script type="math/tex">\tilde{\nabla}_a</script></span> and <span><span class="MathJax_Preview">C^c_{\space ab}</span><script type="math/tex">C^c_{\space ab}</script></span> will satisfy the required property. </p>
+<div>
+<div class="MathJax_Preview">
+C^c_{\space ab} = \frac{1}{2} g^{cd} (\partial_a g_{bd} + \partial_b g_{ad} - \partial_d g_{ab})
+</div>
+<script type="math/tex; mode=display">
+C^c_{\space ab} = \frac{1}{2} g^{cd} (\partial_a g_{bd} + \partial_b g_{ad} - \partial_d g_{ab})
+</script>
+</div>
+<h4 id="curvature">Curvature</h4>
+<p>Given a derivative operator, there exists a notion of how to parallel transport a vector from p to q along a curve C. However, the vector in <span><span class="MathJax_Preview">V_q</span><script type="math/tex">V_q</script></span> which we get by this parallel transport procedure starting from a vector in <span><span class="MathJax_Preview">V_p</span><script type="math/tex">V_p</script></span> will, in general, depend on the choice of curve connecting them. We can use the path dependence of parallel transport to define an intrinsic notion of curvature. The failure of a vector to return to its original value when parallel transported around a small closed loop is governed by the Riemann tensor.</p>
+<p><img alt="" src="../media/15540182142969.jpg" /></p>
+<p><span><span class="MathJax_Preview">(\nabla_a \nabla_b  - \nabla_b \nabla_a)</span><script type="math/tex">(\nabla_a \nabla_b  - \nabla_b \nabla_a)</script></span> defines a linear map dual vectors at <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> to type <span><span class="MathJax_Preview">(0, 3)</span><script type="math/tex">(0, 3)</script></span> tensors at <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span>, its action is that of a tensor of <span><span class="MathJax_Preview">(1, 3)</span><script type="math/tex">(1, 3)</script></span>. Thus, we have shown that there exists a tensor field <span><span class="MathJax_Preview">R_{abc}^{\space \space \space d}</span><script type="math/tex">R_{abc}^{\space \space \space d}</script></span> such that for all dual vector fields <span><span class="MathJax_Preview">\omega_c</span><script type="math/tex">\omega_c</script></span>, we have</p>
+<div>
+<div class="MathJax_Preview">
+\nabla_a \nabla_b \omega_c - \nabla_b \nabla_a \omega_c = R_{abc}^{\space \space \space d} \omega_c
+</div>
+<script type="math/tex; mode=display">
+\nabla_a \nabla_b \omega_c - \nabla_b \nabla_a \omega_c = R_{abc}^{\space \space \space d} \omega_c
+</script>
+</div>
+<p>Properties of the Riemann tensor:</p>
+<ol>
+<li><span><span class="MathJax_Preview">R_{abc}^{\space \space \space d} = - R_{bac}^{\space \space \space d}</span><script type="math/tex">R_{abc}^{\space \space \space d} = - R_{bac}^{\space \space \space d}</script></span></li>
+<li><span><span class="MathJax_Preview">R_{[abc]}^{\space \space \space \space \space d} = 0</span><script type="math/tex">R_{[abc]}^{\space \space \space \space \space d} = 0</script></span></li>
+<li><span><span class="MathJax_Preview">R_{abcd} = - R_{abdc}</span><script type="math/tex">R_{abcd} = - R_{abdc}</script></span></li>
+<li><span><span class="MathJax_Preview">\nabla_{[a}R_{bc]d}^{\space \space \space e} = 0​</span><script type="math/tex">\nabla_{[a}R_{bc]d}^{\space \space \space e} = 0​</script></span></li>
+<li><span><span class="MathJax_Preview">R_{abcd} = R_{cdab}</span><script type="math/tex">R_{abcd} = R_{cdab}</script></span></li>
+</ol>
+<p>Its trace over the second and fourth (or equivalently, the first and third) indices defines the Ricci tensor, <span><span class="MathJax_Preview">R_{ac}</span><script type="math/tex">R_{ac}</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+R_{ac} = R_{abc}^{\space \space \space b}
+</div>
+<script type="math/tex; mode=display">
+R_{ac} = R_{abc}^{\space \space \space b}
+</script>
+</div>
+<p>The scalar curvature, R, is defined as the trace of the Ricci tensor:</p>
+<div>
+<div class="MathJax_Preview">
+R = R_a^{\space a}
+</div>
+<script type="math/tex; mode=display">
+R = R_a^{\space a}
+</script>
+</div>
+<p>We denote the symmetric and antisymmetric parts of a tensor with brackets () and [] around indices in the usual way. For example</p>
+<div>
+<div class="MathJax_Preview">
+T_{(ab)} = \frac{1}{2} (T_{ab} + T_{ba})  \\
+T_{[ab]} = \frac{1}{2} (T_{ab} - T_{ba})
+</div>
+<script type="math/tex; mode=display">
+T_{(ab)} = \frac{1}{2} (T_{ab} + T_{ba})  \\
+T_{[ab]} = \frac{1}{2} (T_{ab} - T_{ba})
+</script>
+</div>
+<p>To calculate the curvature by the coordinate component method, we begin by choosing a coordinate system. We express the derivative operator <span><span class="MathJax_Preview">\nabla_a</span><script type="math/tex">\nabla_a</script></span> in terms of the ordinary derivative <span><span class="MathJax_Preview">\partial_a</span><script type="math/tex">\partial_a</script></span> of this coordinate system and the Christoffel symbol <span><span class="MathJax_Preview">\Gamma^c_{\space ab}</span><script type="math/tex">\Gamma^c_{\space ab}</script></span>.</p>
+<div>
+<div class="MathJax_Preview">
+R_{\mu \nu \rho}^{\space \space \space \sigma} = \frac{\partial}{\partial x^{\nu}} \Gamma^{\sigma}_{\space \mu \rho} - \frac{\partial}{\partial x^{\mu}} \Gamma^{\sigma}_{\space \nu \rho} + \sum_a (\Gamma^{a}_{\space \mu \rho} \Gamma^{\sigma}_{\space a \nu} - \Gamma^{a}_{\space \nu \rho} \Gamma^{\sigma}_{\space a \mu})
+</div>
+<script type="math/tex; mode=display">
+R_{\mu \nu \rho}^{\space \space \space \sigma} = \frac{\partial}{\partial x^{\nu}} \Gamma^{\sigma}_{\space \mu \rho} - \frac{\partial}{\partial x^{\mu}} \Gamma^{\sigma}_{\space \nu \rho} + \sum_a (\Gamma^{a}_{\space \mu \rho} \Gamma^{\sigma}_{\space a \nu} - \Gamma^{a}_{\space \nu \rho} \Gamma^{\sigma}_{\space a \mu})
+</script>
+</div>
+<p>Thus, to calculate <span><span class="MathJax_Preview">R_{\mu \nu \rho}^{\space \space \space \sigma}​</span><script type="math/tex">R_{\mu \nu \rho}^{\space \space \space \sigma}​</script></span>starting from <span><span class="MathJax_Preview">g_{ab}​</span><script type="math/tex">g_{ab}​</script></span>, we first obtain the components, <span><span class="MathJax_Preview">g_{\mu \nu}​</span><script type="math/tex">g_{\mu \nu}​</script></span>, of the metric in our coordinate basis. We then calculate <span><span class="MathJax_Preview">\Gamma^{\sigma}_{\space \mu \nu}​</span><script type="math/tex">\Gamma^{\sigma}_{\space \mu \nu}​</script></span>. Finally we calculate the components <span><span class="MathJax_Preview">R_{\mu \nu \rho}^{\space \space \space \sigma}​</span><script type="math/tex">R_{\mu \nu \rho}^{\space \space \space \sigma}​</script></span>.</p>
+<h4 id="the-lie-derivative">The Lie Derivative</h4>
+<p><img alt="" src="../media/15540183600287.jpg" /></p>
+<p>Consider a (non-zero) vector ﬁeld <span><span class="MathJax_Preview">X^{a}</span><script type="math/tex">X^{a}</script></span> in a manifold <span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span>. We can find the integral curves <span><span class="MathJax_Preview">x^a(\lambda)</span><script type="math/tex">x^a(\lambda)</script></span> (or orbits, or trajectories) of <span><span class="MathJax_Preview">X</span><script type="math/tex">X</script></span> a by integrating the ordinary differential equations</p>
+<div>
+<div class="MathJax_Preview">
+\frac{dx^{a}}{d \lambda} = X^a (x^a(\lambda))
+</div>
+<script type="math/tex; mode=display">
+\frac{dx^{a}}{d \lambda} = X^a (x^a(\lambda))
+</script>
+</div>
+<p>Here <span><span class="MathJax_Preview">\lambda​</span><script type="math/tex">\lambda​</script></span> is some affine parameter.</p>
+<p><img alt="" src="../media/15540183954058.jpg" /></p>
+<p>We would now like to define a derivative of a tensor ﬁeld. This involves comparing the tensor ﬁeld at two different points along <span><span class="MathJax_Preview">X^a</span><script type="math/tex">X^a</script></span>, say <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> and <span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>, and taking the limit as <span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span> tends to <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span>. This is where we encounter a conceptual problem: what do we mean by comparing two tensors at two different locations in the manifold M?</p>
+<p>In order to differentiate a tensor in a tensorial manner, we therefore have to evaluate the two tensors at the same point. To do so, we have to drag one tensor to the other point before we can compare the two tensors.</p>
+<p>However, this recipe still leaves open how we drag <span><span class="MathJax_Preview">T^a_{\space b}</span><script type="math/tex">T^a_{\space b}</script></span> along <span><span class="MathJax_Preview">X^a</span><script type="math/tex">X^a</script></span>. One approach would be to parallel-transport the tensor <span><span class="MathJax_Preview">T^a_{\space b}</span><script type="math/tex">T^a_{\space b}</script></span> from <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> to <span><span class="MathJax_Preview">Q</span><script type="math/tex">Q</script></span>. This idea leads to the definition of the covariant derivative.</p>
+<p>Parallel-transporting is not the only way of dragging <span><span class="MathJax_Preview">T^a_{\space b}</span><script type="math/tex">T^a_{\space b}</script></span> along <span><span class="MathJax_Preview">X^a</span><script type="math/tex">X^a</script></span>. In other words, <strong>the Lie derivative along a vector field <span><span class="MathJax_Preview">X^a</span><script type="math/tex">X^a</script></span> measures by how much the changes in a tensor ﬁeld along <span><span class="MathJax_Preview">X^a</span><script type="math/tex">X^a</script></span> differ from a mere infinitesimal coordinate transformation generated by <span><span class="MathJax_Preview">X^a</span><script type="math/tex">X^a</script></span>.</strong> Unlike the covariant derivative, the Lie derivative does not require an affine connection, and hence requires less structure.
+For a scalar <span><span class="MathJax_Preview">f</span><script type="math/tex">f</script></span>, the Lie derivative naturally reduces to the partial derivative</p>
+<div>
+<div class="MathJax_Preview">
+L_X f = X^b \nabla_b f = X^b \partial_b f
+</div>
+<script type="math/tex; mode=display">
+L_X f = X^b \nabla_b f = X^b \partial_b f
+</script>
+</div>
+<p>Note that the Lie derivative satisﬁes the Leibnitz rule for outer products.</p>
+<div>
+<div class="MathJax_Preview">
+L_X \upsilon^a = X^b \nabla_b \upsilon^a - \upsilon^b \nabla_b X^a = [X, \upsilon]^a       \\
+L_X \omega_a = X^b \nabla_b \omega_a + \omega_b \nabla_a X^b
+</div>
+<script type="math/tex; mode=display">
+L_X \upsilon^a = X^b \nabla_b \upsilon^a - \upsilon^b \nabla_b X^a = [X, \upsilon]^a       \\
+L_X \omega_a = X^b \nabla_b \omega_a + \omega_b \nabla_a X^b
+</script>
+</div>
+<h4 id="killing-vectors">Killing Vectors</h4>
+<p>As an important application, consider the Lie derivative along <span><span class="MathJax_Preview">X^a</span><script type="math/tex">X^a</script></span> of a metric <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span>.</p>
+<div>
+<div class="MathJax_Preview">
+L_X g_{ab} = X^c \nabla_c g_{ab} + g_{cb} \nabla_a X^c + g_{ca} \nabla_b X^c
+</div>
+<script type="math/tex; mode=display">
+L_X g_{ab} = X^c \nabla_c g_{ab} + g_{cb} \nabla_a X^c + g_{ca} \nabla_b X^c
+</script>
+</div>
+<p>If <span><span class="MathJax_Preview">\nabla_a</span><script type="math/tex">\nabla_a</script></span> is compatible with the metric, the first term vanishes, and we </p>
+<div>
+<div class="MathJax_Preview">
+L_X g_{ab} = \nabla_a X_b + \nabla_b X_a
+</div>
+<script type="math/tex; mode=display">
+L_X g_{ab} = \nabla_a X_b + \nabla_b X_a
+</script>
+</div>
+<p>A Killing vector ﬁeld <span><span class="MathJax_Preview">\xi^a</span><script type="math/tex">\xi^a</script></span> can now be deﬁned by</p>
+<div>
+<div class="MathJax_Preview">
+L_{\xi} g_{ab} = 0
+</div>
+<script type="math/tex; mode=display">
+L_{\xi} g_{ab} = 0
+</script>
+</div>
+<p>In other words, a Killing ﬁeld <span><span class="MathJax_Preview">\xi_a</span><script type="math/tex">\xi_a</script></span> generates an isometry of the spacetime, and a displacement along <span><span class="MathJax_Preview">\xi^a</span><script type="math/tex">\xi^a</script></span> leaves the metric invariant. </p>
+<p>Killing's equation</p>
+<div>
+<div class="MathJax_Preview">
+\nabla^a X^b + \nabla^b X^a = 0
+</div>
+<script type="math/tex; mode=display">
+\nabla^a X^b + \nabla^b X^a = 0
+</script>
+</div>
+<p>In some cases it is very easy to identify a Killing vector. If the metric components are independent of a coordinate <span><span class="MathJax_Preview">x^i</span><script type="math/tex">x^i</script></span>, then it follows from the property that the coordinate basis vector <span><span class="MathJax_Preview">e^a</span><script type="math/tex">e^a</script></span> is a Killing vector.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Einstein Equation/" class="btn btn-neutral float-right" title="Einstein Equation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../ET/Visualization/" class="btn btn-neutral" title="Visualization"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../ET/Visualization/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Einstein Equation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

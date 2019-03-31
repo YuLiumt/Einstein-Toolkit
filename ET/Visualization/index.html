@@ -85,6 +85,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../Source File/">Source File</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../parameter/">Parameter</a>
                 </li>
                 <li class=" current">
@@ -108,9 +112,9 @@
     
         <ul>
         
-            <li><a class="toctree-l4" href="#opening-the-databases">Opening the databases</a></li>
+            <li><a class="toctree-l4" href="#getting-started">Getting started</a></li>
         
-            <li><a class="toctree-l4" href="#a-visualization-example">A visualization example</a></li>
+            <li><a class="toctree-l4" href="#plot_1">Plot</a></li>
         
         </ul>
     
@@ -124,6 +128,14 @@
 		
     <span class="caption-text">General Relativity</span>
     <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../GR/Differential geometry/">Differential geometry</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../GR/Einstein Equation/">Einstein Equation</a>
+                </li>
                 <li class="">
                     
     <a class="" href="../../GR/Solutions/">Solutions</a>
@@ -164,11 +176,27 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../../NR/ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../../NR/BSSN/">BSSN</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -238,9 +266,10 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="gnuplot">gnuplot</h2>
+                <h3 id="gnuplot">gnuplot</h3>
 <p>You should see a number of files with the extension <code class="codehilite"><span class="na">.asc</span></code>. These are 0-D (reductions of 3-D grid functions to scalar values) and 1-D ASCII output files that can be plotted with gnuplot.</p>
-<h3 id="plot">Plot</h3>
+<p><a href="http://cactuscode.org/documentation/visualization/gnuPlot/">http://cactuscode.org/documentation/visualization/gnuPlot/</a></p>
+<h4 id="plot">Plot</h4>
 <p>Start gnuplot with the command:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>gnuplot
 </pre></div>
@@ -251,7 +280,7 @@
 </pre></div>
 </td></tr></table>
 
-<h2 id="python">Python</h2>
+<h3 id="python">Python</h3>
 <p>The following commands will generate a simple line plot of the data.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
@@ -269,8 +298,9 @@
 </pre></div>
 </td></tr></table>
 
-<h2 id="visit">VisIt</h2>
-<h3 id="opening-the-databases">Opening the databases</h3>
+<h3 id="visit">VisIt</h3>
+<p><img alt="-w684" src="../media/15524826517187.jpg" /></p>
+<h4 id="getting-started">Getting started</h4>
 <p>Once the software is running, the button Open can be used to open files from the simulation. Make sure to select Open file as type: CarpetHDF5, otherwise VisIt may try to load the data using another format.</p>
 <p><img alt="vt-1" src="../media/vt-1.png" /></p>
 <p>If you are using the Simulation Factory to launch and manage the run, the data will be output under the directory <code class="codehilite">&lt;basedir&gt;/&lt;simulation name&gt;/output-&lt;nnnn&gt;/&lt;parfile name&gt;</code>, where <code class="codehilite">&lt;nnnn&gt;</code> is the number of the restart. There are essentially two types of files that can be visualised with VisIt:</p>
@@ -278,8 +308,43 @@
 <li>Files from the thorn <code class="codehilite">CarpetIOHDF5</code>, with <code class="codehilite"><span class="na">.h5</span></code> extension, which will be read by the <code class="codehilite">CarpetHDF5</code> plugin in VisIt and represent the 1D, 2D, or 3D configuration of a specific field, on a number of constant-time spaces.</li>
 <li>Files from the thorn <code class="codehilite">QuasiLocalMeasures</code>, with <code class="codehilite"><span class="na">.vtk</span></code> extension, which are read natively by VisIt and represent the shape and properties of relevant 2D topological spheres, such as the apparent horizons, also at different times.</li>
 </ul>
-<h3 id="a-visualization-example">A visualization example</h3>
+<h4 id="plot_1">Plot</h4>
 <p>We first need to load the data, using the Open button and selecting the correct path for the database <filename.h5>. We can then generate the plot by clicking <code class="codehilite">Add &gt; Pseudocolor &gt; &lt;filename&gt;</code>. If the Auto Apply feature in VisIt is not selected, we need to click on Draw to make the plot appear.</p>
+<p>VisIt comes with sixteen standard plots: Boundary, Contour, Curve, FilledBoundary, Histogram, Label, Mesh, Pseudocolor, Scatter, Streamline, Subset, Surface, Tensor, Truecolor, Vector, and Volume.</p>
+<p><img alt="-w196" src="../media/15524835013884.jpg" /></p>
+<h5 id="boundary-and-filledboundary-plots">Boundary and FilledBoundary Plots</h5>
+<p>The Boundary plot and FilledBoundary plot are discussed together because of their similarity. Both plots concentrate on the boundaries between materials but each plot shows the boundary in a different way.</p>
+<p><img alt="-w286" src="../media/15524837251917.jpg" /></p>
+<h5 id="contour-plot">Contour Plot</h5>
+<p>This plot displays the location of values for scalar variables like density or pressure using lines for 2D plots and surfaces for 3D plots.</p>
+<p><img alt="-w824" src="../media/15524839724834.jpg" /></p>
+<h5 id="curve-plot">Curve Plot</h5>
+<p>The Curve plot displays a simple group of X-Y pair data such as that output by 1D simulations or data produced by Lineouts of 2D or 3D datasets. Curve plots are useful for visualizations where it is useful to plot 1D quantities that evolve over time.</p>
+<p><img alt="-w994" src="../media/15524840905652.jpg" /></p>
+<h5 id="histogram-plot">Histogram Plot</h5>
+<p>The Histogram plot divides the data range of a scalar variable into a number of bins and groups the variable’s values, weighted by cell area or revolved volume, into different bins. The values in each bin are then used to create a bar graph or curve that represents the distribution of values throughout the variable’s data range. The Histogram plot can be used to determine where data values cluster in the range of a scalar variable.</p>
+<p><img alt="-w543" src="../media/15524841567510.jpg" /></p>
+<h5 id="label-plot">Label Plot</h5>
+<p>The Label plot can display mesh information, scalar fields, vector fields, tensor fields, array variables, subset names, and material names. The Label plot is often used as a debugging device for simulation codes since it allows the user to see labels containing the exact values at the computational mesh’s nodes or cell centers. Since the Label plot’s job is to display labels representing the computational mesh or the fields defined on that mesh, it does not convey much information about the actual mesh geometry. Since having a Label plot by itself does not usually give enough information to understand the plotted dataset, the Label plot is almost always used with other plots.</p>
+<p><img alt="-w932" src="../media/15524842763415.jpg" /></p>
+<h5 id="mesh-plot">Mesh Plot</h5>
+<p>The Mesh plot displays the computational mesh over which a database’s variables are defined. The mesh plot is often added to the visualization window when other plots are visualized to allow individual cells to be clearly seen.</p>
+<p><img alt="-w1017" src="../media/15524843706268.jpg" /></p>
+<h5 id="pseudocolor-plot">Pseudocolor plot</h5>
+<p>The Pseudocolor plot maps a scalar variable’s data values to colors and uses the colors to “paint” values onto the variable’s computational mesh. The result is a clear picture of the database geometry painted with variable values that have been mapped to colors. You might try this plot first when examining a scientific database for the first time since it reveals so much information about the plotted variable.</p>
+<p><img alt="-w566" src="../media/15524844188520.jpg" /></p>
+<h5 id="scatter-plot">Scatter Plot</h5>
+<p>The Scatter plot allows you to combine multiple scalar fields into a point mesh so you can investigate the relationships between multiple input variables.</p>
+<p><img alt="-w985" src="../media/15524844986990.jpg" /></p>
+<h5 id="streamline-plot">Streamline Plot</h5>
+<p>The Streamline plot shows the behavior of particles in a vector field. The Streamline plot calculates the value of the vector field at seed locations, which are produced by point sources, and integrates through the vector field to create a streamline. Streamlines can be displayed as a line, a tube, or as a ribbon if you also want to show the vorticity of the vector field.</p>
+<p><img alt="-w954" src="../media/15524845595717.jpg" /></p>
+<h5 id="surface-plot">Surface Plot</h5>
+<p>The Surface plot takes 2D scalar databases as input and adds a height component to the variable’s mesh, resulting in a height map that is then pseudocolored by the plotted variable. You might want to use this plot to examine 2D datasets because features of the plotted variable are highlighted by the height of the plot in addition to being highlighted by the plot’s colors.</p>
+<p><img alt="-w946" src="../media/15524846354511.jpg" /></p>
+<h5 id="tensor-plot">Tensor plot</h5>
+<p>The Tensor plot displays tensor variables using ellipsoid glyphs to convey information about a tensor variable’s eigenvalues. Each glyph’s scaling and rotation is controlled by the eigenvalues/eigenvectors of the tensor as follows: for each tensor, the eigenvalues (and associated eigenvectors) are sorted to determine the major, medium, and minor eigenvalues/eigenvectors.</p>
+<p><img alt="-w875" src="../media/15524846836295.jpg" /></p>
               
             </div>
           </div>
@@ -287,7 +352,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../GR/Solutions/" class="btn btn-neutral float-right" title="Solutions">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../GR/Differential geometry/" class="btn btn-neutral float-right" title="Differential geometry">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../parameter/" class="btn btn-neutral" title="Parameter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -321,7 +386,7 @@
         <span><a href="../parameter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../GR/Solutions/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../GR/Differential geometry/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
