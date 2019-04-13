@@ -111,6 +111,33 @@
     <a class="current" href="./">Einstein Equation</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#evolution-of-matter-sources">Evolution of matter sources</a></li>
+    
+
+    <li class="toctree-l3"><a href="#black-hole">Black Hole</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#schwarzschild-black-holes">Schwarzschild Black Holes</a></li>
+        
+            <li><a class="toctree-l4" href="#kerr-black-holes">Kerr Black Holes</a></li>
+        
+            <li><a class="toctree-l4" href="#innermost-stable-circular-orbit">Innermost stable circular orbit</a></li>
+        
+            <li><a class="toctree-l4" href="#global-theorems">Global Theorems</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#alternative-theories-of-gravity">Alternative Theories of Gravity</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#scalar-tensor-theories">Scalar-Tensor Theories</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -243,7 +270,217 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="_1"></h2>
+                <p>We will use geometric units. In these units, the speed of light, c, and Newton’s constant G, are taken to be 1. A consequence of this is that distances, time intervals, masses, and energy all have the same units. By convention, the unit of each of these is denoted by an arbitrary mass M.</p>
+<p><img alt="" src="../media/15540193712475.jpg" /></p>
+<p>The geometry of a spacetime can be entirely described by a line element <span><span class="MathJax_Preview">\mathrm{d} s^{2}</span><script type="math/tex">\mathrm{d} s^{2}</script></span>. In Minkowski spacetime, in Cartesian coordinates, the line element takes the form</p>
+<div>
+<div class="MathJax_Preview">
+\mathrm{d} s^{2}=-\mathrm{d} t^{2}+\mathrm{d} x^{2}+\mathrm{d} y^{2}+\mathrm{d} z^{2}
+</div>
+<script type="math/tex; mode=display">
+\mathrm{d} s^{2}=-\mathrm{d} t^{2}+\mathrm{d} x^{2}+\mathrm{d} y^{2}+\mathrm{d} z^{2}
+</script>
+</div>
+<p>Note that <span><span class="MathJax_Preview">\mathrm{d} s^{2}</span><script type="math/tex">\mathrm{d} s^{2}</script></span> is not necessarily positive. <strong>For timelike paths, the proper time along the path is given by the integral of</strong> <span><span class="MathJax_Preview">\mathrm{d} \tau=\sqrt{-\mathrm{d} s^{2}}</span><script type="math/tex">\mathrm{d} \tau=\sqrt{-\mathrm{d} s^{2}}</script></span>.</p>
+<p>Equation can be written as</p>
+<div>
+<div class="MathJax_Preview">
+\mathrm{d} s^{2}=\eta_{\mu \nu} \mathrm{d} x^{\mu} \mathrm{d} x^{\nu}
+</div>
+<script type="math/tex; mode=display">
+\mathrm{d} s^{2}=\eta_{\mu \nu} \mathrm{d} x^{\mu} \mathrm{d} x^{\nu}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">x^{\mu}=(t, x, y, z)</span><script type="math/tex">x^{\mu}=(t, x, y, z)</script></span> and the components of the symmetric tensor <span><span class="MathJax_Preview">\eta_{\mu \nu}</span><script type="math/tex">\eta_{\mu \nu}</script></span> are given by <span><span class="MathJax_Preview">\operatorname{diag}(-1,1,1,1)</span><script type="math/tex">\operatorname{diag}(-1,1,1,1)</script></span>. Here we used two standard conventions, the timelike coordinate is listed first and repeated Greek indices are summed over. By convention, the index of the timelike coordinate is 0, while the spatial coordinates have indices 1, 2, 3.</p>
+<p>A geodesic is the generalization of a straight line in Euclidean space. In Cartesian coordinates, the tangent vector to a straight line is a constant. This can be expressed as</p>
+<div>
+<div class="MathJax_Preview">
+\begin{array}{l}{t^{\mu}=\frac{\mathrm{d}}{\mathrm{d} \lambda} x^{\mu}(\lambda)} \\ {\frac{\mathrm{d}}{\mathrm{d} \lambda} t^{\mu}(\lambda)=0}\end{array}
+</div>
+<script type="math/tex; mode=display">
+\begin{array}{l}{t^{\mu}=\frac{\mathrm{d}}{\mathrm{d} \lambda} x^{\mu}(\lambda)} \\ {\frac{\mathrm{d}}{\mathrm{d} \lambda} t^{\mu}(\lambda)=0}\end{array}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">t^{\nu}</span><script type="math/tex">t^{\nu}</script></span> is the tangent vector to the line and <span><span class="MathJax_Preview">x^{\mu}(\lambda)</span><script type="math/tex">x^{\mu}(\lambda)</script></span> are the Cartesian coordinates of each point of the line.</p>
+<p>The equation for a geodesic in arbitrary coordinates, as well as flat and non-flat metrics, is</p>
+<div>
+<div class="MathJax_Preview">
+\begin{array}{c}{\frac{\mathrm{d}}{\mathrm{d} \lambda} x^{\mu}(\lambda)=t^{\mu}(\lambda)} \\ {t^{\mu} \nabla_{\mu} t^{\nu}=0}\end{array}
+</div>
+<script type="math/tex; mode=display">
+\begin{array}{c}{\frac{\mathrm{d}}{\mathrm{d} \lambda} x^{\mu}(\lambda)=t^{\mu}(\lambda)} \\ {t^{\mu} \nabla_{\mu} t^{\nu}=0}\end{array}
+</script>
+</div>
+<p>General relativity extends the notion of spacetime to include non-flat metrics, where</p>
+<div>
+<div class="MathJax_Preview">
+G_{\mu \nu}=8 \pi T_{\mu \nu}
+</div>
+<script type="math/tex; mode=display">
+G_{\mu \nu}=8 \pi T_{\mu \nu}
+</script>
+</div>
+<p>and <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span> is the stress energy tensor, a measure of the total energy and momentum flux from matter and non-gravitational interactions and radiation.</p>
+<h4 id="evolution-of-matter-sources">Evolution of matter sources</h4>
+<p>In general relativity, the curvature of spacetime possess its own dynamics, and indeed one of the most important phenomena treated by numerical relativity, the merger of two black holes, is a vacuum problem. That is, <span><span class="MathJax_Preview">T_{\mu \nu}=0</span><script type="math/tex">T_{\mu \nu}=0</script></span>. Numerical relativity is also used to study phenomena involving matter flows in strongly-curved dynamical spacetimes. Two problems where such relativistic effects should be particularly important are compact object mergers involving neutron stars and the formation of black holes by stellar collapse.</p>
+<p>Matter and energy constitute the stress-energy tensor <span><span class="MathJax_Preview">T_{\mu \nu}</span><script type="math/tex">T_{\mu \nu}</script></span> that is the source term in Einstein equations. The energy and momentum conservation equations</p>
+<div>
+<div class="MathJax_Preview">
+\nabla_{\mu} T^{\mu \nu}=0
+</div>
+<script type="math/tex; mode=display">
+\nabla_{\mu} T^{\mu \nu}=0
+</script>
+</div>
+<p>provide evolution equations for the matter.</p>
+<p>Perfect fluid mean the mean free path is very small compared to the system’s scale, making the collection a fluid, and viscosity and heat transport are small enough to be ignored. This fluid will have a stress tensor</p>
+<div>
+<div class="MathJax_Preview">
+T_{\mu \nu}^{\mathrm{gas}}=\left(\rho_{0}+u+P\right) u_{\mu} u_{\nu}+P g_{\mu \nu}
+</div>
+<script type="math/tex; mode=display">
+T_{\mu \nu}^{\mathrm{gas}}=\left(\rho_{0}+u+P\right) u_{\mu} u_{\nu}+P g_{\mu \nu}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\rho_{0}</span><script type="math/tex">\rho_{0}</script></span>, <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span>, <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> and <span><span class="MathJax_Preview">u_{\mu}</span><script type="math/tex">u_{\mu}</script></span> are the rest mass density, internal energy, pressure, and 4-velocity. (Note <span><span class="MathJax_Preview">\rho_{0}</span><script type="math/tex">\rho_{0}</script></span> must be distinguished from the total energy density <span><span class="MathJax_Preview">\rho=\rho_{0}+u</span><script type="math/tex">\rho=\rho_{0}+u</script></span>)</p>
+<h3 id="black-hole">Black Hole</h3>
+<p>A black hole is deﬁned as a region of spacetime from which no null geodesic can escape to infinity. The surface of a black hole, the event horizon, acts as a one-way membrane through which light and matter can enter the black hole, but once inside, can never escape. It is the boundary in spacetime separating those events that can emit light rays that can propagate to infinity and those which cannot. More precisely, the event horizon is deﬁned as the boundary of the causal past of future null infinity. It is a 2 + 1 dimensional hypersurface in spacetime formed by those outward-going, future-directed null geodesics that neither escape to infinity nor fall toward the center of the black hole. The event horizon is a gauge-invariant entity, and contains important geometric information about a black hole spacetime.</p>
+<p>The most general stationary black hole solution to Einstein’s equations is the analytically known Kerr-Newman metric. It is uniquely specified by just three parameters: <strong>the mass M, angular momentum J and the charge Q of the black hole</strong>. Special cases are the Kerr metric (Q = 0), the Reissner-Nordstrom metric (J = 0) and the Schwarzschild metric (J = 0, Q = 0).</p>
+<p>Perhaps one of the most interesting predictions of general relativity is the existence of black holes. A black hole can be completely described by two parameters: its mass and spin. In geometric units the magnitude of the spin angular momentum S is bounded by the mass m, where <span><span class="MathJax_Preview">S&lt;m^{2}</span><script type="math/tex">S<m^{2}</script></span>. Typically one defines a specific spin a, where <span><span class="MathJax_Preview">a=S / m</span><script type="math/tex">a=S / m</script></span> and a dimensionless spin <span><span class="MathJax_Preview">\chi</span><script type="math/tex">\chi</script></span>, where <span><span class="MathJax_Preview">\chi=S / m^{2}</span><script type="math/tex">\chi=S / m^{2}</script></span>.</p>
+<p>If the black hole is non-spinning, it is known as a Schwarzschild black hole, and if S is non-zero, it is known as a Kerr black hole.</p>
+<p>A black hole has no material surface, of course, but there is a boundary separating the region from which it is impossible ever to escape (the black hole interior) to the outside universe. This boundary is called the event horizon. In practice, numerical relativists find event horizons by evolving a cluster of null geodesics. We will see that some methods of numerically handling black hole interiors (excision methods) require some knowledge of the horizon location during the simulation. For these purposes, numerical relativists use the apparent horizon. Apparent horizons are two-dimensional surfaces that may exist at each time in a numerical simulation. They are defined to be surfaces from which outward-pointing null rays do not expand. This very unusual situation can only occur in the vicinity of a black hole, but finding such surfaces only requires information about the metric and extrinsic curvature at a given time. For a stationary black hole, the apparent horizon will coincide with the event horizon; in a dynamical spacetime, it will be inside the event horizon.</p>
+<h4 id="schwarzschild-black-holes">Schwarzschild Black Holes</h4>
+<p>The Schwarzschild solution for a vacuum spherical spacetime may be written as</p>
+<div>
+<div class="MathJax_Preview">
+d s ^ { 2 } = - \left( 1 - \frac { 2 M } { r } \right) d t ^ { 2 } + \left( 1 - \frac { 2 M } { r } \right) ^ { - 1 } d r ^ { 2 } + r ^ { 2 } d \theta ^ { 2 } + r ^ { 2 } \sin ^ { 2 } \theta d \phi ^ { 2 }
+</div>
+<script type="math/tex; mode=display">
+d s ^ { 2 } = - \left( 1 - \frac { 2 M } { r } \right) d t ^ { 2 } + \left( 1 - \frac { 2 M } { r } \right) ^ { - 1 } d r ^ { 2 } + r ^ { 2 } d \theta ^ { 2 } + r ^ { 2 } \sin ^ { 2 } \theta d \phi ^ { 2 }
+</script>
+</div>
+<p>The black hole event horizon is located at <span><span class="MathJax_Preview">r = 2M</span><script type="math/tex">r = 2M</script></span> and is sometimes called the Schwarzschild radius. It is also referred to as the “static limit”, because static observers cannot exist inside <span><span class="MathJax_Preview">r = 2M</span><script type="math/tex">r = 2M</script></span>, and the “surface of infinite redshift”, because photons emitted by a static source just outside <span><span class="MathJax_Preview">r = 2M</span><script type="math/tex">r = 2M</script></span> will have infinite wavelength when measured by a static observer at infinity. Circular orbits of test particles exist down to <span><span class="MathJax_Preview">r = 3M</span><script type="math/tex">r = 3M</script></span>.</p>
+<p><strong>The singularity in the metric at <span><span class="MathJax_Preview">r = 2M</span><script type="math/tex">r = 2M</script></span> is a coordinate singularity, removable by coordinate transformation</strong>, while the singularity at <span><span class="MathJax_Preview">r = 0</span><script type="math/tex">r = 0</script></span> is a physical spacetime singularity. In fact, the curvature invariant</p>
+<div>
+<div class="MathJax_Preview">
+I \equiv {}^ { ( 4 ) } R _ { a b c d } {}^ { ( 4 ) } R ^ { a b c d } = 48 M ^ { 2 } / r ^ { 6 }
+</div>
+<script type="math/tex; mode=display">
+I \equiv {}^ { ( 4 ) } R _ { a b c d } {}^ { ( 4 ) } R ^ { a b c d } = 48 M ^ { 2 } / r ^ { 6 }
+</script>
+</div>
+<p>clearly blows up at the origin, showing that the tidal gravitational field becomes infinite at the center of the black hole.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One alternative coordinate choice that removes the coordinate singularity at <span><span class="MathJax_Preview">r = 2M</span><script type="math/tex">r = 2M</script></span> is the Kruskal-Szekeres coordinate system.</p>
+<div>
+<div class="MathJax_Preview">
+d s ^ { 2 } = \frac { 32 M ^ { 3 } } { r } e ^ { - r / 2 M } \left( - d v ^ { 2 } + d u ^ { 2 } \right) + r ^ { 2 } d \theta ^ { 2 } + r ^ { 2 } \sin ^ { 2 } \theta d \phi ^ { 2 }
+</div>
+<script type="math/tex; mode=display">
+d s ^ { 2 } = \frac { 32 M ^ { 3 } } { r } e ^ { - r / 2 M } \left( - d v ^ { 2 } + d u ^ { 2 } \right) + r ^ { 2 } d \theta ^ { 2 } + r ^ { 2 } \sin ^ { 2 } \theta d \phi ^ { 2 }
+</script>
+</div>
+<p>The original Schwarzschild coordinate system covers only half of the spacetime manifold, while Kruskal-Szekeres coordinates cover the entire manifold.</p>
+<p><img alt="" src="../media/15540195906826.jpg" /></p>
+</div>
+<h4 id="kerr-black-holes">Kerr Black Holes</h4>
+<p>The solution to Einstein’s equations describing a stationary, rotating, uncharged black hole of mass M and angular momentum J in vacuum may be expressed in Boyer-Lindquist coordinates in the form</p>
+<div>
+<div class="MathJax_Preview">
+d s ^ { 2 } = - \left( 1 - \frac { 2 M r } { \Sigma } \right) d t ^ { 2 } - \frac { 4 a M r \sin ^ { 2 } \theta } { \Sigma } d t d \phi + \frac { \Sigma } { \Delta } d r ^ { 2 } + \Sigma d \theta ^ { 2 } + \left( r ^ { 2 } + a ^ { 2 } + \frac { 2 a ^ { 2 } M r \sin ^ { 2 } \theta } { \Sigma } \right) \sin ^ { 2 } \theta d \phi ^ { 2 }
+</div>
+<script type="math/tex; mode=display">
+d s ^ { 2 } = - \left( 1 - \frac { 2 M r } { \Sigma } \right) d t ^ { 2 } - \frac { 4 a M r \sin ^ { 2 } \theta } { \Sigma } d t d \phi + \frac { \Sigma } { \Delta } d r ^ { 2 } + \Sigma d \theta ^ { 2 } + \left( r ^ { 2 } + a ^ { 2 } + \frac { 2 a ^ { 2 } M r \sin ^ { 2 } \theta } { \Sigma } \right) \sin ^ { 2 } \theta d \phi ^ { 2 }
+</script>
+</div>
+<p>where</p>
+<div>
+<div class="MathJax_Preview">
+a \equiv J / M , \quad \Delta \equiv r ^ { 2 } - 2 M r + a ^ { 2 } , \quad \Sigma \equiv r ^ { 2 } + a ^ { 2 } \cos ^ { 2 } \theta
+</div>
+<script type="math/tex; mode=display">
+a \equiv J / M , \quad \Delta \equiv r ^ { 2 } - 2 M r + a ^ { 2 } , \quad \Sigma \equiv r ^ { 2 } + a ^ { 2 } \cos ^ { 2 } \theta
+</script>
+</div>
+<p>The horizon of the black hole is located at <span><span class="MathJax_Preview">r_+</span><script type="math/tex">r_+</script></span>, the largest root of the equation <span><span class="MathJax_Preview">∆ = 0</span><script type="math/tex">∆ = 0</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+r _ { + } = M + \left( M ^ { 2 } - a ^ { 2 } \right) ^ { 1 / 2 }
+</div>
+<script type="math/tex; mode=display">
+r _ { + } = M + \left( M ^ { 2 } - a ^ { 2 } \right) ^ { 1 / 2 }
+</script>
+</div>
+<p>The static limit is the surface within which no static observers exist; it resides at <span><span class="MathJax_Preview">r_0</span><script type="math/tex">r_0</script></span>, the largest root of <span><span class="MathJax_Preview">g_{tt} = 0</span><script type="math/tex">g_{tt} = 0</script></span>:</p>
+<div>
+<div class="MathJax_Preview">
+r _ { 0 } = M + \left( M ^ { 2 } - a ^ { 2 } \cos ^ { 2 } \theta \right) ^ { 1 / 2 }
+</div>
+<script type="math/tex; mode=display">
+r _ { 0 } = M + \left( M ^ { 2 } - a ^ { 2 } \cos ^ { 2 } \theta \right) ^ { 1 / 2 }
+</script>
+</div>
+<p>The region between the horizon and static limit is called the ergosphere; in this region all time-like observers are dragged around the hole with angular velocity <span><span class="MathJax_Preview">Ω &gt; 0</span><script type="math/tex">Ω > 0</script></span>.</p>
+<h4 id="innermost-stable-circular-orbit">Innermost stable circular orbit</h4>
+<p>The <strong>Innermost stable circular orbit</strong> (often called the <strong>ISCO</strong>) is the smallest circular orbit in which a test particle can stably orbit a massive object in general relativity. The location of the ISCO, the ISCO-radius (<span><span class="MathJax_Preview">r_{isco}</span><script type="math/tex">r_{isco}</script></span>), depends on the angular momentum (spin) of the central object.</p>
+<p>The ISCO plays an important role in black hole accretion disks since it marks <strong>the inner edge of the disk</strong>.</p>
+<ul>
+<li>For a non-spinning massive object, the ISCO is located at,</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+r_{isco} = \frac{6 G M}{c^2} = 3 R_S
+</div>
+<script type="math/tex; mode=display">
+r_{isco} = \frac{6 G M}{c^2} = 3 R_S
+</script>
+</div>
+<ul>
+<li>For a rotating black holes</li>
+</ul>
+<h4 id="global-theorems">Global Theorems</h4>
+<p>In an isolated system, the sum of the surface areas of all black holes can never decrease.</p>
+<h5 id="schwarzschild-black-hole">Schwarzschild black hole</h5>
+<p>The fact that the event horizon area cannot decrease motivates the definition of the irreducible mass</p>
+<div>
+<div class="MathJax_Preview">
+M_{irr} = (\frac{\mathcal{A}}{16 \pi})^{\frac{1}{2}}
+</div>
+<script type="math/tex; mode=display">
+M_{irr} = (\frac{\mathcal{A}}{16 \pi})^{\frac{1}{2}}
+</script>
+</div>
+<p>The definition then implies that the irreducible mass of the black hole cannot decrease, which motivates its name.</p>
+<p>The area theorem can be used to place a strict upper limit on the amount of energy that is emitted in gravitational radiation in black hole collisions.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Consider two widely separated, non-rotating black holes of masses <span><span class="MathJax_Preview">M_1</span><script type="math/tex">M_1</script></span> and <span><span class="MathJax_Preview">M_2</span><script type="math/tex">M_2</script></span>, initially at rest with respect to some distant observer. Use the area theorem to find an upper limit on the energy emitted in gravitational radiation that arises from the head-on collision of the two black holes. Verify that for equal mass black holes at most 29% of the total initial energy can be emitted in gravitational radiation.</p>
+</div>
+<h5 id="kerr-black-holes_1">Kerr black holes</h5>
+<p>Given the irreducible mass <span><span class="MathJax_Preview">M_{irr}</span><script type="math/tex">M_{irr}</script></span> and the angular momentum J of an isolated, stationary black hole, we can compute the Kerr mass M (<span><span class="MathJax_Preview">= M_{ADM}</span><script type="math/tex">= M_{ADM}</script></span>) from</p>
+<div>
+<div class="MathJax_Preview">
+M^2 = M^2_{irr} + \frac{1}{4} \frac{J^2}{M^2_{irr}}
+</div>
+<script type="math/tex; mode=display">
+M^2 = M^2_{irr} + \frac{1}{4} \frac{J^2}{M^2_{irr}}
+</script>
+</div>
+<p>According to the area theorem, only the rotational energy contribution can be tapped as a source of energy by an external system interacting with the hole, since the irreducible mass can never decrease.</p>
+<h3 id="alternative-theories-of-gravity">Alternative Theories of Gravity</h3>
+<p>The simplest scenario that one could consider in this context is the addition of an extra scalar ﬁeld, but one might also choose to consider extra vectors, tensors, or even higher rank fields. Of course, the effect of such additional ﬁeld needs to be suppressed at scales where General Relativity has been well tested, such as <strong>in the lab or solar system</strong>.</p>
+<h4 id="scalar-tensor-theories">Scalar-Tensor Theories</h4>
+<p>A general form of the scalar-tensor theory can be derived from the <strong>Lagrangian density</strong></p>
+<div>
+<div class="MathJax_Preview">
+\mathcal{L}=\frac{1}{16 \pi } \sqrt{-g} \left[ f\left( \phi \right) R-g\left( \phi \right) \nabla _{\mu }\phi \nabla ^{\mu }\phi -2\Lambda \left( \phi \right) \right] +\mathcal{L}_{m}\left( \psi ,h\left( \phi \right) g_{\mu \nu}\right) 
+</div>
+<script type="math/tex; mode=display">
+\mathcal{L}=\frac{1}{16 \pi } \sqrt{-g} \left[ f\left( \phi \right) R-g\left( \phi \right) \nabla _{\mu }\phi \nabla ^{\mu }\phi -2\Lambda \left( \phi \right) \right] +\mathcal{L}_{m}\left( \psi ,h\left( \phi \right) g_{\mu \nu}\right) 
+</script>
+</div>
+<p><span><span class="MathJax_Preview">\mathcal{L}_m</span><script type="math/tex">\mathcal{L}_m</script></span> is the Lagrangian density of the matter fields <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span>.</p>
               
             </div>
           </div>

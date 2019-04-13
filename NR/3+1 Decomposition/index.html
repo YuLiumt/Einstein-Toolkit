@@ -254,10 +254,15 @@
           <div role="main">
             <div class="section">
               
-                <p>The 3+1 equations are entirely equivalent to the usual ﬁeld equations but they focus on the evolution of 12 purely spatial quantities closely related to <span><span class="MathJax_Preview">g_{ij}</span><script type="math/tex">g_{ij}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ij}</span><script type="math/tex">\partial_t g_{ij}</script></span> and the constraints that they must satisfy on spatial hypersurfaces. Once these spatial ﬁeld quantities are specified on some initial “time slice” (i.e. spatial hypersurface) consistent with the 3 + 1 constraint equations, the 3 + 1 evolution equations can then be integrated, together with evolution equations for the matter sources, to determine these ﬁeld quantities at all later times.</p>
+                <p><strong>The 3+1 equations are entirely equivalent to the usual ﬁeld equations but they focus on the evolution of 12 purely spatial quantities</strong> closely related to <span><span class="MathJax_Preview">g_{ij}</span><script type="math/tex">g_{ij}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ij}</span><script type="math/tex">\partial_t g_{ij}</script></span> and the constraints that they must satisfy on spatial hypersurfaces. Once these spatial field quantities are specified on some initial “time slice” (i.e. spatial hypersurface) consistent with the 3 + 1 constraint equations, the 3 + 1 evolution equations can then be integrated, together with evolution equations for the matter sources, to determine these field quantities at all later times.</p>
 <h3 id="foliations-of-spacetime">Foliations of Spacetime</h3>
+<p>We assume that the spacetime <span><span class="MathJax_Preview">(M, g_{ab})</span><script type="math/tex">(M, g_{ab})</script></span> can be foliated into a family of non-intersecting spacelike three-surfaces Σ. The spacetime is split into spatial hypersurfaces labeled by a coordinate t.</p>
+<div class="admonition note">
+<p class="admonition-title">Cauchy surface</p>
+<p>Cauchy surface is a plane in space-time which is like an instant of time; its significance is that giving the initial conditions on this plane determines the future (and the past) uniquely.</p>
+</div>
 <p><img alt="" src="../media/15533281773996.jpg" /></p>
-<p>We assume that the spacetime <span><span class="MathJax_Preview">(M, g_{ab})</span><script type="math/tex">(M, g_{ab})</script></span> can be foliated into a family of non-intersecting spacelike three-surfaces Σ, which arise, at least locally, as the level surfaces of a scalar function t that can be interpreted as a global time function. From t we can define the 1-form</p>
+<p>From t we can define the 1-form</p>
 <div>
 <div class="MathJax_Preview">
 \Omega _ { a } = \nabla _ { a } t
@@ -284,7 +289,7 @@
 \| \Omega \| ^ { 2 } = g ^ { a b } \nabla _ { a } t \nabla _ { b } t \equiv - \frac { 1 } { \alpha ^ { 2 } }
 </script>
 </div>
-<p><span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> measures how much proper time elapses between neighboring time slices along the normal vector <span><span class="MathJax_Preview">Ω^a</span><script type="math/tex">Ω^a</script></span> to the slice, and is therefore called the lapse function. We assume that <span><span class="MathJax_Preview">α &gt; 0</span><script type="math/tex">α > 0</script></span>, so that <span><span class="MathJax_Preview">Ω^a</span><script type="math/tex">Ω^a</script></span> is timelike and the hypersurface Σ is spacelike everywhere.</p>
+<p><span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> measures how much proper time elapses between neighboring time slices along the normal vector <span><span class="MathJax_Preview">Ω^a</span><script type="math/tex">Ω^a</script></span> to the slice, and is therefore called the <strong>lapse function</strong>. We assume that <span><span class="MathJax_Preview">α &gt; 0</span><script type="math/tex">α > 0</script></span>, so that <span><span class="MathJax_Preview">Ω^a</span><script type="math/tex">Ω^a</script></span> is timelike and the hypersurface Σ is spacelike everywhere.</p>
 <p>We can now define the unit normal to the slices as</p>
 <div>
 <div class="MathJax_Preview">
@@ -295,6 +300,11 @@ n ^ { a } \equiv - g ^ { a b } \alpha \Omega _ { b }
 </script>
 </div>
 <p>Here the negative sign has been chosen so that <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> points in the direction of increasing t, and may therefore be thought of as the four-velocity of a “normal” observer whose worldline is always normal to the spatial slices Σ.</p>
+<p>On each spatial slice, coordinates <span><span class="MathJax_Preview">x^{i}</span><script type="math/tex">x^{i}</script></span> are specified (we use the convention that Latin indices take on the values 1, 2, or 3 of the spacelike dimensions). A point labeled <span><span class="MathJax_Preview">x_{0}^{i}</span><script type="math/tex">x_{0}^{i}</script></span> on one spatial slice and another with the same label on a different slice may be skewed with respect to the unit normal direction <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> (which must be timelike).</p>
+<p><img alt="-w533" src="../media/15540241284940.jpg" /></p>
+<p>Here, the two points are shifted with respect to each other by a spatial vector <span><span class="MathJax_Preview">\beta^{i}</span><script type="math/tex">\beta^{i}</script></span>.</p>
+<p>The shift vector <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> will measure the amount by which the spatial coordinates are shifted within a slice with respect to the normal vector. The lapse function <span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> measures how much proper time elapses between neighboring time slices along the normal vector. <mark>The lapse and the shift therefore determine how the coordinates evolve in time.</mark> The choice of <span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> and <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> is quite arbitrary. <strong>The freedom to choose these four gauge functions<span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> and <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> completely arbitrarily embodies the four-fold coordinate degrees of freedom inherent in general relativity</strong>.</p>
+<p>The lapse and the shift determine how the coordinates evolve from one time slice Σ to the next, whereas the constraint equations represent integrability conditions which have to be satisfied within each slice. <strong>Therefore, the constraints have to be independent of how the coordinates evolve, and the lapse and the shift can enter only the evolution equations</strong>.</p>
 <h4 id="the-spatial-metric-gamma_abgamma_ab">The spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span></h4>
 <p>With the normal vector we can construct the spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span> that is induced by <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> on the three-dimensional hypersurfaces Σ</p>
 <div>
@@ -336,8 +346,11 @@ N^a_{\space b} = - n^a n_b
 </script>
 </div>
 <p>We can now use these two projection operators to decompose any tensor into its spatial and timelike parts.</p>
-<p>The three-dimensional metric only contains <strong>information about the curvature intrinsic to a slice Σ</strong>, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded. This information is contained in a tensor called <strong>extrinsic curvature</strong>.</p>
 </div>
+<p><strong>The induced metric is simply the spatial components of the spacetime metric <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span>.</strong> </p>
+<p>The three-dimensional metric only contains <strong>information about the curvature intrinsic to a slice Σ</strong>, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded. This information is contained in a tensor called <strong>extrinsic curvature</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The three-dimensional covariant derivative can be expressed in terms of three-dimensional connection coefficients, which, in a coordinate basis, are given by</p>
 <div>
 <div class="MathJax_Preview">
@@ -357,6 +370,7 @@ R _ { a b c } ^ { d } = \partial _ { b } \Gamma _ { a c } ^ { d } - \partial _ {
 </script>
 </div>
 <p>The three-dimensional curvature <span><span class="MathJax_Preview">R _ { b c d } ^ { a }</span><script type="math/tex">R _ { b c d } ^ { a }</script></span> only contains information about the curvature intrinsic to a slice Σ, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded.</p>
+</div>
 <h4 id="the-extrinsic-curvature-k_abk_ab">The Extrinsic Curvature <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span></h4>
 <p><img alt="" src="../media/15533289903023.jpg" /></p>
 <p><strong>The extrinsic curvature</strong> <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span> can be found by <strong>projecting gradients of the normal vector into the slice Σ</strong>. The metric and the extrinsic curvature <span><span class="MathJax_Preview">(\gamma_{ab}, K_{ab})</span><script type="math/tex">(\gamma_{ab}, K_{ab})</script></span> can therefore be considered as the equivalent of positions and velocities in classical mechanics – they measure the “instantaneous” state of the gravitational ﬁeld, and form the fundamental variables in our initial value formulation.
@@ -380,7 +394,6 @@ K_{ab} = - \frac{1}{2} \mathcal{L}_n \gamma_{ab}
 </script>
 </div>
 <p>where <span><span class="MathJax_Preview">L_n</span><script type="math/tex">L_n</script></span> denotes the Lie derivative along <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>.</p>
-<p>Since <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> is a timelike vector, equation illustrates the intuitive interpretation of the extrinsic curvature as a geometric generalization of the “time derivative” of the spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Proof: <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span> changes proportionally to <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span></p>
 <div>
@@ -404,6 +417,7 @@ K_{ab} &= - \gamma_a^{\space c} \gamma_b^{\space d} \nabla_c n_d = - (\delta_a^{
 </script>
 </div>
 </div>
+<p>Since <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> is a timelike vector, equation illustrates the intuitive interpretation of <strong>the extrinsic curvature as a geometric generalization of the “time derivative” of the spatial metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span>.</strong></p>
               
             </div>
           </div>

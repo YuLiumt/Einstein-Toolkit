@@ -250,6 +250,10 @@
             <div class="section">
               
                 <p>For all but the simplest systems, <strong>analytic solutions for the evolution of such systems do not exist</strong>. Hence the task of <strong>solving Einstein's equations must be performed numerically on a computer</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">The dimensionless compaction</p>
+<p><strong>Only rather exotic phenomena involve sufficiently strong spacetime curvature to require numerical relativity.</strong> Newtonian gravity clearly works quite well for main sequence stars, planets, and the like. As is well-known, relativity becomes important when speeds approach the speed of light c, so a reasonable guess would be to expect important general relativistic effects as the escape velocity approaches c. Then an object of mass M and radius R will require relativistic treatment if R is close to the gravitational radius <span><span class="MathJax_Preview">r_{G} \equiv 2 G M / c^{2}</span><script type="math/tex">r_{G} \equiv 2 G M / c^{2}</script></span>, the radius of a nonspinning black hole of mass M. The same condition can be stated in terms of <strong>the dimensionless compaction</strong> <span><span class="MathJax_Preview">\mathcal{C} \equiv \frac{G M}{R c^{2}}</span><script type="math/tex">\mathcal{C} \equiv \frac{G M}{R c^{2}}</script></span>。Strong-gravity objects have high compaction (order unity being the standard of “high”). Black holes <span><span class="MathJax_Preview">(\mathcal{C} \sim 1)</span><script type="math/tex">(\mathcal{C} \sim 1)</script></span> and neutron stars <span><span class="MathJax_Preview">(\mathcal{C} \sim 0.1)</span><script type="math/tex">(\mathcal{C} \sim 0.1)</script></span> are compact objects by this definition. White dwarfs <span><span class="MathJax_Preview">\left(\mathcal{C} \sim 10^{-4}\right)</span><script type="math/tex">\left(\mathcal{C} \sim 10^{-4}\right)</script></span> are a marginal case–relativity plays a large role in their stability condition but not their equilibrium structure–and are usually also classified as compact.</p>
+</div>
 <p>In classical dynamics, the evolution of a system is uniquely determined by the initial positions and velocities of its constituents. By analogy, the evolution of general relativistic gravitational field is determined by specifying <strong>the metric quantities <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ab}</span><script type="math/tex">\partial_t g_{ab}</script></span> at a given (initial) instant of time t</strong>. Now these metric quantities can be integrated forward in time provided we can obtain from <strong>the Einstein field equations expressions for <span><span class="MathJax_Preview">\partial^2_t g_{ab}</span><script type="math/tex">\partial^2_t g_{ab}</script></span> at all points on the hypersurface</strong>. That way we can integrate these expressions to compute <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ab}</span><script type="math/tex">\partial_t g_{ab}</script></span> on a new spacelike hypersurface at some new time <span><span class="MathJax_Preview">t + \delta t</span><script type="math/tex">t + \delta t</script></span>, and then, by repeating the process, obtain  <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> for all other points <span><span class="MathJax_Preview">x^0</span><script type="math/tex">x^0</script></span> and <span><span class="MathJax_Preview">x^i</span><script type="math/tex">x^i</script></span> in the (future) spacetime.</p>
 <h3 id="cauchy-problem">Cauchy problem</h3>
 <p><strong>This is a fundamental problem arising in the mathematical theory of partial differential equations.</strong></p>
@@ -271,7 +275,7 @@ G^{a0} = 8 \pi T^{a0}
 G^{a0} = 8 \pi T^{a0}
 </script>
 </div>
-<p>do not furnish any of the information required for the dynamical evolution of the fields. Rather, they supply four constraints on the initial data, i.e. four relations between <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ab}</span><script type="math/tex">\partial_t g_{ab}</script></span> on the initial hypersurface at <span><span class="MathJax_Preview">x^0 = t</span><script type="math/tex">x^0 = t</script></span>. The only truly dynamical equations must be provided by the six remaining relations</p>
+<p>do not furnish any of the information required for the dynamical evolution of the fields. Rather, they supply <strong>four constraints on the initial data</strong>, i.e. four relations between <span><span class="MathJax_Preview">g_{ab}</span><script type="math/tex">g_{ab}</script></span> and <span><span class="MathJax_Preview">\partial_t g_{ab}</span><script type="math/tex">\partial_t g_{ab}</script></span> on the initial hypersurface at <span><span class="MathJax_Preview">x^0 = t</span><script type="math/tex">x^0 = t</script></span>. The only truly <strong>dynamical equations</strong> must be provided by the six remaining relations</p>
 <div>
 <div class="MathJax_Preview">
 G^{ij} = 8 \pi T^{ij}
@@ -280,14 +284,8 @@ G^{ij} = 8 \pi T^{ij}
 G^{ij} = 8 \pi T^{ij}
 </script>
 </div>
-<p>It is not surprising that there is a mismatch between the required number (10) of second time 2 derivatives <span><span class="MathJax_Preview">\partial_t^2 g_{ab}</span><script type="math/tex">\partial_t^2 g_{ab}</script></span> and the available number (6) of dynamical ﬁeld equations. After all, there is always a fourfold ambiguity associated with the freedom to choose four different coordinates to label points in spacetime. So, for example, we could always choose Gaussian normal coordinates and set <span><span class="MathJax_Preview">g_{00} = −1</span><script type="math/tex">g_{00} = −1</script></span> and <span><span class="MathJax_Preview">g_{0i} = 0</span><script type="math/tex">g_{0i} = 0</script></span>.</p>
-<p>The Cauchy problem in general relativity logically involves a <strong>decomposition of four-dimensional spacetime into three dimensional space and one-dimensional time</strong>.</p>
 <div class="admonition note">
-<p class="admonition-title">Cauchy surface</p>
-<p>Cauchy surface is a plane in space-time which is like an instant of time; its significance is that giving the initial conditions on this plane determines the future (and the past) uniquely.</p>
-</div>
-<p><strong>Analogy Maxwell’s equations</strong></p>
-<hr />
+<p class="admonition-title">Analogy Maxwell’s equations</p>
 <div>
 <div class="MathJax_Preview">
 \begin{array} { l } { D _ { i } E ^ { i } - 4 \pi \rho = 0 } \\ D _ { i } B ^ { i } = 0  \end{array}
@@ -306,7 +304,12 @@ G^{ij} = 8 \pi T^{ij}
 </script>
 </div>
 <p>These equations describe how the fields evolve forward in time, and are therefore called <strong>the evolution equations</strong>.</p>
-<p>To completely determine the time evolution of the electromagnetic fields we also have to specify how the sources ρ and <span><span class="MathJax_Preview">j^i</span><script type="math/tex">j^i</script></span> evolve according to the net force acting on them.</p>
+<p><strong>To completely determine the time evolution of the electromagnetic fields we also have to specify how the sources ρ and <span><span class="MathJax_Preview">j^i</span><script type="math/tex">j^i</script></span> evolve according to the net force acting on them.</strong></p>
+</div>
+<p>It is not surprising that there is a mismatch between the required number (10) of second time 2 derivatives <span><span class="MathJax_Preview">\partial_t^2 g_{ab}</span><script type="math/tex">\partial_t^2 g_{ab}</script></span> and the available number (6) of dynamical ﬁeld equations. After all, there is always a fourfold ambiguity associated with the freedom to choose four different coordinates to label points in spacetime. So, for example, we could always choose Gaussian normal coordinates and set <span><span class="MathJax_Preview">g_{00} = −1</span><script type="math/tex">g_{00} = −1</script></span> and <span><span class="MathJax_Preview">g_{0i} = 0</span><script type="math/tex">g_{0i} = 0</script></span>.</p>
+<p>In general relativity, <strong>the gauge freedom comes in the form of the freedom to choose coordinates arbitrarily</strong>. In order to get a unique solution, we need to impose gauge conditions. (the gauge variables <span><span class="MathJax_Preview">\alpha, \beta^{i}</span><script type="math/tex">\alpha, \beta^{i}</script></span>)</p>
+<div class="admonition note">
+<p class="admonition-title">Analogy Maxwell’s equations<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup></p>
 <p>It is possible to bring Maxwell’s equations into a form that is closer to the 3+1 form of Einstein’s equations. To do so, we introduce the vector potential <span><span class="MathJax_Preview">A ^ { a } = \left( \Phi , A ^ { i } \right)</span><script type="math/tex">A ^ { a } = \left( \Phi , A ^ { i } \right)</script></span> and write <span><span class="MathJax_Preview">B^i</span><script type="math/tex">B^i</script></span> as</p>
 <div>
 <div class="MathJax_Preview">
@@ -326,12 +329,33 @@ B _ { i } = \epsilon _ { i j k } D ^ { j } A ^ { k }
 \begin{aligned} \partial _ { t } A _ { i } & = - E _ { i } - D _ { i } \Phi \\ \partial _ { t } E _ { i } & = D _ { i } D ^ { j } A _ { j } - D ^ { j } D _ { j } A _ { i } - 4 \pi j _ { i } \end{aligned}
 </script>
 </div>
-<p>With the vector potential <span><span class="MathJax_Preview">A_i</span><script type="math/tex">A_i</script></span> we have introduced a gauge freedom into electrodynamics which is expressed in the freely specifiable gauge variable <span><span class="MathJax_Preview">Φ</span><script type="math/tex">Φ</script></span>.</p>
+<p>With the vector potential <span><span class="MathJax_Preview">A_i</span><script type="math/tex">A_i</script></span> we have introduced <strong>a gauge freedom into electrodynamics which is expressed in the freely specifiable gauge variable <span><span class="MathJax_Preview">Φ</span><script type="math/tex">Φ</script></span></strong>.</p>
+<p>These are supplemented by the matter evolution equations,</p>
+<div>
+<div class="MathJax_Preview">
+\nabla^{\mu} J_{\mu}=\partial_{t} \rho+D^{i} j_{i}=0
+</div>
+<script type="math/tex; mode=display">
+\nabla^{\mu} J_{\mu}=\partial_{t} \rho+D^{i} j_{i}=0
+</script>
+</div>
+<p><strong>Note that <span><span class="MathJax_Preview">j_i</span><script type="math/tex">j_i</script></span> does not possess an independent evolution equation.</strong> (Their motion depends on what forces are acting on them.)</p>
 <p>The initial value problem in electrodynamics can now be solved in two steps. In the first step, initial data (<span><span class="MathJax_Preview">A_i</span><script type="math/tex">A_i</script></span>, <span><span class="MathJax_Preview">E_i</span><script type="math/tex">E_i</script></span>), together with the sources (ρ, <span><span class="MathJax_Preview">j_i</span><script type="math/tex">j_i</script></span>), are specified that satisfy the constraint equations. In the second step, these fields are evolved according to the evolution equations. <strong>Before the evolution equations can be solved, a suitable gauge condition has to be chosen</strong>.</p>
+<p>Returning to the Einstein equations themselves, similar to how the 4-vector <span><span class="MathJax_Preview">A ^ { a }</span><script type="math/tex">A ^ { a }</script></span> in electromagnetism is not unique due to gauge freedom, <mark>the metric that satisfies general relativity equation (and any relevant boundary conditions) is not unique.</mark></p>
+</div>
+<p>The Cauchy problem in general relativity logically involves a <strong>decomposition of four-dimensional spacetime into three dimensional space and one-dimensional time</strong>.</p>
 <h3 id="complications">Complications</h3>
 <p>The equations that arise in <strong>numerical relativity are typically multidimensional, nonlinear, coupled partial differential equations in space and time</strong>. They have in common with other areas of computational physics, like magnetohydrodynamics. However, solving Einstein’s equations poses some additional complications that are unique to general relativity. In general relativity, coordinates are merely labels that distinguish points in spacetime; by themselves coordinate intervals have no physical significance. <strong>To use coordinate intervals to determine physically measurable proper distances and proper times requires the spacetime metric, but the metric is known only after Einstein’s equations have been solved</strong>. Moreover, as the numerical integrations that determine the metric proceed, it often turns out that the original, arbitrary choice of coordinates turns out to be bad, because, for example, singularities appear in the equations. Encountering such <strong>singularities</strong>, be they physical or coordinate, results in some of the terms in Einstein’s equations becoming infinite, <strong>potentially causing overflows in the computer output and premature termination of the numerical integration</strong>.</p>
 <p>Treating black holes is one of the main goals of numerical relativity, but this poses another complication. The reason is that <strong>black holes contain physical spacetime singularities</strong> – regions where the gravitational tidal field, the matter density and the spacetime curvature all become infinite. Thus, <strong>when dealing with black holes, it is crucial to choose a computational technique that avoids encountering their interior spacetime singularities in the course of the simulation</strong>.</p>
 <p>Another complication arises in the context of one of the most pressing goals of numerical relativity – the calculation of waveforms from promising astrophysical sources of gravitational radiation. These theoretical templates are essential for the identification and physical interpretation of gravitational wave sources. However, the gravitational wave components of the spacetime metric usually constitute small fractions of the smooth background metric. Moreover, to extract the waves from the background in a simulation requires that one probe the numerical spacetime in the far-field, or radiation, zone, which is typically at large distance from the strong-field central source. Yet it is the strong-field region which usually consumes most the computational resources (e.g. spatial resolution) to guarantee accuracy. Furthermore, waiting for the wave to propagate to the far-field region usually takes nonnegligible integration time.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Smarr, L. &amp; York, J. W. Radiation gauge in general relativity. Phys. Rev. D 17, 1945–1956 (1978).&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
               
             </div>
           </div>

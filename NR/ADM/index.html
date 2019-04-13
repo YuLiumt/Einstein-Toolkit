@@ -153,6 +153,9 @@
     <a class="current" href="./">ADM</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#the-projections-of-the-riemann-tensor">The projections of the Riemann tensor</a></li>
+    
+
     <li class="toctree-l3"><a href="#constraint-equations">Constraint equations</a></li>
     
 
@@ -160,6 +163,18 @@
     
 
     <li class="toctree-l3"><a href="#adm-equations">ADM Equations</a></li>
+    
+
+    <li class="toctree-l3"><a href="#ill-posedness">Ill-posedness</a></li>
+    
+
+    <li class="toctree-l3"><a href="#initial-value-problem">initial-value problem</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#conformal-transformation">Conformal Transformation</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -253,57 +268,84 @@
             <div class="section">
               
                 <p>The metric <span><span class="MathJax_Preview">\gamma_{ab}</span><script type="math/tex">\gamma_{ab}</script></span> and the extrinsic curvature <span><span class="MathJax_Preview">K_{ab}</span><script type="math/tex">K_{ab}</script></span> cannot be chosen arbitrarily. Instead, they have to satisfy <strong>certain constraints</strong>.</p>
-<p>In order to find these relations, we have to relate the three-dimensional Riemann tensor <span><span class="MathJax_Preview">R^a_{\space bcd}</span><script type="math/tex">R^a_{\space bcd}</script></span> of the the hypersurfaces Σ to the four-dimensional Riemann tensor <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span> of M. To do so, we first take a completely spatial projection of <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span>, then a projection with one index projected in the normal direction, and finally a projection with two indices projected in the normal direction. All other projections vanish identically because of the symmetries of the Riemann tensor. A decomposition of <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span> into spatial and normal pieces therefore involves these <strong>three different types of projections</strong>.</p>
-<div>
-<div class="MathJax_Preview">
-\begin{align}
-^{(4)} R_{abcd} &amp;= \gamma_a^{\space p} \gamma_b^{\space q} \gamma_c^{\space r} \gamma_d^{\space s} {}^{(4)} R_{pqrs} - 2 \gamma_a^{\space p} \gamma_b^{\space q} \gamma_{[c}^{\space r} n_{d]} n^s {}^{(4)} R_{pqrs} \\
-&amp;- 2 \gamma_c^{\space p} \gamma_d^{\space q} \gamma_{[a}^{\space r} n_{b]} n^s {}^{(4)} R_{pqrs} + 2 \gamma_a^{\space p} \gamma_{[c}^{\space r} n_{d]} n_b n^q n^s {}^{(4)} R_{pqrs} \\
-&amp;- 2 \gamma_b^{\space p} \gamma_{[c}^{\space r} n_{d]} n_a n^q n^s {}^{(4)} R_{pqrs} 
-\end{align}
-</div>
-<script type="math/tex; mode=display">
-\begin{align}
-^{(4)} R_{abcd} &= \gamma_a^{\space p} \gamma_b^{\space q} \gamma_c^{\space r} \gamma_d^{\space s} {}^{(4)} R_{pqrs} - 2 \gamma_a^{\space p} \gamma_b^{\space q} \gamma_{[c}^{\space r} n_{d]} n^s {}^{(4)} R_{pqrs} \\
-&- 2 \gamma_c^{\space p} \gamma_d^{\space q} \gamma_{[a}^{\space r} n_{b]} n^s {}^{(4)} R_{pqrs} + 2 \gamma_a^{\space p} \gamma_{[c}^{\space r} n_{d]} n_b n^q n^s {}^{(4)} R_{pqrs} \\
-&- 2 \gamma_b^{\space p} \gamma_{[c}^{\space r} n_{d]} n_a n^q n^s {}^{(4)} R_{pqrs} 
-\end{align}
-</script>
-</div>
-<p>The above projections give rise to the equations of Gauss, Codazzi and Ricci.</p>
+<h3 id="the-projections-of-the-riemann-tensor">The projections of the Riemann tensor</h3>
+<p>In order to find these relations, we have to <mark>relate the three-dimensional Riemann tensor <span><span class="MathJax_Preview">R^a_{\space bcd}</span><script type="math/tex">R^a_{\space bcd}</script></span> of the the hypersurfaces Σ to the four-dimensional Riemann tensor <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span> of M.</mark> </p>
 <div class="admonition note">
-<p class="admonition-title">Gauss’ equation and Codazzi equations give rise to the “constraint” equations.</p>
-<p>Gauss’ equation:</p>
-<p>a completely spatial projection.</p>
+<p class="admonition-title">relate the three-dimensional Riemann tensor to the four-dimensional Riemann tensor</p>
+<p>Let us consider the Ricci identity defining the (three-dimensional) Riemann tensor <strong>Riem</strong> as measuring the lack of commutation of two successive covariant derivatives with respect to the connection D associated with <span><span class="MathJax_Preview">\Sigma</span><script type="math/tex">\Sigma</script></span>'s metric <span><span class="MathJax_Preview">\gamma</span><script type="math/tex">\gamma</script></span>.</p>
+<p>The four-dimensional version of this identity is</p>
 <div>
 <div class="MathJax_Preview">
-R_{abcd} + K_{ac} K_{bd} -K_{ad} K_{cb} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} \gamma^s_{\space d} {}^{(4)} R_{pqrs}
+D_{\alpha} D_{\beta} v^{\gamma}-D_{\beta} D_{\alpha} v^{\gamma}=R_{\mu \alpha \beta}^{\gamma} v^{\mu}
 </div>
 <script type="math/tex; mode=display">
-R_{abcd} + K_{ac} K_{bd} -K_{ad} K_{cb} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} \gamma^s_{\space d} {}^{(4)} R_{pqrs}
+D_{\alpha} D_{\beta} v^{\gamma}-D_{\beta} D_{\alpha} v^{\gamma}=R_{\mu \alpha \beta}^{\gamma} v^{\mu}
 </script>
 </div>
-<p>Codazzi equation:</p>
-<p><span><span class="MathJax_Preview">R^a_{\space bcd}</span><script type="math/tex">R^a_{\space bcd}</script></span> with one index projected in the normal direction.</p>
+<p>where <span><span class="MathJax_Preview">v</span><script type="math/tex">v</script></span> is a generic vector field tangent to <span><span class="MathJax_Preview">\Sigma</span><script type="math/tex">\Sigma</script></span>.</p>
+<p>The relation between the D-derivative and the <span><span class="MathJax_Preview">\nabla</span><script type="math/tex">\nabla</script></span>-derivative</p>
 <div>
 <div class="MathJax_Preview">
-D_b K_{ac} - D_a K_{bc} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} n^s_{\space d} {}^{(4)} R_{pqrs}
+D_{\rho} T_{\beta_{1} \ldots \beta_{q}}^{\alpha_{1} \ldots \alpha_{p}}=\gamma_{\mu_{1}}^{\alpha_{1}} \cdots \gamma^{\alpha_{p}}_{\mu_{p}} \gamma^{\nu_{1}}_{\beta_{1}} \cdots \gamma^{\nu_{q}}_{\beta_{q}} \gamma^{\sigma}_{\rho} \nabla_{\sigma} T_{\nu_{1} \ldots \nu_{q}}^{\mu_{1} \ldots \mu_{p}}
 </div>
 <script type="math/tex; mode=display">
-D_b K_{ac} - D_a K_{bc} = \gamma^P_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} n^s_{\space d} {}^{(4)} R_{pqrs}
+D_{\rho} T_{\beta_{1} \ldots \beta_{q}}^{\alpha_{1} \ldots \alpha_{p}}=\gamma_{\mu_{1}}^{\alpha_{1}} \cdots \gamma^{\alpha_{p}}_{\mu_{p}} \gamma^{\nu_{1}}_{\beta_{1}} \cdots \gamma^{\nu_{q}}_{\beta_{q}} \gamma^{\sigma}_{\rho} \nabla_{\sigma} T_{\nu_{1} \ldots \nu_{q}}^{\mu_{1} \ldots \mu_{p}}
 </script>
 </div>
+</div>
+<p>To do so, we first take a completely spatial projection of <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span>, then a projection with one index projected in the normal direction, and finally a projection with two indices projected in the normal direction. All other projections vanish identically because of the symmetries of the Riemann tensor. A decomposition of <span><span class="MathJax_Preview">^{(4)} R^a_{\space bcd}</span><script type="math/tex">^{(4)} R^a_{\space bcd}</script></span> into spatial and normal pieces therefore involves these <strong>three different types of projections</strong>.</p>
+<!--$$
+\begin{align}
+^{(4)} R_{abcd} &= \gamma_a^{\space p} \gamma_b^{\space q} \gamma_c^{\space r} \gamma_d^{\space s} {}^{(4)} R_{pqrs} - 2 \gamma_a^{\space p} \gamma_b^{\space q} \gamma_{[c}^{\space r} n_{d]}^{\space} n^s {}^{(4)} R_{pqrs} \\
+&- 2 \gamma_c^{\space p} \gamma_d^{\space q} \gamma_{[a}^{\space r} n_{b]}^{\space} n^s {}^{(4)} R_{pqrs} + 2 \gamma_a^{\space p} \gamma_{[c}^{\space r} n_{d]}^{\space} n_b n^q n^s {}^{(4)} R_{pqrs} \\
+&- 2 \gamma_b^{\space p} \gamma_{[c}^{\space r} n_{d]}^{\space} n_a n^q n^s {}^{(4)} R_{pqrs} 
+\end{align}
+$$-->
+
+<p>The above projections give rise to the equations of Gauss, Codazzi and Ricci<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</p>
+<ul>
+<li>Gauss’ equation: a completely spatial projection.</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+R_{abcd} + K_{ac} K_{bd} -K_{ad} K_{cb} = \gamma^p_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} \gamma^s_{\space d} {}^{(4)} R_{pqrs}
+</div>
+<script type="math/tex; mode=display">
+R_{abcd} + K_{ac} K_{bd} -K_{ad} K_{cb} = \gamma^p_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} \gamma^s_{\space d} {}^{(4)} R_{pqrs}
+</script>
+</div>
+<ul>
+<li>Codazzi equation: the part projected three times onto <span><span class="MathJax_Preview">\Sigma_{t}</span><script type="math/tex">\Sigma_{t}</script></span> and once along the normal n</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+D_b K_{ac} - D_a K_{bc} = \gamma^p_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} n^s_{\space d} {}^{(4)} R_{pqrs}
+</div>
+<script type="math/tex; mode=display">
+D_b K_{ac} - D_a K_{bc} = \gamma^p_{\space a} \gamma^q_{\space b} \gamma^r_{\space c} n^s_{\space d} {}^{(4)} R_{pqrs}
+</script>
+</div>
+<ul>
+<li>Ricci equation: the projection of the spacetime Riemann tensor twice onto <span><span class="MathJax_Preview">\Sigma_{t}</span><script type="math/tex">\Sigma_{t}</script></span> and twice along n.</li>
+</ul>
+<div>
+<div class="MathJax_Preview">
+\gamma_{\alpha \mu} n^{\rho} \gamma_{\beta}^{\nu} n^{\sigma} {}^{4} R_{\rho \nu \sigma}^{\mu}=\frac{1}{N} \mathcal{L}_{m} K_{\alpha \beta}+\frac{1}{N} D_{\alpha} D_{\beta} N+K_{\alpha \mu} K_{\beta}^{\mu}
+</div>
+<script type="math/tex; mode=display">
+\gamma_{\alpha \mu} n^{\rho} \gamma_{\beta}^{\nu} n^{\sigma} {}^{4} R_{\rho \nu \sigma}^{\mu}=\frac{1}{N} \mathcal{L}_{m} K_{\alpha \beta}+\frac{1}{N} D_{\alpha} D_{\beta} N+K_{\alpha \mu} K_{\beta}^{\mu}
+</script>
+</div>
+<p><strong>We can rewrite Einstein’s ﬁeld equations in a 3+1 form. Basically,</strong> <mark>we just need to take the equations of Gauss, Codazzi and Ricci and eliminate the four-dimensional Rieman tensor using Einstein’s equations.</mark></p>
+<div>
+<div class="MathJax_Preview">
+G_{ab} = {}^{(4)} R_{ab} - \frac{1}{2} {}^{(4)} R g_{ab} = 8 \pi T_{ab}
+</div>
+<script type="math/tex; mode=display">
+G_{ab} = {}^{(4)} R_{ab} - \frac{1}{2} {}^{(4)} R g_{ab} = 8 \pi T_{ab}
+</script>
 </div>
 <h3 id="constraint-equations">Constraint equations</h3>
-<p>We can rewrite Einstein’s ﬁeld equations in a 3+1 form. Basically, we just need to take the equations of Gauss, Codazzi and Ricci and eliminate the four-dimensional Rieman tensor using Einstein’s equations.</p>
-<div>
-<div class="MathJax_Preview">
-G_{ab} = {}^{(4)} R_{ab} - \frac{1}{2} {}^{(4)} R g_{ab} = 8 \pi T_{ab}
-</div>
-<script type="math/tex; mode=display">
-G_{ab} = {}^{(4)} R_{ab} - \frac{1}{2} {}^{(4)} R g_{ab} = 8 \pi T_{ab}
-</script>
-</div>
 <p>We will first derive the constraint equations from Gauss’ equation and the Codazzi equation.</p>
 <ul>
 <li>Contracting Gauss’ equation:</li>
@@ -368,7 +410,7 @@ D_b K^b_{\space a} - D_a K = - \gamma^q_{\space a} n^s G_{qs}
 <li>Two dynamical degrees of freedom correspond to <strong>the two polarization modes of a gravitational wave</strong></li>
 </ul>
 <p>It is quite intuitive that the state of a dynamical field, like a <strong>gravitational wave, cannot be determined from constraint equations</strong>. Waves satisfy hyperbolic equations, and their state at any time depends on their past history. It is therefore natural that the constraint equations serve to constrain only the “longitudinal” parts of the fields, while the “transverse” parts, related to the dynamical degrees of freedom, remain freely specifiable.</p>
-<p>Ideally one would like to separate unambiguously the longitudinal from the transverse parts of the fields at some initial time, freely specifying the latter and then solving the constraints for the former. Given the nonlinear nature of general relativity such a rigorous separation is not possible; instead, all these fields are entangled in the spatial metric and the extrinsic curvature.</p>
+<p>Ideally one would like to separate unambiguously the longitudinal from the transverse parts of the fields at some initial time, freely specifying the latter and then solving the constraints for the former. <strong>Given the nonlinear nature of general relativity such a rigorous separation is not possible</strong>; instead, all these fields are entangled in the spatial metric and the extrinsic curvature.</p>
 </div>
 <h3 id="evolution-equations">Evolution Equations</h3>
 <p>The evolution equations evolve the data <span><span class="MathJax_Preview">(γ_{ab},K_{ab})</span><script type="math/tex">(γ_{ab},K_{ab})</script></span> forward in time. However, the Lie derivative along <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span>, <span><span class="MathJax_Preview">\mathcal { L } _ { \mathbf { n } }</span><script type="math/tex">\mathcal { L } _ { \mathbf { n } }</script></span>, is not a natural time derivative since <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> is not dual to the surface 1-form <span><span class="MathJax_Preview">Ω_a</span><script type="math/tex">Ω_a</script></span>, i.e. their dot product is not unity</p>
@@ -398,10 +440,12 @@ t ^ { a } \Omega _ { a } = \alpha n ^ { a } \Omega _ { a } + \beta ^ { a } \Omeg
 t ^ { a } \Omega _ { a } = \alpha n ^ { a } \Omega _ { a } + \beta ^ { a } \Omega _ { a } = 1
 </script>
 </div>
-<p>It will prove useful to choose <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> to be the congruence along which we propagate the spatial coordinate grid from one time slice to the next slice. In other words, <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> will connect points with the same spatial coordinates on neighboring time slices. Then the shift vector <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> will measure the amount by which the spatial coordinates are shifted within a slice with respect to the normal vector. The lapse function <span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> measures how much proper time elapses between neighboring time slices along the normal vector. The lapse and the shift therefore determine how the coordinates evolve in time. The choice of <span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> and <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> is quite arbitrary. <strong>The freedom to choose these four gauge functions<span><span class="MathJax_Preview">α</span><script type="math/tex">α</script></span> and <span><span class="MathJax_Preview">β^a</span><script type="math/tex">β^a</script></span> completely arbitrarily embodies the four-fold coordinate degrees of freedom inherent in general relativity</strong>.</p>
-<p>The lapse and the shift determine how the coordinates evolve from one time slice Σ to the next, whereas the constraint equations represent integrability conditions which have to be satisfied within each slice. Therefore, the constraints have to be independent of how the coordinates evolve, and <strong>the lapse and the shift can enter only the evolution equations</strong>.</p>
+<p>It will prove useful to choose <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> to be the congruence along which we propagate the spatial coordinate grid from one time slice to the next slice. In other words, <strong><span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> will connect points with the same spatial coordinates on neighboring time slices.</strong></p>
 <p><img alt="" src="../media/15533305224645.jpg" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Observers who are “at rest” relative to the slices follow the normal congruence <span><span class="MathJax_Preview">n^a</span><script type="math/tex">n^a</script></span> and are called either normal or Eulerian observers. while observers following the congruence <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> are called coordinate observers. If matter is present it moves entirely independently of the coordinates with four-velocity <span><span class="MathJax_Preview">u^a</span><script type="math/tex">u^a</script></span>.</p>
+</div>
 <p>Ricci’s equation:</p>
 <ul>
 <li>The evolution equation for the extrinsic curvature:</li>
@@ -459,7 +503,7 @@ K_{ab} = - \frac{1}{2} \mathcal{L}_n \gamma_{ab}
 </div>
 </div>
 <p>It is quite intuitive, though, that things will simplify if we adopt a coordinate system that reflects our 3 + 1 split of spacetime in a natural way. We will see that <strong>the Lie derivative in the evolution equations then reduces to a partial derivative</strong> with respect to coordinate time and, as an additional beneﬁt, we will be able to ignore all timelike components of spatial tensors.</p>
-<p>The coupled evolution equations the extrinsic curvature and the spatial metric determine the evolution of the gravitational ﬁeld data <span><span class="MathJax_Preview">(\gamma_{ab}, K_{ab})</span><script type="math/tex">(\gamma_{ab}, K_{ab})</script></span>. Together with the constraint equations they are completely equivalent to Einstein’s equations.</p>
+<p><strong>The coupled evolution equations the extrinsic curvature and the spatial metric determine the evolution of the gravitational ﬁeld data <span><span class="MathJax_Preview">(\gamma_{ab}, K_{ab})</span><script type="math/tex">(\gamma_{ab}, K_{ab})</script></span>. Together with the constraint equations they are completely equivalent to Einstein’s equations.</strong></p>
 <p>Note we have succeeded in recasting Einstein’s equations, which are <strong>second order in time</strong> in their original form, as a coupled set of partial differential equations that are now <strong>first order in time</strong>.</p>
 <p>So far, we have expressed our equations in a covariant, coordinate independent manner, i.e. the basis vectors <span><span class="MathJax_Preview">e_a</span><script type="math/tex">e_a</script></span> have been completely arbitrary and have no particular relationship to the 1-form <span><span class="MathJax_Preview">Ω_a</span><script type="math/tex">Ω_a</script></span> or to the congruence defined by <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span>.</p>
 <h3 id="adm-equations">ADM Equations</h3>
@@ -492,7 +536,7 @@ t ^ { a } = e _ { ( 0 ) } ^ { a } = ( 1,0,0,0 )
 t ^ { a } = e _ { ( 0 ) } ^ { a } = ( 1,0,0,0 )
 </script>
 </div>
-<p>This means that the Lie derivative along <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> reduces to a partial derivative with respect to t: <span><span class="MathJax_Preview">\mathcal{L}_t = \partial_t</span><script type="math/tex">\mathcal{L}_t = \partial_t</script></span>. </p>
+<p><strong>This means that the Lie derivative along <span><span class="MathJax_Preview">t^a</span><script type="math/tex">t^a</script></span> reduces to a partial derivative with respect to t: <span><span class="MathJax_Preview">\mathcal{L}_t = \partial_t</span><script type="math/tex">\mathcal{L}_t = \partial_t</script></span>.</strong></p>
 <p>Since spatial tensors vanish when contracted with the normal vector, this also means that all components of spatial tensors with a contravariant index equal to zero must vanish.</p>
 <p>For the shift vector,</p>
 <div>
@@ -576,59 +620,221 @@ ds^2 = - (properTime)^2 + (properDistance)^2
 </div>
 <p>This equation thus determines the invariant interval between neighboring points A and B.</p>
 <p><img alt="" src="../media/15533309901685.jpg" /></p>
-<p>Therefore, the entire content of the decomposed Einstein equations is contained in their spatial components alone, and we can rewrite:</p>
-<ul>
-<li>the Hamiltonian constraint:</li>
-</ul>
-<div>
-<div class="MathJax_Preview">
-R + K^2 - K_{ij} K^{ij} = 16 \pi \rho
-</div>
-<script type="math/tex; mode=display">
-R + K^2 - K_{ij} K^{ij} = 16 \pi \rho
-</script>
-</div>
-<ul>
-<li>the momentum constraint:</li>
-</ul>
-<div>
-<div class="MathJax_Preview">
-D_{j} (K^{ij} - \gamma^{ij} K) = 8 \pi S^i
-</div>
-<script type="math/tex; mode=display">
-D_{j} (K^{ij} - \gamma^{ij} K) = 8 \pi S^i
-</script>
-</div>
-<ul>
-<li>the evolution equation for the extrinsic curvature:</li>
-</ul>
-<div>
-<div class="MathJax_Preview">
-\begin{align}
-\partial_{t} K_{ij} = &amp;- D_{i} D_{j} \alpha + \alpha \left( R_{ij} - 2 K_{ik} K^{k}_{\space j} + K K_{ij}\right) - 8 \pi \alpha \left( S_{ij} - \frac{1}{2} \gamma_{ij} \left( S - \rho \right) \right) \\
-                      &amp;+ \beta^{k} D_{k} K_{ij} + K_{ik} D_{j} \beta^{k} + K_{kj} D_{i} \beta^{k}
-\end{align}
-</div>
-<script type="math/tex; mode=display">
-\begin{align}
-\partial_{t} K_{ij} = &- D_{i} D_{j} \alpha + \alpha \left( R_{ij} - 2 K_{ik} K^{k}_{\space j} + K K_{ij}\right) - 8 \pi \alpha \left( S_{ij} - \frac{1}{2} \gamma_{ij} \left( S - \rho \right) \right) \\
-                      &+ \beta^{k} D_{k} K_{ij} + K_{ik} D_{j} \beta^{k} + K_{kj} D_{i} \beta^{k}
-\end{align}
-</script>
-</div>
-<ul>
-<li>the evolution equation for the spatial metric:</li>
-</ul>
-<div>
-<div class="MathJax_Preview">
-\partial_t \gamma_{ij} = - 2 \alpha K_{ij} + D_i \beta_j + D_j \beta_i
-</div>
-<script type="math/tex; mode=display">
-\partial_t \gamma_{ij} = - 2 \alpha K_{ij} + D_i \beta_j + D_j \beta_i
-</script>
-</div>
-<p>Equations comprise the “standard” 3 + 1 equations. Sometimes they are referred to as the “ADM” equations.</p>
 <p><img alt="" src="../media/15533310424874.jpg" /></p>
+<h3 id="ill-posedness">Ill-posedness</h3>
+<p><strong>The ADM equations by themselves proved to be unstable for many strong-field problems, including black-hole mergers.</strong> </p>
+<div class="admonition note">
+<p class="admonition-title">Well-Posedness</p>
+<p>Mathematical models of physical phenomena should have the properties that:</p>
+<ol>
+<li><strong>Existence:</strong> a solution exists,</li>
+<li><strong>Uniqueness:</strong> the solution is unique,</li>
+<li><strong>Stability:</strong> the solution's behavior changes continuously with the initial conditions.</li>
+</ol>
+<p>If one of these conditions is not satisfied, the PDE problem is said to be <strong>ill-posed</strong>.</p>
+<p>A system of equations would be stable if the norm of the solution is bounded by the norm of the initial data in terms of constants independent of the initial data.</p>
+<div>
+<div class="MathJax_Preview">
+\|u(\cdot, t)\| \leq a e^{b t}\|u(\cdot, 0)\|
+</div>
+<script type="math/tex; mode=display">
+\|u(\cdot, t)\| \leq a e^{b t}\|u(\cdot, 0)\|
+</script>
+</div>
+<p>where a,b are the same constants for all initial data.</p>
+</div>
+<p>The system is first-order in time and second-order in space, being generically represented in the form</p>
+<div>
+<div class="MathJax_Preview">
+\dot{u}=A^{i j}\left(x^{k}, t, u\right) u_{, i j}+B^{i}\left(x^{k}, t, u, u_{, k}\right) u_{, i}+C\left(x^{k}, t, u\right) \equiv P\left(x^{k}, t, u, u_{, k}, \partial / \partial x^{j}\right) u
+</div>
+<script type="math/tex; mode=display">
+\dot{u}=A^{i j}\left(x^{k}, t, u\right) u_{, i j}+B^{i}\left(x^{k}, t, u, u_{, k}\right) u_{, i}+C\left(x^{k}, t, u\right) \equiv P\left(x^{k}, t, u, u_{, k}, \partial / \partial x^{j}\right) u
+</script>
+</div>
+<p>Any time that an evolution system can be represented in this form, we interpret the right-hand side as an evolution operator acting on a solution. In this case, the evolution operator is P, and contains all the terms in the right-hand side of equation. It is essential to point out that the properties of stability of a system are encoded in the principal terms of the operator P, namely, in <span><span class="MathJax_Preview">A^{i j}\left(x^{k}, t, u\right)</span><script type="math/tex">A^{i j}\left(x^{k}, t, u\right)</script></span>. This means that we can restrict our attention to a system of the</p>
+<div>
+<div class="MathJax_Preview">
+\dot{u}=A^{i j}\left(x^{k}, t, u\right) u_{, i j}
+</div>
+<script type="math/tex; mode=display">
+\dot{u}=A^{i j}\left(x^{k}, t, u\right) u_{, i j}
+</script>
+</div>
+<p>The principal terms of the evolution operator of the standard ADM form are</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned} \dot{\gamma}_{i j} &amp;=0 \\ \dot{K}_{i j} &amp;=\frac{\alpha}{2}\left(2 \gamma^{k l} \gamma_{l(i, j) k}-\gamma^{k l} \gamma_{i j, k l}-\gamma^{k l} \gamma_{k l, i j}\right) \end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned} \dot{\gamma}_{i j} &=0 \\ \dot{K}_{i j} &=\frac{\alpha}{2}\left(2 \gamma^{k l} \gamma_{l(i, j) k}-\gamma^{k l} \gamma_{i j, k l}-\gamma^{k l} \gamma_{k l, i j}\right) \end{aligned}
+</script>
+</div>
+<p>Consider the following periodic solution to with <span><span class="MathJax_Preview">\alpha=1</span><script type="math/tex">\alpha=1</script></span> (geodesic slicing):</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned} \gamma_{i j} &amp;=\left(1+\frac{1}{2} \cos (k \cdot x)\right) \delta_{i j} \\ K_{i j} &amp;=t \frac{\cos (k \cdot x)}{\left(1+\frac{1}{2} \cos (k \cdot x)\right)}\left(k_{i} k_{j}+\delta_{i j} k \cdot k\right) \end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned} \gamma_{i j} &=\left(1+\frac{1}{2} \cos (k \cdot x)\right) \delta_{i j} \\ K_{i j} &=t \frac{\cos (k \cdot x)}{\left(1+\frac{1}{2} \cos (k \cdot x)\right)}\left(k_{i} k_{j}+\delta_{i j} k \cdot k\right) \end{aligned}
+</script>
+</div>
+<p>With the norm</p>
+<div>
+<div class="MathJax_Preview">
+\|u(\cdot, t)\| \equiv \frac{1}{L^{3}} \int_{c u b e} d^{3} x\left(\sum_{i j}\left(\gamma_{i j}\right)^{2}+\sum_{i j}\left(K_{i j}\right)^{2}\right)
+</div>
+<script type="math/tex; mode=display">
+\|u(\cdot, t)\| \equiv \frac{1}{L^{3}} \int_{c u b e} d^{3} x\left(\sum_{i j}\left(\gamma_{i j}\right)^{2}+\sum_{i j}\left(K_{i j}\right)^{2}\right)
+</script>
+</div>
+<p>we have</p>
+<div>
+<div class="MathJax_Preview">
+\|u(\cdot, t)\|=\left(\frac{3}{2}\right)^{3}+6(k \cdot k)^{2} t^{2} \frac{1}{L^{3}} \int_{c u b e} d^{3} x \frac{\cos ^{2}(k \cdot x)}{\left(1+\frac{1}{2} \cos (k \cdot x)\right)^{2}}
+</div>
+<script type="math/tex; mode=display">
+\|u(\cdot, t)\|=\left(\frac{3}{2}\right)^{3}+6(k \cdot k)^{2} t^{2} \frac{1}{L^{3}} \int_{c u b e} d^{3} x \frac{\cos ^{2}(k \cdot x)}{\left(1+\frac{1}{2} \cos (k \cdot x)\right)^{2}}
+</script>
+</div>
+<p>It is very simple to see that the following inequality holds:</p>
+<div>
+<div class="MathJax_Preview">
+\|u(\cdot, t)\| \geq\|u(\cdot, 0)\|\left(1+\frac{2^{5}}{3^{4}}(k \cdot k)^{2} t^{2}\right)
+</div>
+<script type="math/tex; mode=display">
+\|u(\cdot, t)\| \geq\|u(\cdot, 0)\|\left(1+\frac{2^{5}}{3^{4}}(k \cdot k)^{2} t^{2}\right)
+</script>
+</div>
+<p>It is impossible to bound the terms in parenthesis in the right-hand-side by a factor of the form <span><span class="MathJax_Preview">a e^{b t}</span><script type="math/tex">a e^{b t}</script></span> with a and b independent of <span><span class="MathJax_Preview">\omega \equiv \sqrt{k \cdot k}</span><script type="math/tex">\omega \equiv \sqrt{k \cdot k}</script></span>. Because of the presence of <span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span>, we conclude that <mark>the norm is not bounded in terms of the initial data</mark> and the standard ADM equations are ill-posed for <span><span class="MathJax_Preview">\alpha=1</span><script type="math/tex">\alpha=1</script></span>.</p>
+<p>Although this may create a difficulty in the stability analysis of these systems, we do not think that this necessarily implies an obstruction to numerical integration of any of them, in general. For particular applications, <strong>it is possible that the bad behavior at high frequencies may be disregarded</strong>.</p>
+<p>One of the key improvements in numerical simulations prior to the breakthroughs of 2005 was the introduction of the so-called NOKBSSN formulation of the Einstein equations in 3+1. This system modifies the standard ADM equations in several crucial ways.</p>
+<h3 id="initial-value-problem">initial-value problem</h3>
+<p>We first decide which field variables we want to determine by solving constraint equations. We then have to make choices for the remaining, freely specifiable variables. Lastly, we must solve these equations for the constrained field variables.</p>
+<div class="admonition note">
+<p class="admonition-title">Analogy Electric Field</p>
+<p>Maxwell’s equations also split into constraint and evolution equations. The constraint equations have to be satisﬁed by any electric and magnetic ﬁeld at each instant of time, but they are not sufficient to completely determine these fields. Consider the equation for the electric field  <span><span class="MathJax_Preview">\vec{E}</span><script type="math/tex">\vec{E}</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+\nabla \cdot \vec{E} = 4 \pi \rho
+</div>
+<script type="math/tex; mode=display">
+\nabla \cdot \vec{E} = 4 \pi \rho
+</script>
+</div>
+<p>Given an electrical charge density ρ, we can solve this equation for one of the components of <span><span class="MathJax_Preview">E^i</span><script type="math/tex">E^i</script></span> , but not all three of them. For example, we could make certain choices for <span><span class="MathJax_Preview">E^x</span><script type="math/tex">E^x</script></span> and <span><span class="MathJax_Preview">E^y</span><script type="math/tex">E^y</script></span>, and then solve for <span><span class="MathJax_Preview">E^z</span><script type="math/tex">E^z</script></span>, even though we might be <strong>troubled by the asymmetry</strong> in singling out one particular component in this approach.</p>
+<p>Alternatively, we may prefer to write <span><span class="MathJax_Preview">E^i</span><script type="math/tex">E^i</script></span> as some “background” field <span><span class="MathJax_Preview">\bar { E } ^ { i }</span><script type="math/tex">\bar { E } ^ { i }</script></span> times some overall scaling factor, say <span><span class="MathJax_Preview">ψ^4</span><script type="math/tex">ψ^4</script></span></p>
+<div>
+<div class="MathJax_Preview">
+E ^ { i } = \psi ^ { 4 } \bar { E } ^ { i }
+</div>
+<script type="math/tex; mode=display">
+E ^ { i } = \psi ^ { 4 } \bar { E } ^ { i }
+</script>
+</div>
+<p><strong>make certain choices for all three components of the background field</strong> <span><span class="MathJax_Preview">\bar { E } ^ { i }</span><script type="math/tex">\bar { E } ^ { i }</script></span>, and then solve for the scaling factor <span><span class="MathJax_Preview">ψ^4</span><script type="math/tex">ψ^4</script></span>. Though it might not be so useful for treating Maxwell’s equations, such an approach leads to a very convenient and tractable system for Einstein’s equations.</p>
+</div>
+<h4 id="conformal-transformation">Conformal Transformation</h4>
+<p>We begin by writing the spatial metric <span><span class="MathJax_Preview">\gamma_{ij}</span><script type="math/tex">\gamma_{ij}</script></span> as a product of some power of a positive scaling factor ψ and a background metric <span><span class="MathJax_Preview">\bar{\gamma}_{ij}</span><script type="math/tex">\bar{\gamma}_{ij}</script></span>,</p>
+<div>
+<div class="MathJax_Preview">
+\gamma_{ij} = ψ^4 \bar{\gamma}_{ij}
+</div>
+<script type="math/tex; mode=display">
+\gamma_{ij} = ψ^4 \bar{\gamma}_{ij}
+</script>
+</div>
+<p>This identification is a <strong>conformal transformation</strong> of the spatial metric. We call ψ <strong>the conformal factor</strong>, and <span><span class="MathJax_Preview">\bar{\gamma}_{ij}</span><script type="math/tex">\bar{\gamma}_{ij}</script></span> <strong>the conformally related metric</strong>. Taking ψ to the fourth power turns out to be convenient, but is otherwise arbitrary. </p>
+<p>Loosely speaking, <strong>the conformal factor absorbs the overall scale of the metric, which leaves five degrees of freedom in the conformally related metric</strong>. Superficially, <strong>the conformal transformation is just a mathematical trick</strong>, namely, rewriting one unknown as a product of two unknowns in order to make solving some equations easier.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>From now on we will denote all objects associated with the conformal metric <span><span class="MathJax_Preview">\bar{\gamma}_{i j}</span><script type="math/tex">\bar{\gamma}_{i j}</script></span> with a bar. In the above equations <span><span class="MathJax_Preview">\psi</span><script type="math/tex">\psi</script></span> must be treated as a scalar function in covariant derivatives.</strong></p>
+<p>The inverse of <span><span class="MathJax_Preview">\bar{\gamma}_{ij}</span><script type="math/tex">\bar{\gamma}_{ij}</script></span>:</p>
+<div>
+<div class="MathJax_Preview">
+\gamma ^ { i j } = \psi ^ { - 4 } \bar { \gamma } ^ { i j }
+</div>
+<script type="math/tex; mode=display">
+\gamma ^ { i j } = \psi ^ { - 4 } \bar { \gamma } ^ { i j }
+</script>
+</div>
+<p>In three dimensions, the connection coefficients must transform according to</p>
+<div>
+<div class="MathJax_Preview">
+\Gamma _ { j k } ^ { i } = \bar { \Gamma } _ { j k } ^ { i } + 2 \left( \delta _ { j } ^ { i } \bar { D } _ { k } \ln \psi + \delta _ { k } ^ { i } \bar { D } _ { j } \ln \psi - \bar { \gamma } _ { j k } \bar { \gamma } ^ { i l } \bar { D } _ { l } \ln \psi \right)
+</div>
+<script type="math/tex; mode=display">
+\Gamma _ { j k } ^ { i } = \bar { \Gamma } _ { j k } ^ { i } + 2 \left( \delta _ { j } ^ { i } \bar { D } _ { k } \ln \psi + \delta _ { k } ^ { i } \bar { D } _ { j } \ln \psi - \bar { \gamma } _ { j k } \bar { \gamma } ^ { i l } \bar { D } _ { l } \ln \psi \right)
+</script>
+</div>
+<p>For the Ricci tensor we similarly find</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned} R_{i j}=&amp; \bar{R}_{i j}-2\left(\bar{D}_{i} \bar{D}_{j} \ln \psi+\bar{\gamma}_{i j} \bar{\gamma}^{l m} \bar{D}_{l} \bar{D}_{m} \ln \psi\right) \\ &amp;+4\left(\left(\bar{D}_{i} \ln \psi\right)\left(\bar{D}_{j} \ln \psi\right)-\bar{\gamma}_{i j} \bar{\gamma}^{l m}\left(\bar{D}_{l} \ln \psi\right)\left(\bar{D}_{m} \ln \psi\right)\right) \end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned} R_{i j}=& \bar{R}_{i j}-2\left(\bar{D}_{i} \bar{D}_{j} \ln \psi+\bar{\gamma}_{i j} \bar{\gamma}^{l m} \bar{D}_{l} \bar{D}_{m} \ln \psi\right) \\ &+4\left(\left(\bar{D}_{i} \ln \psi\right)\left(\bar{D}_{j} \ln \psi\right)-\bar{\gamma}_{i j} \bar{\gamma}^{l m}\left(\bar{D}_{l} \ln \psi\right)\left(\bar{D}_{m} \ln \psi\right)\right) \end{aligned}
+</script>
+</div>
+<p>For the scalar curvature</p>
+<div>
+<div class="MathJax_Preview">
+R = \psi ^ { - 4 } \bar { R } - 8 \psi ^ { - 5 } \bar { D } ^ { 2 } \psi
+</div>
+<script type="math/tex; mode=display">
+R = \psi ^ { - 4 } \bar { R } - 8 \psi ^ { - 5 } \bar { D } ^ { 2 } \psi
+</script>
+</div>
+</div>
+<p>Inserting the scalar curvature into the Hamiltonian constraint yields</p>
+<div>
+<div class="MathJax_Preview">
+8 \bar { D } ^ { 2 } \psi - \psi \bar { R } - \psi ^ { 5 } K ^ { 2 } + \psi ^ { 5 } K _ { i j } K ^ { i j } = - 16 \pi \psi ^ { 5 } \rho
+</div>
+<script type="math/tex; mode=display">
+8 \bar { D } ^ { 2 } \psi - \psi \bar { R } - \psi ^ { 5 } K ^ { 2 } + \psi ^ { 5 } K _ { i j } K ^ { i j } = - 16 \pi \psi ^ { 5 } \rho
+</script>
+</div>
+<p>which, for a given choice of the conformally related metric <span><span class="MathJax_Preview">\bar { \gamma } ^ { i j }</span><script type="math/tex">\bar { \gamma } ^ { i j }</script></span>, we may interpret as an equation for the conformal factor ψ. The extrinsic curvature <span><span class="MathJax_Preview">K_{ij}</span><script type="math/tex">K_{ij}</script></span> has to satisfy the momentum constraint, and it will be useful to rescale <span><span class="MathJax_Preview">K_{ij}</span><script type="math/tex">K_{ij}</script></span> conformally as well.</p>
+<p>It is convenient to split <span><span class="MathJax_Preview">K_{ij}</span><script type="math/tex">K_{ij}</script></span> into its trace <span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span> and a traceless part <span><span class="MathJax_Preview">A_{i j}</span><script type="math/tex">A_{i j}</script></span> according to</p>
+<div>
+<div class="MathJax_Preview">
+K_{i j}=A_{i j}+\frac{1}{3} \gamma_{i j} K
+</div>
+<script type="math/tex; mode=display">
+K_{i j}=A_{i j}+\frac{1}{3} \gamma_{i j} K
+</script>
+</div>
+<p>and to conformally transform <span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span> and <span><span class="MathJax_Preview">A_{i j}</span><script type="math/tex">A_{i j}</script></span> separately. A priori it is not clear how to transform <span><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span> and <span><span class="MathJax_Preview">A_{i j}</span><script type="math/tex">A_{i j}</script></span>, and our only guidance for inventing rules is that the transformation should bring the constraint equations into a simple and solvable form. Consider the transformations</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned} A^{i j} &amp;=\psi^{\alpha} \bar{A}^{i j} \\ K &amp;=\psi^{\beta} \bar{K} \end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned} A^{i j} &=\psi^{\alpha} \bar{A}^{i j} \\ K &=\psi^{\beta} \bar{K} \end{aligned}
+</script>
+</div>
+<p>With the choices of <span><span class="MathJax_Preview">\alpha=-10</span><script type="math/tex">\alpha=-10</script></span> and <span><span class="MathJax_Preview">\beta=0</span><script type="math/tex">\beta=0</script></span>, the momentum constraint is</p>
+<div>
+<div class="MathJax_Preview">
+\bar{D}_{j} \bar{A}^{i j}-\frac{2}{3} \psi^{6} \bar{\gamma}^{i j} \bar{D}_{j} K=8 \pi \psi^{10} S^{i}
+</div>
+<script type="math/tex; mode=display">
+\bar{D}_{j} \bar{A}^{i j}-\frac{2}{3} \psi^{6} \bar{\gamma}^{i j} \bar{D}_{j} K=8 \pi \psi^{10} S^{i}
+</script>
+</div>
+<p>In addition to the spatial metric and extrinsic curvature, <strong>it may also be necessary to transform the matter sources <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span> and <span><span class="MathJax_Preview">S^{i}</span><script type="math/tex">S^{i}</script></span> to insure uniqueness of solutions</strong>.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Gourgoulhon, E. 3+1 Formalism and Bases of Numerical Relativity. arXiv:gr-qc/0703035 (2007).&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Frittelli, S. &amp; Gomez, R. Ill-posedness in the Einstein equations. Journal of Mathematical Physics 41, 5535–5549 (2000).&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
               
             </div>
           </div>
