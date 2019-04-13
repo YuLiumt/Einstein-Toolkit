@@ -1,10 +1,15 @@
-The 3+1 equations are entirely equivalent to the usual ﬁeld equations but they focus on the evolution of 12 purely spatial quantities closely related to $g_{ij}$ and $\partial_t g_{ij}$ and the constraints that they must satisfy on spatial hypersurfaces. Once these spatial ﬁeld quantities are specified on some initial “time slice” (i.e. spatial hypersurface) consistent with the 3 + 1 constraint equations, the 3 + 1 evolution equations can then be integrated, together with evolution equations for the matter sources, to determine these ﬁeld quantities at all later times.
+**The 3+1 equations are entirely equivalent to the usual ﬁeld equations but they focus on the evolution of 12 purely spatial quantities** closely related to $g_{ij}$ and $\partial_t g_{ij}$ and the constraints that they must satisfy on spatial hypersurfaces. Once these spatial field quantities are specified on some initial “time slice” (i.e. spatial hypersurface) consistent with the 3 + 1 constraint equations, the 3 + 1 evolution equations can then be integrated, together with evolution equations for the matter sources, to determine these field quantities at all later times.
 
 ## Foliations of Spacetime
 
+We assume that the spacetime $(M, g_{ab})$ can be foliated into a family of non-intersecting spacelike three-surfaces Σ. The spacetime is split into spatial hypersurfaces labeled by a coordinate t.
+
+!!! note "Cauchy surface"
+    Cauchy surface is a plane in space-time which is like an instant of time; its significance is that giving the initial conditions on this plane determines the future (and the past) uniquely.
+
 ![](media/15533281773996.jpg)
 
-We assume that the spacetime $(M, g_{ab})$ can be foliated into a family of non-intersecting spacelike three-surfaces Σ, which arise, at least locally, as the level surfaces of a scalar function t that can be interpreted as a global time function. From t we can define the 1-form
+From t we can define the 1-form
 
 $$
 \Omega _ { a } = \nabla _ { a } t
@@ -22,7 +27,7 @@ $$
 \| \Omega \| ^ { 2 } = g ^ { a b } \nabla _ { a } t \nabla _ { b } t \equiv - \frac { 1 } { \alpha ^ { 2 } }
 $$
 
-$α$ measures how much proper time elapses between neighboring time slices along the normal vector $Ω^a$ to the slice, and is therefore called the lapse function. We assume that $α > 0$, so that $Ω^a$ is timelike and the hypersurface Σ is spacelike everywhere.
+$α$ measures how much proper time elapses between neighboring time slices along the normal vector $Ω^a$ to the slice, and is therefore called the **lapse function**. We assume that $α > 0$, so that $Ω^a$ is timelike and the hypersurface Σ is spacelike everywhere.
 
 We can now define the unit normal to the slices as
 
@@ -31,6 +36,16 @@ n ^ { a } \equiv - g ^ { a b } \alpha \Omega _ { b }
 $$
 
 Here the negative sign has been chosen so that $n^a$ points in the direction of increasing t, and may therefore be thought of as the four-velocity of a “normal” observer whose worldline is always normal to the spatial slices Σ.
+
+On each spatial slice, coordinates $x^{i}$ are specified (we use the convention that Latin indices take on the values 1, 2, or 3 of the spacelike dimensions). A point labeled $x_{0}^{i}$ on one spatial slice and another with the same label on a different slice may be skewed with respect to the unit normal direction $n^a$ (which must be timelike).
+
+![-w533](media/15540241284940.jpg)
+
+Here, the two points are shifted with respect to each other by a spatial vector $\beta^{i}$.
+
+The shift vector $β^a$ will measure the amount by which the spatial coordinates are shifted within a slice with respect to the normal vector. The lapse function $α$ measures how much proper time elapses between neighboring time slices along the normal vector. ==The lapse and the shift therefore determine how the coordinates evolve in time.== The choice of $α$ and $β^a$ is quite arbitrary. **The freedom to choose these four gauge functions$α$ and $β^a$ completely arbitrarily embodies the four-fold coordinate degrees of freedom inherent in general relativity**.
+
+The lapse and the shift determine how the coordinates evolve from one time slice Σ to the next, whereas the constraint equations represent integrability conditions which have to be satisfied within each slice. **Therefore, the constraints have to be independent of how the coordinates evolve, and the lapse and the shift can enter only the evolution equations**.
 
 ### The spatial metric $\gamma_{ab}$
 
@@ -63,21 +78,24 @@ $$
 
     We can now use these two projection operators to decompose any tensor into its spatial and timelike parts.
 
-    The three-dimensional metric only contains **information about the curvature intrinsic to a slice Σ**, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded. This information is contained in a tensor called **extrinsic curvature**.
+**The induced metric is simply the spatial components of the spacetime metric $g_{ab}$.** 
 
-The three-dimensional covariant derivative can be expressed in terms of three-dimensional connection coefficients, which, in a coordinate basis, are given by
+The three-dimensional metric only contains **information about the curvature intrinsic to a slice Σ**, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded. This information is contained in a tensor called **extrinsic curvature**.
 
-$$
-\Gamma _ { b c } ^ { a } = \frac { 1 } { 2 } \gamma ^ { a d } \left( \partial _ { c } \gamma _ { d b } + \partial _ { b } \gamma _ { d c } - \partial _ { d } \gamma _ { b c } \right)
-$$
-
-The three-dimensional Riemann tensor can be computed from
-
-$$
-R _ { a b c } ^ { d } = \partial _ { b } \Gamma _ { a c } ^ { d } - \partial _ { a } \Gamma _ { b c } ^ { d } + \Gamma _ { a c } ^ { e } \Gamma _ { e b } ^ { d } - \Gamma _ { b c } ^ { e } \Gamma _ { e a } ^ { d }
-$$
-
-The three-dimensional curvature $R _ { b c d } ^ { a }$ only contains information about the curvature intrinsic to a slice Σ, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded.
+!!! note
+    The three-dimensional covariant derivative can be expressed in terms of three-dimensional connection coefficients, which, in a coordinate basis, are given by
+    
+    $$
+    \Gamma _ { b c } ^ { a } = \frac { 1 } { 2 } \gamma ^ { a d } \left( \partial _ { c } \gamma _ { d b } + \partial _ { b } \gamma _ { d c } - \partial _ { d } \gamma _ { b c } \right)
+    $$
+    
+    The three-dimensional Riemann tensor can be computed from
+    
+    $$
+    R _ { a b c } ^ { d } = \partial _ { b } \Gamma _ { a c } ^ { d } - \partial _ { a } \Gamma _ { b c } ^ { d } + \Gamma _ { a c } ^ { e } \Gamma _ { e b } ^ { d } - \Gamma _ { b c } ^ { e } \Gamma _ { e a } ^ { d }
+    $$
+    
+    The three-dimensional curvature $R _ { b c d } ^ { a }$ only contains information about the curvature intrinsic to a slice Σ, but it gives no information about what shape this slice takes in the spacetime M in which it is embedded.
 
 ### The Extrinsic Curvature $K_{ab}$
 
@@ -100,8 +118,6 @@ $$
 
 where $L_n$ denotes the Lie derivative along $n^a$.
 
-Since $n^a$ is a timelike vector, equation illustrates the intuitive interpretation of the extrinsic curvature as a geometric generalization of the “time derivative” of the spatial metric $\gamma_{ab}$.
-
 !!! note "Proof: $\gamma_{ab}$ changes proportionally to $K_{ab}$"
     $$
     \begin{align}
@@ -112,3 +128,5 @@ Since $n^a$ is a timelike vector, equation illustrates the intuitive interpretat
     \mathcal{L}_n \gamma_{ab} &= - 2 K_{ab}
     \end{align}
     $$
+    
+Since $n^a$ is a timelike vector, equation illustrates the intuitive interpretation of **the extrinsic curvature as a geometric generalization of the “time derivative” of the spatial metric $\gamma_{ab}$.**

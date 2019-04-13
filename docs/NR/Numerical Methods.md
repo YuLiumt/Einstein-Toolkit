@@ -1,3 +1,12 @@
+There are two major classes of techniques used for numerical simulations of the Einstein equations. These are **finite-difference methods**, typically coupled to adaptive mesh refinement techniques, and **pseudo-spectral methods**.
+
+!!! note 
+    Most of the finite difference codes are based on modifications to the ADM system. These equations are in a form with mixed second and first derivatives. Basically, the system is such that **only first time derivatives occur, but first and second spatial derivatives occur.** (Of course, auxiliary evolution variables can be introduced so that the system only has first spatial derivatives, but at the cost of introducing additional constraints.)
+
+A black hole interior presents a major challenge to any numerical technique because of the curvature singularity it harbors. Fortunately, the singularity is concealed behind an event horizon. The region inside the horizon cannot affect the exterior solution, so numerical simulations need not evolve it accurately.
+
+One way to do this is to simply not evolve a region inside the horizon, i.e., to excise this region. The other method, the puncture method involves allowing singularities in the computational domain. In the appropriate gauge, these singularities are sufficiently benign that finite difference methods can handle them.
+
 ## Finite Difference Methods
 
 **In a finite difference approximation a function $f(t,x)$ is represented by values at a discrete set of points.** At the core of finite difference approximation is therefore a discretization of the spacetime, or a numerical grid. Instead of evaluating f at all values of x, for example, we only consider discrete values $x_i$. The distance between the gridpoints $x_i$ is called the gridspacing $∆x$. For uniform grids, for which $∆x$ is constant, we have
@@ -48,7 +57,7 @@ $$
 
 which is second order in $∆x$. In general, **centered derivatives** lead to higher order schemes than one-sided derivatives for the same number of gridpoints.
 
-The key point is that we are able to combine the two Taylor expansions in such a way that the leading order error term cancels out, leaving us **with a higher order representation of the derivative**. This cancellation **only works out for uniform grids**, when $∆x$ is independent of x. This is one of the reasons why many current numerical relativity applications of finite difference schemes work with uniform grids.
+The key point is that we are able to combine the two Taylor expansions in such a way that the leading order error term cancels out, leaving us **with a higher order representation of the derivative**. This cancellation **only works out for uniform grids**, when $∆x$ is independent of x. ==This is one of the reasons why many current numerical relativity applications of finite difference schemes work with uniform grids.==
 
 Higher order derivatives can be constructed in a similar fashion. Adding the two Taylor expansions all terms odd in $∆x$ drop out and we find for the second derivative
 
@@ -56,12 +65,15 @@ $$
 \left( \partial _ { x } ^ { 2 } f \right) _ { i } = \frac { f _ { i + 1 } - 2 f _ { i } + f _ { i - 1 } } { ( \Delta x ) ^ { 2 } } + \mathcal { O } \left( \Delta x ^ { 2 } \right)
 $$
 
-> $$
-> \left( \partial _ { x } f \right) _ { i } = \frac { 1 } { 12 \Delta x } \left( f _ { i - 2 } - 8 f _ { i - 1 } + 8 f _ { i + 1 } - f _ { i + 2 } \right) \\
-\left( \partial _ { x } ^ { 2 } f \right) _ { i } = \frac { 1 } { 12 ( \Delta x ) ^ { 2 } } \left( - f _ { i - 2 } + 16 f _ { i - 1 } - 30 f _ { i } + 16 f _ { i + 1 } - f _ { i + 2 } \right)
-> $$
-> 
-> where we have omitted the truncation error, $\mathcal { O } \left( \Delta x ^ { 4 } \right)$
+!!! note "Fourth-order finite-difference"
+    Fourth-order finite-difference representations of the first and second derivatives of a function f are given by
+
+    $$
+    \left( \partial _ { x } f \right) _ { i } = \frac { 1 } { 12 \Delta x } \left( f _ { i - 2 } - 8 f _ { i - 1 } + 8 f _ { i + 1 } - f _ { i + 2 } \right) \\
+    \left( \partial _ { x } ^ { 2 } f \right) _ { i } = \frac { 1 } { 12 ( \Delta x ) ^ { 2 } } \left( - f _ { i - 2 } + 16 f _ { i - 1 } - 30 f _ { i } + 16 f _ { i + 1 } - f _ { i + 2 } \right)
+    $$
+    
+    where we have omitted the truncation error, $\mathcal { O } \left( \Delta x ^ { 4 } \right)$
 
 ### Elliptic Equations
 
@@ -216,13 +228,9 @@ $$
 \xi(k)=1-i \frac{v \Delta t}{\Delta x} \sin k \Delta x
 $$
 
-**the magnitude of $\xi$ is greater than unity for all k, indicating that this scheme is unstable.** In fact, we have $|\xi|>1$ independently of our choice for $\Delta x$ and $\Delta t$, which makes this scheme unconditionally unstable. That is bad.
+**the magnitude of $\xi$ is greater than unity for all k, indicating that this scheme is unstable.** In fact, we have $|\xi|>1$ independently of our choice for $\Delta x$ and $\Delta t$, which makes this scheme unconditionally unstable. That is bad. **The good news is that there are several ways of fixing this problem.**
 
-The good news is that there are several ways of fixing this problem.
-
-For example
-
-We could replace the term $u_{j}^{n}$ by the spatial average $\left(u_{j+1}^{n}+u_{j-1}^{n}\right) / 2$.
+For example, we could replace the term $u_{j}^{n}$ by the spatial average $\left(u_{j+1}^{n}+u_{j-1}^{n}\right) / 2$.
 
 $$
 u_{j}^{n+1}=\frac{1}{2}\left(u_{j+1}^{n}+u_{j-1}^{n}\right)-\frac{v}{2} \frac{\Delta t}{\Delta x}\left(u_{j+1}^{n}-u_{j-1}^{n}\right)
@@ -268,11 +276,11 @@ $$
 
 where the term on the right-hand side is essentially a diffusion term, with parameter $D=(\Delta x)^{2} /(2 \Delta t)$ serving as a constant coefficient of diffusion.
 
-This feature implies the amplitude of any wave will decrease spuriously with time as it propagates. A related effect is anomalous dispersion, an additional price we pay for stablity in the Lax scheme and many other finite-difference schemes for hyperbolic systems.
+**This feature implies the amplitude of any wave will decrease spuriously with time as it propagates. A related effect is anomalous dispersion, an additional price we pay for stablity in the Lax scheme and many other finite-difference schemes for hyperbolic systems.**
 
-#### Other scheme
+#### implicit scheme
 
-Lax scheme
+<!--Lax scheme
 
 ___
 
@@ -305,10 +313,7 @@ Some researchers prefer two-level schemes over three-level schemes because three
 ![-w619](media/15532637365521.jpg)
 
 The leap-frog scheme has the additional disadvantage that, it only connects fields of the same color. “Black” gridpoints can therefore evolve completely independently of “white” gridpoints, and the two sets of grid points may drift apart as numerical error accumulates differently for the two sets of points. If necessary, this problem can be solved by artificially adding a very small viscous term that links the two sets together. Once these potential issues are resolved, leap-frog is a very simple, accurate and powerful method.
-
-implicit scheme
-
-___
+-->
 
 Yet another way of constructing a stable two-level scheme is to use backward time differencing instead of forward differencing. This approach then yields the “backward-time, centered-space” scheme,
 
@@ -328,7 +333,7 @@ for all values of $\Delta t$. This finding means that this scheme is uncondition
 
 The disadvantage of the backward differencing scheme is that we can no longer solve for the new grid function $u_{j}^{n+1}$ at the new time $t^{n+1}$ explicitly in terms of old grid functions at $t^{n}$ alone. Instead, now couples $u_{j}^{n+1}$ with the its closest neighbors $u_{j+1}^{n+1}$ and $u_{j-1}^{n+1}$. This coupling provides an implicit linear relation between the new grid functions, and is therefore an example of an implicit finite-differencing scheme. We can no longer sweep through the grid and update one point at a time; instead **we now have to solve for all grid points simultaneously**. Writing equation at all interior grid points, and then taking into account the boundary conditions, leads to a system of equations quite similar to elliptic equations.
 
-Crank-Nicholson scheme
+<!--Crank-Nicholson scheme
 
 ___
 
@@ -365,6 +370,7 @@ $$
 The corrector step can be repeated an arbitrary number times N, always using the previous values $^{(N-1)} u_{j}^{n+1}$ on the right-hand side to find new corrected values $^{(N)} u_{j}^{n+1}$.
 
 The iterative Crank-Nicholson scheme is an explicit two-level scheme that is second order in both space and time. Since this form is very similar to the 3 + 1 equations and related formulations, the iterative Crank-Nicholson scheme has often been used in numerical relativity simulations.
+-->
 
 #### Method of Lines
 
@@ -419,13 +425,22 @@ Once the data has been evolved one step, the data in the ghostzones can be excha
 
 ## Mesh Refinement
 
-Many current numerical relativity codes use a uniform grid spacing to cover the entire spatial domain. Given that computational resources are limited, so that we can afford only a finite number of gridpoints, such a “unigrid” implementation may pose a problem.
+It is often the case in simulations of physical systems that **the most interesting phenomena may occur in only a subset of the computational domain.** In the other regions of the domain it may be possible to use a less accurate approximation, thereby reducing the computational resources required, and still obtain results which are essentially similar to those obtained if no such reduction is made.
 
-Imagine, for concreteness, a simulation of a strong-field gravitational wave source, like a compact binary containing neutron stars or black holes. On the one hand we have to resolve these sources well, so as to minimize truncation error in the strong-field region. On the other hand, the grid must extend into the weak-field region at large distances from the sources, so as to minimize error from the outer boundaries and to enable us to extract the emitted gravitational radiation accurately.
+!!! note
+    Imagine, for concreteness, a simulation of a strong-field gravitational wave source, like a compact binary containing neutron stars or black holes. On the one hand we have to resolve these sources well, so as to minimize truncation error in the strong-field region. On the other hand, the grid must extend into the weak-field region at large distances from the sources, so as to minimize error from the outer boundaries and to enable us to extract the emitted gravitational radiation accurately.
 
 ![-w1062](media/15533057187758.jpg)
 
-A very promising alternative is mesh refinement, which has been widely developed and used in the computational fluid dynamics community and is becoming increasingly popular in numerical relativity.
+In particular, we may consider using a computational mesh which is non-uniform in space and time, using **a finer mesh resolution in the “interesting” regions** where we expect it to be necessary, and using **a coarser resolution in other areas**. ==This is what we mean by mesh refinement (MR).==
+
+The mesh refinement driver that we use is called Carpet and is available together with the application framework Cactus. It uses the Berger–Oliger approach, where the computational domain as well as all refined subdomains consist of a set of rectangular grids. **Furthermore, there is a constant refinement ratio between refinement levels.**
+
+![](media/15551363353554.jpg)
+
+!!! note "notation"
+    The grids are grouped into refinement levels (or simply “levels”) $L^K$, each containing an arbitrary number of grids $G^{k}_{j}$. Each grid on refinement level k has the grid spacing (in one dimension) $\Delta x^{k}$. The grid spacings are related by the relation $\Delta x^{k}=\Delta x^{k-1} / N_{\text { refine }}$ with the integer refinement factor $N_{\text { refine }}$. The base level $L^0$ covers the entire domain (typically with a single grid) using a coarse grid spacing. The refined grids have to be properly nested. That is, any grid $G^{k}_{j}$ must be completely contained within the set of grids $L^{k-1}$ of the next coarser level, except possibly at the outer boundaries.
+
 
 The basic idea underlying mesh refinement techniques is to perform the simulation not on one numerical grid, but on several, as in the multigrid methods.
 
@@ -481,3 +496,7 @@ Three rules govern the establishment of refined child blocks.
 1. a refined child block must be one-half as large as its parent block in each spatial dimension. 
 2. a block’s children must be nested; i.e., the child blocks must fit within their parent block and cannot overlap one another, and the complete set of children of a block must fill its volume. Thus, in d dimensions a given block has either zero or $2^d$ children.
 3. blocks which share a common border may not differ from each other by more than one level of refinement.
+
+## Pseudo-spectral methods
+
+In spectral methods the evolved fields are expressed in terms of a finite sum of basis functions. An example of this would be to describe a field on a sphere in terms of an expansion in spherical harmonics. These methods have the advantage that if the fields are smooth then **the error in truncating the expansion converges to zero exponentially with the number of basis functions used in the expansion.**

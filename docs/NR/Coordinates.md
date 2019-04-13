@@ -107,3 +107,8 @@ The conformally related metric $\bar{γ}_{ij}$ has five independent functions, t
 ![](media/15533329131689.jpg)
 
 An “approximate minimal distortion” condition may lead to a coordinate system with similar geometric properties.
+
+
+
+
+In the fixed puncture approach, there are singularities of this type associated with each black hole and the gauge conditions are chosen so that these singularities do not move. Each of these singularities is called a “puncture”. Keeping the puncture fixed has several advantages. First, the singularity in the conformal factor can be handled analytically. Second, by keeping the black holes fixed in coordinate space, one can use the much simpler fixed excision techniques.
