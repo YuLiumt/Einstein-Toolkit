@@ -392,6 +392,30 @@ $$
 
 and then integrate this set of ordinary differential equations with a fourth-order Runge-Kutta method.
 
+##### Runge-Kutta (RK) method 
+
+The explicit form of the algorithms is
+
+1. Prediction step (common for both RK2 and RK3):
+
+$$
+\boldsymbol{U}^{(1)}=\boldsymbol{U}^{(n)}+\Delta t L\left(\boldsymbol{U}^{(n)}\right)
+$$
+
+2. Depending on the order do:
+
+- RK2:
+
+$$
+\boldsymbol{U}^{n+1}=\frac{1}{\alpha}\left[\beta \boldsymbol{U}^{n}+\boldsymbol{U}^{(1)}+\Delta t L\left(\boldsymbol{U}^{(1)}\right)\right]
+$$
+
+- RK3:
+
+$$
+\begin{aligned} \boldsymbol{U}^{(2)} &=\frac{1}{\alpha}\left[\beta \boldsymbol{U}^{(2 n)}+\boldsymbol{U}^{(1)}+\Delta t L\left(\boldsymbol{U}^{(1)}\right)\right] \\ \boldsymbol{U}^{n+1} &=\frac{1}{\beta}\left[\beta \boldsymbol{U}^{(2 n)}+2 \boldsymbol{U}^{(2)}+2 \Delta t L\left(\boldsymbol{U}^{(2)}\right)\right] \end{aligned}
+$$
+
 ## Ghost Zones
 
 Cactus is based upon a distributed computing paradigm. That is, the problem domain is split into blocks, each of which is assigned to a processor.
@@ -434,68 +458,74 @@ It is often the case in simulations of physical systems that **the most interest
 
 In particular, we may consider using a computational mesh which is non-uniform in space and time, using **a finer mesh resolution in the “interesting” regions** where we expect it to be necessary, and using **a coarser resolution in other areas**. ==This is what we mean by mesh refinement (MR).==
 
-The mesh refinement driver that we use is called Carpet and is available together with the application framework Cactus. It uses the Berger–Oliger approach, where the computational domain as well as all refined subdomains consist of a set of rectangular grids. **Furthermore, there is a constant refinement ratio between refinement levels.**
+The mesh refinement driver that we use is called Carpet and is available together with the application framework Cactus. It uses the Berger–Oliger approach, where the computational domain as well as all refined subdomains consist of a set of rectangular grids. **Furthermore, there is a constant refinement ratio between refinement levels.** The basic idea underlying mesh refinement techniques is to perform the simulation not on one numerical grid, but on several, as in the multigrid methods.
+
+![](media/15523870938244.jpg)
 
 ![](media/15551363353554.jpg)
 
 !!! note "notation"
     The grids are grouped into refinement levels (or simply “levels”) $L^K$, each containing an arbitrary number of grids $G^{k}_{j}$. Each grid on refinement level k has the grid spacing (in one dimension) $\Delta x^{k}$. The grid spacings are related by the relation $\Delta x^{k}=\Delta x^{k-1} / N_{\text { refine }}$ with the integer refinement factor $N_{\text { refine }}$. The base level $L^0$ covers the entire domain (typically with a single grid) using a coarse grid spacing. The refined grids have to be properly nested. That is, any grid $G^{k}_{j}$ must be completely contained within the set of grids $L^{k-1}$ of the next coarser level, except possibly at the outer boundaries.
 
+The times and places where refined grids are created and removed are decided by some refinement criterion. The simplest criterion, which is also indispensable for testing, is **manually specifying the locations of the refined grids at fixed locations in space at all times. This is called fixed mesh refinement.** A bit more involved is keeping the same refinement hierarchy, but **moving the finer grids according to some knowledge about the simulated system**, tracking some feature such as a black hole or a neutron star. This might be called “moving fixed mesh refinement”. Clearly the most desirable strategy is an automatic criterion that estimates the truncation error, and places the refined grids only when and where necessary. This is what is commonly understood by adaptive mesh refinement. Carpet supports all of the above in principle.
 
-The basic idea underlying mesh refinement techniques is to perform the simulation not on one numerical grid, but on several, as in the multigrid methods.
+!!! note
+    The situation is more complicated for objects that are moving, as is the case for a coalescing binary star system. In this case we do not know a priori the trajectories of the companion stars, hence do not know which regions need refining. Moreover, these regions will be changing as the system evolves and the stars move. Clearly, we would like to move the refined grids with the stars. Such an approach, whereby the grid is relocated during the simulation to give optimal resolution at each time step, is called adaptive mesh refinement or AMR.
 
-![-w731](media/15533068726818.jpg)
+### Time evolution scheme
 
 In multigrid methods, the numerical solution is computed on a hierarchy of computational grids with increasing grid resolution. The finer grids may or may not cover all the physical space that is covered by the coarser grids. The numerical solution is then computed by completing sweeps through the grid hierarchy. 
 
-The coarse grid is sufficiently small so that we can compute a solution with a direct solver. This provides the “global” features of the solution, albeit on a coarse grid and hence with a large local truncation error. We then interpolate this approximate solution to the next finer grid. This interpolation from a coarser grid to a finer grid is called a “prolongation”, and we point out that the details of this interpolation depend on whether the grid is cell-centered or vertex-centered. 
+![-w731](media/15533068726818.jpg)
+
+#### Prolongation
+
+The coarse grid is sufficiently small so that we can compute a solution with a direct solver. This provides the “global” features of the solution, albeit on a coarse grid and hence with a large local truncation error. We then interpolate this approximate solution to the next finer grid. This interpolation from a coarser grid to a finer grid is called a “prolongation”.
 
 > In the mathematical field of numerical analysis, interpolation is a method of constructing new data points within the range of a discrete set of known data points.
 
-On the finer grid we can then apply a relaxation method, for example a Gauss-Seidel sweep. While this method is too slow to solve the problem globally, as we have discussed above, it is very well suited to improve the solution locally. This step is often called a “smoothing sweep”. 
+AMR scheme evolves coarse grid data forward in time before evolving any data on the finer grids. These evolved coarse grid data can then be used to **provide boundary conditions for the evolution of data on the finer grids via prolongation**, i.e. interpolation in time and space.
 
-After this smoothing sweep the solution can be prolonged to the next finer grid, where the procedure is repeated. Once we have smoothed the solution on the finest grid, we start ascending back to coarser grids. The interpolation from a finer grid to a coarser grid is called a “restriction”. 
+![](media/15551377083235.jpg)
 
-The coarser grids now “learn” from the finer grids by comparing their last solution with the one that comes back from a finer grid. This comparison provides an estimate for the local truncation error, which can be accounted for with the help of an artificial source term. On each grid we again perform smoothing sweeps, again improving the solution because we inherit the smaller truncation error from the finer grids. These sweeps through the grid hierarchy can be repeated until the solution has converged to a pre-determined accuracy.
+A refinement by a factor of $N_{\text { refine }}$ requires time step sizes that are smaller by a factor $N_{\text { refine }}$, and hence $N_{\text { refine }}$ time steps on level $k+1$ are necessary for each time step on level k.
 
-Typically, the gridspacing on the finer grid is half that on the next coarser grid, but clearly other refinement factors can be chosen. The hierarchy can be extended, and typical mesh refinement applications employ multiple refinement levels.
+#### Restriction
 
-Two versions of mesh refinement can be implemented. In the simpler version, called fixed mesh refinement or FMR, it is assumed that the refined grids will be needed only at known locations in space that remain fixed throughout the simulation.
+At time steps in which the coarse and fine grids are both defined, the fine grid data are restricted onto the coarse grid (via a simple copy operation) after it has been evolved forward in time.
 
-The situation is more complicated for objects that are moving, as is the case for a coalescing binary star system. In this case we do not know a priori the trajectories of the companion stars, hence do not know which regions need refining. Moreover, these regions will be changing as the system evolves and the stars move. Clearly, we would like to move the refined grids with the stars. Such an approach, whereby the grid is relocated during the simulation to give optimal resolution at each time step, is called adaptive mesh refinement or AMR.
+![](media/15551378176639.jpg)
 
-### Fixed Mesh Refinement
+The coarser grids now “learn” from the finer grids by comparing their last solution with the one that comes back from a finer grid. This comparison provides an estimate for the local truncation error. These sweeps through the grid hierarchy can be repeated until the solution has converged to a pre-determined accuracy.
 
-A standard way of solving partial differential equations are finite differences on a regular grid. This is also called unigrid. Such an application discretises its problem space onto a single, rectangular grid which has everywhere the same grid spacing. Increasing the resolution in a unigrid application is somewhat expensive. For example, increasing the resolution by a factor of two requires a factor of eight more storage in three dimensions. Most applications need the high resolution only in a part of the simulation domain.
+If there are more than two grid levels, then one proceeds recursively from coarsest to finest, evolving data on the coarsest grid first, interpolating this data in time and space along boundaries of finer grids, evolving the finer grid data, and restricting evolved data from finer to coarser grids whenever possible.
 
-Instead of only one grid, there are several grids or grid patches with different resolutions. The coarsest grid usually encloses the whole simulation domain. Successively finer grids overlay the coarse grid at those locations where a higher resolutions is needed. The coarser grids provide boundary conditions to the finer grid through interpolation.
+!!! note
+    For time evolution schemes that consist only of a single iteration (or step), the fine grid boundary condition needs to be applied only once. Most higher-order time integrations schemes, such as Runge-Kutta or iterative Crank-Nicholson, are actually multi-step schemes and correspondingly require **the fine grid boundary condition to be applied multiple times**. If this is not done in a consistent manner at each iteration, then the coarse and the fine grid time evolution will not couple correctly, and this can introduce a significant error.
+    
+    There are several ways to guarantee consistent boundary conditions on fine grids. Our method use a larger fine grid boundary. That is, each of the integration substeps is formally applied to a progressively smaller domain, and the prolongation operation re-enlarges the domain back to its original size.
+    
+    ![](media/15551389503538.jpg)
 
-Instead of updating only one grid, the application has to update all grids. The usual approach is to first take a step on the coarsest grid, and then recursively take several smaller steps on the finer grids. The Courant criterion requires that the step sizes on the finer grids be smaller than on the coarse grid. The boundary values for the finer grids are found through interpolation in space and time from the coarser grid. In the end, the information on the finer grids is injected into the coarse grids.
+    Note that this “buffering” is done only for prolongation boundaries; outer boundaries are handled in the conventional way. Note also that the use of buffer zones is potentially more computationally efficient. We emphasise that the use of these buffer zones is not always necessary. To our knowledge the buffer zones are necessary only when the system of equations contains second spatial derivatives, and a multi-step numerical method is used for time integration.
 
-### Adaptive mesh refinement (AMR)
+### Inter-grid transport operators
 
-For well behaved problems a grid of uniform mesh spacing (in each of the coordinate directions) gives satisfactory results. However, there are classes of problems where the solution is more difficult to estimate in some regions (perhaps due to discontinuities, steep gradients, shocks, etc.) than in others. One could use a uniform grid having a **spacing fine enough so that the local errors estimated in these difficult regions are acceptable**. But this approach is computationally extremely costly.
+As described above, the interaction between the individual refinement levels happens via prolongation and restriction. For prolongation, Carpet currently supports polynomial interpolation, up to quadratic interpolation in time, which requires keeping at least two previous time levels of data. It also supports up to quintic interpolation in space, which requires using at least three ghost zones. We usually use cubic interpolation in space, which requires only two ghost zones. For restricting, Carpet currently uses sampling (i.e., a simple copy operation). These transport operators are not conservative. Since our formulation of Einstein’s equation is not in a conservative form, any use of conservative inter-grid operations offers no benefit. However, the transport operators can easily be changed.
 
-In numerical analysis, **adaptive mesh refinement (AMR)** is a method of **adapting the accuracy of a solution within certain sensitive or turbulent regions** of simulation, dynamically and during the time the solution is being calculated. The use of AMR has since then proved of broad use and has been used in studying turbulence problems in hydrodynamics as well as in the study of large scale structures in astrophysics。
+### Initial data generation
 
-![](media/15523870802272.jpg)
+Initial data generation and time evolution are controlled by the driver Carpet. Initial data are created recursively, starting on the coarsest level $L^{0}$. 
 
-1. Start with a coarse grid
-2. Identify regions that need finer resolution
-3. Superimpose finer sub-grids only on those regions 
-4. Finer and finer subgrids are added recursively until either a given maximum level of refinement is reached or the local truncation error has dropped below the desired level
+In many cases, the initial data specification is only valid for a single time $t=0$. However, for the time interpolation necessary during prolongation, it may be necessary to have data on several time levels. One solution is to use only lower order interpolation during the first few time steps. We decided instead, we offer the option to evolve coarse grid data backwards in time in order to provide sufficient time levels for higher order interpolation in time at fine grid boundaries. 
 
-![](media/15523870938244.jpg)
+This initial data generation proceeds in two stages.
 
-The complete computational grid consists of a collection of blocks with different physical cell sizes, which are related to each other in a hierarchical fashion using a tree data structure. The blocks at the root of the tree have the largest cells, while their children have smaller cells and are said to be refined. 
+First the data are evolved both forwards and backwards in time one step, leading to the “hourglass” structure.
 
-![](media/15523871071222.jpg)
+![](media/15551393149475.jpg)
 
-Three rules govern the establishment of refined child blocks.
-
-1. a refined child block must be one-half as large as its parent block in each spatial dimension. 
-2. a block’s children must be nested; i.e., the child blocks must fit within their parent block and cannot overlap one another, and the complete set of children of a block must fill its volume. Thus, in d dimensions a given block has either zero or $2^d$ children.
-3. blocks which share a common border may not differ from each other by more than one level of refinement.
+This evolution proceeds recursively from coarsest to finest, so that all data necessary for time interpolation are present. Note that this would not be the case if we evolved two steps backwards in time, as there would not be enough data for the time interpolation for the restriction operation between these two steps.
 
 ## Pseudo-spectral methods
 
