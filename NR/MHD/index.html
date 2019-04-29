@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>BBH - Yu Liu's Notebook</title>
+  <title>MHD - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "BBH";
-    var mkdocs_page_input_path = "Example/BBH.md";
-    var mkdocs_page_url = "/Einstein-Toolkit/Example/BBH/";
+    var mkdocs_page_name = "MHD";
+    var mkdocs_page_input_path = "NR/MHD.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/NR/MHD/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
@@ -146,39 +146,42 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../NR/Introduction/">Introduction</a>
+    <a class="" href="../Introduction/">Introduction</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/3+1 Decomposition/">3+1 Decomposition</a>
+    <a class="" href="../3+1 Decomposition/">3+1 Decomposition</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/ADM/">ADM</a>
+    <a class="" href="../ADM/">ADM</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/BSSN/">BSSN</a>
+    <a class="" href="../BSSN/">BSSN</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">MHD</a>
+    <ul class="subnav">
+            
+    </ul>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/MHD/">MHD</a>
+    <a class="" href="../Conformal Transformation/">Conformal Transformation</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Conformal Transformation/">Conformal Transformation</a>
+    <a class="" href="../Coordinates/">Coordinates</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Coordinates/">Coordinates</a>
+    <a class="" href="../Matter Sources/">Matter Sources</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../NR/Matter Sources/">Matter Sources</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../NR/Numerical Methods/">Numerical Methods</a>
+    <a class="" href="../Numerical Methods/">Numerical Methods</a>
                 </li>
     </ul>
 	    </li>
@@ -204,7 +207,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../Poisson/">Poisson</a>
+    <a class="" href="../../Example/Poisson/">Poisson</a>
                 </li>
     </ul>
 	    </li>
@@ -230,11 +233,15 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
+        
+          <li>Numerical Relativity &raquo;</li>
+        
+      
     
-    <li>BBH</li>
+    <li>MHD</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/Example/BBH.md"
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/NR/MHD.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -244,13 +251,80 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="_1"></h2>
-<p><a href="https://arxiv.org/abs/gr-qc/0104020">https://arxiv.org/abs/gr-qc/0104020</a>
-<a href="https://arxiv.org/abs/gr-qc/0008067">https://arxiv.org/abs/gr-qc/0008067</a></p>
+                <p>The GRHydro scheme is written in a first-order hyperbolic flux-conservative evolution system for the conserved variables D, <span><span class="MathJax_Preview">S^{i}</span><script type="math/tex">S^{i}</script></span>, <span><span class="MathJax_Preview">\tau</span><script type="math/tex">\tau</script></span>, and <span><span class="MathJax_Preview">\mathcal{B}^{i}</span><script type="math/tex">\mathcal{B}^{i}</script></span>, defined in terms of the primitive variables <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span>, <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>, <span><span class="MathJax_Preview">v^{i}</span><script type="math/tex">v^{i}</script></span>, and <span><span class="MathJax_Preview">B^{i}</span><script type="math/tex">B^{i}</script></span> such that</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned} D &amp;=\sqrt{\gamma} \rho W \\ S_{j} &amp;=\sqrt{\gamma}\left(\rho h^{*} W^{2} v_{j}-\alpha b^{0} b_{j}\right) \\ \tau &amp;=\sqrt{\gamma}\left(\rho h^{*} W^{2}-P^{*}-\left(\alpha b^{0}\right)^{2}\right)-D \\ \mathcal{B}^{k} &amp;=\sqrt{\gamma} B^{k} \end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned} D &=\sqrt{\gamma} \rho W \\ S_{j} &=\sqrt{\gamma}\left(\rho h^{*} W^{2} v_{j}-\alpha b^{0} b_{j}\right) \\ \tau &=\sqrt{\gamma}\left(\rho h^{*} W^{2}-P^{*}-\left(\alpha b^{0}\right)^{2}\right)-D \\ \mathcal{B}^{k} &=\sqrt{\gamma} B^{k} \end{aligned}
+</script>
+</div>
+<p>where <span><span class="MathJax_Preview">\gamma</span><script type="math/tex">\gamma</script></span> is the determinant of <span><span class="MathJax_Preview">\gamma_{i j}</span><script type="math/tex">\gamma_{i j}</script></span>. We choose a definition of the 3-velocity <span><span class="MathJax_Preview">v^{i}</span><script type="math/tex">v^{i}</script></span> that corresponds to the velocity seen by an Eulerian observer at rest in the current spatial 3-hypersurface </p>
+<div>
+<div class="MathJax_Preview">
+v^{i}=\frac{u^{i}}{W}+\frac{\beta^{i}}{\alpha}
+</div>
+<script type="math/tex; mode=display">
+v^{i}=\frac{u^{i}}{W}+\frac{\beta^{i}}{\alpha}
+</script>
+</div>
+<p>and <span><span class="MathJax_Preview">W \equiv\left(1-v^{i} v_{i}\right)^{-1 / 2}</span><script type="math/tex">W \equiv\left(1-v^{i} v_{i}\right)^{-1 / 2}</script></span> is the Lorentz factor. Note that <span><span class="MathJax_Preview">v^{i}</span><script type="math/tex">v^{i}</script></span>, <span><span class="MathJax_Preview">B^{i}</span><script type="math/tex">B^{i}</script></span>, <span><span class="MathJax_Preview">S^{i}</span><script type="math/tex">S^{i}</script></span>, and <span><span class="MathJax_Preview">\beta^{i}</span><script type="math/tex">\beta^{i}</script></span> are 3-vectors, and their indices are raised and lowered with the 3-metric, e.g., <span><span class="MathJax_Preview">v_{i} \equiv \gamma_{i j} v^{j}</span><script type="math/tex">v_{i} \equiv \gamma_{i j} v^{j}</script></span>.</p>
+<p>The evolution system for the conserved variables,</p>
+<div>
+<div class="MathJax_Preview">
+\frac{\partial \mathbf{U}}{\partial t}+\frac{\partial \mathbf{F}^{i}}{\partial x^{i}}=\mathbf{S}
+</div>
+<script type="math/tex; mode=display">
+\frac{\partial \mathbf{U}}{\partial t}+\frac{\partial \mathbf{F}^{i}}{\partial x^{i}}=\mathbf{S}
+</script>
+</div>
+<p>with </p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{U}=\left[D, S_{j}, \tau, \mathcal{B}^{k}\right] \\
+\mathbf{F}^{i}=\alpha \times \left[ \begin{array}{c}{D \tilde{v}^{i}} \\ {S_{j} \tilde{v}^{i}+\sqrt{\gamma} P^{*} \delta_{j}^{i}-b_{j} \mathcal{B}^{i} / W} \\ {\tau \tilde{v}^{i}+\sqrt{\gamma} P^{*} v^{i}-\alpha b^{0} \mathcal{B}^{i} / W} \\ {\mathcal{B}^{k} \tilde{v}^{i}-\mathcal{B}^{i} \tilde{v}^{k}}\end{array}\right] \\
+\mathbf{S}=\alpha \sqrt{\gamma} \times \left[ \begin{array}{c}{0} \\ {T^{\mu \nu}\left(\frac{\partial g_{i}-\Gamma_{\mu}^{\lambda} g_{\lambda j} )}{\partial x^{\mu}}-\Gamma_{\mu}^{\lambda} g_{\lambda j}\right)} \\ {\alpha\left(T^{\mu 0 \ln \alpha}-T^{\mu \nu} \Gamma_{\mu \nu}^{0}\right)} \\ {\overline{0}}\end{array}\right]
+</div>
+<script type="math/tex; mode=display">
+\mathbf{U}=\left[D, S_{j}, \tau, \mathcal{B}^{k}\right] \\
+\mathbf{F}^{i}=\alpha \times \left[ \begin{array}{c}{D \tilde{v}^{i}} \\ {S_{j} \tilde{v}^{i}+\sqrt{\gamma} P^{*} \delta_{j}^{i}-b_{j} \mathcal{B}^{i} / W} \\ {\tau \tilde{v}^{i}+\sqrt{\gamma} P^{*} v^{i}-\alpha b^{0} \mathcal{B}^{i} / W} \\ {\mathcal{B}^{k} \tilde{v}^{i}-\mathcal{B}^{i} \tilde{v}^{k}}\end{array}\right] \\
+\mathbf{S}=\alpha \sqrt{\gamma} \times \left[ \begin{array}{c}{0} \\ {T^{\mu \nu}\left(\frac{\partial g_{i}-\Gamma_{\mu}^{\lambda} g_{\lambda j} )}{\partial x^{\mu}}-\Gamma_{\mu}^{\lambda} g_{\lambda j}\right)} \\ {\alpha\left(T^{\mu 0 \ln \alpha}-T^{\mu \nu} \Gamma_{\mu \nu}^{0}\right)} \\ {\overline{0}}\end{array}\right]
+</script>
+</div>
+<p>Here, <span><span class="MathJax_Preview">\tilde{v}^{i}=v^{i}-\beta^{i} / \alpha</span><script type="math/tex">\tilde{v}^{i}=v^{i}-\beta^{i} / \alpha</script></span> and <span><span class="MathJax_Preview">\Gamma_{\mu \nu}^{\lambda}</span><script type="math/tex">\Gamma_{\mu \nu}^{\lambda}</script></span> are the 4-Christoffel symbols.</p>
+<p>The magnetic field is divergence-free, the “no-monopoles” constraint:</p>
+<div>
+<div class="MathJax_Preview">
+\nabla \cdot B \equiv \frac{1}{\sqrt{\gamma}} \partial_{i}\left(\sqrt{\gamma} B^{i}\right)=0
+</div>
+<script type="math/tex; mode=display">
+\nabla \cdot B \equiv \frac{1}{\sqrt{\gamma}} \partial_{i}\left(\sqrt{\gamma} B^{i}\right)=0
+</script>
+</div>
+<p>which also implies</p>
+<div>
+<div class="MathJax_Preview">
+\partial_{i} \mathcal{B}^{i}=0
+</div>
+<script type="math/tex; mode=display">
+\partial_{i} \mathcal{B}^{i}=0
+</script>
+</div>
+<p>In practice, we implement two different methods to actively enforce this constraint. In the “divergence cleaning” technique we include the ability to modify the magnetic field evolution by introducing a new field variable that dissipates away numerical divergences. An alternative method, commonly called “constrained transport”, instead carefully constructs a numerical method so that the constraint is satisfied to round-off error at the discrete level.</p>
               
             </div>
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Conformal Transformation/" class="btn btn-neutral float-right" title="Conformal Transformation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../BSSN/" class="btn btn-neutral" title="BSSN"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -276,6 +350,10 @@
           <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
+        <span><a href="../BSSN/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Conformal Transformation/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
