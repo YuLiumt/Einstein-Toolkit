@@ -14,6 +14,7 @@ nav:
     - Thorn: 'ET/Thorn.md'
     - Source File: 'ET/Source File.md'
     - Parameter: 'ET/parameter.md'
+    - Lorene: 'ET/Lorene.md'
     - Visualization: 'ET/Visualization.md'
 - General Relativity:
     - Differential geometry: 'GR/Differential geometry.md'
@@ -28,6 +29,7 @@ nav:
     - 3+1 Decomposition: 'NR/3+1 Decomposition.md'
     - ADM: 'NR/ADM.md'
     - BSSN: 'NR/BSSN.md'
+    - MHD: 'NR/MHD.md'
     - Conformal Transformation: 'NR/Conformal Transformation.md'
     - Coordinates: 'NR/Coordinates.md'
     - Matter Sources: 'NR/Matter Sources.md'

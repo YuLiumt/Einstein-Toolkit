@@ -1,0 +1,3 @@
+[LORENE](https://lorene.obspm.fr) is a set of C++ classes to solve various problems arising in numerical relativity, and more generally in computational astrophysics. It provides tools to solve partial differential equations by means of multi-domain spectral methods.
+
+The online service [CompOSE](https://compose.obspm.fr/#) provides data tables for different state of the art equations of state (EoS) ready for further usage in astrophysical applications, nuclear physics and beyond. The cold neutron star EoS tables can be used directly within LORENE to obtain models of (rotating/magnetised) neutron stars.
