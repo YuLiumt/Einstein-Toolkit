@@ -266,189 +266,76 @@ Llama is a multipatch infrastructure for Cactus. This thorn provides definition 
 | cylinder_zmax | 2.0 | Maximum z for cylinder and column | : :: "" |
 | h_z | 0.1 | Spacing in z direction | 0: :: "" |
 
-## Time Integration
+## Grid
 
-### Time
+### SpaceMask
 
-Calculates the timestep used for an evolution.
+Thorn locate in `CactusNumerical/SpaceMask`
 
 #### Description
 
-The method is chosen using the keyword parameter `time::timestep` method.
-
-- given
-    The timestep is fixed to the value of the parameter `time::timestep`.
-- courant_static
-    Calculates the timestep once at the start of the simulation, based
-on a simple courant type condition using the spatial gridsizes and the parameter `time::dtfac`.
-
-    $$
-    \Delta t=\operatorname{dt} \mathrm{fac} * \min \left(\Delta x^{i}\right)
-    $$
-    
-    Note that it is up to the user to custom `dtfac` to take into account the dimension of the space being used, and the wave speed.
-- courant_speed
-    The timestep being set before each iteration using the spatial dimension of the grid, the spatial grid sizes, the parameter `courant_fac` and the grid variable `courant_wave_speed`. The algorithm used is
-     
-    $$
-    \Delta t=\operatorname{courant}\_ \mathrm{fac} * \min \left(\Delta x^{i}\right) / \mathrm{courant}\_\mathrm{wave}\_ \text { speed } / \sqrt{\mathrm{dim}}
-    $$
-    
-    For this algorithm to be successful, the variable `courant_wave_speed` must have been set by some thorn to the maximum propagation speed on the grid before this thorn sets the timestep,
-- courant_time
-    the timestep is chosen using
-    
-    $$
-    \Delta t=\operatorname{courant}\_ \mathrm{fac} * \mathrm{courant}\_\mathrm{min}\_ \text { time } / \sqrt{\mathrm{dim}}
-    $$
-    
-    where the grid variable `courant_min_time` must be set by some thorn to the minimum time for a wave to cross a gridzone before this thorn sets the timestep,
+To record whether each point of the grid has state “interior”, “excised” or “boundary”. 2-bits of the mask (enough to represent the three possible states of the type) are allocated to hold this information.
 
 #### Parameter
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
-| timestep_method | "courant_static" | Method for calculating timestep | "given":: "Use given timestep";  "courant_static" :: "Courant condition at BASEGRID (using dtfac)";  "courant_speed":: "Courant condition at POSTSTEP (using wavespeed and courant_fac)";  "courant_time" :: "Courant condition at POSTSTEP (using min time and courant_fac)" |
-| timestep_outonly | "no" | Don't set a dynamic timestep, just output what it would be |  |
-| timestep | 0.0 | Absolute value for timestep | : :: "Could be anything" |
-| dtfac | 0.5 | The standard timestep condition `dt = dtfac*max(delta_space)` | 0: :: "For positive timestep";  :0 :: "For negative timestep" |
-| courant_fac | 0.9 | The courant timestep condition dt = courant_fac*max(delta_space)/speed/sqrt(dim) | 0: :: "For positive timestep";  :0 :: "For negative timestep" |
-| timestep_outevery | 1 | How often to output courant timestep | 1: :: "Zero means no output" |
-| verbose | "no" | Give selective information about timestep setting |  |
+| use_mask | "no" | Turn on storage for mask? |  |
 
-#### Examples
+### SphericalSurface
 
-```
-# Fixed Value Timestep
-time::timestep_method = "given"
-time::timestep        = 0.1
-# Calculate Static Timestep Based on Grid Spacings. The following parameters set the timestep to be 0.25
-grid::dx
-grid::dy
-grid::dz
-time::timestep_method = "courant_static"
-time::dtfac = 0.5
-```
-
-### [MoL](http://cactuscode.org/documentation/thorns/CactusBase-MoL.pdf)
-
-This thorn provides generic time integrators. 
+Thorn locate in `CactusNumerical/SphericalSurface`
 
 #### Description
 
-The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator.
+This thorn provides a repository for two-dimensional surfaces with spherical topology. This thorn allows other thorns to store and retrieve the surfaces and some associated information. 
 
-$$
-\partial_{t} \mathbf{q}+\mathbf{A}^{i}(\mathbf{q}) \partial_{i} \mathbf{B}(\mathbf{q})=\mathbf{s}(\mathbf{q})
-$$
-
-Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.
-
-The keyword `MoL::ODE_Method` chooses between the different methods. To switch between the different types of generic methods there is also the keyword `MoL::Generic_Type`.
-
-The parameter `MoL::MoL_Intermediate_Steps ` controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method. For the ICN methods this parameter controls the number of iterations taken, which does not check for stability.
-
-The parameter `MoL::MoL_Num_Scratch_Levels  ` controls the amount of scratch space used.
-
-Time evolution methods provided by MoL
-
-- The standard "ICN"
-    $$
-    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(i)} &=\mathbf{q}^{(0)}+\frac{\Delta t}{2} \mathbf{L}\left(\mathbf{q}^{(i-1)}\right), \quad i=1, \ldots, N-1 \\ \mathbf{q}^{(N)} &=\mathbf{q}^{(N-1)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(N-1)}\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(N)} \end{aligned}
-    $$
-- he “averaging” ICN method "ICN-avg" instead calculates intermediate steps before averaging
-    $$
-    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \tilde{\mathbf{q}}^{(i)} &=\frac{1}{2}\left(\mathbf{q}^{(i)}+\mathbf{q}^{n}\right), \quad i=0, \ldots, N-1 \\ \mathbf{q}^{(i)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\tilde{\mathbf{q}}^{(N-1)}\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(N)} \end{aligned}
-    $$
-- The Runge-Kutta methods are those typically used in hydrodynamics
-    Explicitly the first order method is the Euler method:
-    $$
-    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\tilde{\mathbf{q}}^{(0)}\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(1)} \end{aligned}
-    $$
-    The second order method is:
-    $$
-    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(0)}\right) \\ \mathbf{q}^{(2)} &=\frac{1}{2}\left(\mathbf{q}^{(0)}+\mathbf{q}^{(1)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(1)}\right)\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(2)} \end{aligned}
-    $$
-    The third order method is:
-    $$
-    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(0)}\right) \\ \mathbf{q}^{(2)} &=\frac{1}{4}\left(3 \mathbf{q}^{(0)}+\mathbf{q}^{(1)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(1)}\right)\right) \\ \mathbf{q}^{(3)} &=\frac{1}{3}\left(\mathbf{q}^{(0)}+2 \mathbf{q}^{(2)}+2 \Delta t \mathbf{L}\left(\mathbf{q}^{(2)}\right)\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(3)} \end{aligned}
-    $$
-    The fourth order method, which is not strictly TVD, is:
-    $$
-    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\frac{1}{2} \Delta t \mathbf{L}\left(\mathbf{q}^{(0)}\right) \\ \mathbf{q}^{(2)} &=\mathbf{q}^{(0)}+\frac{1}{2} \Delta t \mathbf{L}\left(\mathbf{q}^{(1)}\right) \\ \mathbf{q}^{(3)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(2)}\right) \\ \mathbf{q}^{n+1} &=\frac{1}{6}\left(-2 \mathbf{q}^{(0)}+2 \mathbf{q}^{(1)}+4 \mathbf{q}^{(2)}+2 \mathbf{q}^{(3)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(3)}\right)\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(4)} \end{aligned}
-    $$
+**Examples are apparent and event horizons, or the surfaces on which gravitational waves are extracted.** Other such surfaces might be excision or outer boundaries.
 
 #### Parameter
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
-| MoL_Num_Evolved_Vars | 0 | The maximum number of variables to be evolved by MoL (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
-| MoL_Num_Evolved_Vars_Slow | 0 | The maximum number of 'slow' variables to be evolved by MoL (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
-| MoL_Num_Constrained_Vars | 0 | The maximum number of constrained variables with timelevels that MoL needs to know about (DPRECATED) | 0:	:: "Anything non negative. Added to by other thorns." |
-| MoL_Num_SaveAndRestore_Vars | 0 | The maximum number of variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
-| MoL_Max_Evolved_Array_Size | 0 | The maximum total size of any grid arrays to be evolved | 0: :: "Anything non negative. Accumulated by other thorns" |
-| MoL_Num_ArrayEvolved_Vars | 0 | The maximum number of array variables to be evolved by MoL (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
-| MoL_Num_ArrayConstrained_Vars | 0 | The maximum number of array constrained variables with timelevels that MoL needs to know about (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
-| MoL_Num_ArraySaveAndRestore_Vars | 0 | The maximum number of array variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) | 0:	:: "Anything non negative. Added to by other thorns." |
-| MoL_Num_Scratch_Levels | 0 | Number of scratch levels required by the ODE method | 0: :: "Anything non negative" |
-| ODE_Method | "ICN" | The ODE method use by MoL to do time integration | "Generic"	:: "Generic Shu-Osher Runge-Kutta type"; "ICN" :: "Iterative Crank Nicholson"; "ICN-avg" :: "Iterative Crank Nicholson with averaging"; "Euler"	:: "Euler"; "RK2" :: "Efficient RK2"; "RK2-central"	:: "Central RK2"; "RK3" :: "Efficient RK3"; "RK4" :: "Efficient RK4"; "RK45":: "RK45 (Fehlberg) with error estimation"; "RK45CK":: "RK45CK (Cash-Karp) with error estimation"; "RK65":: "RK65 with error estimation"; "RK87":: "RK87 with error estimation"; "AB":: "Adams-Bashforth"; "RK2-MR-2:1":: "2nd order 2:1 multirate RK scheme based on RK2 due to Schlegel et al 2009. This requires init_RHS_zero='no'."; "RK4-MR-2:1":: "3rd order 2:1 multirate RK scheme based on RK43 due to Schlegel et al 2009. This requires init_RHS_zero='no'."; "RK4-RK2" :: "RK4 as fast method and RK2 as slow method" |
-| Generic_Type | "RK" | If using the generic method, which sort | "RK" :: "One of the standard TVD Runge-Kutta methods"; "ICN" :: "Iterative Crank Nicholson as a generic method"; "Table" :: "Given from the generic method descriptor parameter"; "Classic RK3" :: "Efficient RK3 - classical version" |
-| ICN_avg_theta | 0.5 | theta of averaged ICN method, usually 0.5 | 0:1 :: "0 <= theta <= 1" |
-| ICN_avg_swapped | "no" | Use swapped averages in ICN method? |  |
-| AB_Type | "1" | If using the the AB method, which sort | "1" :: "same as forward Euler"; "2" :: "second order"; "3" :: "third order"; "4" :: "fourth order"; "5" :: "fifth order" |
-| AB_initially_reduce_order | "yes" | Reduce order of accuracy initially so that no past timelevels of initial data are required |  |
-| MoL_Intermediate_Steps | 3 | Number of intermediate steps taken by the ODE method | 1:		:: "Anything greater than 1" |
-| MoL_Memory_Always_On | "yes" | Do we keep the scratch arrays allocated all the time? |  |
-| MoL_Tiny | 1.e-15 | Effective local machine zero; required by generic solvers | 0: :: "Defaults to 1.e-15" |
-| initial_data_is_crap | "no" | If the initial data routine fails to set up the previous time levels, copy the current backwards |  |
-| run_MoL_PostStep_in_Post_Recover_Variables | "yes" | Schedule the PostStep parts after recovery so that symmetries are automatically done correctly. |  |
-| set_ID_boundaries | "yes" | Should boundaries be overwritten (via synchronization, prolongation, boundary conditions) by MoL? |  |
-| Generic_Method_Descriptor | "GenericIntermediateSteps | A string used to create a table containing the description of the generic method | ".":: "Should contain the Alpha and Beta arrays, and the number of intermediate steps" |
-| MoL_NaN_Check | "no" | Should the RHS GFs be checked for NaNs? |  |
-| disable_prolongation | "yes" | If Mesh refinement is enabled should we use buffer zones in intermediate steps? |  |
-| skip_initial_copy | "no" | Skip initial copy from previous to current time level |  |
-| init_RHS_zero | "yes" | Initialise the RHS to zero |  |
-| adaptive_stepsize | "no" | Choose the time step size adaptively |  |
-| maximum_absolute_error | 1.0e-6 | Maximum allowed absolute error for adaptive stepsize control | 0.0:) :: "" |
-| maximum_relative_error | 1.0e-6 | Maximum allowed relative error for adaptive stepsize control | 0.0:) :: "" |
-| RHS_error_weight | 1.0 | Weight of the RHS in the relative error calculation | 0.0: :: "should be between zero and one" |
-| safety_factor | 0.9 | Safety factor for stepsize control | (0.0:) :: "should be less than one" |
-| maximum_decrease | 10.0 | Maximum stepsize decrease factor | (1.0:) :: "should be larger than one" |
-| maximum_increase | 5.0 | Maximum stepsize increase factor | (1.0:) :: "should be larger than one" |
-| verbose | "normal" | How verbose should MoL be? | "none" :: "No output at all (not implemented)"; "normal" :: "Standard verbosity"; "register" :: "List the variables registered as well"; "extreme":: "Everything you never wanted to know" |
-
-## Boundary Condtition
+| nsurfaces | 0 | The number of surfaces | 0:42 :: "" |
+| maxntheta | 19 | Maximum number of grid points in the theta direction | 0: :: "" |
+| maxnphi | 38 | Maximum number of grid points in the phi direction | 0: :: "" |
+| name | "" | User friendly name of spherical surface | ".*" :: "any string" |
+| ntheta | 19 | Number of grid points in the theta direction | `0:` :: "must be at least `3 * nghoststheta`" |
+| nphi | 38 | Number of grid points in the phi direction | 0: :: "must be at least `3 * nghostsphi`" |
+| nghoststheta | 2 | Number of ghost zones in the theta direction | 0: :: "" |
+| nghostsphi | 2 | Number of ghost zones in the phi direction | 0: :: "" |
+| set_spherical | no | Place surface at a certain radius | |
+| radius | 0.0 | Radius for surface | :: "radius" |
+| ... | | |
 
 ### Boundary
 
-Provides a generic interface to boundary conditions, and provides a set of standard boundary conditions for one, two, and three dimensional grid variables. In addition, it allows all considerations of symmetry to be separated from those of physical boundary conditions.
+#### Description
 
-Boundary conditions can be local, meaning that the boundary point can be updated based on data in its immediate vicinity, or non-local, meaning that the new value on the boundary depends on data from a remote region of the computational domain
+Provides a set of standard boundary conditions for one, two, and three dimensional grid variables.
 
-Currently thorn Boundary allows a separate boundary condition to be applied to each face of the domain, however this is only implemented at the moment using the older deprecated interface.
-
-Thorn Boundary also provides seven standard boundary conditions, which can be applied to one, two, or three dimensional grid variables. The boundary conditions available are
-
-- Scalar: the value of the given field or fields at the boundary is set to a given scalar value, for example zero.
-- Flat: the value of the given field or fields at the boundary is copied from the value one grid point in, in any direction.
-- Radiation: Grid functions are given for the current time level as well as grid functions from a past timelevel which are needed for constructing the boundary condition.
-- Copy: Copy the boundary values from a different grid function, for example the previous timelevel. The two grid functions (or groups of grid functions) must have the same geometry.
-- Robin: The Robin boundary condition is $f(r)=f_{0}+\frac{k}{r^{n}}$
-- Static: The static boundary condition ensures that the boundary values do not evolve in time, by copying their values from previous timelevels.
-- None: The “None” boundary condition does just that, nothing. Grid variables should have symmetry boundary conditions applied to them, but do not have their physical boundary conditions applied using a properly registered function.
+Boundary conditions can be local, meaning that the boundary point can be updated based on data in its immediate vicinity, or non-local, meaning that the new value on the boundary depends on data from a remote region of the computational domain.
 
 #### Parameter
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
+| register_scalar | "yes" | the value of the given field or fields at the boundary is set to a given scalar value, for example zero. |  |
+| register_flat | "yes" | the value of the given field or fields at the boundary is copied from the value one grid point in, in any direction. |  |
+| register_radiation | "yes" | Grid functions are given for the current time level as well as grid functions from a past timelevel which are needed for constructing the boundary condition. |  |
+| register_copy | "yes" | Copy the boundary values from a different grid function, for example the previous timelevel. The two grid functions (or groups of grid functions) must have the same geometry. |  |
+| register_robin | "yes" | The Robin boundary condition is $f(r)=f_{0}+\frac{k}{r^{n}}$ |  |
+| register_static | "yes" | The static boundary condition ensures that the boundary values do not evolve in time, by copying their values from previous timelevels. |  |
+| register_none | "yes" | Grid variables should have symmetry boundary conditions applied to them, but do not have their physical boundary conditions applied using a properly registered function. |  |
 | radpower | -1 | Power of decay rate in extrapolation used in radiative boundaries | : :: "A negative value switches off this feature" |
-| register_scalar | "yes" | Register routine to handle the 'Scalar' boundary condition |  |
-| register_flat | "yes" | Register routine to handle the 'Flat' boundary condition |  |
-| register_radiation | "yes" | Register routine to handle the 'Radiation' boundary condition |  |
-| register_copy | "yes" | Register routine to handle the 'Copy' boundary condition |  |
-| register_robin | "yes" | Register routine to handle the 'Robin' boundary condition |  |
-| register_static | "yes" | Register routine to handle the 'Static' boundary condition |  |
-| register_none | "yes" | Register routine to handle the 'None' boundary condition |  |
+
+### SymBase
+
+Thorn locate in `CactusBase/SymBase`
+
+#### Description
+
+Each thorn that implements a symmetry boundary condition should register itself with thorn SymBase
 
 ### ReflectionSymmetry
 
@@ -579,23 +466,13 @@ The computational grid can be manually distributed using PUGH’s string paramet
 
 https://arxiv.org/pdf/gr-qc/0310042.pdf
 
-The Carpet driver, which lives in the Carpet arrangement, is divided into several parts. The thorn Carpet is the main driver piece; it provides all the routines and structures that Cactus expects from it. The thorn CarpetLib is the workhorse that does all the bookkeeping and data shuffling. Those two alone form a valid Cactus driver; the other thorns provide additional functionality. The thorns CarpetInterp, CarpetReduce, and CarpetSlab provide the corresponding interpolation, reduction, and slabbing interfaces. The thorns CarpetIOASCII and CarpetIOFlexIO provide I/O methods. Finally, thorn CarpetRegrid provides a user interface to select where and what to refine. (The actual refinement is handled in CarpetLib.)
-
-Carpet is a mesh refinement driver. It knows about a hierarchy of refinement levels, where each level is decomposed into a set of cuboid grid patches. For historic reasons it also has a notion of multigrid levels, but those are currently unused.
+The Carpet driver, which lives in the Carpet arrangement, is divided into several parts. The thorn Carpet is the main driver piece; it provides all the routines and structures that Cactus expects from it.
 
 In order to allow multiple processors to run efficiently in parallel, **the grid is broken down into several rectangular components, and each processor is assigned one of these components.** The components will usually **overlap by a few grid points, so as to allow the processors to calculate spatial derivatives** (which require neighbouring grid points) without having to communicate for every grid point. From time to time it is then necessary to synchronise the overlapping region, which is the only time at which communication happens.
 
-Setting up a grid hierarch is in Carpet handled by three different entities:
+#### Description
 
-- Carpet itself decides the extent of the domain, the type of outer boundary conditions, and distributes the domain onto processors.
-- a regridding thorn is responsible for deciding the shape of the grid hierarchy.
-- CarpetLib handles the details and actually manages the data.
-
-A regridding thorn, such as CarpetRegrid or CarpetRegrid2, sets up the grid hierarchy. The grid hierarchy consists of several refinement levels, and each refinement level consists of several refined regions.
-
-We assume that boundary location and boundary discretisation are set up via CoordBase. This is necessary since other methods do not allow specifying sufficient details to handle e.g. refined regions intersecting mesh refinement boundaries.
-
-The main distinction between an outer boundary point and an interior point from Carpet’s point of view is that an outer boundary point is not evolved in time. Instead, the value of boundary points must be completely determined by the value of interior points.
+This thorn provides a parallel AMR (adaptive mesh refinement) driver with MPI.
 
 #### Parameter
 
@@ -837,6 +714,14 @@ regions.  This should happen in conjunction with an excision boundary thorn.
 
 ## Partial Differential Equation (PDE)
 
+### SummationByParts
+
+Thorn locate in `CactusNumerical/SummationByParts`
+
+#### Description
+
+Calculate first derivates of grid functions using ﬁnite difference stencils that satisfy summation by parts.
+
 ### CT_MultiLevel
 
 This thorn implements a multigrid solver for systems of elliptic partial differential equations.
@@ -965,61 +850,17 @@ CT_MultiLevel needs at least one external thorn to set the PDE coefficients `CT_
 
 Thorn `IOASCII` provides I/O methods for 1D, 2D, and 3D output of grid arrays and grid functions into files in ASCII format.
 
-## Einstein
+## Initial data
 
-The basic variables are those of the ADM formulation of Einstein’s equations, namely the spatial 3-metric $\gamma_{i j}$, the lapse $\alpha$, the shift $\beta$, and the extrinsic curvature $K_{i j}$. The 4-metric is given by
-
-$$
-d s^{2}=-\left(\alpha^{2}-\beta^{i} \beta_{i}\right) d t^{2}+\beta_{i} d t d x^{i}+\gamma_{i j} d x^{i} d x^{j}
-$$
-
-If $\gamma_{i j}$ is the 3-metric of a spacelike Cauchy surface with normal n, then
-
-$$
-K_{i j}=\frac{1}{2} \mathcal{L}_{n} \gamma_{i j}
-$$
-
-The ADM equations then evolve the spatial three metric $\gamma_{i j}$ and the extrinsic curvature $K_{i j}$ using
-
-$$
-\begin{aligned} \frac{d}{d t} \gamma_{i j}=&-2 \alpha K_{i j} \\ \frac{d}{d t} K_{i j}=&-D_{i} D_{j} \alpha+\alpha\left(R_{i j}+K K_{i j}\right.\\ &-2 K_{i k} K_{j}^{k} - ^{(4)} R_{i j} ) \end{aligned}
-$$
-
-with
-
-$$
-\frac{d}{d t}=\partial_{t}-\mathcal{L}_{\beta}
-$$
-
-These variables are defined in the thorn ADMBase, and are the ones that are used to communicate the geometry to other thorns. It is not necessary to use all of these thorns to make use of CactusEinstein, however. The only thorn which is necessary is ADMBase, since it defines the variables and parameters on which the rest of the CactusEinstein thorns depend.
-
-- ADMConstraints: computes the 3 + 1 Hamiltonian (energy) and momentum constraints
-- ADMCoupling: allows thorns to ‘register’ their matter field contributions to the stress energy tensor
-- ADMMacros: macros for computing various quantities which are commonly used in 3 + 1 numerical relativity, such as Christoffel symbols, covariant derivatives, the Ricci tensor, etc etc; some of these support both 2nd and 4th order finite differencing
-- AHFinder: searches for apparent horizons
-- CoordGauge: manages gauge quantities
-- EvolSimple: a demo evolution thorn
-- Extract: ‘extracts’ gravitational-wave waveforms
-- IDAnalyticBH: analytic black hole initial data
-- IDAxiBrillBH: axisymmetric Brill wave with black hole initial data
-- IDBrillData: Brill wave initial data
-- IDLinearWaves: linearized wave initial data
-- IDSimple: a demo initial data thorn, provides Minkowski space with conformal factor
-- Maximal: maximal slicing gauge condition
-- PsiKadelia: computes various Neumann-Penrose quantities
-- SpaceMask: provides a ‘mask’ for the spatial grid
-- StaticConformal: provides for a static conformal factor
-- TimeGeodesic: computes timelike geodesics
-- Exact: analytical solutions where the full 4-metric is known throughout the entire spacetime, eg. Schwarzschild, Kerr, various cosmological solutions.
+The initial data are computed using three different codes: COCAL, LORENE, and the RNS code.
 
 ### ADMBase
 
-This thorn provides the basic variables used to communicate between
-thorns doing General Relativity in the 3+1 formalism.
+Thorn locate in `EinsteinBase/ADMBase`
 
 #### Description
 
-It provides the basic variables (3-metric, extrinsic curvature, lapse and shift vector) for the 3 + 1 formalism, in addition to a set of parameters to regulate the methods used for their evolution. These variables are used to communicate between thorns providing initial data, evolution methods and analysis routines for the 3 + 1 formalism.
+It provides the basic variables (3-metric, extrinsic curvature, lapse and shift vector) for the 3 + 1 formalism, in addition to a set of parameters to regulate the methods used for their evolution.
 
 The variables provided by ADMBase are:
 - The 3-metric tensor, $g_{i j}$
@@ -1031,15 +872,13 @@ The variables provided by ADMBase are:
 - The (optional) shift vector $\beta^{i}$
     betax, betay, betaz
 
-Initial data for the 3 + 1 variables is specified by the `initial_data` (3-metric and extrinsic curvature), `initial_lapse` (lapse), and `initial_shift` (shift) parameters. By default, ADMBase initialises the 3- metric and extrinsic curvature to Minkowski and the lapse to one.
-
-Analogous to specifying initial data, evolution methods are chosen by the evolution method (3-metric and extrinsic curvature), `lapse_evolution_method` (lapse), and `shift_evolution_method` (shift) parameters. By default, ADMBase does not evolve the 3-metric or extrinsic curvature, and holds the lapse and shift static.
+By default, ADMBase initialises the 3-metric and extrinsic curvature to Minkowski and the lapse to one. By default, ADMBase does not evolve the 3-metric or extrinsic curvature, and holds the lapse and shift static.
 
 #### Parameter
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
-| initial_data | "Cartesian | Initial metric and extrinsic curvature datasets | "Cartesian Minkowski" :: "Minkowski values in cartesian coordinates" |
+| initial_data | "Cartesian Minkowski" | Initial metric and extrinsic curvature datasets | "Cartesian Minkowski" :: "Minkowski values in cartesian coordinates" |
 | initial_lapse | "one" | Initial lapse value | "one" :: "Uniform lapse" |
 | initial_shift | "zero" | Initial shift value | "none" :: "Shift is inactive"; "zero" :: "Shift is zero" |
 | initial_dtlapse | "none" | Initial dtlapse value | "none" :: "Dtlapse is inactive"; "zero" :: "Dtlapse is zero" |
@@ -1049,17 +888,59 @@ Analogous to specifying initial data, evolution methods are chosen by the evolut
 | shift_evolution_method | "static" | The shift evolution method | "static" :: "dtlapse is not evolved"; "ID-apply-regrid" :: "dtlapse is not evolved and initial data is used to fill in new grid points after regridding"; "ID-apply-always" :: "dtlapse is not evolved and initial data is used to fill in new grid points before each step and after grid changes" |
 | dtshift_evolution_method | "flat" | The dtshift evolution method | "" :: "must be a registered boundary condition" |
 | metric_type | "physical" | The semantics of the metric variables (physical, static conformal, etc) | "physical" :: "metric and extrinsic curvature are the physical ones" |
-| lapse_prolongation_type | "Lagrange" | The kind of boundary prolongation for the lapse | "Lagrange" :: "standard prolongation (requires several time levels)"; "none" :: "no prolongation (use this if you do not have enough time levels active)" |
-| shift_prolongation_type | "Lagrange" | The kind of boundary prolongation for the shift | "Lagrange" :: "standard prolongation (requires several time levels)"; "none" :: "no prolongation (use this if you do not have enough time levels active)" |
-| metric_prolongation_type | "Lagrange" | The kind of boundary prolongation for the metric and extrinsic curvature | "Lagrange" :: "standard prolongation (requires several time levels)"; "none" :: "no prolongation (use this if you do not have enough time levels active)" |
-| lapse_timelevels | 1 | Number of time levels for the lapse | 0:3 :: "" |
-| shift_timelevels | 1 | Number of time levels for the shift | 0:3 :: "" |
-| metric_timelevels | 1 | Number of time levels for the metric and extrinsic curvature | 0:3 :: "" |
+| ... | | | |
+
+### ADMMacros
+
+#### Description
+
+This thorn provides various macros which can be used to calculate quantities.
+
+Macros exist for the following quantities
+
+| macros | Describe | Macro Name |
+| ------------ | ------------- | ------------- |
+| $\alpha_{,i}$ | All first spatial derivatives of lapse | DA |
+| $\alpha_{,ij}$ | All second spatial derivatives of lapse | DDA |
+| $\alpha_{;ij}$ | All second covariant spatial derivatives of lapse | CDCDA |
+| $\beta^{i}_{\;\;j}$ | All first spatial derivatives of shift | DB | 
+| $K_{ij;kl}$ | All first covariant derivatives of the extrinsic curvature | CDK |
+| $K_{ij;x}$ | First covariant derivatives of the extrinsic curvature | CDXCDK |
+|  | Determinant of 3-metric | DETG |
+| $g^{ij}$ | Upper 3-metric | UPPERMET |
+| $trK$ | Trace of extrinsic curvature | TRK |
+| | Trace of stress energy tensor | TRT |
+| | Hamiltonian constraint | HAMADM |
+| $K_{ij,x}$ | Partial derivatives of extrinsic curvature | DXDK |
+| $g_{ij,x}$ | First partial derivatives of 3-metric | DXDG |
+| $g_{ij,k}$ | All first partial derivatives of 3-metric | DG |
+| $g_{ij;x}$ | First covariant derivatives of 3-metric | DXDCG |
+| $g_{ij,xx}$ | Second partial derivatives of 3-metric | DXXDG |
+| $g_{ij,lm}$ | All second partial derivative of 3-metric | DDG |
+| $R_{ij}$ | Ricci tensor | RICCI |
+| $R$ | Trace of Ricci tensor | TRRICCI |
+| $\Gamma_{cab}$ | Christoffel symbols of first kind | CHR1 |
+| $\Gamma^{c}_{\;\;ab}$ | Christoffel symbols of second kind | CHR2 |
+| | Momentum constraints | MOMX |
+| $\tilde{g}_{ij,t}$ | Source term in evolution equation for conformal metric | DCGDT |
+
+Some of the macros also support centered 4th order finite differencing; This is selected with the parameter `spatial_order`. If it’s set to 4, then 5-point finite difference molecules are used, so `driver::ghost` size must be set to at least 2.
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| spatial_order | 2 | Order of spatial differencing | 2 :: "2nd order finite differencing"; 4 :: "4th order finite differencing" |
+
+### ADMCoupling
+
+#### Description
+
+This thorn is to allow clean coupling of matter thorns and spacetime evolution thorns.
 
 ### ADMAnalysis
 
-This thorn does basic analysis of the metric and extrinsic curvature 
-tensors.
+This thorn does basic analysis of the metric and extrinsic curvature tensors.
 
 It calculates if output is requested for them.
 
@@ -1094,54 +975,11 @@ projects the spherical components onto (`r*dtheta`, `r*sin(theta)*dphi`) instead
 | ricci_timelevels | 1 | Number of time levels for the Ricci tensor and scalar | 1:3 :: "" |
 | ricci_prolongation_type | "none" | The kind of boundary prolongation for the Ricci tensor and scalar | "Lagrange" :: "standard prolongation (requires several time levels)"; "copy" :: "use data from the current time level (requires only one time level)"; "none" :: "no prolongation (use this if you do not have enough time levels active)" |
 
-### ADMMacros
-
-This thorn provides various macros which can be used to calculate quantities, such as the Christoffel Symbol or Riemann Tensor components, using the basic variables of thorn ADMBase. The macros work pointwise to calculate quantities at the grid point (i, j, k); it’s up to you to loop over all the grid points where you want computations done.
+### InitBase
 
 #### Description
 
-By default, the macros use centered 2nd order finite differencing, with 3-point finite difference molecules. That is, when finite differencing the the grid-point indices i ± 1, j ± 1, and k ± 1 must also be valid, and `driver::ghost_size` must be set to at least 1.
-
-Some of the macros also support centered 4th order finite differencing; This is selected with the parameter `spatial_order`. This may be set to either 2 or 4; it defaults to 2. If it’s set to 4, then 5-point finite difference molecules are used, so the grid-point indices i ± 2, j ± 2, and k ± 2 must also be valid, and driver::ghost size must be set to at least 2.
-
-#### Parameter
-
-| Key | Defaults | Describe | Option |
-| ------------ | ------------- | ------------- | ------------- |
-| spatial_order | 2 | Order of spatial differencing | 2 :: "2nd order finite differencing"; 4 :: "4th order finite differencing" |
-
-## Initial data
-
-The initial data are computed using the Compact Object CALculator (COCAL)
-
-![-w534](media/15512756872829.jpg)
-
-### InitBase
-
-Thorn InitBase specifies how initial data are to be set up.  It does
-not set up any initial data by itself, nor does it contain any
-routines which are to be called.  It is merely a convenient repository
-remembering how initial data are to be set up, so that other thorns
-can check their actions against this thorn.
-
-There are several possibilities:
-
-1. The initial data thorn sets up data on one time level, while other
-   time levels are scratch space.  The time evolution method must
-   start up from a single time level.  (This is the default.)
-
-2. The initial data thorn sets up data on exactly one time level, and
-   is called once for each active time level.  (This means that the
-   initial data thorn can only access the current time level.)
-
-3. The initial data thorn sets up data on exactly two time levels, and
-   is called once for each active time level.  (This means that the
-   initial data thorn can only access the current and the first past
-   time level.)
-
-4. The initial data thorn sets up data on all active time levels.
-   (This makes it necessary that the initial data thorn checks the
-   number of active time levels.)
+Set up initial data level
 
 #### Parameter
 
@@ -1193,15 +1031,154 @@ $$
 
 ## Evolution
 
-### ADMCoupling
+### Time
 
-This thorn allows seamless coupling of evolution and analysis thorns to any thorns which contribute matter terms to the stress energy tensor $T_{a b}$.
+Calculates the timestep used for an evolution.
 
 #### Description
 
-The point is to allow clean coupling of matter thorns and spacetime evolution thorns. This avoids explicit dependencies between the spacetime and matter evolution thorns.
+The method is chosen using the keyword parameter `time::timestep` method.
 
-Spacetime evolution thorns and various analysis thorns may need to know the value of the stress-energy tensor.
+- given
+    The timestep is fixed to the value of the parameter `time::timestep`.
+- courant_static
+    Calculates the timestep once at the start of the simulation, based
+on a simple courant type condition using the spatial gridsizes and the parameter `time::dtfac`.
+
+    $$
+    \Delta t=\operatorname{dt} \mathrm{fac} * \min \left(\Delta x^{i}\right)
+    $$
+    
+    Note that it is up to the user to custom `dtfac` to take into account the dimension of the space being used, and the wave speed.
+- courant_speed
+    The timestep being set before each iteration using the spatial dimension of the grid, the spatial grid sizes, the parameter `courant_fac` and the grid variable `courant_wave_speed`. The algorithm used is
+     
+    $$
+    \Delta t=\operatorname{courant}\_ \mathrm{fac} * \min \left(\Delta x^{i}\right) / \mathrm{courant}\_\mathrm{wave}\_ \text { speed } / \sqrt{\mathrm{dim}}
+    $$
+    
+    For this algorithm to be successful, the variable `courant_wave_speed` must have been set by some thorn to the maximum propagation speed on the grid before this thorn sets the timestep,
+- courant_time
+    the timestep is chosen using
+    
+    $$
+    \Delta t=\operatorname{courant}\_ \mathrm{fac} * \mathrm{courant}\_\mathrm{min}\_ \text { time } / \sqrt{\mathrm{dim}}
+    $$
+    
+    where the grid variable `courant_min_time` must be set by some thorn to the minimum time for a wave to cross a gridzone before this thorn sets the timestep,
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| timestep_method | "courant_static" | Method for calculating timestep | "given":: "Use given timestep";  "courant_static" :: "Courant condition at BASEGRID (using dtfac)";  "courant_speed":: "Courant condition at POSTSTEP (using wavespeed and courant_fac)";  "courant_time" :: "Courant condition at POSTSTEP (using min time and courant_fac)" |
+| timestep_outonly | "no" | Don't set a dynamic timestep, just output what it would be |  |
+| timestep | 0.0 | Absolute value for timestep | : :: "Could be anything" |
+| dtfac | 0.5 | The standard timestep condition `dt = dtfac*max(delta_space)` | 0: :: "For positive timestep";  :0 :: "For negative timestep" |
+| courant_fac | 0.9 | The courant timestep condition dt = courant_fac*max(delta_space)/speed/sqrt(dim) | 0: :: "For positive timestep";  :0 :: "For negative timestep" |
+| timestep_outevery | 1 | How often to output courant timestep | 1: :: "Zero means no output" |
+| verbose | "no" | Give selective information about timestep setting |  |
+
+#### Examples
+
+```
+# Fixed Value Timestep
+time::timestep_method = "given"
+time::timestep        = 0.1
+# Calculate Static Timestep Based on Grid Spacings. The following parameters set the timestep to be 0.25
+grid::dx
+grid::dy
+grid::dz
+time::timestep_method = "courant_static"
+time::dtfac = 0.5
+```
+
+### [MoL](http://cactuscode.org/documentation/thorns/CactusBase-MoL.pdf)
+
+This thorn provides generic time integrators. 
+
+#### Description
+
+The Method of Lines (MoL) converts a (system of) partial differential equation(s) into an ordinary differential equation containing some spatial differential operator.
+
+$$
+\partial_{t} \mathbf{q}+\mathbf{A}^{i}(\mathbf{q}) \partial_{i} \mathbf{B}(\mathbf{q})=\mathbf{s}(\mathbf{q})
+$$
+
+Given this separation of the time and space discretizations, well known stable ODE integrators such as Runge-Kutta can be used to do the time integration.
+
+The keyword `MoL::ODE_Method` chooses between the different methods. To switch between the different types of generic methods there is also the keyword `MoL::Generic_Type`.
+
+The parameter `MoL::MoL_Intermediate_Steps ` controls the number of intermediate steps for the ODE solver. For the generic Runge-Kutta solvers it controls the order of accuracy of the method. For the ICN methods this parameter controls the number of iterations taken, which does not check for stability.
+
+The parameter `MoL::MoL_Num_Scratch_Levels  ` controls the amount of scratch space used.
+
+Time evolution methods provided by MoL
+
+- The standard "ICN"
+    $$
+    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(i)} &=\mathbf{q}^{(0)}+\frac{\Delta t}{2} \mathbf{L}\left(\mathbf{q}^{(i-1)}\right), \quad i=1, \ldots, N-1 \\ \mathbf{q}^{(N)} &=\mathbf{q}^{(N-1)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(N-1)}\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(N)} \end{aligned}
+    $$
+- he “averaging” ICN method "ICN-avg" instead calculates intermediate steps before averaging
+    $$
+    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \tilde{\mathbf{q}}^{(i)} &=\frac{1}{2}\left(\mathbf{q}^{(i)}+\mathbf{q}^{n}\right), \quad i=0, \ldots, N-1 \\ \mathbf{q}^{(i)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\tilde{\mathbf{q}}^{(N-1)}\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(N)} \end{aligned}
+    $$
+- The Runge-Kutta methods are those typically used in hydrodynamics
+    Explicitly the first order method is the Euler method:
+    $$
+    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\tilde{\mathbf{q}}^{(0)}\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(1)} \end{aligned}
+    $$
+    The second order method is:
+    $$
+    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(0)}\right) \\ \mathbf{q}^{(2)} &=\frac{1}{2}\left(\mathbf{q}^{(0)}+\mathbf{q}^{(1)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(1)}\right)\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(2)} \end{aligned}
+    $$
+    The third order method is:
+    $$
+    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(0)}\right) \\ \mathbf{q}^{(2)} &=\frac{1}{4}\left(3 \mathbf{q}^{(0)}+\mathbf{q}^{(1)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(1)}\right)\right) \\ \mathbf{q}^{(3)} &=\frac{1}{3}\left(\mathbf{q}^{(0)}+2 \mathbf{q}^{(2)}+2 \Delta t \mathbf{L}\left(\mathbf{q}^{(2)}\right)\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(3)} \end{aligned}
+    $$
+    The fourth order method, which is not strictly TVD, is:
+    $$
+    \begin{aligned} \mathbf{q}^{(0)} &=\mathbf{q}^{n} \\ \mathbf{q}^{(1)} &=\mathbf{q}^{(0)}+\frac{1}{2} \Delta t \mathbf{L}\left(\mathbf{q}^{(0)}\right) \\ \mathbf{q}^{(2)} &=\mathbf{q}^{(0)}+\frac{1}{2} \Delta t \mathbf{L}\left(\mathbf{q}^{(1)}\right) \\ \mathbf{q}^{(3)} &=\mathbf{q}^{(0)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(2)}\right) \\ \mathbf{q}^{n+1} &=\frac{1}{6}\left(-2 \mathbf{q}^{(0)}+2 \mathbf{q}^{(1)}+4 \mathbf{q}^{(2)}+2 \mathbf{q}^{(3)}+\Delta t \mathbf{L}\left(\mathbf{q}^{(3)}\right)\right) \\ \mathbf{q}^{n+1} &=\mathbf{q}^{(4)} \end{aligned}
+    $$
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| MoL_Num_Evolved_Vars | 0 | The maximum number of variables to be evolved by MoL (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_Evolved_Vars_Slow | 0 | The maximum number of 'slow' variables to be evolved by MoL (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_Constrained_Vars | 0 | The maximum number of constrained variables with timelevels that MoL needs to know about (DPRECATED) | 0:	:: "Anything non negative. Added to by other thorns." |
+| MoL_Num_SaveAndRestore_Vars | 0 | The maximum number of variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
+| MoL_Max_Evolved_Array_Size | 0 | The maximum total size of any grid arrays to be evolved | 0: :: "Anything non negative. Accumulated by other thorns" |
+| MoL_Num_ArrayEvolved_Vars | 0 | The maximum number of array variables to be evolved by MoL (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_ArrayConstrained_Vars | 0 | The maximum number of array constrained variables with timelevels that MoL needs to know about (DPRECATED) | 0: :: "Anything non negative. Added to by other thorns." |
+| MoL_Num_ArraySaveAndRestore_Vars | 0 | The maximum number of array variables to be evolved outside of MoL but that MoL needs to know about (DPRECATED) | 0:	:: "Anything non negative. Added to by other thorns." |
+| MoL_Num_Scratch_Levels | 0 | Number of scratch levels required by the ODE method | 0: :: "Anything non negative" |
+| ODE_Method | "ICN" | The ODE method use by MoL to do time integration | "Generic"	:: "Generic Shu-Osher Runge-Kutta type"; "ICN" :: "Iterative Crank Nicholson"; "ICN-avg" :: "Iterative Crank Nicholson with averaging"; "Euler"	:: "Euler"; "RK2" :: "Efficient RK2"; "RK2-central"	:: "Central RK2"; "RK3" :: "Efficient RK3"; "RK4" :: "Efficient RK4"; "RK45":: "RK45 (Fehlberg) with error estimation"; "RK45CK":: "RK45CK (Cash-Karp) with error estimation"; "RK65":: "RK65 with error estimation"; "RK87":: "RK87 with error estimation"; "AB":: "Adams-Bashforth"; "RK2-MR-2:1":: "2nd order 2:1 multirate RK scheme based on RK2 due to Schlegel et al 2009. This requires init_RHS_zero='no'."; "RK4-MR-2:1":: "3rd order 2:1 multirate RK scheme based on RK43 due to Schlegel et al 2009. This requires init_RHS_zero='no'."; "RK4-RK2" :: "RK4 as fast method and RK2 as slow method" |
+| Generic_Type | "RK" | If using the generic method, which sort | "RK" :: "One of the standard TVD Runge-Kutta methods"; "ICN" :: "Iterative Crank Nicholson as a generic method"; "Table" :: "Given from the generic method descriptor parameter"; "Classic RK3" :: "Efficient RK3 - classical version" |
+| ICN_avg_theta | 0.5 | theta of averaged ICN method, usually 0.5 | 0:1 :: "0 <= theta <= 1" |
+| ICN_avg_swapped | "no" | Use swapped averages in ICN method? |  |
+| AB_Type | "1" | If using the the AB method, which sort | "1" :: "same as forward Euler"; "2" :: "second order"; "3" :: "third order"; "4" :: "fourth order"; "5" :: "fifth order" |
+| AB_initially_reduce_order | "yes" | Reduce order of accuracy initially so that no past timelevels of initial data are required |  |
+| MoL_Intermediate_Steps | 3 | Number of intermediate steps taken by the ODE method | 1:		:: "Anything greater than 1" |
+| MoL_Memory_Always_On | "yes" | Do we keep the scratch arrays allocated all the time? |  |
+| MoL_Tiny | 1.e-15 | Effective local machine zero; required by generic solvers | 0: :: "Defaults to 1.e-15" |
+| initial_data_is_crap | "no" | If the initial data routine fails to set up the previous time levels, copy the current backwards |  |
+| run_MoL_PostStep_in_Post_Recover_Variables | "yes" | Schedule the PostStep parts after recovery so that symmetries are automatically done correctly. |  |
+| set_ID_boundaries | "yes" | Should boundaries be overwritten (via synchronization, prolongation, boundary conditions) by MoL? |  |
+| Generic_Method_Descriptor | "GenericIntermediateSteps | A string used to create a table containing the description of the generic method | ".":: "Should contain the Alpha and Beta arrays, and the number of intermediate steps" |
+| MoL_NaN_Check | "no" | Should the RHS GFs be checked for NaNs? |  |
+| disable_prolongation | "yes" | If Mesh refinement is enabled should we use buffer zones in intermediate steps? |  |
+| skip_initial_copy | "no" | Skip initial copy from previous to current time level |  |
+| init_RHS_zero | "yes" | Initialise the RHS to zero |  |
+| adaptive_stepsize | "no" | Choose the time step size adaptively |  |
+| maximum_absolute_error | 1.0e-6 | Maximum allowed absolute error for adaptive stepsize control | 0.0:) :: "" |
+| maximum_relative_error | 1.0e-6 | Maximum allowed relative error for adaptive stepsize control | 0.0:) :: "" |
+| RHS_error_weight | 1.0 | Weight of the RHS in the relative error calculation | 0.0: :: "should be between zero and one" |
+| safety_factor | 0.9 | Safety factor for stepsize control | (0.0:) :: "should be less than one" |
+| maximum_decrease | 10.0 | Maximum stepsize decrease factor | (1.0:) :: "should be larger than one" |
+| maximum_increase | 5.0 | Maximum stepsize increase factor | (1.0:) :: "should be larger than one" |
+| verbose | "normal" | How verbose should MoL be? | "none" :: "No output at all (not implemented)"; "normal" :: "Standard verbosity"; "register" :: "List the variables registered as well"; "extreme":: "Everything you never wanted to know" |
 
 ### ML_BSSN
 
@@ -2056,7 +2033,32 @@ AHFinderDirect::initial_guess__coord_sphere__z_center[1] =  0.0
 AHFinderDirect::initial_guess__coord_sphere__radius[1] = 2.0
 ```
 
-## Extract Gravitational Wave
+## Analysis
+
+### StaticConformal
+
+Thorn locate in `EinsteinBase/StaticConformal`
+
+#### Description
+
+`StaticConformal` provides aliased functions to convert between physical and conformal 3-metric values.
+
+The transformation is
+
+$$ 
+g_{ij}^{\mbox{physical}} = \psi^4 g_{ij}^{\mbox{conformal}}
+$$
+
+The extrinsic curvature is not transformed.
+
+#### Parameter
+
+| Key | Defaults | Describe | Option |
+| ------------ | ------------- | ------------- | ------------- |
+| metric_type |  | ADM variables are the conformal values as opposed to the physical values. | "static conformal" :: "Metric is conformal with static conformal factor, extrinsic curvature is physical" |
+| conformal_storage | "factor+derivs+2nd | How much conformal storage do we have ? | "factor" :: "Just the conformal factor"; "factor+derivs":: "Conformal factor plus first derivatives"; "factor+derivs+2nd derivs" :: "Conformal factor plus first and second derivatives" |
+
+### Extract Gravitational Wave
 
 To measure the flux of energy and angular momentum carried away by GWs, we use a modiﬁed version of the Psikadelia thorn.
 
@@ -2068,6 +2070,8 @@ https://arxiv.org/pdf/gr-qc/0206008.pdf
 
 ## Output
 
+Standard I/O methods provided with the Cactus distribution
+
 | IO method | Description | Providing thorn | Viz Tools |
 | ------------ | ------------- | ------------- | ------------- |
 | Scalar | output of scalars or grid array reductions in xgraph or gnuplot format | CactusBase/IOBasic | gnuplot |
@@ -2077,14 +2081,12 @@ https://arxiv.org/pdf/gr-qc/0206008.pdf
 
 ### IOUtil
 
-Input and output of data (I/O) in Cactus is provided by infrastructure thorns, which interact with the flesh via a fixed interface. Thorn IOUtil by itself provides no I/O methods.
+Thorn locate in `CactusBase/IOUtil`
 
 #### Description
 
-- IO::out_dir
-    The name of the directory to be used for output. All the I/O methods described here will write by default to this directory (which itself defaults to the current working directory). Individual methods have parameters which can direct their output to a different directory.
-- IO::out_criterion
-    The criterion that decides when to output. The default is to output every so many iterations.
+This thorn is the flesh for IO - it always needs to be activated if you want to do some I/O in Cactus. IOUtil allows you to set the default behaviour for all the I/O methods. The default behaviour can be overridden by specific parameters for each method.
+
 - IO::out_every
     How often, in terms of iterations, each of the Cactus I/O methods will write output. Again, individual methods can set their own parameters to override this. The default is to never write output.
 - IO::out_dt
@@ -2147,8 +2149,7 @@ Each checkpoint is saved into a checkpoint file which can be used to restart a n
 
 | Key | Defaults | Describe | Option |
 | ------------ | ------------- | ------------- | ------------- |
-| out_dir | "." | Default output directory | ".+" :: "A valid directory name" |
-| max_entries_per_subdir | 0 | Number of processes that can access the same directory | 0 :: "unlimited"; 2: :: "at most that many processes" |
+| out_dir | "." | Default output directory (which itself defaults to the current working directory) | "." :: "A valid directory name" |
 | out_criterion | "iteration" | Criterion to select output intervals | "never" :: "Never output"; "iteration" :: "Output every so many iterations"; "time":: "Output every that much coordinate time" |
 | out_every | -1 | How often to do output by default | 1: :: "Every so many iterations"; -1:0 :: "Disable output" |
 | out_dt | -2 | How often to do output by default | (0: :: "In intervals of that much coordinate time";  0 :: "As often as possible"; -1 :: "Disable output"; -2 :: "Disable output" |
@@ -2425,9 +2426,9 @@ This thorn does output of arbitrary Cactus variables in HDF5 file format. It als
 | checkpoint | "no" | Do checkpointing with HDF5 |  |
 | checkpoint_next | "no" | Checkpoint at next iteration |  |
 
-### [CarpetIOHDF5](https://www.einsteintoolkit.org/thornguide/Carpet/CarpetIOHDF5/documentation.html)
+### CarpetIOHDF5
 
-The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate files named "<varname>.h5". Such dataﬁles can be used for further postprocessing or fed back into Cactus via the filereader capabilities of thorn IOUtil. Checkpointing for thorn CarpetIOHDF5 is enabled by setting the parameter `IOHDF5::checkpoint = "yes"`.
+The CarpetIOHDF5 I/O method can output any type of CCTK grid variables (grid scalars, grid functions, and grid arrays of arbitrary dimension); data is written into separate files named "<varname>.h5". Such dataﬁles can be used for further postprocessing or fed back into Cactus via the filereader capabilities of thorn IOUtil.
 
 #### Description
 
@@ -2598,7 +2599,11 @@ IO::recover      = "auto"
 
 ### TimerReport
 
-This thorn provides mechanisms for obtaining different information from timers during a Cactus run.
+Thorn locate in `CactusUtils/TimerReport`
+
+#### Description
+
+This thorn provides timer details to screen at different iterations.
 
 #### Parameter
 
@@ -2606,15 +2611,14 @@ This thorn provides mechanisms for obtaining different information from timers d
 | ------------ | ------------- | ------------- | ------------- |
 | out_every | 0 | How often to output timer report to screen | 0 :: "No periodic output (default)"; 1: :: "Every so many iterations" |
 | out_at | -1 | Output timer information at a given iteration | -1 :: "Do not output at specific iteration (default)"; 0::: "At this iteration" |
-| out_filename | "" | File name for timer reports | "`^$`" :: "empty filename: print to stdout"; "`^.+$`" :: "otherwise: print to that file" |
-| before_checkpoint | "no" | Before a checkpoint |  |
-| next | "no" | On next iteration |  |
+| out_filename | "" | File name for timer reports | "." :: "" |
 | output_schedule_timers | "yes" | Output the schedule timers in a formatted tabular format |  |
 | output_all_timers | "no" | Output one file per processor containing all the Cactus timers |  |
 | output_all_timers_together | "no" | Output three files (formats .txt, .csv, and .tsv), containing information about all the Cactus timers (average, minimum, and maximum over all processors) |  |
 | output_all_timers_readable | "no" | Output one file containing information about all the Cactus timers (average, minimum, and maximum over all processors), in a format that is readable by humans |  |
 | all_timers_clock | "gettimeofday" | Which clock to use for the all timers output | "." :: "any clock name allowed" |
 | n_top_timers | 0 | How many timers to include in the top timer report | 0 :: "Do not print the report"; 1: :: "Any number of timers" |
+| ... | | | |
 
 ## Extension
 
@@ -2654,3 +2658,51 @@ This thorn watches the elapsed walltime. If only n minutes are left before the s
 | output_remtime_every_minutes | 60.0 | Output remaining wall time every n minutes | 0.0:: "No output"; (0.0: :: "Output" |
 | testsuite | "no" | manually trigger termination |  |
 
+## Other
+
+The basic variables are those of the ADM formulation of Einstein’s equations, namely the spatial 3-metric $\gamma_{i j}$, the lapse $\alpha$, the shift $\beta$, and the extrinsic curvature $K_{i j}$. The 4-metric is given by
+
+$$
+d s^{2}=-\left(\alpha^{2}-\beta^{i} \beta_{i}\right) d t^{2}+\beta_{i} d t d x^{i}+\gamma_{i j} d x^{i} d x^{j}
+$$
+
+If $\gamma_{i j}$ is the 3-metric of a spacelike Cauchy surface with normal n, then
+
+$$
+K_{i j}=\frac{1}{2} \mathcal{L}_{n} \gamma_{i j}
+$$
+
+The ADM equations then evolve the spatial three metric $\gamma_{i j}$ and the extrinsic curvature $K_{i j}$ using
+
+$$
+\begin{aligned} \frac{d}{d t} \gamma_{i j}=&-2 \alpha K_{i j} \\ \frac{d}{d t} K_{i j}=&-D_{i} D_{j} \alpha+\alpha\left(R_{i j}+K K_{i j}\right.\\ &-2 K_{i k} K_{j}^{k} - ^{(4)} R_{i j} ) \end{aligned}
+$$
+
+with
+
+$$
+\frac{d}{d t}=\partial_{t}-\mathcal{L}_{\beta}
+$$
+
+These variables are defined in the thorn ADMBase, and are the ones that are used to communicate the geometry to other thorns. It is not necessary to use all of these thorns to make use of CactusEinstein, however. The only thorn which is necessary is ADMBase, since it defines the variables and parameters on which the rest of the CactusEinstein thorns depend.
+
+- ADMConstraints: computes the 3 + 1 Hamiltonian (energy) and momentum constraints
+- ADMCoupling: allows thorns to ‘register’ their matter field contributions to the stress energy tensor
+- ADMMacros: macros for computing various quantities which are commonly used in 3 + 1 numerical relativity, such as Christoffel symbols, covariant derivatives, the Ricci tensor, etc etc; some of these support both 2nd and 4th order finite differencing
+- AHFinder: searches for apparent horizons
+- CoordGauge: manages gauge quantities
+- EvolSimple: a demo evolution thorn
+- Extract: ‘extracts’ gravitational-wave waveforms
+- IDAnalyticBH: analytic black hole initial data
+- IDAxiBrillBH: axisymmetric Brill wave with black hole initial data
+- IDBrillData: Brill wave initial data
+- IDLinearWaves: linearized wave initial data
+- IDSimple: a demo initial data thorn, provides Minkowski space with conformal factor
+- Maximal: maximal slicing gauge condition
+- PsiKadelia: computes various Neumann-Penrose quantities
+- SpaceMask: provides a ‘mask’ for the spatial grid
+- StaticConformal: provides for a static conformal factor
+- TimeGeodesic: computes timelike geodesics
+- Exact: analytical solutions where the full 4-metric is known throughout the entire spacetime, eg. Schwarzschild, Kerr, various cosmological solutions.
+
+![-w534](media/15512756872829.jpg)
