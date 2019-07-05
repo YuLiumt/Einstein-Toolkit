@@ -165,6 +165,9 @@
     <a class="current" href="./">MHD</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#grmhd">GRMHD</a></li>
+    
+
     </ul>
                 </li>
                 <li class="">
@@ -311,7 +314,29 @@ v^{i}=\frac{u^{i}}{W}+\frac{\beta^{i}}{\alpha}
 \partial_{i} \mathcal{B}^{i}=0
 </script>
 </div>
-<p>In practice, we implement two different methods to actively enforce this constraint. In the “divergence cleaning” technique we include the ability to modify the magnetic field evolution by introducing a new field variable that dissipates away numerical divergences. An alternative method, commonly called “constrained transport”, instead carefully constructs a numerical method so that the constraint is satisfied to round-off error at the discrete level.</p>
+<p>In practice, <strong>we implement two different methods to actively enforce this constraint</strong>. In the “divergence cleaning” technique we include the ability to modify the magnetic field evolution by introducing a new field variable that dissipates away numerical divergences. An alternative method, commonly called “constrained transport”, instead carefully constructs a numerical method so that the constraint is satisfied to round-off error at the discrete level.</p>
+<p><strong>Reconstruction</strong></p>
+<hr />
+<p>The GRHydro code now includes several improved higher-order techniques for <strong>reconstruction of states at cell interfaces for use in high-resolution shock capturing</strong>.</p>
+<p>In a finite-volume scheme, <strong>one evaluates fluxes at cell faces by solving Riemann problems involving potentially discontinuous hydrodynamic states on either side of the interface</strong>. To construct these Riemann problems, one must first obtain the fluid state on the left and right sides of the interface. The fluid state is known within cells in the form of cell-averages of the hydrodynamical variables. The reconstruction step interpolates the fluid state from cell averaged values to values at cell interfaces without introducing oscillations at shocks and other discontinuities. It is possible to reconstruct either primitive or conserved fluid variables, however using the former makes it much easier to guarantee physically valid results for which the pressure is positive and the fluid velocities sub-luminal.</p>
+<p>By assuming an orthogonal set of coordinates, it is possible to reconstruct each coordinate direction independently. Thus, the fluid reconstruction reduces to a one-dimensional problem.</p>
+<p><strong>Primitive variable transformations</strong></p>
+<hr />
+<p>In GRHD, converting the conservative variables back to the primitives is a relatively straightforward task. GRHydro accomplishes the task through a 1D Newton-Raphson scheme. The scheme iterates by estimating the fluid pressure, determining the density, internal energy and the conservative quantities given this estimate, and using those in turn to calculate a new value for the pressure and its residual. The method works for any EOS, so long as one can calculate the thermodynamic derivatives <span><span class="MathJax_Preview">\mathrm{d} P / \mathrm{d}\left.\rho\right|_{\epsilon}</span><script type="math/tex">\mathrm{d} P / \mathrm{d}\left.\rho\right|_{\epsilon}</script></span> and <span><span class="MathJax_Preview">\mathrm{d} P / \mathrm{d}\left.\epsilon\right|_{\rho}</span><script type="math/tex">\mathrm{d} P / \mathrm{d}\left.\epsilon\right|_{\rho}</script></span>.</p>
+<p><strong>Equation of State</strong></p>
+<hr />
+<p>We implement the conversion of conserved to primitive variables for arbitrary equations of state (EOS), including polytropic, Γ-law, hybrid polytropic/Γ-law, and microphysical finite-temperature EOS.</p>
+<p>The Einstein Toolkit EOS interface uses the pressure as a function of density and the specific internal energy <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>, <span><span class="MathJax_Preview">P=P(\rho, \epsilon)</span><script type="math/tex">P=P(\rho, \epsilon)</script></span>, and calculates partial derivatives against those variables, rather than <span><span class="MathJax_Preview">\rho</span><script type="math/tex">\rho</script></span> and <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span>.</p>
+<h3 id="grmhd">GRMHD</h3>
+<p>The MHD code stores the values of both the primitive B-field vector, <span><span class="MathJax_Preview">B^{i}</span><script type="math/tex">B^{i}</script></span> (<code class="codehilite">Bvec</code> in the code), and the evolved conservative field <span><span class="MathJax_Preview">B^{i}</span><script type="math/tex">B^{i}</script></span> (<code class="codehilite">Bcons</code> in the code) in the frame of the Eulerian observers. For analysis purposes we include options to compute the magnetic field in fluid’s rest frame</p>
+<div>
+<div class="MathJax_Preview">
+\begin{aligned} b^{0} &amp;=\frac{W B^{k} v_{k}}{\alpha} \\ b^{i} &amp;=\frac{B^{i}}{W}+W\left(B^{k} v_{k}\right)\left(v^{i}-\frac{\beta^{i}}{\alpha}\right) \\ b^{2} &amp;=\frac{B^{i} B_{i}}{W^{2}}+\left(B^{i} v_{i}\right)^{2} \end{aligned}
+</div>
+<script type="math/tex; mode=display">
+\begin{aligned} b^{0} &=\frac{W B^{k} v_{k}}{\alpha} \\ b^{i} &=\frac{B^{i}}{W}+W\left(B^{k} v_{k}\right)\left(v^{i}-\frac{\beta^{i}}{\alpha}\right) \\ b^{2} &=\frac{B^{i} B_{i}}{W^{2}}+\left(B^{i} v_{i}\right)^{2} \end{aligned}
+</script>
+</div>
               
             </div>
           </div>

@@ -8,7 +8,7 @@
   
   <meta name="author" content="Yu Liu">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Lorene - Yu Liu's Notebook</title>
+  <title>Code - Yu Liu's Notebook</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Lorene";
-    var mkdocs_page_input_path = "ET/Lorene.md";
-    var mkdocs_page_url = "/Einstein-Toolkit/ET/Lorene/";
+    var mkdocs_page_name = "Code";
+    var mkdocs_page_input_path = "ET/Code.md";
+    var mkdocs_page_url = "/Einstein-Toolkit/ET/Code/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js" defer></script>
@@ -91,18 +91,9 @@
                     
     <a class="" href="../parameter/">Parameter</a>
                 </li>
-                <li class=" current">
+                <li class="">
                     
-    <a class="current" href="./">Lorene</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#using-lorene">Using LORENE</a></li>
-    
-
-    <li class="toctree-l3"><a href="#example">Example</a></li>
-    
-
-    </ul>
+    <a class="" href="../Lorene/">Lorene</a>
                 </li>
                 <li class="">
                     
@@ -239,15 +230,11 @@
     <li><a href="../..">Docs</a> &raquo;</li>
     
       
-        
-          <li>Einstein Toolkit &raquo;</li>
-        
-      
     
-    <li>Lorene</li>
+    <li>Code</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/Lorene.md"
+        <a href="https://github.com/YuLiumt/Einstein-Toolkit/edit/master/docs/ET/Code.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -257,52 +244,133 @@
           <div role="main">
             <div class="section">
               
-                <p><a href="https://lorene.obspm.fr">LORENE</a> is a set of C++ classes to solve various problems arising in numerical relativity, and more generally in computational astrophysics. It provides tools to solve partial differential equations by means of multi-domain spectral methods.</p>
-<p>The online service <a href="https://compose.obspm.fr/#">CompOSE</a> provides data tables for different state of the art equations of state (EoS) ready for further usage in astrophysical applications, nuclear physics and beyond. The cold neutron star EoS tables can be used directly within LORENE to obtain models of (rotating/magnetised) neutron stars.</p>
-<h3 id="using-lorene">Using LORENE</h3>
-<p>Typing </p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>make
-</pre></div>
-</td></tr></table>
-
-<p>will produce the executable file <executable>.</p>
-<p>You can clear everything by</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>make uninstall
-</pre></div>
-</td></tr></table>
-
-<p>Simply type</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>&lt;executable&gt;
-</pre></div>
-</td></tr></table>
-
-<h3 id="example">Example</h3>
-<p>Bin_star</p>
-<hr />
-<p>The procedure needs 7 parameter files named <code class="codehilite">par_eos1.d</code>, <code class="codehilite">par_eos2.d</code>, <code class="codehilite">par_grid1.d</code>, <code class="codehilite">par_grid2.d</code>, <code class="codehilite">par_init.d</code>, <code class="codehilite">parcoal.d</code>. The first two files contain the informations about each neutron star EOS, then two of them set the grid points and size, while <code class="codehilite">par_init.d</code> contains the physical values for the initial conditions and <code class="codehilite">parcoal.d</code> the parameters for the equilibrium condition.</p>
-<p>This class includes the sources of the executables we need, namely <code class="codehilite">init_bin</code> and <code class="codehilite">coal</code></p>
+                <h3 id="partial-differential-equation-pde">Partial Differential Equation (PDE)</h3>
+<h4 id="summationbyparts">SummationByParts</h4>
+<h5 id="interface">interface</h5>
+<p>In order to use the derivative routines the appropriate declarations have to be added to your thorns <code class="codehilite">interface.ccl</code> ﬁle. To use the interface that works on whole grid functions you have to add:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>make init_bin
-./init_bin
-make coal
-./coal
+4
+5
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>SUBROUTINE Diff_gv ( CCTK_POINTER_TO_CONST IN cctkGH, \  
+                     CCTK_INT IN dir, \  
+                     CCTK_REAL IN ARRAY var, \  
+                     CCTK_REAL OUT ARRAY dvar, \  
+                     CCTK_INT IN table_handle )  
+USES FUNCTION Diff_gv
 </pre></div>
 </td></tr></table>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cctkGH</td>
+<td>the cactus GH</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>the direction of the derivative (0 for x, 1 for y and 2 for z)</td>
+</tr>
+<tr>
+<td>var</td>
+<td>the grid function to calculate derivatives.</td>
+</tr>
+<tr>
+<td>dvar</td>
+<td>the grid function where the derivative is to be stored</td>
+</tr>
+<tr>
+<td>table_handle</td>
+<td>an integer that contains a handle for a keyword table with optional parameters. If there are no optional parameters just pass in a negative value.</td>
+</tr>
+</tbody>
+</table>
+<p>To use the interface that returns the ﬁnite difference coefficients you have to add:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>SUBROUTINE Diff_coeff ( CCTK_POINTER_TO_CONST IN cctkGH, \  
+                        CCTK_INT IN dir, \  
+                        CCTK_INT IN nsize, \  
+                        CCTK_INT OUT ARRAY imin, \  
+                        CCTK_INT OUT ARRAY imax, \  
+                        CCTK_REAL OUT ARRAY q, \  
+                        CCTK_INT IN table_handle )
+</pre></div>
+</td></tr></table>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Describe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cctkGH</td>
+<td>the cactus GH</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>the direction of the derivative (0 for x, 1 for y and 2 for z)</td>
+</tr>
+<tr>
+<td>nsize</td>
+<td>the grid size in the direction you are interested in</td>
+</tr>
+<tr>
+<td>imin and imax</td>
+<td>the minimum and maximum index of the stencil in direction dir</td>
+</tr>
+<tr>
+<td>q</td>
+<td>a 2D real array of size <code class="codehilite">nsize×nsize</code> that on return will contain the coefficients for the derivatives.</td>
+</tr>
+<tr>
+<td>table_handle</td>
+<td>an integer that contains a handle for a keyword table with optional parameters. If there are no optional parameters just pass in a negative value.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="initial-data">Initial data</h3>
+<h4 id="admmacros">ADMMacros</h4>
+<h5 id="source-file">Source File</h5>
+<ul>
+<li><code class="codehilite">&lt;MACRONAME&gt;_declare.h</code></li>
+</ul>
+<p>sets up the declarations for the internal macro variables. All the internal (hidden) variables have names beginning with the macro name. This ﬁle should be included in the declarations section of your routine.</p>
+<ul>
+<li><code class="codehilite">&lt;MACRONAME&gt;_guts.h</code></li>
+</ul>
+<p>is the actual included source code which will calculate the quantities.</p>
+<ul>
+<li><code class="codehilite">&lt;MACRONAME&gt;_undefine.h</code></li>
+</ul>
+<p>resets the macros. This ﬁle must be #included at the end of every loop using macros. Without this, a second loop using macros would assume that quantities have already been calculated (and thus get wrong results).</p>
+<p>Note that all ADMMacro include files are in the directory EinsteinBase/ADMMacros/src/macro/, so you include the macros with lines such as</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;EinsteinBase/ADMMacros/src/macro/&lt;MACRONAME&gt;_&lt;TYPE&gt;.h&quot;</span><span class="cp"></span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="analysis">Analysis</h3>
+<h4 id="staticconformal">StaticConformal</h4>
+<h5 id="interface_1">interface</h5>
+<p><code class="codehilite">StaticConformal</code> provides aliased functions to convert between physical and conformal 3-metric values.</p>
               
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../Visualization/" class="btn btn-neutral float-right" title="Visualization">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-        <a href="../parameter/" class="btn btn-neutral" title="Parameter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
@@ -328,10 +396,6 @@ make coal
           <a href="https://github.com/YuLiumt/Einstein-Toolkit/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../parameter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
-      
-      
-        <span style="margin-left: 15px"><a href="../Visualization/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
